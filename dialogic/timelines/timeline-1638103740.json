@@ -1,0 +1,15 @@
+{
+	"events": [
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Welcome to the Dialogic test project!\nIn this project we will test every feature to make sure they work before a release."
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4 - DEV",
+		"file": "timeline-1638103740.json",
+		"name": "Start"
+	}
+}

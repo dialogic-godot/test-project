@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Menu.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 431.0
+margin_top = 260.0
+margin_right = 592.0
+margin_bottom = 340.0
+custom_constants/separation = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 161.0
+margin_bottom = 14.0
+text = "Select a test to run:"
+align = 1
+
+[node name="DndTest" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 27.0
+margin_right = 161.0
+margin_bottom = 47.0
+text = "Start drag and drop test"
+
+[node name="CodeTest" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 161.0
+margin_bottom = 80.0
+text = "Start code test"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/DndTest" to="." method="_on_DndTest_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/CodeTest" to="." method="_on_CodeTest_pressed"]
