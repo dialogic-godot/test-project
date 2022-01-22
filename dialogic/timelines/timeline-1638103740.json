@@ -5,6 +5,10 @@
 			"event_id": "dialogic_001",
 			"portrait": "",
 			"text": "Welcome to the Dialogic test project!\nIn this project we will test every feature to make sure they work before a release."
+		},
+		{
+			"change_scene": "res://Menu.tscn",
+			"event_id": "dialogic_041"
 		}
 	],
 	"metadata": {
