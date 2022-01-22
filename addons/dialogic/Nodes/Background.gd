@@ -8,7 +8,10 @@ func _ready():
 	name = 'Background'
 	anchor_right = 1
 	anchor_bottom = 1
-	stretch_mode = TextureRect.STRETCH_SCALE
+	if DialogicResources.get_settings_value('dialog', 'stretch_backgrounds', true):
+		stretch_mode = TextureRect.STRETCH_SCALE
+	else:
+		stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	show_behind_parent = true
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
@@ -18,8 +21,9 @@ func _init():
 
 
 func fade_in(time = 1):
+	modulate = Color(1, 1,1,0)
 	tween.interpolate_property(self, "modulate",
-		Color(1,1,1,0), Color(1,1,1,1), time,
+		null, Color(1,1,1,1), time,
 		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	tween.start()
 

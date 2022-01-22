@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/dialogic/Editor/Events/Templates/EventTemplate.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialogic/Images/Event Icons/Main Icons/save-icon.svg" type="Texture" id=2]
 [ext_resource path="res://addons/dialogic/Editor/Events/Parts/Logic/EventPart_Save.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/dialogic/Editor/Events/styles/Timeline.tres" type="StyleBox" id=4]
 
 [sub_resource type="Image" id=3]
 data = {
@@ -27,36 +26,45 @@ event_data = {
 "event_id": "dialogic_026",
 "use_default_slot": true
 }
+event_color = Color( 0.0470588, 0.647059, 0.921569, 1 )
 event_icon = ExtResource( 2 )
-event_style = ExtResource( 4 )
 header_scene = ExtResource( 3 )
 expand_on_default = false
 help_page_path = "res://addons/dialogic/Documentation/Content/Tutorials/Saving.md"
 
 [node name="PanelContainer" parent="." index="1"]
-custom_styles/panel = ExtResource( 4 )
+margin_right = 196.0
 
-[node name="SelectedStyle" parent="PanelContainer" index="0"]
-modulate = Color( 0, 0, 0, 1 )
+[node name="MarginContainer" parent="PanelContainer" index="1"]
+margin_right = 196.0
 
-[node name="IconTexture" parent="PanelContainer/MarginContainer/VBoxContainer/Header" index="1"]
-margin_right = 32.0
+[node name="VBoxContainer" parent="PanelContainer/MarginContainer" index="0"]
+margin_right = 190.0
+
+[node name="Header" parent="PanelContainer/MarginContainer/VBoxContainer" index="0"]
+margin_right = 184.0
+
+[node name="IconPanel" parent="PanelContainer/MarginContainer/VBoxContainer/Header/CenterContainer" index="0"]
+self_modulate = Color( 0.137255, 0.792157, 0.498039, 1 )
+
+[node name="IconTexture" parent="PanelContainer/MarginContainer/VBoxContainer/Header/CenterContainer/IconPanel" index="0"]
+self_modulate = Color( 0, 0, 0, 1 )
 texture = ExtResource( 2 )
 
 [node name="TitleLabel" parent="PanelContainer/MarginContainer/VBoxContainer/Header" index="2"]
-margin_left = 42.0
-margin_right = 71.0
+margin_right = 37.0
 text = "Save"
 
 [node name="Content" parent="PanelContainer/MarginContainer/VBoxContainer/Header" index="3"]
-margin_left = 81.0
-margin_right = 91.0
+margin_left = 41.0
+margin_right = 180.0
 
 [node name="Spacer" parent="PanelContainer/MarginContainer/VBoxContainer/Header" index="5"]
-margin_left = 101.0
+margin_left = 184.0
+margin_right = 184.0
 
 [node name="HelpButton" parent="PanelContainer/MarginContainer/VBoxContainer/Header" index="6"]
 icon = SubResource( 2 )
 
-[node name="OptionsControl" parent="PanelContainer/MarginContainer/VBoxContainer/Header" index="7"]
-items = [ "Move Up", null, 0, false, false, 0, 0, null, "", false, "Move Down", null, 0, false, false, 1, 0, null, "", false, "", null, 0, false, false, 2, 0, null, "", false, "Remove", null, 0, false, false, 3, 0, null, "", false ]
+[node name="PopupMenu" parent="." index="2"]
+items = [ "Move Up", null, 0, false, false, 0, 0, null, "", false, "Move Down", null, 0, false, false, 1, 0, null, "", false, "", null, 0, false, false, 2, 0, null, "", true, "Remove", null, 0, false, false, 3, 0, null, "", false ]

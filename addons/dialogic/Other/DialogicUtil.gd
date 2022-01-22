@@ -487,9 +487,71 @@ static func resource_fixer():
 							i['event_id'] = 'dialogic_042'
 			timeline['events'] = events
 			DialogicResources.set_timeline(timeline)
+	if update_index < 2:
+		# Updates the text alignment to be saved as int like all anchors
+		print("[D] Update NR. "+str(update_index)+" | Changes how some theme values are saved. No need to worry about this.")
+		for theme_info in get_theme_list():
+			var theme = DialogicResources.get_theme_config(theme_info['file'])
+
+			match theme.get_value('text', 'alignment', 'Left'):
+				'Left':
+					DialogicResources.set_theme_value(theme_info['file'], 'text', 'alignment', 0)
+				'Center':
+					DialogicResources.set_theme_value(theme_info['file'], 'text', 'alignment', 1)
+				'Right':
+					DialogicResources.set_theme_value(theme_info['file'], 'text', 'alignment', 2)
 	
-	DialogicResources.set_settings_value("updates", "updatenumber", 1)
+	DialogicResources.set_settings_value("updates", "updatenumber", 2)
 	
+
+static func get_editor_scale(ref) -> float:
+	# There hasn't been a proper way of reliably getting the editor scale
+	# so this function aims at fixing that by identifying what the scale is and
+	# returning a value to use as a multiplier for manual UI tweaks
+	
+	# The way of getting the scale could change, but this is the most reliable
+	# solution I could find that works in many different computer/monitors.
+	var _scale = ref.get_constant("inspector_margin", "Editor")
+	_scale = _scale * 0.125
+	
+	return _scale
+
+
+static func list_dir(path: String) -> Array:
+	var files = []
+	var dir = Directory.new()
+	dir.open(path)
+	dir.list_dir_begin(true)
+
+	var file = dir.get_next()
+	while file != '':
+		files += [file]
+		file = dir.get_next()
+	return files
+
+## *****************************************************************************
+##							ANIMATION-HELPERS
+## *****************************************************************************
+static func animations():
+	return {
+	0:{"name":"[Default]", "default_length":1},
+	1:{"name": "Instant Appear", "default_length": 0},
+	2:{"name": "Float Up", "default_length": 1},
+	3:{"name": "Fade", "default_length": 1},
+	4:{"name": "Pop", "default_length": 1},
+	}
+
+static func get_animation_names():
+	var dict = {}
+	for id in animations().keys():
+		dict[animations()[id]['name']] = id
+	return dict
+
+static func get_animation_data(id):
+	return animations()[int(id)]
+
+static func get_default_animation_id():
+	return 2
 
 ## *****************************************************************************
 ##							DIALOGIC_SORTER CLASS
