@@ -1,0 +1,97 @@
+{
+	"color": "#ff5b9b6c",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1643369140.json",
+	"mirror_portraits": false,
+	"name": "Eliana",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://Assets/Characters/Eliana/pl1 concept.png"
+		},
+		{
+			"name": "angry",
+			"path": "res://Assets/Characters/Eliana/pl1 angry.png"
+		},
+		{
+			"name": "blink",
+			"path": "res://Assets/Characters/Eliana/pl1 blink.png"
+		},
+		{
+			"name": "happy",
+			"path": "res://Assets/Characters/Eliana/pl1 happy.png"
+		},
+		{
+			"name": "hate",
+			"path": "res://Assets/Characters/Eliana/pl1 hate.png"
+		},
+		{
+			"name": "plot",
+			"path": "res://Assets/Characters/Eliana/pl1 plot.png"
+		},
+		{
+			"name": "sad",
+			"path": "res://Assets/Characters/Eliana/pl1 sad.png"
+		},
+		{
+			"name": "sadhappy",
+			"path": "res://Assets/Characters/Eliana/pl1 sadhappy.png"
+		},
+		{
+			"name": "serious",
+			"path": "res://Assets/Characters/Eliana/pl1 serious.png"
+		},
+		{
+			"name": "surprise",
+			"path": "res://Assets/Characters/Eliana/pl1 surprise.png"
+		},
+		{
+			"name": "wangry",
+			"path": "res://Assets/Characters/Eliana/pl1 wangry.png"
+		},
+		{
+			"name": "wblink",
+			"path": "res://Assets/Characters/Eliana/pl1 wblink.png"
+		},
+		{
+			"name": "wconcept",
+			"path": "res://Assets/Characters/Eliana/pl1 wconcept.png"
+		},
+		{
+			"name": "whappy",
+			"path": "res://Assets/Characters/Eliana/pl1 whappy.png"
+		},
+		{
+			"name": "whate",
+			"path": "res://Assets/Characters/Eliana/pl1 whate.png"
+		},
+		{
+			"name": "wplot",
+			"path": "res://Assets/Characters/Eliana/pl1 wplot.png"
+		},
+		{
+			"name": "wsad",
+			"path": "res://Assets/Characters/Eliana/pl1 wsad.png"
+		},
+		{
+			"name": "wsadhappy",
+			"path": "res://Assets/Characters/Eliana/pl1 wsadhappy.png"
+		},
+		{
+			"name": "wserious",
+			"path": "res://Assets/Characters/Eliana/pl1 wserious.png"
+		},
+		{
+			"name": "wsurprise",
+			"path": "res://Assets/Characters/Eliana/pl1 wsurprise.png"
+		}
+	],
+	"scale": 80,
+	"theme": ""
+}
