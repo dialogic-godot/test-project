@@ -1,0 +1,33 @@
+{
+	"events": [
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1643580391.cfg"
+		},
+		{
+			"background": "res://Assets/Backgrounds/d23_by_olracadejup-d4ohe1q.jpg",
+			"event_id": "dialogic_021"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Wow. Such text."
+		},
+		{
+			"background": "res://Assets/Backgrounds/d5_by_olracadejup-d4ohcil.jpg",
+			"event_id": "dialogic_021"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Wow. Such new."
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4 - DEV",
+		"file": "timeline-1643579820.json",
+		"name": "ThemesBackgroundsSounds"
+	}
+}

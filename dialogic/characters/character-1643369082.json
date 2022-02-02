@@ -1,0 +1,57 @@
+{
+	"color": "#ffeb8f00",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1643369082.json",
+	"mirror_portraits": false,
+	"name": "Jane",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://Assets/Characters/Jane/pl3 concept.png"
+		},
+		{
+			"name": "surprise",
+			"path": "res://Assets/Characters/Jane/pl3 surprise.png"
+		},
+		{
+			"name": "avoid",
+			"path": "res://Assets/Characters/Jane/pl3 avoid.png"
+		},
+		{
+			"name": "blink",
+			"path": "res://Assets/Characters/Jane/pl3 blink.png"
+		},
+		{
+			"name": "confusion",
+			"path": "res://Assets/Characters/Jane/pl3 confusion.png"
+		},
+		{
+			"name": "doubt",
+			"path": "res://Assets/Characters/Jane/pl3 doubt.png"
+		},
+		{
+			"name": "happy",
+			"path": "res://Assets/Characters/Jane/pl3 happy.png"
+		},
+		{
+			"name": "plot",
+			"path": "res://Assets/Characters/Jane/pl3 plot.png"
+		},
+		{
+			"name": "sad",
+			"path": "res://Assets/Characters/Jane/pl3 sad.png"
+		},
+		{
+			"name": "shy",
+			"path": "res://Assets/Characters/Jane/pl3 shy.png"
+		}
+	],
+	"scale": 80,
+	"theme": ""
+}

@@ -1,14 +1,119 @@
 {
 	"events": [
 		{
+			"action": "leaveall",
+			"character": "[All]",
+			"event_id": "dialogic_003"
+		},
+		{
+			"audio_bus": "Master",
+			"background-music": "play",
+			"event_id": "dialogic_031",
+			"event_name": "BackgroundMusic",
+			"fade_length": 1,
+			"file": "",
+			"volume": 0
+		},
+		{
+			"background": "",
+			"event_id": "dialogic_021"
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "default-theme.cfg"
+		},
+		{
+			"condition": "==",
+			"definition": "1643371002-682",
+			"event_id": "dialogic_012",
+			"value": "1"
+		},
+		{
 			"character": "",
 			"event_id": "dialogic_001",
 			"portrait": "",
-			"text": "Welcome to the Dialogic test project!\nIn this project we will test every feature to make sure they work before a release."
+			"text": "Welcome back from testing. I hope everything went [great,brilliant,as you wanted it to]!\nIn this project we will test every feature to make sure they work before a release."
 		},
 		{
-			"change_scene": "res://Menu.tscn",
-			"event_id": "dialogic_041"
+			"event_id": "dialogic_013"
+		},
+		{
+			"condition": "==",
+			"definition": "1643371002-682",
+			"event_id": "dialogic_012",
+			"value": "0"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "[Hi,Hello,Good morning]! Welcome to the Dialogic test project!\nIn this project we will test every feature to make sure they work before a release."
+		},
+		{
+			"definition": "1643371002-682",
+			"event_id": "dialogic_014",
+			"operation": "+",
+			"random_upper_limit": 100,
+			"set_random": false,
+			"set_value": "1"
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"character": "",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "What would you like to test first"
+		},
+		{
+			"choice": "Characters",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"change_timeline": "timeline-1643371397.json",
+			"event_id": "dialogic_020"
+		},
+		{
+			"choice": "Themes and Backgrounds",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"change_timeline": "timeline-1643579820.json",
+			"event_id": "dialogic_020"
+		},
+		{
+			"choice": "Values and Glossary",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"choice": "The Godot events",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"choice": "The timeline events",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"event_id": "dialogic_013"
 		}
 	],
 	"metadata": {
