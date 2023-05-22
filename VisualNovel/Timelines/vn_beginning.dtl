@@ -1,0 +1,11 @@
+[i]This is the beginning of dialogics example visual novel. Enjoy.
+[background arg="res://VisualNovel/Assets/Backgrounds/d5_by_olracadejup-d4ohcil.jpg" fade="0.0"]
+Join Leon 3
+Leon: Wow, what a day. Feels insane to think it hasn't been more then 12 hours since everything began.
+Leon (Negative/sad): Only 12 hours and I already want back. [pause]But that won't happen.
+Leon (Positive/scoff): Let's see how this will end then.
+[music fade="0.0" volume="0.0" bus="Master"]
+[background fade="0.0"]
+Leave --All--
+[i]This is the end of the dialogic example visual novel. \
+Thank you for playing.

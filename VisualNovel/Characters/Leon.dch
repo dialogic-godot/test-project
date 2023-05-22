@@ -1,0 +1,82 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"color": Color(0.819608, 0.819608, 0.568627, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": ""
+},
+"default_portrait": "Basic/default",
+"description": "",
+"display_name": "Leon",
+"mirror": false,
+"nicknames": [""],
+"offset": Vector2(0, 0),
+"portraits": {
+"Basic/blink": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 blink.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Basic/default": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Basic/doubt": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 doubt.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Basic/shy": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 shy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Negative/hate": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 hate.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Negative/plot": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 plot.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Negative/sad": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 sad.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Positive/scoff": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 scoff.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Positive/surprise": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/pl5 surprise.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+"scale": 0.8
+}

@@ -1,10 +1,7 @@
 2a60927148abd1d33b818b535e306557
-::res://::1684763131
-default_env.tres::Environment::1574148006412064664::1684763124::0::1::::<><>::
+::res://::1684793123
 icon.png::CompressedTexture2D::6840095056223641110::1684762675::1684763099::1::::<><>::
-Menu.gd::GDScript::-1::1684762785::0::1::::<>Control<>::
-Menu.tscn::PackedScene::1674696564128930996::1684763124::0::1::::<><>::res://Menu.gd
-Readme.md::TextFile::-1::1684762675::0::1::::<><>::
+Readme.md::TextFile::-1::1684792825::0::1::::<><>::
 ::res://addons/::1684762834
 ::res://addons/dialogic/::1684762835
 plugin.cfg::TextFile::-1::1684749828::0::1::::<><>::
@@ -69,8 +66,8 @@ SinglelineText.gd::GDScript::-1::1683019936::0::1::::<>LineEdit<>::
 SinglelineText.tscn::PackedScene::193280157467062682::1683019936::0::1::::<><>::res://addons/dialogic/Editor/Events/Fields/SinglelineText.gd
 Vector2.gd::GDScript::-1::1684748564::0::1::::<>Control<>::
 Vector2.tscn::PackedScene::250297584763637452::1684748564::0::1::::<><>::res://addons/dialogic/Editor/Events/Fields/Vector2.gd<>uid://kdpp3mibml33
-::res://addons/dialogic/Editor/Events/styles/::1684762834
-InputFieldsStyle.tres::Theme::9138712547249545382::1684761258::0::1::::<><>::
+::res://addons/dialogic/Editor/Events/styles/::1684793123
+InputFieldsStyle.tres::Theme::9138712547249545382::1684793123::0::1::::<><>::
 ResourceMenuHover.tres::StyleBoxFlat::-1::1679247524::0::1::::<><>::
 ResourceMenuNormal.tres::StyleBoxFlat::-1::1679247524::0::1::::<><>::
 ResourceMenuPanelBackground.tres::StyleBoxFlat::209165682571293718::1684310520::0::1::::<><>::
@@ -86,7 +83,7 @@ home_page.gd::GDScript::-1::1684432970::0::1::::<>DialogicEditor<>::
 home_page.tscn::PackedScene::5947401273500014660::1684444937::0::1::::<><>::res://addons/dialogic/Editor/HomePage/home_page.gd<>uid://cvmlp5nxb2rer<>uid://bt87p6qlso0ya
 icon_bg.png::CompressedTexture2D::6272275887492997861::1684431735::1684763100::1::::<><>::
 tips.txt::TextFile::-1::1684432903::0::1::::<><>::
-::res://addons/dialogic/Editor/Images/::1684763100
+::res://addons/dialogic/Editor/Images/::1684793097
 dialogic-logo.svg::CompressedTexture2D::3790104562841938052::1679247524::1684763100::1::::<><>::
 plugin-icon.svg::CompressedTexture2D::8846273605144170474::1679247524::1684763100::1::::<><>::
 preview_character.png::CompressedTexture2D::2091084072335210920::1684688095::1684763100::1::::<><>::
@@ -266,10 +263,10 @@ icon.png::CompressedTexture2D::4564620340770139594::1679247524::1684763100::1:::
 index.gd::GDScript::-1::1679247524::0::1::::<>DialogicIndexer<>::
 ui_condition_end.gd::GDScript::-1::1679247524::0::1::::<>HBoxContainer<>::
 ui_condition_end.tscn::PackedScene::-1::1684313658::0::1::::<><>::res://addons/dialogic/Modules/Condition/ui_condition_end.gd
-::res://addons/dialogic/Modules/Converter/::1684762835
+::res://addons/dialogic/Modules/Converter/::1684764688
 custom_event_converter.gd::GDScript::-1::1679247524::0::1::::CustomEventConverter<>Node<>::
 index.gd::GDScript::-1::1679247524::0::1::::<>DialogicIndexer<>::
-settings_converter.gd::GDScript::-1::1684313684::0::1::::<>HSplitContainer<>::
+settings_converter.gd::GDScript::-1::1684764688::0::1::::<>HSplitContainer<>::
 settings_converter.tscn::PackedScene::-1::1684313658::0::1::::<><>::res://addons/dialogic/Modules/Converter/settings_converter.gd<>uid://dmsjhgv22dns8
 ::res://addons/dialogic/Modules/Core/::1684763100
 event_end_branch.gd::GDScript::-1::1684688095::0::1::::DialogicEndBranchEvent<>DialogicEvent<>::
@@ -428,103 +425,94 @@ event.gd::GDScript::-1::1684756918::0::1::::DialogicEvent<>Resource<>::
 timeline.gd::GDScript::-1::1679247525::0::1::::DialogicTimeline<>Resource<>::
 TimelineResourceLoader.gd::GDScript::-1::1679247525::0::1::::DialogicTimelineFormatLoader<>ResourceFormatLoader<>::
 TimelineResourceSaver.gd::GDScript::-1::1679247525::0::1::::DialogicTimelineFormatSaver<>ResourceFormatSaver<>::
-::res://Assets/::1684762675
-::res://Assets/Backgrounds/::1684763099
-d5_by_olracadejup-d4ohcil.jpg::CompressedTexture2D::4191590391669966965::1684762675::1684763099::1::::<><>::
-d23_by_olracadejup-d4ohe1q.jpg::CompressedTexture2D::8132857103470975658::1684762675::1684763099::1::::<><>::
-d24_by_olracadejup-d4ohe4u.jpg::CompressedTexture2D::7820350208967550459::1684762675::1684763099::1::::<><>::
-sunsetintheswamp.png::CompressedTexture2D::4730281905563541432::1684762675::1684763099::1::::<><>::
-wizardtower.png::CompressedTexture2D::4082749047361762392::1684762675::1684763099::1::::<><>::
-::res://Assets/Characters/::1684762675
-::res://Assets/Characters/Antonio/::1684763099
-pl5 blink.png::CompressedTexture2D::1456921446011047523::1684762675::1684763099::1::::<><>::
-pl5 doubt.png::CompressedTexture2D::6209216842191309116::1684762675::1684763099::1::::<><>::
-pl5 hate.png::CompressedTexture2D::6366420339242114061::1684762675::1684763099::1::::<><>::
-pl5 plot.png::CompressedTexture2D::7427298347401840421::1684762675::1684763099::1::::<><>::
-pl5 sad.png::CompressedTexture2D::74708617008314675::1684762675::1684763099::1::::<><>::
-pl5 scoff.png::CompressedTexture2D::7497568907769139013::1684762675::1684763099::1::::<><>::
-pl5 shy.png::CompressedTexture2D::7222553176765660607::1684762675::1684763099::1::::<><>::
-pl5 surprise.png::CompressedTexture2D::5280469039625895295::1684762675::1684763099::1::::<><>::
-pl5.png::CompressedTexture2D::8461310666153030570::1684762675::1684763099::1::::<><>::
-::res://Assets/Characters/Audrey/::1684763099
-pl2 angry.png::CompressedTexture2D::997519103519177065::1684762675::1684763099::1::::<><>::
-pl2 blink.png::CompressedTexture2D::2719847182820403935::1684762675::1684763099::1::::<><>::
-pl2 concept.png::CompressedTexture2D::6895638114511324724::1684762675::1684763099::1::::<><>::
-pl2 happy.png::CompressedTexture2D::3859847482914660311::1684762675::1684763099::1::::<><>::
-pl2 hate.png::CompressedTexture2D::6558802068484243612::1684762675::1684763099::1::::<><>::
-pl2 plot.png::CompressedTexture2D::3103767698504479322::1684762675::1684763099::1::::<><>::
-pl2 sad.png::CompressedTexture2D::4305830947900267322::1684762675::1684763099::1::::<><>::
-pl2 shy.png::CompressedTexture2D::3073826217042186928::1684762675::1684763099::1::::<><>::
-pl2 surprise.png::CompressedTexture2D::8196621333830526682::1684762675::1684763099::1::::<><>::
-pl2 worry.png::CompressedTexture2D::8745320601688672400::1684762675::1684763099::1::::<><>::
-::res://Assets/Characters/Chyou/::1684763099
-pl4 angry.png::CompressedTexture2D::8079448861741599052::1684762675::1684763099::1::::<><>::
-pl4 blink.png::CompressedTexture2D::3326699715857868405::1684762675::1684763099::1::::<><>::
-pl4 concept.png::CompressedTexture2D::8384074775762323577::1684762675::1684763099::1::::<><>::
-pl4 happy.png::CompressedTexture2D::7681372949369245208::1684762675::1684763099::1::::<><>::
-pl4 normal.png::CompressedTexture2D::4839280046078909042::1684762675::1684763099::1::::<><>::
-pl4 plot.png::CompressedTexture2D::9029555650088786823::1684762675::1684763099::1::::<><>::
-pl4 sad.png::CompressedTexture2D::3440267378982049492::1684762675::1684763099::1::::<><>::
-pl4 scoff.png::CompressedTexture2D::8758031760167637924::1684762675::1684763099::1::::<><>::
-pl4 shy.png::CompressedTexture2D::7869845916710579677::1684762675::1684763099::1::::<><>::
-pl4 surprise.png::CompressedTexture2D::5261427842183964888::1684762675::1684763099::1::::<><>::
-pl4 worry.png::CompressedTexture2D::7446167792268789740::1684762675::1684763099::1::::<><>::
-::res://Assets/Characters/Eliana/::1684763100
-pl1 angry.png::CompressedTexture2D::8327637877140527698::1684762675::1684763099::1::::<><>::
-pl1 blink.png::CompressedTexture2D::7878065643355763547::1684762675::1684763099::1::::<><>::
-pl1 concept.png::CompressedTexture2D::7132291433825232261::1684762675::1684763099::1::::<><>::
-pl1 happy.png::CompressedTexture2D::6314040753403987841::1684762675::1684763099::1::::<><>::
-pl1 hate.png::CompressedTexture2D::4885217765901785443::1684762675::1684763099::1::::<><>::
-pl1 plot.png::CompressedTexture2D::3039765446723720742::1684762675::1684763099::1::::<><>::
-pl1 sad.png::CompressedTexture2D::3657669258351467961::1684762675::1684763099::1::::<><>::
-pl1 sadhappy.png::CompressedTexture2D::8767103661398423951::1684762675::1684763100::1::::<><>::
-pl1 serious.png::CompressedTexture2D::3365158538553708762::1684762675::1684763100::1::::<><>::
-pl1 surprise.png::CompressedTexture2D::2648862709285751910::1684762675::1684763100::1::::<><>::
-pl1 wangry.png::CompressedTexture2D::1183447440540793749::1684762675::1684763100::1::::<><>::
-pl1 wblink.png::CompressedTexture2D::7514736736491542656::1684762675::1684763100::1::::<><>::
-pl1 wconcept.png::CompressedTexture2D::3394665877813084689::1684762675::1684763099::1::::<><>::
-pl1 whappy.png::CompressedTexture2D::6184498917139311330::1684762675::1684763099::1::::<><>::
-pl1 whate.png::CompressedTexture2D::1921304281074856048::1684762675::1684763099::1::::<><>::
-pl1 wplot.png::CompressedTexture2D::1920214493406917778::1684762675::1684763099::1::::<><>::
-pl1 wsad.png::CompressedTexture2D::7184145868280742158::1684762675::1684763099::1::::<><>::
-pl1 wsadhappy.png::CompressedTexture2D::649990246630118039::1684762675::1684763099::1::::<><>::
-pl1 wserious.png::CompressedTexture2D::7043641375035598592::1684762675::1684763099::1::::<><>::
-pl1 wsurprise.png::CompressedTexture2D::942971382438818979::1684762675::1684763099::1::::<><>::
-::res://Assets/Characters/Jane/::1684763099
-pl3 avoid.png::CompressedTexture2D::6345274641683668424::1684762675::1684763099::1::::<><>::
-pl3 blink.png::CompressedTexture2D::5368207202608882570::1684762675::1684763099::1::::<><>::
-pl3 concept.png::CompressedTexture2D::3907283856218287253::1684762675::1684763099::1::::<><>::
-pl3 confusion.png::CompressedTexture2D::5662486066551338465::1684762675::1684763099::1::::<><>::
-pl3 doubt.png::CompressedTexture2D::8018823281256414100::1684762675::1684763099::1::::<><>::
-pl3 happy.png::CompressedTexture2D::8873583894553892445::1684762675::1684763099::1::::<><>::
-pl3 plot.png::CompressedTexture2D::6688022072754797087::1684762675::1684763099::1::::<><>::
-pl3 sad.png::CompressedTexture2D::4582210844922828670::1684762675::1684763099::1::::<><>::
-pl3 shy.png::CompressedTexture2D::12863755134035386::1684762675::1684763099::1::::<><>::
-pl3 surprise.png::CompressedTexture2D::6773292629528391747::1684762675::1684763099::1::::<><>::
-::res://Assets/UI/::1684763100
-box.png::CompressedTexture2D::6615430836769172938::1684762675::1684763100::1::::<><>::
-namelabel.png::CompressedTexture2D::5971927319672988421::1684762675::1684763099::1::::<><>::
 ::res://Code-scene/::1684762675
 Code-scene.gd::GDScript::-1::1684762785::0::1::::<>Control<>::
 Code-scene.tscn::PackedScene::-1::1684762785::0::1::::<><>::res://Code-scene/Code-scene.gd
-::res://dialogic/::1684762675
-definitions.json::JSON::-1::1684762675::0::1::::<><>::
-folder_structure.json::JSON::-1::1684762675::0::1::::<><>::
-settings.cfg::TextFile::-1::1684762675::0::1::::<><>::
-::res://dialogic/characters/::1684762675
-character-1642163400.json::JSON::-1::1684762675::0::1::::<><>::
-character-1643369021.json::JSON::-1::1684762675::0::1::::<><>::
-character-1643369082.json::JSON::-1::1684762675::0::1::::<><>::
-character-1643369140.json::JSON::-1::1684762675::0::1::::<><>::
-character-1643369237.json::JSON::-1::1684762675::0::1::::<><>::
-character-1643371729.json::JSON::-1::1684762675::0::1::::<><>::
-::res://dialogic/themes/::1684762675
-default-theme.cfg::TextFile::-1::1684762675::0::1::::<><>::
-theme-1643548801.cfg::TextFile::-1::1684762675::0::1::::<><>::
-theme-1643580391.cfg::TextFile::-1::1684762675::0::1::::<><>::
-::res://dialogic/timelines/::1684762675
-timeline-1638103740.json::JSON::-1::1684762675::0::1::::<><>::
-timeline-1643371397.json::JSON::-1::1684762675::0::1::::<><>::
-timeline-1643579820.json::JSON::-1::1684762675::0::1::::<><>::
-::res://Drag-and-drop-scene/::1684762675
-Drag-and-drop-scene.tscn::PackedScene::-1::1684762785::0::1::::<><>::res://addons/dialogic/Dialog.tscn
+::res://MainMenu/::1684793123
+Dialogic Logo.svg::CompressedTexture2D::4477285468380801241::1684793083::1684793123::1::::<><>::
+Menu.gd::GDScript::-1::1684765165::0::1::::<>Control<>::
+Menu.tscn::PackedScene::5210993650944559636::1684793123::0::1::::<><>::res://MainMenu/Menu.gd
+::res://VisualNovel/::1684765877
+visual_novel_main.gd::GDScript::-1::1684765874::0::1::::<>Control<>::
+visual_novel_main.tscn::PackedScene::4054131147847361802::1684765877::0::1::::<><>::res://VisualNovel/visual_novel_main.gd
+::res://VisualNovel/Assets/::1684762675
+::res://VisualNovel/Assets/Backgrounds/::1684765052
+d5_by_olracadejup-d4ohcil.jpg::CompressedTexture2D::4191590391669966965::1684762675::1684765052::1::::<><>::
+d23_by_olracadejup-d4ohe1q.jpg::CompressedTexture2D::8132857103470975658::1684762675::1684765052::1::::<><>::
+d24_by_olracadejup-d4ohe4u.jpg::CompressedTexture2D::7820350208967550459::1684762675::1684765052::1::::<><>::
+sunsetintheswamp.png::CompressedTexture2D::4730281905563541432::1684762675::1684765052::1::::<><>::
+wizardtower.png::CompressedTexture2D::4082749047361762392::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Assets/Characters/::1684762675
+::res://VisualNovel/Assets/Characters/Antonio/::1684765052
+pl5 blink.png::CompressedTexture2D::1456921446011047523::1684762675::1684765052::1::::<><>::
+pl5 doubt.png::CompressedTexture2D::6209216842191309116::1684762675::1684765052::1::::<><>::
+pl5 hate.png::CompressedTexture2D::6366420339242114061::1684762675::1684765052::1::::<><>::
+pl5 plot.png::CompressedTexture2D::7427298347401840421::1684762675::1684765052::1::::<><>::
+pl5 sad.png::CompressedTexture2D::74708617008314675::1684762675::1684765052::1::::<><>::
+pl5 scoff.png::CompressedTexture2D::7497568907769139013::1684762675::1684765052::1::::<><>::
+pl5 shy.png::CompressedTexture2D::7222553176765660607::1684762675::1684765052::1::::<><>::
+pl5 surprise.png::CompressedTexture2D::5280469039625895295::1684762675::1684765052::1::::<><>::
+pl5.png::CompressedTexture2D::8461310666153030570::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Assets/Characters/Audrey/::1684765052
+pl2 angry.png::CompressedTexture2D::997519103519177065::1684762675::1684765052::1::::<><>::
+pl2 blink.png::CompressedTexture2D::2719847182820403935::1684762675::1684765052::1::::<><>::
+pl2 concept.png::CompressedTexture2D::6895638114511324724::1684762675::1684765052::1::::<><>::
+pl2 happy.png::CompressedTexture2D::3859847482914660311::1684762675::1684765052::1::::<><>::
+pl2 hate.png::CompressedTexture2D::6558802068484243612::1684762675::1684765052::1::::<><>::
+pl2 plot.png::CompressedTexture2D::3103767698504479322::1684762675::1684765052::1::::<><>::
+pl2 sad.png::CompressedTexture2D::4305830947900267322::1684762675::1684765052::1::::<><>::
+pl2 shy.png::CompressedTexture2D::3073826217042186928::1684762675::1684765052::1::::<><>::
+pl2 surprise.png::CompressedTexture2D::8196621333830526682::1684762675::1684765052::1::::<><>::
+pl2 worry.png::CompressedTexture2D::8745320601688672400::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Assets/Characters/Chyou/::1684765052
+pl4 angry.png::CompressedTexture2D::8079448861741599052::1684762675::1684765052::1::::<><>::
+pl4 blink.png::CompressedTexture2D::3326699715857868405::1684762675::1684765052::1::::<><>::
+pl4 concept.png::CompressedTexture2D::8384074775762323577::1684762675::1684765052::1::::<><>::
+pl4 happy.png::CompressedTexture2D::7681372949369245208::1684762675::1684765052::1::::<><>::
+pl4 normal.png::CompressedTexture2D::4839280046078909042::1684762675::1684765052::1::::<><>::
+pl4 plot.png::CompressedTexture2D::9029555650088786823::1684762675::1684765052::1::::<><>::
+pl4 sad.png::CompressedTexture2D::3440267378982049492::1684762675::1684765052::1::::<><>::
+pl4 scoff.png::CompressedTexture2D::8758031760167637924::1684762675::1684765052::1::::<><>::
+pl4 shy.png::CompressedTexture2D::7869845916710579677::1684762675::1684765052::1::::<><>::
+pl4 surprise.png::CompressedTexture2D::5261427842183964888::1684762675::1684765052::1::::<><>::
+pl4 worry.png::CompressedTexture2D::7446167792268789740::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Assets/Characters/Eliana/::1684765052
+pl1 angry.png::CompressedTexture2D::8327637877140527698::1684762675::1684765052::1::::<><>::
+pl1 blink.png::CompressedTexture2D::7878065643355763547::1684762675::1684765052::1::::<><>::
+pl1 concept.png::CompressedTexture2D::7132291433825232261::1684762675::1684765052::1::::<><>::
+pl1 happy.png::CompressedTexture2D::6314040753403987841::1684762675::1684765052::1::::<><>::
+pl1 hate.png::CompressedTexture2D::4885217765901785443::1684762675::1684765052::1::::<><>::
+pl1 plot.png::CompressedTexture2D::3039765446723720742::1684762675::1684765052::1::::<><>::
+pl1 sad.png::CompressedTexture2D::3657669258351467961::1684762675::1684765052::1::::<><>::
+pl1 sadhappy.png::CompressedTexture2D::8767103661398423951::1684762675::1684765052::1::::<><>::
+pl1 serious.png::CompressedTexture2D::3365158538553708762::1684762675::1684765052::1::::<><>::
+pl1 surprise.png::CompressedTexture2D::2648862709285751910::1684762675::1684765052::1::::<><>::
+pl1 wangry.png::CompressedTexture2D::1183447440540793749::1684762675::1684765052::1::::<><>::
+pl1 wblink.png::CompressedTexture2D::7514736736491542656::1684762675::1684765052::1::::<><>::
+pl1 wconcept.png::CompressedTexture2D::3394665877813084689::1684762675::1684765052::1::::<><>::
+pl1 whappy.png::CompressedTexture2D::6184498917139311330::1684762675::1684765052::1::::<><>::
+pl1 whate.png::CompressedTexture2D::1921304281074856048::1684762675::1684765052::1::::<><>::
+pl1 wplot.png::CompressedTexture2D::1920214493406917778::1684762675::1684765052::1::::<><>::
+pl1 wsad.png::CompressedTexture2D::7184145868280742158::1684762675::1684765052::1::::<><>::
+pl1 wsadhappy.png::CompressedTexture2D::649990246630118039::1684762675::1684765052::1::::<><>::
+pl1 wserious.png::CompressedTexture2D::7043641375035598592::1684762675::1684765052::1::::<><>::
+pl1 wsurprise.png::CompressedTexture2D::942971382438818979::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Assets/Characters/Jane/::1684765052
+pl3 avoid.png::CompressedTexture2D::6345274641683668424::1684762675::1684765052::1::::<><>::
+pl3 blink.png::CompressedTexture2D::5368207202608882570::1684762675::1684765052::1::::<><>::
+pl3 concept.png::CompressedTexture2D::3907283856218287253::1684762675::1684765052::1::::<><>::
+pl3 confusion.png::CompressedTexture2D::5662486066551338465::1684762675::1684765052::1::::<><>::
+pl3 doubt.png::CompressedTexture2D::8018823281256414100::1684762675::1684765052::1::::<><>::
+pl3 happy.png::CompressedTexture2D::8873583894553892445::1684762675::1684765052::1::::<><>::
+pl3 plot.png::CompressedTexture2D::6688022072754797087::1684762675::1684765052::1::::<><>::
+pl3 sad.png::CompressedTexture2D::4582210844922828670::1684762675::1684765052::1::::<><>::
+pl3 shy.png::CompressedTexture2D::12863755134035386::1684762675::1684765052::1::::<><>::
+pl3 surprise.png::CompressedTexture2D::6773292629528391747::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Assets/UI/::1684765052
+box.png::CompressedTexture2D::6615430836769172938::1684762675::1684765052::1::::<><>::
+namelabel.png::CompressedTexture2D::5971927319672988421::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Characters/::1684793123
+Elina.dch::Resource::-1::1684765607::0::1::::<><>::
+Leon.dch::Resource::-1::1684793123::0::1::::<><>::
+::res://VisualNovel/Timelines/::1684792824
+vn_beginning.dtl::Resource::-1::1684792824::0::1::::<><>::

@@ -1,0 +1,195 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgiiklsftpoau"]
+
+[ext_resource type="Script" path="res://MainMenu/Menu.gd" id="1_tdqfe"]
+[ext_resource type="Texture2D" uid="uid://b413ictwywftp" path="res://MainMenu/Dialogic Logo.svg" id="2_u154w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a307k"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 1, 1, 0.105882)
+skew = Vector2(0.084, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rs0yb"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 0.501961)
+skew = Vector2(0.084, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pf35h"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+draw_center = false
+skew = Vector2(0.084, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_xmlp2"]
+Button/styles/focus = SubResource("StyleBoxFlat_a307k")
+Button/styles/hover = SubResource("StyleBoxFlat_rs0yb")
+Button/styles/normal = SubResource("StyleBoxFlat_pf35h")
+Button/styles/pressed = SubResource("StyleBoxFlat_pf35h")
+
+[sub_resource type="Gradient" id="Gradient_6bcxu"]
+offsets = PackedFloat32Array(0, 0.255556, 1)
+colors = PackedColorArray(0.180857, 0.488328, 0.562902, 1, 0.0599336, 0.319169, 0.518657, 1, 0.219048, 0.0790837, 0.551257, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_485ln"]
+gradient = SubResource("Gradient_6bcxu")
+fill_to = Vector2(0.273504, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_xmlp2")
+script = ExtResource("1_tdqfe")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_485ln")
+expand_mode = 1
+
+[node name="AboutScreen" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 123.0
+offset_top = 69.0
+offset_right = 1030.0
+offset_bottom = 569.0
+
+[node name="VBox" type="VBoxContainer" parent="AboutScreen"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 566.0
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="AboutScreen/VBox"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "About"
+
+[node name="Text" type="Label" parent="AboutScreen/VBox"]
+layout_mode = 2
+text = "This is a project showcasing Dialogic 2, a story and dialog creation tool for the godot game engine.
+
+This project serves as a testing ground for existing and new features of dialogic."
+autowrap_mode = 3
+
+[node name="Back" type="Button" parent="AboutScreen/VBox"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Back"
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Version" type="Label" parent="MainMenu"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -507.0
+offset_top = -26.0
+offset_right = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 12
+text = "Current Dialogic Version: "
+horizontal_alignment = 2
+autowrap_mode = 3
+
+[node name="DialogicLogo" type="TextureRect" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 173.0
+offset_top = -126.0
+offset_right = 663.0
+offset_bottom = 38.0
+grow_vertical = 2
+size_flags_vertical = 3
+texture = ExtResource("2_u154w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="FlowContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 171.0
+offset_top = 24.0
+offset_right = 658.0
+offset_bottom = 164.0
+grow_vertical = 2
+theme_override_constants/h_separation = 13
+theme_override_constants/v_separation = 11
+
+[node name="VisualNovel" type="Button" parent="MainMenu/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Start visual novel"
+
+[node name="About" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "About"
+
+[node name="Quit" type="Button" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Quit"
+
+[connection signal="pressed" from="AboutScreen/VBox/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/VisualNovel" to="." method="_on_visual_novel_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
