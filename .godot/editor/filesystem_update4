@@ -1,0 +1,5 @@
+res://default_env.tres
+res://Menu.tscn
+res://addons/dialogic/Editor/Events/styles/InputFieldsStyle.tres
+res://addons/dialogic/Modules/Converter/settings_converter.gd
+res://converted-dialogic/characters/Antonio.dch

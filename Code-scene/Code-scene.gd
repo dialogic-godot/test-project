@@ -7,7 +7,7 @@ func _ready():
 	dia = Dialogic.start('Start')
 	add_child(dia)
 	
-	$UI/SaveLoad/MenuButton.get_popup().connect('index_pressed', self, 'save_slot_selected')
+	$UI/SaveLoad/MenuButton.get_popup().connect('index_pressed', Callable(self, 'save_slot_selected'))
 
 
 func _on_Save_pressed():
@@ -18,7 +18,7 @@ func _on_Load_pressed():
 	print("load ", current_save_slot)
 	dia.queue_free()
 	Dialogic.load(current_save_slot)
-	dia = Dialogic.start('', 'Start')
+	dia = Dialogic.start(Callable('', 'Start'))
 	add_child(dia)
 
 func _on_MenuButton_about_to_show():
