@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://u0gqldnxnboj"]
+[gd_scene load_steps=38 format=3 uid="uid://u0gqldnxnboj"]
 
 [ext_resource type="Script" path="res://VisualNovel/Menu/visual_novel_main.gd" id="1_4g5d8"]
 [ext_resource type="Script" path="res://VisualNovel/Menu/MainMenu.gd" id="2_2x8iy"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csc6c3v4cnfh3" path="res://VisualNovel/Assets/UI/menuGrid.png" id="10_8n3tn"]
 [ext_resource type="Texture2D" uid="uid://r7hcvplmu12d" path="res://VisualNovel/Assets/UI/exit.png" id="11_7ufed"]
 [ext_resource type="Texture2D" uid="uid://digng6kq2lkxj" path="res://VisualNovel/Assets/UI/cross.png" id="12_yiqe1"]
+[ext_resource type="FontFile" uid="uid://kpjdmncdwo8n" path="res://Assets/Fonts/Roboto/Roboto-Bold.ttf" id="18_tvmy3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k38t"]
 content_margin_left = 10.0
@@ -465,7 +466,6 @@ item_2/text = "A really cool item"
 unique_name_in_owner = true
 process_mode = 3
 layer = 2
-visible = false
 script = ExtResource("5_wmmq1")
 
 [node name="SaveLoadMenu" type="PanelContainer" parent="IngameUI"]
@@ -735,6 +735,40 @@ icon = ExtResource("10_8n3tn")
 flat = true
 icon_alignment = 1
 expand_icon = true
+
+[node name="SaveIndicator" type="TextureRect" parent="IngameUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -83.0
+offset_top = -46.0
+offset_right = -51.0
+offset_bottom = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("6_230wf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="IngameUI/SaveIndicator"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -259.0
+offset_top = -9.5
+offset_right = -32.0
+offset_bottom = 14.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("18_tvmy3")
+text = "Saved to DEFAULT"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [connection signal="pressed" from="Menu/MainPart/VBox/Continue" to="Menu" method="_on_menu_continue_pressed"]
 [connection signal="pressed" from="Menu/MainPart/VBox/NewGame" to="Menu" method="_on_new_game_pressed"]

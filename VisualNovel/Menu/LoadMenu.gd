@@ -13,7 +13,9 @@ func open() -> void:
 func reload_slot_list() -> void:
 	%SlotList.clear()
 	for slot in Dialogic.Save.get_slot_names():
-		%SlotList.add_item(slot)
+		var idx :int = %SlotList.add_item(slot)
+		if slot == Dialogic.Save.get_latest_slot():
+			%SlotList.set_item_custom_fg_color(idx, Color(0.97885006666183, 0.70094847679138, 0.42981573939323))
 	if %SlotList.item_count:
 		%SlotList.select(0)
 		_on_slot_list_item_selected(0)
@@ -53,6 +55,8 @@ func _on_load_slot_button_pressed():
 
 
 func _on_delete_slot_button_pressed():
+	if %SlotList.get_item_text(%SlotList.get_selected_items()[0]) == Dialogic.Save.get_latest_slot():
+		%Continue.hide()
 	Dialogic.Save.delete_slot(%SlotList.get_item_text(%SlotList.get_selected_items()[0]))
 	%SlotList.remove_item(%SlotList.get_selected_items()[0])
 	reload_slot_list()

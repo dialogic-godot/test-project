@@ -32,7 +32,7 @@ func _on_new_game_pressed():
 	Dialogic.start("res://VisualNovel/Timelines/vn_beginning.dtl")
 	Dialogic.timeline_ended.connect(_on_dialogic_end)
 	hide()
-	%IngameUI.show()
+	%IngameUI.enter_game()
 
 
 func _on_load_pressed():
@@ -49,7 +49,7 @@ func load_slot(slot_name:String) -> void:
 	Dialogic.Save.load(slot_name)
 	Dialogic.timeline_ended.connect(_on_dialogic_end)
 	hide()
-	%IngameUI.show()
+	%IngameUI.enter_game()
 
 
 func _on_back_pressed():

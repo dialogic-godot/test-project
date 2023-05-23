@@ -1,14 +1,19 @@
 extends CanvasLayer
 
 
-func _ready() -> void:
+func _ready():
+	Dialogic.Save.saved.connect(_on_dialogic_saved)
+
+func enter_game() -> void:
+	show()
 	$InGameMenu.hide()
 	$SaveLoadMenu.hide()
 	$WarningScreen.hide()
+	$SaveIndicator.hide()
+
 
 func _on_in_game_menu_button_pressed():
 	if $InGameMenu.visible:
-		
 		var tween := create_tween()
 		$InGameMenu.pivot_offset = $InGameMenu.size
 		tween.tween_property($InGameMenu, 'scale', Vector2(0,0), 0.2).set_trans(Tween.TRANS_ELASTIC)
@@ -19,7 +24,6 @@ func _on_in_game_menu_button_pressed():
 		$InGameMenu.hide()
 	
 	else:
-		
 		# Call this here to make sure there is no menus in the thumbnail
 		Dialogic.Save.take_thumbnail()
 		
@@ -30,11 +34,10 @@ func _on_in_game_menu_button_pressed():
 		var tween := create_tween()
 		$InGameMenu.pivot_offset = $InGameMenu.size
 		tween.tween_property($InGameMenu, 'scale', Vector2(1,1), 0.2).from(Vector2()).set_trans(Tween.TRANS_ELASTIC)
-		
 
 
 func _on_quick_save_button_pressed():
-	Dialogic.Save.save('', false, Dialogic.Save.THUMBNAIL_MODE.STORE_ONLY)
+	Dialogic.Save.save(Dialogic.Save.get_latest_slot(), false, Dialogic.Save.THUMBNAIL_MODE.STORE_ONLY)
 	_on_in_game_menu_button_pressed()
 
 
@@ -44,7 +47,7 @@ func _on_menu_button_pressed():
 
 
 func _on_with_saving_button_pressed():
-	Dialogic.Save.save('', false, Dialogic.Save.THUMBNAIL_MODE.STORE_ONLY)
+	Dialogic.Save.save(Dialogic.Save.get_latest_slot(), false, Dialogic.Save.THUMBNAIL_MODE.STORE_ONLY)
 	Dialogic.clear()
 	Dialogic.get_layout_node().queue_free()
 	$WarningScreen.hide()
@@ -127,3 +130,17 @@ func _on_in_game_slot_list_item_activated(index:int) -> void:
 	await _on_save_load_button_pressed()
 	_on_in_game_menu_button_pressed()
 	
+
+func _on_dialogic_saved(info:Dictionary) -> void:
+	if info.get('is_autosave', false):
+		$SaveIndicator/Label.text = ""
+	else:
+		$SaveIndicator/Label.text = "Saved to "+info.get('slot_name').to_upper()
+	
+	$SaveIndicator.show()
+	var tween := create_tween()
+	tween.tween_property($SaveIndicator, 'modulate', Color.WHITE, 0.3).set_ease(Tween.EASE_OUT).from(Color.TRANSPARENT)
+	tween.tween_interval(1)
+	tween.tween_property($SaveIndicator, 'modulate', Color.TRANSPARENT, 2)
+	await tween.finished
+	$SaveIndicator.hide()
