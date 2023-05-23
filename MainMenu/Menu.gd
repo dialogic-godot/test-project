@@ -14,7 +14,7 @@ func _ready():
 
 func _on_visual_novel_pressed():
 	await fade()
-	get_tree().change_scene_to_file("res://VisualNovel/visual_novel_main.tscn")
+	get_tree().change_scene_to_file("res://VisualNovel/Menu/visual_novel_main.tscn")
 
 
 func _on_quit_pressed():
@@ -51,3 +51,4 @@ func fade(fade_in:= false):
 		self.modulate = Color.WHITE
 		tween.tween_property(self, 'modulate', Color.TRANSPARENT, 0.2)
 	await tween.finished
+	await get_tree().create_timer(0.3).timeout

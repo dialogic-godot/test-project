@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://VisualNovel/Menu/button_click.gdshader" id="1_4de1g"]
+
+[resource]
+shader = ExtResource("1_4de1g")
+shader_parameter/circle_center = Vector2(0.586, 0.509)
+shader_parameter/time = 0.0
+shader_parameter/size = Vector2(640, 240)
+shader_parameter/color = Color(0.835294, 0.835294, 0.835294, 1)
+shader_parameter/margin = Vector2(0, 0)

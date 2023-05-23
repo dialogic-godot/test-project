@@ -57,12 +57,12 @@ Button/styles/hover = SubResource("StyleBoxFlat_rs0yb")
 Button/styles/normal = SubResource("StyleBoxFlat_pf35h")
 Button/styles/pressed = SubResource("StyleBoxFlat_pf35h")
 
-[sub_resource type="Gradient" id="Gradient_6bcxu"]
+[sub_resource type="Gradient" id="Gradient_a4bnh"]
 offsets = PackedFloat32Array(0, 0.255556, 1)
 colors = PackedColorArray(0.180857, 0.488328, 0.562902, 1, 0.0599336, 0.319169, 0.518657, 1, 0.219048, 0.0790837, 0.551257, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_485ln"]
-gradient = SubResource("Gradient_6bcxu")
+gradient = SubResource("Gradient_a4bnh")
 fill_to = Vector2(0.273504, 1)
 
 [node name="Main" type="Control"]

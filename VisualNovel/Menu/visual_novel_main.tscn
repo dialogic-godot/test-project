@@ -1,0 +1,758 @@
+[gd_scene load_steps=37 format=3 uid="uid://u0gqldnxnboj"]
+
+[ext_resource type="Script" path="res://VisualNovel/Menu/visual_novel_main.gd" id="1_4g5d8"]
+[ext_resource type="Script" path="res://VisualNovel/Menu/MainMenu.gd" id="2_2x8iy"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_62d8m"]
+[ext_resource type="Texture2D" uid="uid://b413ictwywftp" path="res://MainMenu/Dialogic Logo.svg" id="3_pedax"]
+[ext_resource type="Script" path="res://VisualNovel/Menu/LoadMenu.gd" id="3_wurwl"]
+[ext_resource type="FontFile" uid="uid://cqh8tow5n20r4" path="res://Assets/Fonts/Roboto/Roboto-Italic.ttf" id="5_4y8dd"]
+[ext_resource type="Texture2D" uid="uid://c4pnmpmep2xwg" path="res://icon.png" id="5_muuk4"]
+[ext_resource type="Script" path="res://VisualNovel/Menu/IngameUI.gd" id="5_wmmq1"]
+[ext_resource type="Texture2D" uid="uid://j2xovxi836t8" path="res://VisualNovel/Assets/UI/save.png" id="6_230wf"]
+[ext_resource type="Texture2D" uid="uid://bxtiwgr6gho8" path="res://VisualNovel/Assets/UI/open.png" id="7_h7oxv"]
+[ext_resource type="Texture2D" uid="uid://bhtf8qxddipgx" path="res://VisualNovel/Assets/UI/trashcan.png" id="7_oe5lv"]
+[ext_resource type="Texture2D" uid="uid://dwm3egl3ysw7" path="res://VisualNovel/Assets/UI/plus.png" id="8_bbg7t"]
+[ext_resource type="Texture2D" uid="uid://bysxuiutd66cx" path="res://VisualNovel/Assets/UI/gear.png" id="8_qax7c"]
+[ext_resource type="Texture2D" uid="uid://rbyro7pjcpmu" path="res://VisualNovel/Assets/UI/home.png" id="9_wa353"]
+[ext_resource type="Texture2D" uid="uid://csc6c3v4cnfh3" path="res://VisualNovel/Assets/UI/menuGrid.png" id="10_8n3tn"]
+[ext_resource type="Texture2D" uid="uid://r7hcvplmu12d" path="res://VisualNovel/Assets/UI/exit.png" id="11_7ufed"]
+[ext_resource type="Texture2D" uid="uid://digng6kq2lkxj" path="res://VisualNovel/Assets/UI/cross.png" id="12_yiqe1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k38t"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.564706)
+draw_center = false
+skew = Vector2(0.128, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2jsu4"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.776471)
+skew = Vector2(0.128, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3esxh"]
+content_margin_left = 10.0
+content_margin_top = 5.0
+content_margin_right = 10.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.564706)
+skew = Vector2(0.128, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Theme" id="Theme_c822e"]
+Button/styles/focus = SubResource("StyleBoxFlat_1k38t")
+Button/styles/hover = SubResource("StyleBoxFlat_2jsu4")
+Button/styles/normal = SubResource("StyleBoxFlat_3esxh")
+Button/styles/pressed = SubResource("StyleBoxFlat_3esxh")
+
+[sub_resource type="Gradient" id="Gradient_6bcxu"]
+offsets = PackedFloat32Array(0, 0.255556, 1)
+colors = PackedColorArray(0.330493, 0.368524, 0.122125, 1, 0.270347, 0.333673, 0.167277, 1, 0.118004, 0.251993, 0.18044, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w2llu"]
+gradient = SubResource("Gradient_6bcxu")
+fill_from = Vector2(0.619658, 0)
+fill_to = Vector2(0.273504, 1)
+
+[sub_resource type="Gradient" id="Gradient_rtm0d"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nv4hs"]
+gradient = SubResource("Gradient_rtm0d")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_wvv6k"]
+offsets = PackedFloat32Array(0, 0.311927, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.698039, 0.698039, 0.698039, 0.662745, 0.972549, 0.972549, 0.972549, 0)
+
+[sub_resource type="Gradient" id="Gradient_554c4"]
+offsets = PackedFloat32Array(0, 0.255556, 1)
+colors = PackedColorArray(0.676998, 0.54432, 0.732338, 1, 0.946702, 0.645795, 0.644089, 1, 0.895065, 0.592797, 0.922506, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ncwis"]
+gradient = SubResource("Gradient_554c4")
+fill_from = Vector2(1, 0.41453)
+fill_to = Vector2(0, 0.589744)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cxqqu"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(0.055, 0.022)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0.980392, 0.980392, 0.980392, 0.0823529)
+shadow_size = 14
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_45d8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcitc"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(0.055, 0.022)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pud4n"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.313726)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6w3f7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvpxx"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 0.905882)
+skew = Vector2(0, 0.016)
+border_color = Color(0.054902, 0.0745098, 0.0666667, 0.556863)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_xgrnr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p264t"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 0.568627)
+skew = Vector2(0, -0.131)
+border_color = Color(0.054902, 0.0745098, 0.0666667, 0.556863)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 20
+
+[node name="VisualNovel_Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_c822e")
+script = ExtResource("1_4g5d8")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_w2llu")
+expand_mode = 1
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="BG"]
+position = Vector2(571, 272)
+amount = 200
+lifetime = 7.0
+preprocess = 6.0
+texture = SubResource("GradientTexture2D_nv4hs")
+emission_shape = 3
+emission_rect_extents = Vector2(600, 400)
+gravity = Vector2(0, 10)
+initial_velocity_min = 11.97
+initial_velocity_max = 11.97
+scale_amount_min = 0.32
+scale_amount_max = 0.66
+color = Color(0.619608, 0.564706, 0.372549, 1)
+color_ramp = SubResource("Gradient_wvv6k")
+hue_variation_min = -0.44
+hue_variation_max = 0.41
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_2x8iy")
+
+[node name="MainPart" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 67.0
+offset_right = 668.0
+offset_bottom = -67.0
+grow_vertical = 2
+alignment = 1
+
+[node name="DialogicLogo" type="TextureRect" parent="Menu/MainPart"]
+self_modulate = Color(1, 1, 1, 0.552941)
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+texture = ExtResource("3_pedax")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Title" type="Label" parent="Menu/MainPart"]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"HeaderLarge"
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_62d8m")
+theme_override_font_sizes/font_size = 50
+text = "The Dialogic Paradox"
+
+[node name="BG2" type="TextureRect" parent="Menu/MainPart/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ncwis")
+expand_mode = 1
+
+[node name="VBox" type="VBoxContainer" parent="Menu/MainPart"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Continue" type="Button" parent="Menu/MainPart/VBox"]
+unique_name_in_owner = true
+clip_children = 2
+layout_mode = 2
+text = "Continue"
+alignment = 0
+
+[node name="NewGame" type="Button" parent="Menu/MainPart/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+alignment = 0
+
+[node name="Load" type="Button" parent="Menu/MainPart/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+alignment = 0
+
+[node name="Back" type="Button" parent="Menu/MainPart/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+alignment = 0
+
+[node name="LoadMenu" type="VBoxContainer" parent="Menu"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -521.0
+offset_top = 24.0
+offset_right = -34.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 21
+alignment = 1
+script = ExtResource("3_wurwl")
+
+[node name="Top" type="Control" parent="Menu/LoadMenu"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Title" type="Label" parent="Menu/LoadMenu/Top"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -74.0
+offset_top = -38.0
+offset_right = 77.0
+offset_bottom = 1.0
+grow_horizontal = 2
+rotation = -0.0234824
+size_flags_horizontal = 4
+theme_type_variation = &"HeaderLarge"
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_62d8m")
+theme_override_font_sizes/font_size = 30
+text = "Load Game
+"
+horizontal_alignment = 2
+
+[node name="BG2" type="TextureRect" parent="Menu/LoadMenu/Top/Title"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ncwis")
+expand_mode = 1
+
+[node name="Preview" type="Panel" parent="Menu/LoadMenu/Top"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_cxqqu")
+
+[node name="Preview2" type="Panel" parent="Menu/LoadMenu/Top/Preview"]
+modulate = Color(0.0980392, 0.0980392, 0.0980392, 0.478431)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 190.0
+offset_top = 109.0
+offset_right = 45.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_cxqqu")
+
+[node name="LoadSlotButton" type="Button" parent="Menu/LoadMenu/Top/Preview"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+offset_left = 286.0
+offset_top = 113.0
+offset_right = 355.0
+offset_bottom = 153.0
+tooltip_text = "Load"
+focus_neighbor_top = NodePath("../DeleteSlotButton")
+focus_neighbor_bottom = NodePath("../../../../../IngameUI/InGameMenuButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("7_h7oxv")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="DeleteSlotButton" type="Button" parent="Menu/LoadMenu/Top/Preview"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+offset_left = 293.0
+offset_top = 146.0
+offset_right = 344.0
+offset_bottom = 186.0
+tooltip_text = "Delete slot (no undo!)"
+focus_neighbor_bottom = NodePath("../LoadSlotButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("7_oe5lv")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="PreviewPanel" type="Panel" parent="Menu/LoadMenu/Top/Preview"]
+clip_children = 2
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wcitc")
+
+[node name="PreviewTexture" type="TextureRect" parent="Menu/LoadMenu/Top/Preview/PreviewPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -3.0
+offset_right = 6.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_muuk4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="SlotName" type="Label" parent="Menu/LoadMenu/Top/Preview/PreviewPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 302.0
+offset_bottom = 45.0
+rotation = -0.020774
+size_flags_horizontal = 4
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("5_4y8dd")
+theme_override_font_sizes/font_size = 22
+text = "Load Game
+"
+
+[node name="SlotList" type="ItemList" parent="Menu/LoadMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pud4n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6w3f7")
+item_count = 3
+item_0/text = "Some item"
+item_1/text = "Another item"
+item_2/text = "A really cool item"
+
+[node name="IngameUI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+layer = 2
+visible = false
+script = ExtResource("5_wmmq1")
+
+[node name="SaveLoadMenu" type="PanelContainer" parent="IngameUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -305.0
+offset_top = -257.0
+offset_right = -90.0
+offset_bottom = -59.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hvpxx")
+
+[node name="VBox" type="VBoxContainer" parent="IngameUI/SaveLoadMenu"]
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="IngameUI/SaveLoadMenu/VBox"]
+layout_mode = 2
+
+[node name="SaveTab" type="Button" parent="IngameUI/SaveLoadMenu/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.894118, 0.894118, 0.894118, 1)
+theme_override_colors/font_pressed_color = Color(0.337255, 0.717647, 0.756863, 1)
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_xgrnr")
+text = "Save"
+flat = true
+
+[node name="LoadTab" type="Button" parent="IngameUI/SaveLoadMenu/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.894118, 0.894118, 0.894118, 1)
+theme_override_colors/font_pressed_color = Color(0.337255, 0.717647, 0.756863, 1)
+toggle_mode = true
+button_group = SubResource("ButtonGroup_xgrnr")
+text = "Load"
+flat = true
+
+[node name="InGameSlotList" type="ItemList" parent="IngameUI/SaveLoadMenu/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_pud4n")
+item_count = 3
+item_0/text = "Some item"
+item_1/text = "Another item"
+item_2/text = "A really cool item"
+
+[node name="NewSlotEdit" type="LineEdit" parent="IngameUI/SaveLoadMenu/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NewSlotButton" type="Button" parent="IngameUI/SaveLoadMenu/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+text = "New Slot"
+icon = ExtResource("8_bbg7t")
+flat = true
+expand_icon = true
+
+[node name="InGameMenu" type="PanelContainer" parent="IngameUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -205.0
+offset_right = -21.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p264t")
+
+[node name="VBox" type="VBoxContainer" parent="IngameUI/InGameMenu"]
+layout_mode = 2
+theme_override_constants/separation = -7
+
+[node name="QuickSaveButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+tooltip_text = "Quick Save"
+focus_neighbor_top = NodePath("../../../InGameMenuButton")
+focus_neighbor_bottom = NodePath("../SaveLoadButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("6_230wf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SaveLoadButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+tooltip_text = "Save/Load"
+focus_neighbor_top = NodePath("../QuickSaveButton")
+focus_neighbor_bottom = NodePath("../SettingsButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("7_h7oxv")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SettingsButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+tooltip_text = "Settings"
+focus_neighbor_top = NodePath("../SaveLoadButton")
+focus_neighbor_bottom = NodePath("../MenuButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+disabled = true
+icon = ExtResource("8_qax7c")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MenuButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+tooltip_text = "Menu"
+focus_neighbor_top = NodePath("../SettingsButton")
+focus_neighbor_bottom = NodePath("../../../InGameMenuButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("9_wa353")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="WarningScreen" type="ColorRect" parent="IngameUI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.321569)
+
+[node name="Warning" type="PanelContainer" parent="IngameUI/WarningScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -158.0
+offset_top = -40.0
+offset_right = 158.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hvpxx")
+
+[node name="VBox" type="VBoxContainer" parent="IngameUI/WarningScreen/Warning"]
+layout_mode = 2
+
+[node name="WarningText" type="Label" parent="IngameUI/WarningScreen/Warning/VBox"]
+layout_mode = 2
+text = "Do you want to save before exiting?"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="IngameUI/WarningScreen/Warning/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="WithSavingButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+tooltip_text = "Exit with saving"
+focus_neighbor_top = NodePath("../../../../../InGameMenuButton")
+focus_neighbor_bottom = NodePath("../CancelButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("6_230wf")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="WithoutSavingButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+tooltip_text = "Exit without saving"
+focus_neighbor_top = NodePath("../../../../../InGameMenuButton")
+focus_neighbor_bottom = NodePath("../CancelButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("11_7ufed")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="CancelButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+tooltip_text = "Cancel Exit"
+focus_neighbor_top = NodePath("../WithSavingButton")
+theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
+theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
+theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
+icon = ExtResource("12_yiqe1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="InGameMenuButton" type="Button" parent="IngameUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -59.0
+offset_top = -55.0
+offset_right = -10.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.501961)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+icon = ExtResource("10_8n3tn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Menu/MainPart/VBox/Continue" to="Menu" method="_on_menu_continue_pressed"]
+[connection signal="pressed" from="Menu/MainPart/VBox/NewGame" to="Menu" method="_on_new_game_pressed"]
+[connection signal="pressed" from="Menu/MainPart/VBox/Load" to="Menu" method="_on_load_pressed"]
+[connection signal="pressed" from="Menu/MainPart/VBox/Back" to="Menu" method="_on_back_pressed"]
+[connection signal="pressed" from="Menu/LoadMenu/Top/Preview/LoadSlotButton" to="Menu/LoadMenu" method="_on_load_slot_button_pressed"]
+[connection signal="pressed" from="Menu/LoadMenu/Top/Preview/DeleteSlotButton" to="Menu/LoadMenu" method="_on_delete_slot_button_pressed"]
+[connection signal="item_activated" from="Menu/LoadMenu/SlotList" to="Menu/LoadMenu" method="_on_slot_list_item_activated"]
+[connection signal="item_selected" from="Menu/LoadMenu/SlotList" to="Menu/LoadMenu" method="_on_slot_list_item_selected"]
+[connection signal="toggled" from="IngameUI/SaveLoadMenu/VBox/HBox/SaveTab" to="IngameUI" method="_on_save_tab_toggled"]
+[connection signal="toggled" from="IngameUI/SaveLoadMenu/VBox/HBox/LoadTab" to="IngameUI" method="_on_load_tab_toggled"]
+[connection signal="item_activated" from="IngameUI/SaveLoadMenu/VBox/InGameSlotList" to="IngameUI" method="_on_in_game_slot_list_item_activated"]
+[connection signal="text_submitted" from="IngameUI/SaveLoadMenu/VBox/NewSlotEdit" to="IngameUI" method="_on_new_slot_edit_text_submitted"]
+[connection signal="pressed" from="IngameUI/SaveLoadMenu/VBox/NewSlotButton" to="IngameUI" method="_on_new_slot_button_pressed"]
+[connection signal="pressed" from="IngameUI/InGameMenu/VBox/QuickSaveButton" to="IngameUI" method="_on_quick_save_button_pressed"]
+[connection signal="pressed" from="IngameUI/InGameMenu/VBox/SaveLoadButton" to="IngameUI" method="_on_save_load_button_pressed"]
+[connection signal="pressed" from="IngameUI/InGameMenu/VBox/MenuButton" to="IngameUI" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="IngameUI/WarningScreen/Warning/VBox/HBox/WithSavingButton" to="IngameUI" method="_on_with_saving_button_pressed"]
+[connection signal="pressed" from="IngameUI/WarningScreen/Warning/VBox/HBox/WithoutSavingButton" to="IngameUI" method="_on_without_saving_button_pressed"]
+[connection signal="pressed" from="IngameUI/WarningScreen/Warning/VBox/HBox/CancelButton" to="IngameUI" method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="IngameUI/InGameMenuButton" to="IngameUI" method="_on_in_game_menu_button_pressed"]

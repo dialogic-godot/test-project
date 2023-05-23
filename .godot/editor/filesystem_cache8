@@ -1,5 +1,6 @@
 2a60927148abd1d33b818b535e306557
-::res://::1684793123
+::res://::1684841611
+default_bus_layout.tres::AudioBusLayout::196888898710771457::1684794938::0::1::::<><>::
 icon.png::CompressedTexture2D::6840095056223641110::1684762675::1684763099::1::::<><>::
 Readme.md::TextFile::-1::1684792825::0::1::::<><>::
 ::res://addons/::1684762834
@@ -66,8 +67,8 @@ SinglelineText.gd::GDScript::-1::1683019936::0::1::::<>LineEdit<>::
 SinglelineText.tscn::PackedScene::193280157467062682::1683019936::0::1::::<><>::res://addons/dialogic/Editor/Events/Fields/SinglelineText.gd
 Vector2.gd::GDScript::-1::1684748564::0::1::::<>Control<>::
 Vector2.tscn::PackedScene::250297584763637452::1684748564::0::1::::<><>::res://addons/dialogic/Editor/Events/Fields/Vector2.gd<>uid://kdpp3mibml33
-::res://addons/dialogic/Editor/Events/styles/::1684793123
-InputFieldsStyle.tres::Theme::9138712547249545382::1684793123::0::1::::<><>::
+::res://addons/dialogic/Editor/Events/styles/::1684832661
+InputFieldsStyle.tres::Theme::9138712547249545382::1684832661::0::1::::<><>::
 ResourceMenuHover.tres::StyleBoxFlat::-1::1679247524::0::1::::<><>::
 ResourceMenuNormal.tres::StyleBoxFlat::-1::1679247524::0::1::::<><>::
 ResourceMenuPanelBackground.tres::StyleBoxFlat::209165682571293718::1684310520::0::1::::<><>::
@@ -207,9 +208,9 @@ icon_music.png::CompressedTexture2D::3834477294349682204::1679247524::1684763100
 icon_sound.png::CompressedTexture2D::9154319766566815221::1679247524::1684763100::1::::<><>::
 index.gd::GDScript::-1::1679247524::0::1::::<>DialogicIndexer<>::
 subsystem_audio.gd::GDScript::-1::1684310520::0::1::::<>DialogicSubsystem<>::
-::res://addons/dialogic/Modules/Background/::1684763100
+::res://addons/dialogic/Modules/Background/::1684842201
 default_background.gd::GDScript::-1::1679247524::0::1::::<>TextureRect<>::
-default_background.tscn::PackedScene::-1::1684313658::0::1::::<><>::res://addons/dialogic/Modules/Background/default_background.gd
+default_background.tscn::PackedScene::2789679482133417838::1684842201::0::1::::<><>::res://addons/dialogic/Modules/Background/default_background.gd
 event_background.gd::GDScript::-1::1684688095::0::1::::DialogicBackgroundEvent<>DialogicEvent<>::
 icon.png::CompressedTexture2D::2161304343150396202::1679247524::1684763100::1::::<><>::
 index.gd::GDScript::-1::1679247524::0::1::::<>DialogicIndexer<>::
@@ -219,7 +220,7 @@ subsystem_backgrounds.gd::GDScript::-1::1684310520::0::1::::<>DialogicSubsystem<
 event_call_node.gd::GDScript::-1::1684688095::0::1::::DialogicCallNodeEvent<>DialogicEvent<>::
 icon.png::CompressedTexture2D::8606518780689924191::1679247524::1684763100::1::::<><>::
 index.gd::GDScript::-1::1679247524::0::1::::<>DialogicIndexer<>::
-::res://addons/dialogic/Modules/Character/::1684763100
+::res://addons/dialogic/Modules/Character/::1684842064
 class_dialogic_animation.gd::GDScript::-1::1679247524::0::1::::DialogicAnimation<>Node<>::
 default_portrait.gd::GDScript::-1::1679247524::0::1::::DialogicDefaultPortrait<>Node<>::
 default_portrait.tscn::PackedScene::-1::1684313658::0::1::::<><>::res://addons/dialogic/Modules/Character/default_portrait.gd
@@ -233,7 +234,7 @@ node_portrait_holder.gd::GDScript::-1::1679247524::0::1::::DialogicNode_Portrait
 preview_character.tres::Resource/Resource::7856311023649503634::1684688095::0::1::::<><>::res://addons/dialogic/Resources/character.gd
 settings_portraits.gd::GDScript::-1::1683024463::0::1::::<>HBoxContainer<>::
 settings_portraits.tscn::PackedScene::-1::1684313658::0::1::::<><>::res://addons/dialogic/Modules/Character/settings_portraits.gd<>uid://dmsjhgv22dns8<>uid://dpwhshre1n4t6<>res://addons/dialogic/Editor/Settings/HintLabelStylingScript.gd<>uid://7mvxuaulctcq
-subsystem_portraits.gd::GDScript::-1::1684753867::0::1::::<>DialogicSubsystem<>::
+subsystem_portraits.gd::GDScript::-1::1684842064::0::1::::<>DialogicSubsystem<>::
 ::res://addons/dialogic/Modules/Character/DefaultAnimations/::1684762835
 bounce_in.gd::GDScript::-1::1679247524::0::1::::<>DialogicAnimation<>::
 bounce_out.gd::GDScript::-1::1679247524::0::1::::<>DialogicAnimation<>::
@@ -425,23 +426,48 @@ event.gd::GDScript::-1::1684756918::0::1::::DialogicEvent<>Resource<>::
 timeline.gd::GDScript::-1::1679247525::0::1::::DialogicTimeline<>Resource<>::
 TimelineResourceLoader.gd::GDScript::-1::1679247525::0::1::::DialogicTimelineFormatLoader<>ResourceFormatLoader<>::
 TimelineResourceSaver.gd::GDScript::-1::1679247525::0::1::::DialogicTimelineFormatSaver<>ResourceFormatSaver<>::
+::res://Assets/::1684832773
+::res://Assets/Fonts/::1684832855
+::res://Assets/Fonts/Caveat_Brush/::1684832856
+CaveatBrush-Regular.ttf::FontFile::8311377764415132323::1583778954::1684832856::1::::<><>::
+OFL.txt::TextFile::-1::1583778954::0::1::::<><>::
+::res://Assets/Fonts/Comic_Neue/::1684832779
+ComicNeue-Bold.ttf::FontFile::1769765112257125050::1583967600::1684832779::1::::<><>::
+ComicNeue-BoldItalic.ttf::FontFile::4269307111393800013::1583967600::1684832779::1::::<><>::
+ComicNeue-Italic.ttf::FontFile::3704379065333126572::1583967600::1684832779::1::::<><>::
+ComicNeue-Light.ttf::FontFile::4081166601966147286::1583967600::1684832779::1::::<><>::
+ComicNeue-LightItalic.ttf::FontFile::6760174304483363454::1583967600::1684832779::1::::<><>::
+ComicNeue-Regular.ttf::FontFile::5144063220617209909::1583967600::1684832779::1::::<><>::
+OFL.txt::TextFile::-1::1583967600::0::1::::<><>::
+::res://Assets/Fonts/Roboto/::1684832856
+LICENSE.txt::TextFile::-1::1584555820::0::1::::<><>::
+Roboto-Black.ttf::FontFile::4651450985893839462::1584555820::1684832856::1::::<><>::
+Roboto-BlackItalic.ttf::FontFile::5765133579876625978::1584555822::1684832856::1::::<><>::
+Roboto-Bold.ttf::FontFile::733406563466254343::1584555820::1684832856::1::::<><>::
+Roboto-BoldItalic.ttf::FontFile::5330901563507293543::1584555820::1684832856::1::::<><>::
+Roboto-Italic.ttf::FontFile::5912351871412749995::1584555820::1684832856::1::::<><>::
+Roboto-Light.ttf::FontFile::6185646140310626143::1584555820::1684832856::1::::<><>::
+Roboto-LightItalic.ttf::FontFile::239936508104667627::1584555820::1684832856::1::::<><>::
+Roboto-Medium.ttf::FontFile::3131647331156385409::1584555820::1684832856::1::::<><>::
+Roboto-MediumItalic.ttf::FontFile::193824911045821805::1584555820::1684832856::1::::<><>::
+Roboto-Regular.ttf::FontFile::1466618053197675064::1584555820::1684832856::1::::<><>::
+Roboto-Thin.ttf::FontFile::7335612401147889474::1584555820::1684832856::1::::<><>::
+Roboto-ThinItalic.ttf::FontFile::7562815032116121187::1584555820::1684832856::1::::<><>::
 ::res://Code-scene/::1684762675
 Code-scene.gd::GDScript::-1::1684762785::0::1::::<>Control<>::
 Code-scene.tscn::PackedScene::-1::1684762785::0::1::::<><>::res://Code-scene/Code-scene.gd
-::res://MainMenu/::1684793123
+::res://MainMenu/::1684848142
 Dialogic Logo.svg::CompressedTexture2D::4477285468380801241::1684793083::1684793123::1::::<><>::
-Menu.gd::GDScript::-1::1684765165::0::1::::<>Control<>::
-Menu.tscn::PackedScene::5210993650944559636::1684793123::0::1::::<><>::res://MainMenu/Menu.gd
-::res://VisualNovel/::1684765877
-visual_novel_main.gd::GDScript::-1::1684765874::0::1::::<>Control<>::
-visual_novel_main.tscn::PackedScene::4054131147847361802::1684765877::0::1::::<><>::res://VisualNovel/visual_novel_main.gd
+Menu.gd::GDScript::-1::1684841628::0::1::::<>Control<>::
+Menu.tscn::PackedScene::5210993650944559636::1684848142::0::1::::<><>::res://MainMenu/Menu.gd<>uid://b413ictwywftp
+::res://VisualNovel/::1684841611
+button_click.gdshader::Shader::-1::1684841611::0::1::::<><>::
 ::res://VisualNovel/Assets/::1684762675
-::res://VisualNovel/Assets/Backgrounds/::1684765052
-d5_by_olracadejup-d4ohcil.jpg::CompressedTexture2D::4191590391669966965::1684762675::1684765052::1::::<><>::
-d23_by_olracadejup-d4ohe1q.jpg::CompressedTexture2D::8132857103470975658::1684762675::1684765052::1::::<><>::
-d24_by_olracadejup-d4ohe4u.jpg::CompressedTexture2D::7820350208967550459::1684762675::1684765052::1::::<><>::
-sunsetintheswamp.png::CompressedTexture2D::4730281905563541432::1684762675::1684765052::1::::<><>::
-wizardtower.png::CompressedTexture2D::4082749047361762392::1684762675::1684765052::1::::<><>::
+::res://VisualNovel/Assets/Backgrounds/::1684847944
+Interior 4.png::CompressedTexture2D::1650874660241505490::1672676174::1684847944::1::::<><>::
+Interior 5.png::CompressedTexture2D::5222791811743231582::1672676176::1684847944::1::::<><>::
+Kiosk 4.png::CompressedTexture2D::6117041827914208464::1672676130::1684847944::1::::<><>::
+Restaurant 9.png::CompressedTexture2D::7871708241430108204::1672676170::1684847944::1::::<><>::
 ::res://VisualNovel/Assets/Characters/::1684762675
 ::res://VisualNovel/Assets/Characters/Antonio/::1684765052
 pl5 blink.png::CompressedTexture2D::1456921446011047523::1684762675::1684765052::1::::<><>::
@@ -508,11 +534,36 @@ pl3 plot.png::CompressedTexture2D::6688022072754797087::1684762675::1684765052::
 pl3 sad.png::CompressedTexture2D::4582210844922828670::1684762675::1684765052::1::::<><>::
 pl3 shy.png::CompressedTexture2D::12863755134035386::1684762675::1684765052::1::::<><>::
 pl3 surprise.png::CompressedTexture2D::6773292629528391747::1684762675::1684765052::1::::<><>::
-::res://VisualNovel/Assets/UI/::1684765052
-box.png::CompressedTexture2D::6615430836769172938::1684762675::1684765052::1::::<><>::
-namelabel.png::CompressedTexture2D::5971927319672988421::1684762675::1684765052::1::::<><>::
-::res://VisualNovel/Characters/::1684793123
+::res://VisualNovel/Assets/UI/::1684848321
+audioOff.png::CompressedTexture2D::3124121603072149414::1414962514::1684840398::1::::<><>::
+audioOn.png::CompressedTexture2D::5251098072207606592::1414962514::1684840398::1::::<><>::
+checkmark.png::CompressedTexture2D::6716802913011534444::1414962517::1684842531::1::::<><>::
+cross.png::CompressedTexture2D::7733960746812705479::1414962518::1684842531::1::::<><>::
+exit.png::CompressedTexture2D::1259700147192700417::1414962519::1684840398::1::::<><>::
+export.png::CompressedTexture2D::7338203819319411227::1414962520::1684841067::1::::<><>::
+fastForward.png::CompressedTexture2D::1881124044509857489::1414962520::1684840398::1::::<><>::
+gear.png::CompressedTexture2D::4109544389242106719::1414962521::1684839317::1::::<><>::
+home.png::CompressedTexture2D::1196763071377686760::1414962521::1684840398::1::::<><>::
+import.png::CompressedTexture2D::4864845054748493857::1414962521::1684840551::1::::<><>::
+information.png::CompressedTexture2D::8026488892336603398::1414962523::1684840398::1::::<><>::
+menuGrid.png::CompressedTexture2D::6042256611157988486::1414962526::1684839317::1::::<><>::
+musicOff.png::CompressedTexture2D::5773562709468622646::1414962527::1684841199::1::::<><>::
+musicOn.png::CompressedTexture2D::633959301223949884::1414962527::1684840398::1::::<><>::
+open.png::CompressedTexture2D::118838606791811929::1414962527::1684841199::1::::<><>::
+plus.png::CompressedTexture2D::256761667546345908::1414962528::1684844697::1::::<><>::
+save.png::CompressedTexture2D::688860422979776723::1414962529::1684840398::1::::<><>::
+trashcan.png::CompressedTexture2D::2917329158693908527::1414962532::1684848322::1::::<><>::
+::res://VisualNovel/Characters/::1684832661
 Elina.dch::Resource::-1::1684765607::0::1::::<><>::
-Leon.dch::Resource::-1::1684793123::0::1::::<><>::
-::res://VisualNovel/Timelines/::1684792824
-vn_beginning.dtl::Resource::-1::1684792824::0::1::::<><>::
+Leon.dch::Resource::-1::1684832661::0::1::::<><>::
+::res://VisualNovel/Menu/::1684848142
+button_click.gdshader::Shader::-1::1684848142::0::1::::<><>::
+button_click_overlay.tres::ShaderMaterial::-1::1684841611::0::1::::<><>::res://VisualNovel/Menu/button_click.gdshader
+IngameUI.gd::GDScript::-1::1684845878::0::1::::<>CanvasLayer<>::
+LoadMenu.gd::GDScript::-1::1684846311::0::1::::<>VBoxContainer<>::
+MainMenu.gd::GDScript::-1::1684846487::0::1::::<>Control<>::
+visual_novel_main.gd::GDScript::-1::1684846487::0::1::::<>Control<>::
+visual_novel_main.tscn::PackedScene::1455779774284392865::1684848142::0::1::::<><>::res://VisualNovel/Menu/visual_novel_main.gd<>res://VisualNovel/Menu/MainMenu.gd<>uid://b7jgyogiuxer3<>uid://b413ictwywftp<>res://VisualNovel/Menu/LoadMenu.gd<>uid://cqh8tow5n20r4<>uid://c4pnmpmep2xwg<>res://VisualNovel/Menu/IngameUI.gd<>uid://j2xovxi836t8<>uid://bxtiwgr6gho8<>uid://dwm3egl3ysw7<>uid://bysxuiutd66cx<>uid://rbyro7pjcpmu<>uid://csc6c3v4cnfh3<>uid://r7hcvplmu12d<>uid://digng6kq2lkxj
+::res://VisualNovel/Timelines/::1684848133
+vn_ending.dtl::Resource::-1::1684847059::0::1::::<><>::
+vn_beginning.dtl::Resource::-1::1684848133::0::1::::<><>::
