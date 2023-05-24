@@ -44,13 +44,13 @@ func _input(event:InputEvent):
 			get_node('Sprite').flip_h = _player.position.x < position.x
 			_player.get_node('Sprite').flip_h =  _player.position.x > position.x
 			_player.get_node('Camera2D').align()
-#			print(global_position+(_player.global_position-global_position)/2)
 			_player.get_node('Camera2D').position = global_position-_player.global_position
 			_player.zoom_in()
 			
 		if timeline:
 			owner.state = owner.States.DIALOG
 			get_viewport().set_input_as_handled()
+			Dialogic.add_layout_node("res://addons/dialogic/Modules/DefaultStyles/TextBubble/DialogicTextBubbleLayout.tscn")
 			var node := Dialogic.start(timeline, next_label)
 			if _player:
 				node.register_character(load("res://SmallRPG/Timelines/Player.dch"), _player.get_node('BubbleMarker'))
@@ -71,6 +71,7 @@ func _on_dialog_end():
 	Dialogic.signal_event.disconnect(_on_dialogic_signal_event)
 	if _player:
 		_player.zoom_out()
+
 
 func _on_dialogic_signal_event(argument:String):
 	if argument.begins_with('next->'):

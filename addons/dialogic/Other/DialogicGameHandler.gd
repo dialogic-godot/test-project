@@ -482,19 +482,17 @@ func add_layout_node(scene_path := "", export_overrides := {}) -> Node:
 		scene = get_tree().get_meta('dialogic_layout_node', null)
 	
 	# create a new one if none exists or a different one was requested
-	if !is_instance_valid(scene) or scene.get_meta('scene_path', '') != scene_path:
+	if !is_instance_valid(scene) or (!scene_path.is_empty() and scene.get_meta('scene_path', scene_path) != scene_path):
 		if is_instance_valid(scene):
 			scene.queue_free()
 		
-		if !scene_path.is_empty():
-			scene = load(scene_path).instantiate()
-			scene.set_meta('scene_path', scene_path)
-		else:
-			scene = load(ProjectSettings.get_setting(
+		if scene_path.is_empty():
+			scene_path = ProjectSettings.get_setting(
 						'dialogic/layout/layout_scene', 
 						DialogicUtil.get_default_layout())
-					).instantiate()
-			scene.set_meta('scene_path', '')
+		
+		scene = load(scene_path).instantiate()
+		scene.set_meta('scene_path', scene_path)
 		
 		get_parent().call_deferred("add_child", scene)
 		get_tree().set_meta('dialogic_layout_node', scene)

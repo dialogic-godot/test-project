@@ -57,7 +57,7 @@ translation/original_locale="en"
 translation/file_mode=1
 translation/translation_folder=""
 translation/id_counter=16
-layout/layout_scene="res://addons/dialogic/Modules/DefaultStyles/TextBubble/DialogicTextBubbleLayout.tscn"
+layout/layout_scene="res://addons/dialogic/Modules/DefaultStyles/Default/DialogicDefaultLayout.tscn"
 layout/export_overrides={
 "sizing_mode": "0"
 }

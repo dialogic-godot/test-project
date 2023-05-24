@@ -20,6 +20,7 @@ func fade(fade_in:= false):
 	await tween.finished
 	await get_tree().create_timer(0.3).timeout
 
+
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE):
 		await fade()
