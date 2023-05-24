@@ -26,10 +26,22 @@ enum Alignments {Left, Center, Right}
 @export var name_label_box_modulate : Color = box_modulate
 @export var name_label_alignment := Alignments.Left
 
-## FOR TESTING PURPOSES
+
+@export_group("Other")
+@export_subgroup("Next Indicator")
+@export var next_indicator_enabled := true
+@export_enum('bounce', 'blink', 'none') var next_indicator_animation := 0
+@export_file("*.png","*.svg") var next_indicator_texture := ''
+@export var next_indicator_show_on_questions := true
+@export var next_indicator_show_on_autoadvance := false
+
+
 func _ready():
 	add_to_group('dialogic_main_node')
-	
+
+
+## Called by dialogic whenever export overrides might change
+func _apply_export_overrides():
 	## FONT SETTINGS
 	%DialogicNode_DialogText.alignment = text_alignment
 	
@@ -69,3 +81,14 @@ func _ready():
 	%NameLabelPanel.anchor_left = name_label_alignment/2.0
 	%NameLabelPanel.anchor_right = name_label_alignment/2.0
 	%NameLabelPanel.grow_horizontal = [1, 2, 0][name_label_alignment]
+
+	## NEXT INDICATOR SETTINGS
+	if !next_indicator_enabled:
+		%NextIndicator.queue_free()
+	else:
+		%NextIndicator.animation = next_indicator_animation
+		if FileAccess.file_exists(next_indicator_texture):
+			%NextIndicator.texture = load(next_indicator_texture)
+		%NextIndicator.show_on_questions = next_indicator_show_on_questions
+		%NextIndicator.show_on_autoadvance = next_indicator_show_on_autoadvance
+

@@ -1,12 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bd7237ue2rs0x"]
+[gd_scene load_steps=18 format=3 uid="uid://dlx7jcvm52tyw"]
 
-[ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultStyles/TextBubble/Bubble.gd" id="1_1r4d6"]
-[ext_resource type="Shader" path="res://addons/dialogic/Modules/DefaultStyles/TextBubble/speech_bubble.gdshader" id="2_1rklp"]
-[ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="3_vwaxq"]
-[ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_type_sound.gd" id="4_t5d64"]
-[ext_resource type="Script" path="res://addons/dialogic/Modules/Choice/node_choice_button.gd" id="5_8kr3u"]
-[ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultStyles/HideWithChild.gd" id="6_j46jo"]
-[ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_name_label.gd" id="7_o4lxv"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultStyles/TextBubble/TextBubble.gd" id="1_jdhpk"]
+[ext_resource type="Shader" path="res://addons/dialogic/Modules/DefaultStyles/TextBubble/speech_bubble.gdshader" id="2_1mhvf"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="3_syv35"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_type_sound.gd" id="4_7bm4b"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultStyles/HideWithChild.gd" id="5_371j3"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_name_label.gd" id="6_5gd03"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Choice/node_choice_button.gd" id="7_0tnh1"]
 
 [sub_resource type="Curve" id="Curve_0j8nu"]
 _data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
@@ -36,7 +36,7 @@ cellular_jitter = 0.15
 noise = SubResource("FastNoiseLite_0momr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_60xbe"]
-shader = ExtResource("2_1rklp")
+shader = ExtResource("2_1mhvf")
 shader_parameter/radius = 0.25
 shader_parameter/ratio = Vector2(1, 1)
 shader_parameter/crease = 0.1
@@ -65,7 +65,7 @@ border_color = Color(0.227451, 0.227451, 0.227451, 1)
 [node name="TextBubble" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_1r4d6")
+script = ExtResource("1_jdhpk")
 
 [node name="Tail" type="Line2D" parent="."]
 width = 96.0
@@ -103,10 +103,11 @@ grow_vertical = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Some Text"
 scroll_active = false
-script = ExtResource("3_vwaxq")
+visible_characters_behavior = 1
+script = ExtResource("3_syv35")
 
 [node name="DialogicNode_TypeSounds" type="AudioStreamPlayer" parent="DialogText"]
-script = ExtResource("4_t5d64")
+script = ExtResource("4_7bm4b")
 
 [node name="NameLabel" type="PanelContainer" parent="DialogText"]
 layout_mode = 1
@@ -117,13 +118,13 @@ offset_right = 7.0
 offset_bottom = -3.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h6ls0")
-script = ExtResource("6_j46jo")
+script = ExtResource("5_371j3")
 
 [node name="NameLabel" type="Label" parent="DialogText/NameLabel"]
 unique_name_in_owner = true
 layout_mode = 2
 horizontal_alignment = 1
-script = ExtResource("7_o4lxv")
+script = ExtResource("6_5gd03")
 
 [node name="ChoiceContainer" type="HBoxContainer" parent="DialogText"]
 layout_mode = 1
@@ -146,7 +147,7 @@ theme_override_colors/font_focus_color = Color(0.27451, 0.180392, 0.0627451, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_g4yjl")
 text = "Yes!"
 flat = true
-script = ExtResource("5_8kr3u")
+script = ExtResource("7_0tnh1")
 
 [node name="DialogicNode_ChoiceButton2" type="Button" parent="DialogText/ChoiceContainer"]
 layout_mode = 2
@@ -158,7 +159,7 @@ theme_override_colors/font_focus_color = Color(0.27451, 0.180392, 0.0627451, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_g4yjl")
 text = "Yes!"
 flat = true
-script = ExtResource("5_8kr3u")
+script = ExtResource("7_0tnh1")
 
 [node name="DialogicNode_ChoiceButton3" type="Button" parent="DialogText/ChoiceContainer"]
 layout_mode = 2
@@ -170,7 +171,6 @@ theme_override_colors/font_focus_color = Color(0.27451, 0.180392, 0.0627451, 1)
 theme_override_styles/focus = SubResource("StyleBoxFlat_g4yjl")
 text = "Yes!"
 flat = true
-script = ExtResource("5_8kr3u")
+script = ExtResource("7_0tnh1")
 
-[connection signal="continued_revealing_text" from="DialogText" to="." method="_on_DialogText_continued_revealing_text"]
 [connection signal="started_revealing_text" from="DialogText" to="." method="_on_dialog_text_started_revealing_text"]
