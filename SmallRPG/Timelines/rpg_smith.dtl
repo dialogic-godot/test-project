@@ -1,0 +1,77 @@
+# First interaction with the smith
+Smith: Hi, I'm Smith.
+Player: Hi Smith!
+Smith: I don't have time right now.
+Smith: Come back later!
+[signal arg="next->again"]
+[end_timeline]
+
+# Second interaction
+[label name="again"]
+Smith: Oh, it's you again.
+Player: Yep, me again.
+Smith: Haha, I like you.
+[signal arg="next->quest"]
+[end_timeline]
+
+# Third interaction
+[label name="quest"]
+Smith: Alright kid...
+Smith: I feel like I can trust you.
+Smith: So I have a task for you.
+- Okay?
+	Smith: I've lost a key in the forest.
+	Smith: It was in the north-east.
+	Smith: Could you get it?
+	- Okay!
+		Smith: Thank you, kiddo.
+		Player: See you later!
+		[signal arg="next->quest_accepted"]
+	- Argh no
+		Smith: You won't? Damn.
+		Smith: Well then off you go.
+		[signal arg="next->quest_declined"]
+- Nah.
+	Smith: Not? I've judged you wrong.
+	Smith: Then go!
+	[signal arg="next->quest_declined"]
+[end_timeline]
+
+# Quest In Progress
+[label name="quest_declined"]
+Smith: What [do you want/is it] now?
+Smith: [Argh. I don't have time for you./ Go away!]
+Smith: Go!
+[end_timeline]
+
+[label name="quest_accepted"]
+Smith: And? 
+Smith: Have you [found/ gotten] the [key/ key yet]?
+- Yes [if {RPG_Example.smiths_key} > 0]
+	Player: Here, I hope it's this one.
+	Smith: Oh?
+	Smith: Yes, that is my key!
+	Smith: Thank you very much.
+	Player: No problem.
+	Smith: See you later then my friend.
+	Player: Bye!
+	[signal arg="next->end_good"]
+- No
+	Smith: Well, I hope you'll get it soon.
+	Player: I'll try!
+[end_timeline]
+
+# Quest Finished
+[label name="end_good"]
+Smith: [It's good to have the key back./ It was nice of you to help me.]
+Smith: Thank you once again!
+[end_timeline]
+
+# Finding the key
+[label name="key"]
+Player: I bet that's the key!
+Player: Smith will be happy.
+VAR {RPG_Example.smiths_key} = 1
+[signal arg="collect"]
+[end_timeline]
+

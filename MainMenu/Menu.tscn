@@ -177,7 +177,13 @@ theme_override_constants/v_separation = 11
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
-text = "Start visual novel"
+text = "Visual Novel"
+
+[node name="SmallRPG" type="Button" parent="MainMenu/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Small RPG"
 
 [node name="About" type="Button" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
@@ -191,5 +197,6 @@ text = "Quit"
 
 [connection signal="pressed" from="AboutScreen/VBox/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/VisualNovel" to="." method="_on_visual_novel_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/SmallRPG" to="." method="_on_text_bubble_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/About" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -78,6 +78,8 @@ func _execute() -> void:
 	if dialogic.has_subsystem('Glossary'):
 		final_text = dialogic.Glossary.parse_glossary(final_text)
 	
+	final_text = dialogic.Text.parse_text(final_text)
+	dialogic.Text.about_to_show_text.emit({'text':final_text, 'character':character, 'portrait':portrait})
 	final_text = await dialogic.Text.update_dialog_text(final_text)
 	
 	#Plays the audio region for the current line.

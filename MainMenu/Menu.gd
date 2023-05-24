@@ -17,6 +17,11 @@ func _on_visual_novel_pressed():
 	get_tree().change_scene_to_file("res://VisualNovel/Menu/visual_novel_main.tscn")
 
 
+func _on_text_bubble_pressed():
+	await fade()
+	get_tree().change_scene_to_file("res://SmallRPG/SmallRPG.tscn")
+
+
 func _on_quit_pressed():
 	get_tree().quit()
 
@@ -52,3 +57,4 @@ func fade(fade_in:= false):
 		tween.tween_property(self, 'modulate', Color.TRANSPARENT, 0.2)
 	await tween.finished
 	await get_tree().create_timer(0.3).timeout
+
