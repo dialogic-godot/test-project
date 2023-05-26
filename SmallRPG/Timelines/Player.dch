@@ -3,16 +3,35 @@
 "@subpath": NodePath(""),
 "color": Color(0.886275, 0.0156863, 0.0156863, 1),
 "custom_info": {
-"sound_mood_default": "",
-"sound_moods": {},
+"sound_mood_default": "Default",
+"sound_moods": {
+"Default": {
+"mode": 1,
+"name": "Default",
+"pitch_base": 1.0,
+"pitch_variance": 0.1,
+"skip_characters": 3.0,
+"sound_path": "res://SmallRPG/Assets/talking_sound_short.ogg",
+"volume_base": -10.0,
+"volume_variance": 0.0
+}
+},
 "style": ""
 },
-"default_portrait": "",
+"default_portrait": "New portrait",
 "description": "",
 "display_name": "Player",
 "mirror": false,
 "nicknames": [""],
 "offset": Vector2(0, 0),
-"portraits": {},
+"portraits": {
+"New portrait": {
+"image": "",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
 "scale": 1.0
 }

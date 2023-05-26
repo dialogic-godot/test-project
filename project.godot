@@ -112,7 +112,6 @@ interact={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://TextBubble/Timelines/text_bubbles_smith_translation.en.translation")
 locale/test="de"
 
 [physics]

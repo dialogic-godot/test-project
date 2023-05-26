@@ -15,6 +15,7 @@ func open():
 	else:
 		%NewGame.grab_focus()
 	%Load.visible = !Dialogic.Save.get_slot_names().is_empty()
+	%LoadMenu.hide()
 
 
 func _on_dialogic_end() -> void:

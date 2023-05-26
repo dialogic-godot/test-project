@@ -3,7 +3,7 @@
 "@subpath": NodePath(""),
 "color": Color(0.372549, 0.709804, 0.890196, 1),
 "custom_info": {
-"sound_mood_default": "",
+"sound_mood_default": "Happy",
 "sound_moods": {},
 "style": ""
 },
@@ -19,7 +19,8 @@
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
-"scene": ""
+"scene": "",
+"sound_mood": "Happy"
 },
 "Entangled/wblink": {
 "image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wblink.png",

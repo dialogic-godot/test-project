@@ -3,8 +3,19 @@
 "@subpath": NodePath(""),
 "color": Color(0.360784, 0.6, 0.937255, 1),
 "custom_info": {
-"sound_mood_default": "",
-"sound_moods": {},
+"sound_mood_default": "Default",
+"sound_moods": {
+"Default": {
+"mode": 1,
+"name": "Default",
+"pitch_base": 0.8,
+"pitch_variance": 0.2,
+"skip_characters": 3.0,
+"sound_path": "res://SmallRPG/Assets",
+"volume_base": -15.0,
+"volume_variance": 2.0
+}
+},
 "style": ""
 },
 "default_portrait": "",

@@ -114,6 +114,7 @@ This project serves as a testing ground for existing and new features of dialogi
 autowrap_mode = 3
 
 [node name="Back" type="Button" parent="AboutScreen/VBox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Back"
@@ -186,17 +187,19 @@ size_flags_horizontal = 0
 text = "Small RPG"
 
 [node name="About" type="Button" parent="MainMenu/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "About"
 
 [node name="Quit" type="Button" parent="MainMenu/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Quit"
 
 [connection signal="pressed" from="AboutScreen/VBox/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/VisualNovel" to="." method="_on_visual_novel_pressed"]
-[connection signal="pressed" from="MainMenu/VBoxContainer/SmallRPG" to="." method="_on_text_bubble_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/SmallRPG" to="." method="_on_small_rpg_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/About" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

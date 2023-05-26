@@ -23,5 +23,7 @@ func fade(fade_in:= false):
 
 func _input(event):
 	if Input.is_key_pressed(KEY_ESCAPE):
+		if Dialogic.has_active_layout_node():
+			Dialogic.get_layout_node().queue_free()
 		await fade()
 		get_tree().change_scene_to_file("res://MainMenu/Menu.tscn")
