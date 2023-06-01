@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqw0xfdhc4nc4"]
+
+[ext_resource type="Texture2D" uid="uid://bp18h0ibngt7s" path="res://Assets/RPG_Preview.PNG" id="1_8asru"]
+[ext_resource type="Script" path="res://Smartphone/image_message_panel.gd" id="1_kupgr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwfob"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="ImageMessage" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -902.0
+offset_bottom = -482.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iwfob")
+script = ExtResource("1_kupgr")
+
+[node name="Time" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -270.0
+offset_top = -18.0
+offset_right = -5.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.564706, 0.564706, 0.564706, 1)
+theme_override_font_sizes/font_size = 8
+text = "14:22"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Image" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8asru")
+expand_mode = 1
+stretch_mode = 5

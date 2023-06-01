@@ -35,10 +35,15 @@ text/hide_empty_textbox=true
 text/autopauses={}
 glossary/default_case_sensitive=true
 layout/mode=0
-text/autocolor_names=true
+text/autocolor_names=false
 variables={
 "RPG_Example": {
 "smiths_key": "0"
+},
+"Smartphone": {
+"Claire": "0",
+"Laurey": "",
+"Otto": ""
 }
 }
 event_default_overrides={
@@ -50,6 +55,12 @@ event_default_overrides={
 },
 "Voice": {
 "audio_bus": "Voices"
+},
+"Wait": {
+"hide_text": true
+},
+"Wait for Input": {
+"hide_textbox": false
 }
 }
 translation/enabled=false
@@ -59,8 +70,17 @@ translation/translation_folder=""
 translation/id_counter=16
 layout/layout_scene="res://addons/dialogic/Modules/DefaultStyles/Default/DialogicDefaultLayout.tscn"
 layout/export_overrides={
+"name_label_alignment": "2",
 "sizing_mode": "0"
 }
+layout/end_behaviour=0
+choices/reveal_delay=0.0
+choices/reveal_by_input=false
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
