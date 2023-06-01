@@ -32,7 +32,10 @@ settings/text_speed=0.01
 text/skippable=true
 text/autoadvance_delay=1.0
 text/hide_empty_textbox=true
-text/autopauses={}
+text/autopauses={
+",;:": 0.1,
+".?!": 0.1
+}
 glossary/default_case_sensitive=true
 layout/mode=0
 text/autocolor_names=false
@@ -73,7 +76,7 @@ layout/export_overrides={
 "sizing_mode": "0"
 }
 layout/end_behaviour=0
-choices/reveal_delay=0.0
+choices/reveal_delay=0
 choices/reveal_by_input=false
 
 [display]
