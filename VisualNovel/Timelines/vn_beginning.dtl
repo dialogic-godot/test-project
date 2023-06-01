@@ -1,3 +1,4 @@
+Setting "text_speed" = 0.03
 [i]This is the beginning of dialogics example visual novel. Enjoy.
 [background arg="res://VisualNovel/Assets/Backgrounds/Interior 4.png" fade="1.0"]
 Join Leon 3
@@ -5,12 +6,15 @@ Leon: Wow, what a day. Feels insane to think it hasn't been more then 12 hours s
 Leon (Negative/sad): Only 12 hours and I already want back. [pause]But that won't happen.
 Leon (Positive/scoff): Let's see how this will end then.
 
+Update Leon (Positive/surprise) 2 [animation="Tada" wait="true" repeat="3"]
 
 [background arg="res://VisualNovel/Assets/Backgrounds/Restaurant 9.png" fade="1.0"]
 [i] Some time later...
 Leon (Basic/default): Oh, this is a cosy place. Let's say some more generic stuff.
 Leon (Basic/doubt): What?
+Leave Leon
 Leon: ???
 Leon: ...
 Leon (Basic/default): Well, whatever.
 [jump timeline="vn_ending"]
+

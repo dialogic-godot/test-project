@@ -42,6 +42,69 @@
 "scale": 1,
 "scene": ""
 },
+"Faces/Basic/blink": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_blink.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Basic/default": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_default.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Basic/doubt": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_doubt.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Basic/shy": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_shy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Negative/hate": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_hate.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Negative/plot": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_plot.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Negative/sad": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_sad.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Positive/scoff": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_scoff.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Faces/Positive/surprise": {
+"image": "res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_surprise.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
 "Negative/hate": {
 "image": "res://VisualNovel/Assets/Characters/Antonio/pl5 hate.png",
 "mirror": false,
