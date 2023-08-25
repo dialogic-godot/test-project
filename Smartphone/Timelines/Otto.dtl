@@ -1,0 +1,30 @@
+Player: Hey, what's up?
+Otto: Yo, just got home.
+Player: Wanna meet later?
+Otto: Yeah sure.
+Otto: Where?
+- At the church
+	Player: What about at the church?
+	Otto: What you planning at the church, huh?
+	Player: Just thought it's a good spot to meet.
+	Otto: Yeah, okay.
+- At the lake
+	Player: Maybe at the lake?
+	Otto: Yes!
+	Otto: Bring your stuff.
+	Player: Sure.
+	Otto: Yeah!
+Player: You're a real "yeah" guy
+Otto: ?
+Player: nevermind
+[wait time="1" hide_text="false"]
+Otto: Yeah.
+Player: xD
+
+label Loop
+[wait_input]
+Player: <Hey?/whatyoudoin??/otto>
+Otto: <yeah?/?/is this important?>
+Player: <just checkin in/I'm bored/you bored too?>
+Otto: <sry, but no time rn, k?/I have no time for your nonsense xD>
+jump Loop

@@ -50,7 +50,7 @@ func _input(event:InputEvent):
 		if timeline:
 			owner.state = owner.States.DIALOG
 			get_viewport().set_input_as_handled()
-			Dialogic.add_layout_node("res://addons/dialogic/Modules/DefaultStyles/TextBubble/DialogicTextBubbleLayout.tscn")
+			Dialogic.Styles.add_layout_style('SmallRPG_Style')
 			var node := Dialogic.start(timeline, next_label)
 			if _player:
 				node.register_character(load("res://SmallRPG/Timelines/Player.dch"), _player.get_node('BubbleMarker'))

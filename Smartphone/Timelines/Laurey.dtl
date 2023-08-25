@@ -1,0 +1,29 @@
+Player: Hey, is this Laurey?
+Laurey: Yeah
+Laurey: Whos this?
+Player: I'm Sally
+Player: got your number from Claire
+Player: She said you know codes.
+Player: I've found this strange message.
+Laurey: Interesting
+Laurey: Do explicate
+Player: huh?
+Laurey: tell more
+Player: Oh yeah
+Player: So I've found this in our attic
+Player: Probably belonged to my grandparents.
+Player: I can send you a picture.
+[background arg="res://Smartphone/Assets/secret_message.png"]
+[wait_input]
+Laurey: wow
+Laurey: Looks strange indeed
+Laurey: I can took at it
+Laurey: but no promises
+Player: thx
+label point1
+[wait time="5"]
+Laurey: So...
+Laurey: I think I found something.
+Player: Wow.
+Player: What is it?
+Laurey: I think this might be a mix of 

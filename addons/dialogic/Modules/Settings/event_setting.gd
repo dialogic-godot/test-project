@@ -7,22 +7,22 @@ extends DialogicEvent
 
 ### Settings
 
-enum Modes {Set, Reset, ResetAll}
+enum Modes {SET, RESET, RESET_ALL}
 
 ## The name of the setting to save to. 
 var name: String = ""
 var _value_type := 0
 var value: Variant = ""
 
-var mode := Modes.Set
+var mode := Modes.SET
 
 ################################################################################
 ## 						INITIALIZE
 ################################################################################
 
 func _execute() -> void:
-	if mode == Modes.Reset or mode == Modes.ResetAll:
-		if !name.is_empty() and mode != Modes.ResetAll:
+	if mode == Modes.RESET or mode == Modes.RESET_ALL:
+		if !name.is_empty() and mode != Modes.RESET_ALL:
 			dialogic.Settings.reset_setting(name)
 		else:
 			dialogic.Settings.reset_all()
@@ -47,7 +47,7 @@ func _execute() -> void:
 
 func _init() -> void:
 	event_name = "Setting"
-	set_default_color('Color6')
+	set_default_color('Color9')
 	event_category = "Helpers"
 	event_sorting_index = 2
 
@@ -62,13 +62,13 @@ func _get_icon() -> Resource:
 
 func to_text() -> String:
 	var string := "Setting "
-	if mode == Modes.Reset:
+	if mode == Modes.RESET:
 		string += "reset "
 	
-	if !name.is_empty() and mode != Modes.ResetAll:
+	if !name.is_empty() and mode != Modes.RESET_ALL:
 		string += '"' + name + '"'
 	
-	if mode == Modes.Set:
+	if mode == Modes.SET:
 		string += " = "
 		value = str(value)
 		match _value_type:
@@ -90,12 +90,12 @@ func from_text(string:String) -> void:
 		return
 	
 	if result.get_string('reset'):
-		mode = Modes.Reset
+		mode = Modes.RESET
 	
 	name = result.get_string('name').strip_edges()
 	
-	if name.is_empty() and mode == Modes.Reset:
-		mode = Modes.ResetAll
+	if name.is_empty() and mode == Modes.RESET:
+		mode = Modes.RESET_ALL
 	
 	if result.get_string('value'):
 		value = result.get_string('value').strip_edges()
@@ -122,24 +122,24 @@ func is_valid_event(string:String) -> bool:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('mode', ValueType.FixedOptionSelector, '', '', {
+	add_header_edit('mode', ValueType.FIXED_OPTION_SELECTOR, '', '', {
 		'selector_options': [{
 				'label': 'Set',
-				'value': Modes.Set,
+				'value': Modes.SET,
 				'icon': load("res://addons/dialogic/Editor/Images/Dropdown/default.svg")
 			},{
 				'label': 'Reset',
-				'value': Modes.Reset,
+				'value': Modes.RESET,
 				'icon': load("res://addons/dialogic/Editor/Images/Dropdown/update.svg")
 			},{
 				'label': 'Reset All',
-				'value': Modes.ResetAll,
+				'value': Modes.RESET_ALL,
 				'icon': load("res://addons/dialogic/Editor/Images/Dropdown/update.svg")
 			},
 			]})
 	
-	add_header_edit('name', ValueType.ComplexPicker, '', '', {'placeholder':'Type setting', 'suggestions_func':get_settings_suggestions}, 'mode != 2')
-	add_header_edit('_value_type', ValueType.FixedOptionSelector, 'to', '', {
+	add_header_edit('name', ValueType.COMPLEX_PICKER, '', '', {'placeholder':'Type setting', 'suggestions_func':get_settings_suggestions}, 'mode != 2')
+	add_header_edit('_value_type', ValueType.FIXED_OPTION_SELECTOR, 'to', '', {
 		'selector_options': [
 			{
 				'label': 'String',
@@ -160,9 +160,9 @@ func build_event_editor():
 			}],
 		'symbol_only':true}, 
 		'!name.is_empty() and mode == 0')
-	add_header_edit('value', ValueType.SinglelineText, '', '', {}, '!name.is_empty() and (_value_type == 0 or _value_type == 3) and mode == 0')
-	add_header_edit('value', ValueType.Float, '', '', {}, '!name.is_empty()  and _value_type == 1 and mode == 0')
-	add_header_edit('value', ValueType.ComplexPicker, '', '', 
+	add_header_edit('value', ValueType.SINGLELINE_TEXT, '', '', {}, '!name.is_empty() and (_value_type == 0 or _value_type == 3) and mode == 0')
+	add_header_edit('value', ValueType.FLOAT, '', '', {}, '!name.is_empty()  and _value_type == 1 and mode == 0')
+	add_header_edit('value', ValueType.COMPLEX_PICKER, '', '', 
 			{'suggestions_func' : get_value_suggestions, 'placeholder':'Select Variable'}, 
 			'!name.is_empty() and _value_type == 2 and mode == 0')
 
@@ -183,3 +183,37 @@ func get_value_suggestions(filter:String) -> Dictionary:
 	for var_path in DialogicUtil.list_variables(vars):
 		suggestions[var_path] = {'value':var_path, 'editor_icon':["ClassList", "EditorIcons"]}
 	return suggestions
+
+
+
+####################### CODE COMPLETION ########################################
+################################################################################
+
+func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:String, word:String, symbol:String) -> void:
+	if symbol == " " and !"reset" in line and !'=' in line and !'"' in line:
+		TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, "reset", "reset ", event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("RotateLeft", "EditorIcons"))
+		TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, "reset all", "reset\n", event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("ToolRotate", "EditorIcons"))
+	
+	if (symbol == " " or symbol == '"') and !"=" in line:
+		for i in get_settings_suggestions(''):
+			if i.is_empty():
+				continue
+			if symbol == '"':
+				TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, i, i, event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("GDScript", "EditorIcons"), '"')
+			else:
+				TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, i, '"'+i, event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5), TextNode.get_theme_icon("GDScript", "EditorIcons"), '"')
+
+
+func _get_start_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit) -> void:
+	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, 'Setting', 'Setting ', event_color)
+
+#################### SYNTAX HIGHLIGHTING #######################################
+################################################################################
+
+func _get_syntax_highlighting(Highlighter:SyntaxHighlighter, dict:Dictionary, line:String) -> Dictionary:
+	dict[line.find('Setting')] = {"color":event_color}
+	dict[line.find('Setting')+7] = {"color":Highlighter.normal_color}
+	dict = Highlighter.color_word(dict, event_color, line, 'reset')
+	dict = Highlighter.color_region(dict, Highlighter.string_color, line, '"', '"')
+	dict = Highlighter.color_region(dict, Highlighter.variable_color, line, '{', '}')
+	return dict

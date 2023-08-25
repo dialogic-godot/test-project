@@ -1,0 +1,33 @@
+Player: <Hi Claire, are you there?/Hey, you there?/Anyone home?>
+Claire: <Yep. What are you up to?/Yeah, why?/Sure. What's up?'>
+Player: <Just vibin./Idk/Just thought of you>
+Claire: Anything you wanted to tell me?
+- Yes, actually...
+	Player: Yes, actually I need help
+	Player: I've found a strange paper
+	Claire: huh?
+	Claire: Whats strange?
+	Player: It's old. from the attic.
+	Player: It seems like nonsense, but it was in my grandmas stuff.
+	Player: You know anything about codes or such stuff?
+	Claire: Completely clueless.
+	Claire: You can ask Laurey
+	Claire: He knows stuff like that I think.
+	Claire: Wait
+	[signal arg="reveal->Laurey"]
+	Claire: Here's his number
+	Player: Wow, thanks!
+	Claire: np
+- Ugh. Nope.
+	Claire: <Wow/Haha/Really?>
+	Claire: <Glad youre still texting me for no reason \:)/You're so silly./Damn>
+	Player: <xD/^_^>
+	[wait time="4"]
+	jump
+label Loop
+[wait_input]
+Player: <Hey, you've got time rn?/Time to talk?/You got a moment??>
+Claire: <Nah/Nope./Not right now>
+Claire: <sorry, I gotta study/gotta learn stuff/school>
+Player: <alright/okay/\:(>
+jump Loop

@@ -1,12 +1,15 @@
 @tool
-extends HBoxContainer
+extends DialogicSettingsPage
 
 ## Settings tab that holds genreal dialogic settings.
 
-signal colors_changed
 
-var color_palette :Dictionary = {}
+func _get_title() -> String:
+	return "General"
 
+
+func _get_priority() -> int:
+	return 99
 
 func _ready() -> void:
 	var s := DCSS.inline({
@@ -20,30 +23,23 @@ func _ready() -> void:
 	%PhysicsTimerButton.pressed.connect(_on_physics_timer_button_toggled)
 
 	# Colors
+	%ResetColorsButton.icon = get_theme_icon("Reload", "EditorIcons")
 	%ResetColorsButton.button_up.connect(_on_reset_colors_button)
-
-	for n in %Colors.get_children():
-		n.color_changed.connect(_on_color_change.bind(n))
-
+	
 	# Extension creator
 	%ExtensionCreator.hide()
 
 
-func refresh() -> void:
+func _refresh() -> void:
 	%PhysicsTimerButton.button_pressed = DialogicUtil.is_physics_timer()
 	%LayoutNodeEndBehaviour.select(ProjectSettings.get_setting('dialogic/layout/end_behaviour', 0))
 	%ExtensionsFolderPicker.set_value(ProjectSettings.get_setting('dialogic/extensions_folder', 'res://addons/dialogic_additions'))
 	
-	# Color Palette
-	color_palette = DialogicUtil.get_color_palette()
-	var _scale := DialogicUtil.get_editor_scale()
-	for n in %Colors.get_children():
-		n.custom_minimum_size = Vector2(50 ,50)*scale
-		n.color = color_palette[n.name]
+	update_color_palette()
 	
 	%SectionList.clear()
 	%SectionList.create_item()
-	var cached_events :Array[DialogicEvent] = get_parent().get_parent().editors_manager.resource_helper.event_script_cache
+	var cached_events :Array[DialogicEvent] = find_parent('Settings').editors_manager.resource_helper.event_script_cache
 	var sections := []
 	var section_order :Array = DialogicUtil.get_editor_setting('event_section_order', ['Main', 'Logic', 'Timeline', 'Audio', 'Godot','Other', 'Helper'])
 	for ev in cached_events:
@@ -66,6 +62,7 @@ func _on_section_list_button_clicked(item:TreeItem, column, id, mouse_button_ind
 		item.move_before(item.get_parent().get_child(item.get_index()-1))
 	else:
 		item.move_after(item.get_parent().get_child(item.get_index()+1))
+	
 	for child in %SectionList.get_root().get_children():
 		child.set_button_disabled(0, 0, false)
 		child.set_button_disabled(0, 1, false)
@@ -82,26 +79,33 @@ func _on_section_list_button_clicked(item:TreeItem, column, id, mouse_button_ind
 
 
 func force_event_button_list_reload() -> void:
-	find_parent('EditorsManager').editors['Timeline Editor'].node.get_node('VisualEditor').load_event_buttons()
+	find_parent('EditorsManager').editors['Timeline'].node.get_node('VisualEditor').load_event_buttons()
 
 
-func _on_color_change(color: Color, who) -> void:
-	ProjectSettings.set_setting('dialogic/editor/' + str(who.name), color)
-	ProjectSettings.save()
-	emit_signal('colors_changed')
+func update_color_palette() -> void:
+	# Color Palette
+	for child in %Colors.get_children():
+		child.queue_free()
+	var _scale := DialogicUtil.get_editor_scale()
+	for color in DialogicUtil.get_color_palette():
+		var button := ColorPickerButton.new()
+		button.custom_minimum_size = Vector2(50 ,50)*scale
+		%Colors.add_child(button)
+		button.color = DialogicUtil.get_color(color)
+		button.color_changed.connect(_on_color_change)
+
+
+func _on_color_change(color:Color) -> void:
+	var new_palette := {}
+	for i in %Colors.get_children():
+		new_palette['Color'+str(i.get_index()+1)] = i.color
+	DialogicUtil.set_editor_setting('color_palette', new_palette)
+	
 
 
 func _on_reset_colors_button() -> void:
-	color_palette = DialogicUtil.get_color_palette(true)
-	for n in %Colors.get_children():
-		n.color = color_palette[n.name]
-		# There is a bug when trying to remove existing values, so we have to
-		# set/create new entries for all the colors used.
-		# If you manage to make it work using the ProjectSettings.clear()
-		# feel free to open a PR!
-		ProjectSettings.set_setting('dialogic/editor/' + str(n.name), color_palette[n.name])
-	ProjectSettings.save()
-	emit_signal('colors_changed')
+	DialogicUtil.set_editor_setting('color_palette', null)
+	update_color_palette()
 
 
 func _on_physics_timer_button_toggled(button_pressed:bool) -> void:
@@ -206,7 +210,7 @@ func build_event_editor() -> void:
 ##					STATE
 ####################################################################################################
 
-func clear_game_state(clear_flag:=Dialogic.ClearFlags.FullClear):
+func clear_game_state(clear_flag:=Dialogic.ClearFlags.FULL_CLEAR):
 	pass
 
 func load_game_state():

@@ -7,7 +7,7 @@ Smith: Come back later!
 [end_timeline]
 
 # Second interaction
-[label name="again"]
+label again
 Smith: Oh, it's you again.
 Player: Yep, me again.
 Smith: Haha, I like you.
@@ -15,7 +15,7 @@ Smith: Haha, I like you.
 [end_timeline]
 
 # Third interaction
-[label name="quest"]
+label quest
 Smith: Alright kid...
 Smith: I feel like I can trust you.
 Smith: So I have a task for you.
@@ -38,15 +38,15 @@ Smith: So I have a task for you.
 [end_timeline]
 
 # Quest In Progress
-[label name="quest_declined"]
-Smith: What [do you want/is it] now?
-Smith: [Argh. I don't have time for you./ Go away!]
+label quest_declined
+Smith: What <do you want/is it> now?
+Smith: <Argh. I don't have time for you./ Go away!>
 Smith: Go!
 [end_timeline]
 
-[label name="quest_accepted"]
-Smith: And? 
-Smith: Have you [found/ gotten] the [key/ key yet]?
+label quest_accepted
+Smith: And?
+Smith: Have you <found/ gotten> the <key/ key yet>?
 - Yes [if {RPG_Example.smiths_key} > 0]
 	Player: Here, I hope it's this one.
 	Smith: Oh?
@@ -62,16 +62,15 @@ Smith: Have you [found/ gotten] the [key/ key yet]?
 [end_timeline]
 
 # Quest Finished
-[label name="end_good"]
-Smith: [It's good to have the key back./ It was nice of you to help me.]
-Smith: Thank you once again!
+label end_good
+Smith: It's <good/so great/wonderful> <to have/you broght> <the/my> key back.
+Smith: Thank you <once again/very much/my friend>!
 [end_timeline]
 
 # Finding the key
-[label name="key"]
+label key
 Player: I bet that's the key!
 Player: Smith will be happy.
 VAR {RPG_Example.smiths_key} = 1
 [signal arg="collect"]
 [end_timeline]
-

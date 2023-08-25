@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://dk2343crqx1nf"]
+
+[ext_resource type="Script" path="res://Smartphone/phone_example.gd" id="1_3og1r"]
+[ext_resource type="FontFile" uid="uid://c05jd1fu67en" path="res://Assets/Fonts/Roboto/Roboto-MediumItalic.ttf" id="1_jt70c"]
+[ext_resource type="PackedScene" uid="uid://brtaff0j0wfm6" path="res://Smartphone/contact_button.tscn" id="3_r2c8r"]
+[ext_resource type="Texture2D" uid="uid://bsb3pyc2vy0bt" path="res://Smartphone/Assets/elf.png" id="4_drqya"]
+[ext_resource type="Texture2D" uid="uid://c6h63a0ufpvvh" path="res://Smartphone/Assets/dwarf.png" id="5_l3tcf"]
+[ext_resource type="Texture2D" uid="uid://dykkpg0mdhimc" path="res://Smartphone/Assets/knight.png" id="6_lnyac"]
+[ext_resource type="Texture2D" uid="uid://digng6kq2lkxj" path="res://VisualNovel/Assets/UI/cross.png" id="7_dcmgn"]
+
+[node name="PhoneExample" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3og1r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 144.0
+offset_top = -117.0
+offset_right = 638.0
+offset_bottom = 125.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_jt70c")
+theme_override_font_sizes/font_size = 40
+text = "Yo. Smartphone example."
+
+[node name="Label2" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_fonts/font = ExtResource("1_jt70c")
+theme_override_font_sizes/font_size = 30
+text = "Let's chat with someone."
+text_overrun_behavior = 4
+
+[node name="Contacts" type="HFlowContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 21
+
+[node name="Claire" parent="VBox/Contacts" instance=ExtResource("3_r2c8r")]
+layout_mode = 2
+image = ExtResource("4_drqya")
+
+[node name="Otto" parent="VBox/Contacts" instance=ExtResource("3_r2c8r")]
+layout_mode = 2
+image = ExtResource("5_l3tcf")
+
+[node name="Laurey" parent="VBox/Contacts" instance=ExtResource("3_r2c8r")]
+visible = false
+layout_mode = 2
+image = ExtResource("6_lnyac")
+
+[node name="Label4" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.337255, 0.337255, 0.337255, 1)
+theme_override_fonts/font = ExtResource("1_jt70c")
+theme_override_font_sizes/font_size = 20
+text = "Advance the chat by clicking. Also try out switching chats."
+autowrap_mode = 3
+
+[node name="Quit" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -49.0
+offset_top = 10.0
+offset_right = -7.0
+offset_bottom = 49.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+focus_mode = 0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.509804)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+icon = ExtResource("7_dcmgn")
+flat = true
+expand_icon = true
+
+[connection signal="pressed" from="VBox/Contacts/Claire" to="." method="_on_contact_pressed"]
+[connection signal="pressed" from="VBox/Contacts/Otto" to="." method="_on_contact_pressed"]
+[connection signal="pressed" from="VBox/Contacts/Laurey" to="." method="_on_contact_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

@@ -21,9 +21,9 @@ func _execute() -> void:
 	if hide_text and dialogic.has_subsystem("Text"):
 		dialogic.Text.update_dialog_text('')
 		dialogic.Text.hide_text_boxes()
-	dialogic.current_state = dialogic.states.WAITING
+	dialogic.current_state = dialogic.States.WAITING
 	await dialogic.get_tree().create_timer(time, true, DialogicUtil.is_physics_timer()).timeout
-	dialogic.current_state = dialogic.states.IDLE
+	dialogic.current_state = dialogic.States.IDLE
 	
 	finish()
 
@@ -34,9 +34,9 @@ func _execute() -> void:
 
 func _init() -> void:
 	event_name = "Wait"
-	set_default_color('Color6')
-	event_category = "Other"
-	event_sorting_index = 10
+	set_default_color('Color5')
+	event_category = "Flow"
+	event_sorting_index = 11
 	expand_by_default = false
 
 
@@ -61,6 +61,7 @@ func get_shortcode_parameters() -> Dictionary:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('time', ValueType.Float, '','', {'autofocus':true})
-	add_header_label('seconds.')
-	add_body_edit('hide_text', ValueType.Bool, 'Hide text box:')
+	add_header_edit('time', ValueType.FLOAT, 'Wait','', {'autofocus':true})
+	add_header_label('seconds', 'time != 1')
+	add_header_label('second', 'time == 1')
+	add_body_edit('hide_text', ValueType.BOOL, 'Hide text box:')

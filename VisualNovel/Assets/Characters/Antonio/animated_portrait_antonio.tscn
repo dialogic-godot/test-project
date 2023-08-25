@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5d2iiukwf856"]
+
+[ext_resource type="Script" path="res://VisualNovel/Assets/Characters/Antonio/animated_portrait_antonio.gd" id="1_2sp3o"]
+[ext_resource type="Texture2D" uid="uid://dssysylhvatha" path="res://VisualNovel/Assets/Characters/Antonio/pl5.png" id="2_uwubj"]
+[ext_resource type="Texture2D" uid="uid://u00jvtcbthxr" path="res://VisualNovel/Assets/Characters/Antonio/pl5 blink.png" id="3_pdxmx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sa0u2"]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": ExtResource("2_uwubj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pdxmx")
+}, {
+"duration": 20.0,
+"texture": ExtResource("2_uwubj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pdxmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_uwubj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pdxmx")
+}, {
+"duration": 20.0,
+"texture": ExtResource("2_uwubj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pdxmx")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 15.0
+}]
+
+[node name="AnimatedPortrait_Antonio" type="Node2D"]
+script = ExtResource("1_2sp3o")
+
+[node name="Portrait" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, 1)
+sprite_frames = SubResource("SpriteFrames_sa0u2")
+animation = &"idle"
+centered = false

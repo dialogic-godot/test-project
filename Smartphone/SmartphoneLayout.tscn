@@ -1,0 +1,249 @@
+[gd_scene load_steps=11 format=3 uid="uid://doer5vu1ifsrv"]
+
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="1_lblyi"]
+[ext_resource type="Script" path="res://Smartphone/SmartphoneLayout.gd" id="1_qguno"]
+[ext_resource type="Texture2D" uid="uid://byaate5oq35el" path="res://Smartphone/Assets/GalaxyNote3.png" id="2_nhqfc"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Choice/node_choice_button.gd" id="4_jhrew"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3p03"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfajr"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 15.0
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4t2r2"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
+draw_center = false
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5t4gp"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.972549, 0.972549, 0.972549, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gnh08"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.972549, 0.972549, 0.972549, 0.639216)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.8, 0.8, 0.8, 0.415686)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_v01w8"]
+Button/colors/font_color = Color(0.47451, 0.47451, 0.47451, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0.101961, 0.101961, 0.101961, 1)
+Button/colors/font_pressed_color = Color(0.352941, 0.352941, 0.352941, 1)
+Button/font_sizes/font_size = 10
+Button/styles/focus = SubResource("StyleBoxFlat_4t2r2")
+Button/styles/hover = SubResource("StyleBoxFlat_5t4gp")
+Button/styles/normal = SubResource("StyleBoxFlat_gnh08")
+Button/styles/pressed = SubResource("StyleBoxFlat_gnh08")
+
+[node name="Smartphone_Layout" type="CanvasLayer"]
+script = ExtResource("1_qguno")
+
+[node name="PhoneTexture" type="TextureRect" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -282.0
+offset_right = -53.0
+offset_bottom = 269.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 0.0322615
+texture = ExtResource("2_nhqfc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="PhoneTexture"]
+self_modulate = Color(0.917647, 0.913725, 0.905882, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 96.0
+offset_top = 43.0
+offset_right = -96.0
+offset_bottom = -41.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v3p03")
+
+[node name="Title" type="Label" parent="PhoneTexture/Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 6.10352e-05
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Scroll" type="ScrollContainer" parent="PhoneTexture/Panel"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 34.0
+offset_right = 253.0
+offset_bottom = 457.0
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="MessageList" type="VBoxContainer" parent="PhoneTexture/Panel/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="DialogText" type="RichTextLabel" parent="PhoneTexture/Panel/Scroll/MessageList"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/default_color = Color(0.172549, 0.172549, 0.172549, 1)
+theme_override_font_sizes/normal_font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_lfajr")
+text = "This is some example text. That is to long for one line."
+fit_content = true
+visible_characters_behavior = 1
+script = ExtResource("1_lblyi")
+hide_when_empty = true
+
+[node name="Time" type="Label" parent="PhoneTexture/Panel/Scroll/MessageList/DialogText"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_top = -26.0
+offset_right = -7.0
+offset_bottom = -3.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.564706, 0.564706, 0.564706, 1)
+theme_override_font_sizes/font_size = 8
+text = "14:22"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Choices" type="HBoxContainer" parent="PhoneTexture/Panel/Scroll/MessageList"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = SubResource("Theme_v01w8")
+alignment = 2
+
+[node name="DialogicNode_ChoiceButton" type="Button" parent="PhoneTexture/Panel/Scroll/MessageList/Choices"]
+layout_mode = 2
+text = "ChoiceA"
+script = ExtResource("4_jhrew")
+
+[node name="DialogicNode_ChoiceButton2" type="Button" parent="PhoneTexture/Panel/Scroll/MessageList/Choices"]
+layout_mode = 2
+text = "ChoiceA"
+script = ExtResource("4_jhrew")
+
+[node name="DialogicNode_ChoiceButton3" type="Button" parent="PhoneTexture/Panel/Scroll/MessageList/Choices"]
+layout_mode = 2
+text = "ChoiceA"
+script = ExtResource("4_jhrew")
+
+[node name="DialogicNode_ChoiceButton4" type="Button" parent="PhoneTexture/Panel/Scroll/MessageList/Choices"]
+layout_mode = 2
+text = "ChoiceA"
+script = ExtResource("4_jhrew")
+
+[node name="Image" type="ColorRect" parent="."]
+visible = false
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.662745)
+
+[node name="ImageOpener" type="Control" parent="Image"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 592.0
+offset_top = 146.0
+offset_right = 1113.0
+offset_bottom = 484.0
+rotation = 0.0183431
+
+[node name="ImageReveal" type="TextureRect" parent="Image/ImageOpener"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="finished_revealing_text" from="PhoneTexture/Panel/Scroll/MessageList/DialogText" to="." method="_on_dialogic_node_dialog_text_finished_revealing_text"]
+[connection signal="started_revealing_text" from="PhoneTexture/Panel/Scroll/MessageList/DialogText" to="." method="_on_dialog_text_started_revealing_text"]

@@ -20,16 +20,15 @@ var text_effects := {}
 var parsed_text_effect_info : Array[Dictionary]= []
 var text_effects_regex := RegEx.new()
 var text_modifiers := []
+var input_handler :Node = null
 
-var input_handler_node :Node = null
-
-var autopauses := {} 
+var autopauses := {}
 
 ####################################################################################################
 ##					STATE
 ####################################################################################################
 
-func clear_game_state(clear_flag:=Dialogic.ClearFlags.FullClear) -> void:
+func clear_game_state(clear_flag:=Dialogic.ClearFlags.FULL_CLEAR) -> void:
 	update_dialog_text('', true)
 	update_name_label(null)
 	dialogic.current_state_info['character'] = null
@@ -37,6 +36,10 @@ func clear_game_state(clear_flag:=Dialogic.ClearFlags.FullClear) -> void:
 	
 	set_skippable(ProjectSettings.get_setting('dialogic/text/skippable', true))
 	set_autoadvance(ProjectSettings.get_setting('dialogic/text/autoadvance', false), ProjectSettings.get_setting('dialogic/text/autoadvance_delay', 1))
+	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
+		if text_node.start_hidden:
+			text_node.textbox_root.hide()
+	
 	set_manualadvance(true)
 
 
@@ -51,11 +54,11 @@ func load_game_state() -> void:
 
 
 func pause() -> void:
-	input_handler_node.pause()
+	input_handler.pause()
 
 
 func resume() -> void:
-	input_handler_node.resume()
+	input_handler.resume()
 
 
 ####################################################################################################
@@ -63,17 +66,23 @@ func resume() -> void:
 ####################################################################################################
 
 ## Applies modifiers, effects and coloring to the text
-func parse_text(text:String) -> String:
-	text = parse_text_modifiers(text)
-	text = parse_text_effects(text)
-	text = color_names(text)
+func parse_text(text:String, variables:= true, glossary:= true, modifiers:= true, effects:= true, color_names:= true) -> String:
+	if variables and dialogic.has_subsystem('VAR'):
+		text = dialogic.VAR.parse_variables(text)
+	if glossary and dialogic.has_subsystem('Glossary'):
+		text = dialogic.Glossary.parse_glossary(text)
+	if modifiers:
+		text = parse_text_modifiers(text)
+	if effects:
+		text = parse_text_effects(text)
+	if color_names:
+		text = color_names(text)
 	return text
 
 
 ## Shows the given text on all visible DialogText nodes.
 ## Instant can be used to skip all revieling.
 func update_dialog_text(text:String, instant:bool= false) -> String:
-	
 	if ProjectSettings.get_setting('dialogic/text/hide_empty_textbox', true):
 		if text.is_empty():
 			await hide_text_boxes(instant)
@@ -84,10 +93,10 @@ func update_dialog_text(text:String, instant:bool= false) -> String:
 				if Dialogic.Animation.is_animating():
 					await Dialogic.Animation.finished
 	
-	if !instant: dialogic.current_state = dialogic.states.SHOWING_TEXT
+	if !instant: dialogic.current_state = dialogic.States.SHOWING_TEXT
 	dialogic.current_state_info['text'] = text
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
-		if text_node.is_visible_in_tree():
+		if text_node.enabled and (text_node == text_node.textbox_root or text_node.textbox_root.is_visible_in_tree()):
 			if instant:
 				text_node.text = text
 			else:
@@ -160,37 +169,38 @@ func update_typing_sound_mood(mood:Dictionary = {}) -> void:
 
 # instant skips the signal and thus possible animations
 func hide_text_boxes(instant:=false) -> void:
+	dialogic.current_state_info['text'] = ''
 	var emitted := instant
 	for name_label in get_tree().get_nodes_in_group('dialogic_name_label'):
 		name_label.text = ""
-	if !emitted and !get_tree().get_nodes_in_group('dialogic_dialog_text').is_empty() and get_tree().get_nodes_in_group('dialogic_dialog_text')[0].get_parent().visible:
+	if !emitted and !get_tree().get_nodes_in_group('dialogic_dialog_text').is_empty() and get_tree().get_nodes_in_group('dialogic_dialog_text')[0].textbox_root.visible:
 		animation_textbox_hide.emit()
 		if Dialogic.Animation.is_animating():
 			await Dialogic.Animation.finished
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
-		if text_node.get_parent().visible and !emitted:
+		if text_node.textbox_root.visible and !emitted:
 			textbox_visibility_changed.emit(false)
 			emitted = true
-		text_node.get_parent().visible = false
+		text_node.textbox_root.hide()
 
 
 func is_textbox_visible() -> bool:
-	return get_tree().get_nodes_in_group('dialogic_dialog_text').any(func(x): return x.get_parent().visible)
+	return get_tree().get_nodes_in_group('dialogic_dialog_text').any(func(x): return x.textbox_root.visible)
 
 
 # instant skips the signal and thus possible animations
 func show_text_boxes(instant:=false) -> void:
 	var emitted := instant
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
-		if !text_node.get_parent().visible and !emitted:
+		if !text_node.textbox_root.visible and !emitted:
 			animation_textbox_show.emit()
-			text_node.get_parent().set_deferred('visible', true)
+			text_node.textbox_root.show()
 			if Dialogic.Animation.is_animating():
 				await Dialogic.Animation.finished
 			textbox_visibility_changed.emit(true)
 			emitted = true
 		else:
-			text_node.get_parent().visible = true
+			text_node.textbox_root.show()
 
 
 func show_next_indicators(question=false, autoadvance=false) -> void:
@@ -228,9 +238,9 @@ func get_autoadvance_time() -> float:
 
 
 func get_autoadvance_progress() -> float:
-	if !input_handler_node.is_autoadvancing():
+	if !input_handler.is_autoadvancing():
 		return -1
-	return (get_autoadvance_time()-input_handler_node.get_autoadvance_time_left())/get_autoadvance_time()
+	return (get_autoadvance_time()-input_handler.get_autoadvance_time_left())/get_autoadvance_time()
 
 
 func can_skip() -> bool:
@@ -253,28 +263,35 @@ func collect_text_effects() -> void:
 	text_effects_regex.compile("(?<!\\\\)\\[\\s*(?<command>"+text_effect_names.trim_suffix("|")+")\\s*(=\\s*(?<value>.+?)\\s*)?\\]")
 
 
+
 ## Returns the string with all text effects removed
 ## Use get_parsed_text_effects() after calling this to get all effect information
 func parse_text_effects(text:String) -> String:
 	parsed_text_effect_info.clear()
+	var rtl := RichTextLabel.new()
+	rtl.bbcode_enabled = true
 	var position_correction := 0
+	var bbcode_correction := 0
 	for effect_match in text_effects_regex.search_all(text):
+		rtl.text = text.substr(0, effect_match.get_start())
+		bbcode_correction = effect_match.get_start()-len(rtl.get_parsed_text())
 		# append [index] = [command, value] to effects dict
-		parsed_text_effect_info.append({'index':effect_match.get_start()-position_correction, 'execution_info':text_effects[effect_match.get_string('command')], 'value': effect_match.get_string('value').strip_edges()})
+		parsed_text_effect_info.append({'index':effect_match.get_start()-position_correction-bbcode_correction, 'execution_info':text_effects[effect_match.get_string('command')], 'value': effect_match.get_string('value').strip_edges()})
 		
-		## TODO MIGHT BE BROKEN, because I had to replace string.erase for godot 4
 		text = text.substr(0,effect_match.get_start()-position_correction)+text.substr(effect_match.get_start()-position_correction+len(effect_match.get_string()))
 		
 		position_correction += len(effect_match.get_string())
 	text = text.replace('\\[', '[')
+	rtl.queue_free()
 	return text
+
 
 func execute_effects(current_index:int, text_node:Control, skipping:bool= false) -> void:
 	# might have to execute multiple effects
 	while true:
 		if parsed_text_effect_info.is_empty():
 			return
-		if current_index == -1 or current_index < parsed_text_effect_info[0]['index']:
+		if current_index != -1 and current_index < parsed_text_effect_info[0]['index']:
 			return
 		var effect :Dictionary=  parsed_text_effect_info.pop_front()
 		await (effect['execution_info']['callable'] as Callable).call(text_node, skipping, effect['value'])
@@ -313,14 +330,14 @@ func _ready():
 	collect_text_effects()
 	collect_text_modifiers()
 	Dialogic.event_handled.connect(hide_next_indicators)
-	input_handler_node = Node.new()
+	
 	autopauses = {}
 	var autopause_data :Dictionary= ProjectSettings.get_setting('dialogic/text/autopauses', {})
 	for i in autopause_data.keys():
-		autopauses[RegEx.create_from_string('(?<!(\\[|\\{))['+i+'](?![\\w\\s]*[\\]\\}])')] = autopause_data[i]
-		
-	input_handler_node.set_script(load(get_script().resource_path.get_base_dir().path_join('default_input_handler.gd')))
-	add_child(input_handler_node)
+		autopauses[RegEx.create_from_string('(?<!(\\[|\\{))['+i+'](?!([\\w\\s]*[\\]\\}]|$))')] = autopause_data[i]
+	input_handler = Node.new()
+	input_handler.set_script(load(get_script().resource_path.get_base_dir().path_join('default_input_handler.gd')))
+	add_child(input_handler)
 
 
 func color_names(text:String) -> String:
@@ -401,10 +418,10 @@ func effect_autoadvance(text_node:Control, skipped:bool, argument:String) -> voi
 		set_autoadvance(true, argument, true)
 
 
-var modifier_words_select_regex := RegEx.create_from_string("(?<!\\\\)\\[[^\\[\\]]+(\\/[^\\]]*)\\]")
+var modifier_words_select_regex := RegEx.create_from_string("(?<!\\\\)\\<[^\\[\\>]+(\\/[^\\>]*)\\>")
 func modifier_random_selection(text:String) -> String:
 	for replace_mod_match in modifier_words_select_regex.search_all(text):
-		var string :String= replace_mod_match.get_string().trim_prefix("[").trim_suffix("]")
+		var string :String= replace_mod_match.get_string().trim_prefix("<").trim_suffix(">")
 		string = string.replace('//', '<slash>')
 		var list :PackedStringArray= string.split('/')
 		var item :String= list[randi()%len(list)]

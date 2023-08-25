@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://btq2j5wf1e07n"]
+
+[ext_resource type="Script" path="res://MainMenu/ProjectPreview.gd" id="1_o2s7t"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_sj0gr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf5av"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="ProjectPreview" type="Panel"]
+clip_children = 1
+custom_minimum_size = Vector2(200, 150)
+offset_right = 200.0
+offset_bottom = 150.0
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wf5av")
+script = ExtResource("1_o2s7t")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 4.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 2
+color = Color(0, 0, 0, 0.701961)
+
+[node name="Name" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -169.0
+offset_top = -52.0
+offset_right = -14.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("2_sj0gr")
+theme_override_font_sizes/font_size = 30
+text = "A Project"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
+[connection signal="mouse_entered" from="ColorRect" to="." method="_on_color_rect_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]

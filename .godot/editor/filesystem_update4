@@ -1,12 +1,3 @@
-res://VisualNovel/Characters/Elina.dch
+res://Smartphone/Characters/Laurey.dch
+res://Smartphone/Timelines/Claire.dtl
 res://MainMenu/Menu.tscn
-res://addons/dialogic/Editor/Events/styles/InputFieldsStyle.tres
-res://SmallRPG/Timelines/rpg_smith.dtl
-res://addons/dialogic/Modules/DefaultStyles/TextBubble/speech_bubble.gdshader
-res://addons/dialogic/Modules/Text/character_settings/character_moods_settings.gd
-res://addons/dialogic/Modules/Text/character_settings/character_portrait_mood_settings.gd
-res://VisualNovel/Characters/Leon.dch
-res://SmallRPG/Timelines/Player.dch
-res://SmallRPG/Timelines/Smith.dch
-res://addons/dialogic/Modules/Text/node_type_sound.gd
-res://VisualNovel/Timelines/vn_ending.dtl

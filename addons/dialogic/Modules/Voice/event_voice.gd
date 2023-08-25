@@ -33,7 +33,7 @@ func _execute() -> void:
 
 func _init() -> void:
 	event_name = "Voice"
-	set_default_color('Color5')
+	set_default_color('Color7')
 	event_category = "Audio"
 	event_sorting_index = 5
 	expand_by_default = false
@@ -61,9 +61,9 @@ func get_shortcode_parameters() -> Dictionary:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('file_path', ValueType.File, '', 'is the audio for the next text', 
+	add_header_edit('file_path', ValueType.FILE, 'Set', 'as the next voice audio', 
 			{'file_filter'	: "*.mp3, *.ogg, *.wav", 
 			'placeholder' 	: "Select file", 
 			'editor_icon' 	: ["AudioStreamPlayer", "EditorIcons"]})
-	add_body_edit('volume', ValueType.Decibel, 'volume:', '', {}, '!file_path.is_empty()')
-	add_body_edit('audio_bus', ValueType.SinglelineText, 'audio_bus:', '', {}, '!file_path.is_empty()')
+	add_body_edit('volume', ValueType.DECIBEL, 'Volume:', '', {}, '!file_path.is_empty()')
+	add_body_edit('audio_bus', ValueType.SINGLELINE_TEXT, 'Audio Bus:', '', {}, '!file_path.is_empty()')
