@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://nqibjx5oqxto"]
+
+[ext_resource type="Script" path="res://VisualNovel/Assets/Backgrounds/particles_background.gd" id="1_3xxsl"]
+[ext_resource type="Texture2D" uid="uid://cgn7varar35m5" path="res://VisualNovel/Assets/Backgrounds/Interior 5.png" id="2_5lcq7"]
+
+[sub_resource type="Gradient" id="Gradient_qhytk"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vgy20"]
+gradient = SubResource("Gradient_qhytk")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="Curve" id="Curve_8ii68"]
+_data = [Vector2(0, 0.109091), 0.0, 0.0, 0, 0, Vector2(0.514388, 0.954545), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.92871, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_21kvu"]
+offsets = PackedFloat32Array(0, 0.117021, 0.670213, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="ParticlesBackground" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3xxsl")
+
+[node name="Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5lcq7")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.882353)
+position = Vector2(577, 346)
+amount = 200
+lifetime = 5.0
+preprocess = 73.47
+randomness = 0.37
+texture = SubResource("GradientTexture2D_vgy20")
+emission_shape = 3
+emission_rect_extents = Vector2(600, 300)
+spread = 141.92
+gravity = Vector2(0, 10)
+initial_velocity_min = 30.49
+initial_velocity_max = 56.13
+linear_accel_max = 11.97
+damping_min = 14.53
+damping_max = 32.47
+scale_amount_min = 0.1
+scale_amount_max = 0.2
+scale_amount_curve = SubResource("Curve_8ii68")
+color_ramp = SubResource("Gradient_21kvu")

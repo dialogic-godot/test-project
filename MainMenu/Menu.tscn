@@ -42,9 +42,9 @@ corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pf35h"]
 content_margin_left = 8.0
-content_margin_top = 8.0
+content_margin_top = 4.0
 content_margin_right = 8.0
-content_margin_bottom = 8.0
+content_margin_bottom = 4.0
 draw_center = false
 skew = Vector2(0.084, 0)
 border_width_left = 2
@@ -219,10 +219,10 @@ title = "Smartphone"
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.902778
-anchor_top = 0.0138889
-anchor_right = 0.957465
-anchor_bottom = 0.0740741
+anchor_left = 0.640625
+anchor_top = 0.421296
+anchor_right = 0.695313
+anchor_bottom = 0.469136
 grow_horizontal = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4

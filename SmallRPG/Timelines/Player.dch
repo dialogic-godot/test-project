@@ -5,9 +5,9 @@
 "custom_info": {
 "sound_mood_default": "Default",
 "sound_moods": {
-"Default": {
+"Happy": {
 "mode": 1,
-"name": "Default",
+"name": "Happy",
 "pitch_base": 1.0,
 "pitch_variance": 0.1,
 "skip_characters": 3.0,
@@ -18,20 +18,12 @@
 },
 "style": ""
 },
-"default_portrait": "New portrait",
+"default_portrait": "",
 "description": "",
 "display_name": "Player",
 "mirror": false,
 "nicknames": [""],
 "offset": Vector2(0, 0),
-"portraits": {
-"New portrait": {
-"image": "",
-"mirror": false,
-"offset": Vector2(0, 0),
-"scale": 1,
-"scene": ""
-}
-},
+"portraits": {},
 "scale": 1.0
 }

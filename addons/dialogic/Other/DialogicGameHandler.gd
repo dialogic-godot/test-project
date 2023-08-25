@@ -48,7 +48,8 @@ signal text_signal(argument)
 func _ready() -> void:
 	rebuild_character_directory()
 	rebuild_timeline_directory()
-	
+	print(character_directory)
+	print(timeline_directory)
 	collect_subsystems()
 
 	clear()

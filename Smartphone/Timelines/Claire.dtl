@@ -10,7 +10,7 @@ Claire: Anything you wanted to tell me?
 	Player: It's old. from the attic.
 	Player: It seems like nonsense, but it was in my grandmas stuff.
 	Player: You know anything about codes or such stuff?
-	Claire: Completely clueless. 
+	Claire: Completely clueless.
 	Claire: You can ask Laurey
 	Claire: He knows stuff like that I think.
 	Claire: Wait
@@ -20,7 +20,7 @@ Claire: Anything you wanted to tell me?
 	Claire: np
 - Ugh. Nope.
 	Claire: [Wow/Haha/Really?]
-	Claire: [Glad youre still texting me for no reason :)/You're so silly./Damn]
+	Claire: [Glad youre still texting me for no reason \:)/You're so silly./Damn]
 	Player: [xD/^_^]
 	[wait time="4"]
 	[jump]
@@ -29,6 +29,5 @@ Claire: Anything you wanted to tell me?
 Player: [Hey, you've got time rn?/Time to talk?/You got a moment??]
 Claire: [Nah/Nope./Not right now]
 Claire: [sorry, I gotta study/gotta learn stuff/school]
-Player: [alright/okay/:(]
+Player: [alright/okay/\:(]
 [jump label="Loop"]
-

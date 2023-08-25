@@ -18,12 +18,13 @@ enum Alignments {Left, Center, Right}
 @export var box_size : Vector2 = Vector2(550, 110)
 
 @export_subgroup("Name Label")
-@export var name_label_font_size := 15
-@export_file('*.ttf') var name_label_font : String = ""
-@export var name_label_use_character_color := true
-@export var name_label_color := Color.WHITE
-@export var name_label_box_modulate : Color = box_modulate
 @export var name_label_alignment := Alignments.Left
+@export var name_label_font_size := 15
+@export var name_label_color := Color.WHITE
+@export var name_label_use_character_color := true
+@export_file('*.ttf') var name_label_font : String = ""
+@export var name_label_box_modulate : Color = box_modulate
+@export var name_label_box_offset := Vector2.ZERO
 
 
 @export_group("Other")
@@ -35,8 +36,8 @@ enum Alignments {Left, Center, Right}
 @export var next_indicator_show_on_autoadvance := false
 
 
-func _ready():
-	add_to_group('dialogic_main_node')
+@export_subgroup('Portraits')
+@export var portrait_size_mode := DialogicNode_PortraitContainer.SizeModes.FitScaleHeight
 
 
 ## Called by dialogic whenever export overrides might change
@@ -80,11 +81,11 @@ func _apply_export_overrides():
 	
 	%NameLabelPanel.self_modulate = name_label_box_modulate
 	
-	%NameLabelPanel.position.x = 0
+	%NameLabelPanel.position = name_label_box_offset+Vector2(0, -50)
 	%NameLabelPanel.anchor_left = name_label_alignment/2.0
 	%NameLabelPanel.anchor_right = name_label_alignment/2.0
 	%NameLabelPanel.grow_horizontal = [1, 2, 0][name_label_alignment]
-
+	
 	## NEXT INDICATOR SETTINGS
 	if !next_indicator_enabled:
 		%NextIndicator.queue_free()
@@ -94,4 +95,7 @@ func _apply_export_overrides():
 			%NextIndicator.texture = load(next_indicator_texture)
 		%NextIndicator.show_on_questions = next_indicator_show_on_questions
 		%NextIndicator.show_on_autoadvance = next_indicator_show_on_autoadvance
-
+	
+	## PORTRAIT SETTINGS
+	for child in %Portraits.get_children():
+		child.size_mode = portrait_size_mode

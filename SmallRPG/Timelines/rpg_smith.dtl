@@ -45,7 +45,7 @@ Smith: Go!
 [end_timeline]
 
 [label name="quest_accepted"]
-Smith: And? 
+Smith: And?
 Smith: Have you [found/ gotten] the [key/ key yet]?
 - Yes [if {RPG_Example.smiths_key} > 0]
 	Player: Here, I hope it's this one.
@@ -63,7 +63,7 @@ Smith: Have you [found/ gotten] the [key/ key yet]?
 
 # Quest Finished
 [label name="end_good"]
-Smith: [It's good to have the key back./ It was nice of you to help me.]
+Smith: It's good to have the key back.
 Smith: Thank you once again!
 [end_timeline]
 
@@ -74,4 +74,3 @@ Player: Smith will be happy.
 VAR {RPG_Example.smiths_key} = 1
 [signal arg="collect"]
 [end_timeline]
-
