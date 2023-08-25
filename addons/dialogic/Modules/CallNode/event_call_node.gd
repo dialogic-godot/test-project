@@ -44,7 +44,9 @@ func _execute() -> void:
 			if inline:
 				dialogic.text_signal.connect(_call_on_signal, CONNECT_PERSIST)
 			elif wait:
+				dialogic.current_state = dialogic.States.WAITING
 				await n.callv(method, arguments)
+				dialogic.current_state = dialogic.States.IDLE
 			else:
 				n.callv(method, arguments)
 	else:
@@ -72,9 +74,9 @@ func _disconnect_signal():
 
 func _init() -> void:
 	event_name = "Call Node"
-	set_default_color('Color1')
-	event_category = "Godot"
-	event_sorting_index = 3
+	set_default_color('Color6')
+	event_category = "Logic"
+	event_sorting_index = 10
 	expand_by_default = false
 
 
@@ -92,13 +94,10 @@ func get_shortcode_parameters() -> Dictionary:
 		"path" 		: {"property": "path", 		"default": ""},
 		"method" 	: {"property": "method", 	"default": ""},
 		"args" 		: {"property": "arguments", "default": []},
-		"wait" 		: {"property": "wait", 		"default": false, 
-						"suggestions": func(): return {'True':{'value':'true'}, 'False':{'value':'false'}}},
-		"inline" 	: {"property": "inline", 	"default": false, 
-						"suggestions": func(): return {'True':{'value':'true'}, 'False':{'value':'false'}}},
+		"wait" 		: {"property": "wait", 		"default": false},
+		"inline" 	: {"property": "inline", 	"default": false},
 		"signal" 	: {"property": "inline_signal_argument", 	"default": ""},
-		"single_use": {"property": "inline_single_use", 		"default": false, 
-							"suggestions": func(): return {'True':{'value':'true'}, 'False':{'value':'false'}}}
+		"single_use": {"property": "inline_single_use", 		"default": false}
 	}
 
 
@@ -107,11 +106,11 @@ func get_shortcode_parameters() -> Dictionary:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('method', ValueType.SinglelineText, 'Call method')
-	add_header_edit('path', ValueType.SinglelineText, 'in object')
-	add_body_edit('inline', ValueType.Bool, 'Inline Command:', '', {'tooltip':"If enabled, the method won't be called instantly. Only when a signal is emmited inside the following text event will it be called."})
-	add_body_edit('inline_signal_argument', ValueType.SinglelineText, 'Inline Signal Argument', '', {'tooltip':"For example if set to 'Hello' the method can be called with [signal=Hello] in the next text event."}, 'inline == true')
-	add_body_edit('inline_single_use', ValueType.Bool, 'Single Use:', '', {'tooltip':"By default calling via in-text signal only works once. Uncheck this to make the event keep listening. \nThis only stays valid during this dialog."}, 'inline == true')
-	add_body_edit('wait', ValueType.Bool, 'Wait:', '', {'tooltip':'Will wait for the method to finish. Only relevant for methods with `await` in them.'}, 'inline == false')
+	add_header_edit('method', ValueType.SINGLELINE_TEXT, 'Call method')
+	add_header_edit('path', ValueType.SINGLELINE_TEXT, 'in object')
+	add_body_edit('inline', ValueType.BOOL, 'Inline Command:', '', {'tooltip':"If enabled, the method won't be called instantly. Only when a signal is emmited inside the following text event will it be called."})
+	add_body_edit('inline_signal_argument', ValueType.SINGLELINE_TEXT, 'Inline Signal Argument', '', {'tooltip':"For example if set to 'Hello' the method can be called with [signal=Hello] in the next text event."}, 'inline == true')
+	add_body_edit('inline_single_use', ValueType.BOOL, 'Single Use:', '', {'tooltip':"By default calling via in-text signal only works once. Uncheck this to make the event keep listening. \nThis only stays valid during this dialog."}, 'inline == true')
+	add_body_edit('wait', ValueType.BOOL, 'Wait:', '', {'tooltip':'Will wait for the method to finish. Only relevant for methods with `await` in them.'}, 'inline == false')
 	add_body_line_break()
-	add_body_edit('arguments', ValueType.StringArray, 'Arguments:')
+	add_body_edit('arguments', ValueType.STRING_ARRAY, 'Arguments:')

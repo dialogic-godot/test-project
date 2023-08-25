@@ -20,3 +20,11 @@ Player: nevermind
 [wait time="1" hide_text="false"]
 Otto: Yeah.
 Player: xD
+
+label Loop
+[wait_input]
+Player: <Hey?/whatyoudoin??/otto>
+Otto: <yeah?/?/is this important?>
+Player: <just checkin in/I'm bored/you bored too?>
+Otto: <sry, but no time rn, k?/I have no time for your nonsense xD>
+jump Loop

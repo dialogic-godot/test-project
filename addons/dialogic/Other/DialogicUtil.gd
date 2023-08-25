@@ -5,6 +5,8 @@ class_name DialogicUtil
 ## Used whenever the same thing is needed in different parts of the plugin.
  
 
+enum AnimationType {ALL, IN, OUT, ACTION}
+
 ################################################################################
 ##					EDITOR
 ################################################################################
@@ -12,7 +14,7 @@ static func get_editor_scale() -> float:
 	return get_dialogic_plugin().get_editor_interface().get_editor_scale()
 
 
-static func get_dialogic_plugin() -> Node:
+static func get_dialogic_plugin() -> EditorPlugin:
 	var tree: SceneTree = Engine.get_main_loop()
 	if tree.get_root().get_child(0).has_node('DialogicPlugin'):
 		return tree.get_root().get_child(0).get_node('DialogicPlugin')
@@ -94,9 +96,9 @@ static func get_indexers(include_custom := true, force_reload := false) -> Array
 		var possible_script:String = DialogicUtil.get_module_path(file).path_join("index.gd")
 		if FileAccess.file_exists(possible_script):
 			indexers.append(load(possible_script).new())
-	
+
 	if include_custom:
-		var extensions_folder :String= ProjectSettings.get_setting('dialogic/extension_folder/', "res://addons/dialogic_additions/")
+		var extensions_folder: String = ProjectSettings.get_setting('dialogic/extensions_folder', "res://addons/dialogic_additions/")
 		for file in listdir(extensions_folder, false, false):
 			var possible_script: String = extensions_folder.path_join(file + "/index.gd")
 			if FileAccess.file_exists(possible_script):
@@ -104,6 +106,23 @@ static func get_indexers(include_custom := true, force_reload := false) -> Array
 	
 	Engine.get_main_loop().set_meta('dialogic_indexers', indexers)
 	return indexers
+
+
+static func get_portrait_animation_scripts(type:=AnimationType.ALL, include_custom:=true) -> Array:
+	var animations := []
+	if Engine.get_main_loop().has_meta('dialogic_animation_names'):
+		animations = Engine.get_main_loop().get_meta('dialogic_animation_names')
+	else:
+		for i in get_indexers():
+			animations.append_array(i._get_portrait_animations())
+		Engine.get_main_loop().set_meta('dialogic_animation_names', animations)
+
+	return animations.filter(
+		func(script):
+			if type == AnimationType.ALL: return true;
+			if type == AnimationType.IN: return '_in' in script;
+			if type == AnimationType.OUT: return '_out' in script;
+			if type == AnimationType.ACTION: return not ('_in' in script or '_out' in script))
 
 
 static func pretty_name(script:String) -> String:
@@ -117,7 +136,7 @@ static func str_to_bool(boolstring:String) -> bool:
 	return true if boolstring == "true" else false
 
 
-static func logical_convert(value:String) -> Variant:
+static func logical_convert(value:Variant) -> Variant:
 	if typeof(value) == TYPE_STRING:
 		if value.is_valid_int():
 			return value.to_int()
@@ -131,32 +150,20 @@ static func logical_convert(value:String) -> Variant:
 
 
 static func get_color_palette(default:bool = false) -> Dictionary:
-	# Colors are using the ProjectSettings instead of the EditorSettings
-	# because there is a bug in Godot which prevents us from using it.
-	# When you try to do it, the text in the timelines goes to weird artifacts
-	# and on the Output panel you see the error:
-	#  ./core/rid.h:151 - Condition "!id_map.has(p_rid.get_data())" is true. Returned: nullptr
-	# over and over again.
-	# Might revisit this in Godot 4, but don't have any high hopes for it improving.
-	var colors := [
-		Color('#3b8bf2'), # Blue
-		Color('#00b15f'), # Green
-		Color('#9468e8'), # Purple
-		Color('#de5c5c'), # Red
-		Color('#fa952a'), # Orange
-		Color('#7C7C7C')  # Gray
-	]
-	var color_dict := {}
-	var index := 1
-	for n in colors:
-		var color_name := 'Color' + str(index)
-		color_dict[color_name] = n
-		if !default:
-			if ProjectSettings.has_setting('dialogic/editor/' + color_name):
-				color_dict[color_name] = ProjectSettings.get_setting('dialogic/editor/' + color_name)
-		index += 1
-	
-	return color_dict
+	var defaults := {
+		'Color1': Color('#3b8bf2'), # Blue
+		'Color2': Color('#00b15f'), # Green
+		'Color3': Color('#e868e2'), # Pink
+		'Color4': Color('#9468e8'), # Purple
+		'Color5': Color('#574fb0'), # DarkPurple
+		'Color6': Color('#1fa3a3'), # Aquamarine
+		'Color7': Color('#fa952a'), # Orange
+		'Color8': Color('#de5c5c'), # Red
+		'Color9': Color('#7c7c7c'), # Gray
+	}
+	if default: 
+		return defaults
+	return get_editor_setting('color_palette', defaults)
 
 
 static func get_color(value:String) -> Color:
@@ -188,16 +195,77 @@ static func list_variables(dict:Dictionary, path := "") -> Array:
 	return array
 
 
-static func get_default_layout() -> String:
-	return DialogicUtil.get_module_path('DefaultStyles').path_join("Default/DialogicDefaultLayout.tscn")
+static func get_default_layout_scene() -> String:
+	return DialogicUtil.get_module_path('DefaultLayouts').path_join("Default/DialogicDefaultLayout.tscn")
+
+
+static func get_inherited_style_overrides(style_name:String) -> Dictionary:
+	var styles_info := ProjectSettings.get_setting('dialogic/layout/styles', {'Default':{}})
+	if !style_name in styles_info:
+		return {}
+	
+	var inheritance := [styles_info[style_name].get('inherits', '')]
+	var info :Dictionary = styles_info[style_name].get('export_overrides', {}).duplicate(true)
+	
+	
+	while (!inheritance[-1].is_empty()) and inheritance[-1] in styles_info:
+		info.merge(styles_info[inheritance[-1]].get('export_overrides', {}))
+		if !styles_info[inheritance[-1]].get('inherits', '') in styles_info:
+			break
+		inheritance.append(styles_info[inheritance[-1]].get('inherits', ''))
+	return info
+
+
+static func get_inherited_style_layout(style_name:String="") -> String:
+	var style_list := ProjectSettings.get_setting('dialogic/layout/styles', {'Default':{}})
+	if style_name.is_empty(): return get_default_layout_scene()
+	return style_list[get_inheritance_style_list(style_name)[-1]].get('layout', get_default_layout_scene())
+
+
+static func get_inheritance_style_list(style_name:String) -> Array:
+	var style_list := ProjectSettings.get_setting('dialogic/layout/styles', {'Default':{}})
+	if !style_name in style_list:
+		return []
+	var list := [style_name]
+	while !style_list[style_name].get('inherits', '').is_empty():
+		style_name = style_list[style_name].get('inherits', '')
+		list.append(style_name)
+	return list
 
 
 static func apply_scene_export_overrides(node:Node, export_overrides:Dictionary) -> void:
-	for i in export_overrides:
-		if i in node:
-			node.set(i, str_to_var(export_overrides[i]))
+	var default_info := get_scene_export_defaults(node)
+	if !node.script:
+		return
+	var property_info :Array[Dictionary] = node.script.get_script_property_list()
+	for i in property_info:
+		if i['usage'] & PROPERTY_USAGE_EDITOR:
+			if i['name'] in export_overrides:
+				node.set(i['name'], str_to_var(export_overrides[i['name']]))
+			elif i['name'] in default_info:
+				node.set(i['name'], default_info.get(i['name']))
 	if node.has_method('_apply_export_overrides'):
 		node._apply_export_overrides()
+
+
+static func get_scene_export_defaults(node:Node) -> Dictionary:
+	if !node.script:
+		return {}
+	
+	if Engine.get_main_loop().has_meta('dialogic_scene_export_defaults') and \
+			node.script.resource_path in Engine.get_main_loop().get_meta('dialogic_scene_export_defaults'):
+		return Engine.get_main_loop().get_meta('dialogic_scene_export_defaults')[node.script.resource_path]
+	
+	if !Engine.get_main_loop().has_meta('dialogic_scene_export_defaults'):
+		Engine.get_main_loop().set_meta('dialogic_scene_export_defaults', {})
+	var defaults := {}
+	var property_info :Array[Dictionary] = node.script.get_script_property_list()
+	for i in property_info:
+		if i['usage'] & PROPERTY_USAGE_EDITOR:
+			defaults[i['name']] = node.get(i['name'])
+	Engine.get_main_loop().get_meta('dialogic_scene_export_defaults')[node.script.resource_path] = defaults
+	return defaults
+
 
 static func setup_script_property_edit_node(property_info: Dictionary, value:Variant, methods:Dictionary) -> Control:
 	var input :Control = null

@@ -38,7 +38,7 @@ layout/mode=0
 text/autocolor_names=false
 variables={
 "RPG_Example": {
-"smiths_key": 1
+"NewVariable": ""
 },
 "Smartphone": {
 "Claire": "0",
@@ -84,6 +84,17 @@ layout/export_overrides={
 layout/end_behaviour=0
 choices/reveal_delay=0
 choices/reveal_by_input=false
+layout/styles={
+"SmallRPG_Style": {
+"layout": "res://addons/dialogic/Modules/DefaultLayouts/TextBubble/DialogicTextBubbleLayout.tscn"
+},
+"Smartphone_Style": {
+"layout": "res://Smartphone/SmartphoneLayout.tscn"
+},
+"VisualNovel_Style": {}
+}
+layout/default_style="VisualNovel_Style"
+text/skippable_delay=0.1
 
 [display]
 

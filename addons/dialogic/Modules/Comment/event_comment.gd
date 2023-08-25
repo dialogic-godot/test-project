@@ -26,7 +26,7 @@ func _execute() -> void:
 
 func _init() -> void:
 	event_name = "Comment"
-	set_default_color('Color6')
+	set_default_color('Color9')
 	event_category = "Helpers"
 	event_sorting_index = 0
 	continue_at_end = true
@@ -56,4 +56,12 @@ func is_valid_event(string:String) -> bool:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('text', ValueType.SinglelineText, '#','',{'autofocus':true})
+	add_header_edit('text', ValueType.SINGLELINE_TEXT, '#','',{'autofocus':true})
+
+
+#################### SYNTAX HIGHLIGHTING #######################################
+################################################################################
+
+func _get_syntax_highlighting(Highlighter:SyntaxHighlighter, dict:Dictionary, line:String) -> Dictionary:
+	dict[0] = {'color':event_color.lerp(Highlighter.normal_color, 0.3)}
+	return dict

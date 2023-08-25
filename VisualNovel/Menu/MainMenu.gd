@@ -30,6 +30,7 @@ func _on_menu_continue_pressed():
 func _on_new_game_pressed():
 	display_button_ripple(%NewGame)
 	await get_parent().fade()
+	Dialogic.Styles.add_layout_style('VisualNovel_Style')
 	Dialogic.start("res://VisualNovel/Timelines/vn_beginning.dtl")
 	Dialogic.timeline_ended.connect(_on_dialogic_end)
 	hide()
@@ -46,7 +47,7 @@ func _on_load_pressed():
 
 func load_slot(slot_name:String) -> void:
 	await get_parent().fade()
-	await Dialogic.add_layout_node().ready
+	Dialogic.Styles.add_layout_style('VisualNovel_Style')
 	Dialogic.Save.load(slot_name)
 	Dialogic.timeline_ended.connect(_on_dialogic_end)
 	hide()

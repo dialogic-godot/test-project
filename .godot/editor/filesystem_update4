@@ -1,9 +1,3 @@
+res://Smartphone/Characters/Laurey.dch
+res://Smartphone/Timelines/Claire.dtl
 res://MainMenu/Menu.tscn
-res://addons/dialogic/Editor/Events/styles/InputFieldsStyle.tres
-res://VisualNovel/Characters/Leon.dch
-res://SmallRPG/Timelines/rpg_smith.dtl
-res://addons/dialogic/Modules/DefaultStyles/TextBubble/speech_bubble.gdshader
-res://addons/dialogic/Modules/Character/preview_character.tres
-res://VisualNovel/Menu/visual_novel_main.tscn
-res://SmallRPG/SmallRPG.tscn
-res://MainMenu/ProjectPreview.tscn

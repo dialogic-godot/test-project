@@ -1,6 +1,6 @@
-Player: [Hi Claire, are you there?/Hey, you there?/Anyone home?]
-Claire: [Yep. What are you up to?/Yeah, why?/Sure. What's up?']
-Player: [Just vibin./Idk/Just thought of you]
+Player: <Hi Claire, are you there?/Hey, you there?/Anyone home?>
+Claire: <Yep. What are you up to?/Yeah, why?/Sure. What's up?'>
+Player: <Just vibin./Idk/Just thought of you>
 Claire: Anything you wanted to tell me?
 - Yes, actually...
 	Player: Yes, actually I need help
@@ -19,15 +19,15 @@ Claire: Anything you wanted to tell me?
 	Player: Wow, thanks!
 	Claire: np
 - Ugh. Nope.
-	Claire: [Wow/Haha/Really?]
-	Claire: [Glad youre still texting me for no reason \:)/You're so silly./Damn]
-	Player: [xD/^_^]
+	Claire: <Wow/Haha/Really?>
+	Claire: <Glad youre still texting me for no reason \:)/You're so silly./Damn>
+	Player: <xD/^_^>
 	[wait time="4"]
-	[jump]
-[label name="Loop"]
+	jump
+label Loop
 [wait_input]
-Player: [Hey, you've got time rn?/Time to talk?/You got a moment??]
-Claire: [Nah/Nope./Not right now]
-Claire: [sorry, I gotta study/gotta learn stuff/school]
-Player: [alright/okay/\:(]
-[jump label="Loop"]
+Player: <Hey, you've got time rn?/Time to talk?/You got a moment??>
+Claire: <Nah/Nope./Not right now>
+Claire: <sorry, I gotta study/gotta learn stuff/school>
+Player: <alright/okay/\:(>
+jump Loop

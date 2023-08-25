@@ -10,7 +10,7 @@ func _ready():
 	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 2)
 	ProjectSettings.set_setting('dialogic/choices/reveal_by_input', true)
 #	Dialogic.Text.set_skippable(false)
-	await Dialogic.add_layout_node("res://Smartphone/SmartphoneLayout.tscn").ready
+	Dialogic.Styles.add_layout_style('Smartphone_Style')
 	Dialogic.signal_event.connect(_on_dialogic_signal_event)
 	Dialogic.clear()
 

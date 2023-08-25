@@ -39,7 +39,8 @@ var _character_from_directory: String:
 		
 ## Used by [_character_from_directory] to fetch the unique name_identifier or resource.
 var _character_directory: Dictionary = {}
-
+# Reference regex without Godot escapes: ((")?(?<name>(?(2)[^"\n]*|[^(: \n]*))(?(2)"|)(\W*\((?<portrait>.*)\))?\s*(?<!\\):)?(?<text>(.|\n)*)
+var regex := RegEx.create_from_string("((\")?(?<name>(?(2)[^\"\\n]*|[^(: \\n]*))(?(2)\"|)(\\W*(?<portrait>\\(.*\\)))?\\s*(?<!\\\\):)?(?<text>(.|\\n)*)")
 
 ################################################################################
 ## 						EXECUTION
@@ -49,11 +50,11 @@ func _execute() -> void:
 	if (not character or character.custom_info.get('style', '').is_empty()) and dialogic.has_subsystem('Styles'):
 		# if previous characters had a custom style change back to base style 
 		if dialogic.current_state_info.get('base_style') != dialogic.current_state_info.get('style'):
-			dialogic.Styles.change_style(dialogic.current_state_info.get('base_style', 'Default'))
+			dialogic.Styles.add_layout_style(dialogic.current_state_info.get('base_style', 'Default'))
 	
 	if character:
 		if dialogic.has_subsystem('Styles') and character.custom_info.get('style', null):
-			dialogic.Styles.change_style(character.custom_info.style)
+			dialogic.Styles.add_layout_style(character.custom_info.style)
 		
 		
 		if portrait and dialogic.has_subsystem('Portraits') and dialogic.Portraits.is_character_joined(character):
@@ -72,7 +73,6 @@ func _execute() -> void:
 		dialogic.Portraits.change_speaker(null)
 		dialogic.Text.update_name_label(null)
 	
-	
 	var final_text: String = dialogic.Text.parse_text(get_property_translated('text'))
 	dialogic.Text.about_to_show_text.emit({'text':final_text, 'character':character, 'portrait':portrait})
 	final_text = await dialogic.Text.update_dialog_text(final_text)
@@ -87,7 +87,7 @@ func _execute() -> void:
 	if dialogic.has_subsystem('Choices') and dialogic.Choices.is_question(dialogic.current_event_idx):
 		dialogic.Text.show_next_indicators(true)
 		dialogic.Choices.show_current_choices(false)
-		dialogic.current_state = dialogic.states.AWAITING_CHOICE
+		dialogic.current_state = dialogic.States.AWAITING_CHOICE
 	elif Dialogic.Text.should_autoadvance():
 		dialogic.Text.show_next_indicators(false, true)
 		# In this case continuing is handled by the input script.
@@ -113,6 +113,7 @@ func _init() -> void:
 	event_sorting_index = 0
 	help_page_path = "https://dialogic.coppolaemilio.com/documentation/Events/000/"
 	continue_at_end = false
+	_character_directory = Engine.get_main_loop().get_meta('dialogic_character_directory')
 
 
 ################################################################################
@@ -150,11 +151,7 @@ func from_text(string:String) -> void:
 		if _character_from_directory in _character_directory.keys():
 			character = _character_directory[_character_from_directory]['resource']
 	
-	var reg := RegEx.new()
-	
-	# Reference regex without Godot escapes: ((")?(?<name>(?(2)[^"\n]*|[^(: \n]*))(?(2)"|)(\W*\((?<portrait>.*)\))?\s*(?<!\\):)?(?<text>(.|\n)*)
-	reg.compile("((\")?(?<name>(?(2)[^\"\\n]*|[^(: \\n]*))(?(2)\"|)(\\W*(?<portrait>\\(.*\\)))?\\s*(?<!\\\\):)?(?<text>(.|\\n)*)")
-	var result := reg.search(string)
+	var result := regex.search(string)
 	if result and !result.get_string('name').is_empty():
 		var name := result.get_string('name').strip_edges()
 		if name == '_':
@@ -227,17 +224,18 @@ func _get_property_original_translation(property:String) -> String:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('_character_from_directory', ValueType.ComplexPicker, '', '', 
+	add_header_edit('_character_from_directory', ValueType.COMPLEX_PICKER, '', '', 
 			{'file_extension' 	: '.dch', 
 			'suggestions_func' 	: get_character_suggestions, 
 			'empty_text' 		: '(No one)',
 			'icon' 				: load("res://addons/dialogic/Editor/Images/Resources/character.svg")}, 'do_any_characters_exist()')
-	add_header_edit('portrait', ValueType.ComplexPicker, '', '', 
+	add_header_edit('portrait', ValueType.COMPLEX_PICKER, '', '', 
 			{'suggestions_func' : get_portrait_suggestions, 
 			'placeholder' 		: "(Don't change)", 
-			'icon' 				: load("res://addons/dialogic/Editor/Images/Resources/portrait.svg")}, 
+			'icon' 				: load("res://addons/dialogic/Editor/Images/Resources/portrait.svg"),
+			'collapse_when_empty':true,}, 
 			'character != null and !has_no_portraits()')
-	add_body_edit('text', ValueType.MultilineText)
+	add_body_edit('text', ValueType.MULTILINE_TEXT, "", "", {'autofocus':true})
 
 func do_any_characters_exist() -> bool:
 	return !DialogicUtil.list_resources_of_type(".dch").is_empty()
@@ -250,7 +248,7 @@ func get_character_suggestions(search_text:String) -> Dictionary:
 	var suggestions := {}
 	
 	#override the previous _character_directory with the meta, specifically for searching otherwise new nodes wont work
-	_character_directory = Engine.get_meta('dialogic_character_directory')
+	_character_directory = Engine.get_main_loop().get_meta('dialogic_character_directory')
 	
 	var icon = load("res://addons/dialogic/Editor/Images/Resources/character.svg")
 	suggestions['(No one)'] = {'value':null, 'editor_icon':["GuiRadioUnchecked", "EditorIcons"]}
@@ -271,3 +269,100 @@ func get_portrait_suggestions(search_text:String) -> Dictionary:
 		for portrait in character.portraits:
 			suggestions[portrait] = {'value':portrait, 'icon':icon}
 	return suggestions
+
+
+####################### CODE COMPLETION ########################################
+################################################################################
+
+var completion_text_character_getter_regex := RegEx.new()
+var completion_text_effects := {}
+func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:String, word:String, symbol:String) -> void:
+	if completion_text_character_getter_regex.get_pattern().is_empty():
+		completion_text_character_getter_regex.compile("\\W*(\")?(?<name>(?(2)[^\"\\n]*|[^(: \\n]*))(?(1)\"|)")
+	
+	if completion_text_effects.is_empty():
+		for idx in DialogicUtil.get_indexers():
+			for effect in idx._get_text_effects():
+				completion_text_effects[effect['command']] = effect
+	
+	if not ':' in line.substr(0, TextNode.get_caret_column()) and symbol == '(':
+		var character := completion_text_character_getter_regex.search(line).get_string('name')
+		CodeCompletionHelper.suggest_portraits(TextNode, character)
+	if symbol == '[':
+		suggest_bbcode(TextNode)
+		for effect in completion_text_effects.values():
+			if effect.get('arg', false):
+				TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, effect.command, effect.command+'=', TextNode.syntax_highlighter.normal_color, TextNode.get_theme_icon("RichTextEffect", "EditorIcons"))
+			else:
+				TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, effect.command, effect.command, TextNode.syntax_highlighter.normal_color, TextNode.get_theme_icon("RichTextEffect", "EditorIcons"), ']')
+	if symbol == '{':
+		CodeCompletionHelper.suggest_variables(TextNode)
+	
+	if symbol == '=':
+		if CodeCompletionHelper.get_line_untill_caret(line).ends_with('[portrait='):
+			var character := completion_text_character_getter_regex.search(line).get_string('name')
+			CodeCompletionHelper.suggest_portraits(TextNode, character, ']')
+
+
+func _get_start_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit) -> void:
+	CodeCompletionHelper.suggest_characters(TextNode, CodeEdit.KIND_CLASS)
+
+
+func suggest_bbcode(text:CodeEdit):
+	for i in [['b (bold)', 'b'], ['i (italics)', 'i'], ['color', 'color='], ['font size','font_size=']]:
+		text.add_code_completion_option(CodeEdit.KIND_MEMBER, i[0], i[1],  text.syntax_highlighter.normal_color, text.get_theme_icon("RichTextEffect", "EditorIcons"),)
+		text.add_code_completion_option(CodeEdit.KIND_CLASS, 'end '+i[0], '/'+i[1],  text.syntax_highlighter.normal_color, text.get_theme_icon("RichTextEffect", "EditorIcons"), ']')
+
+
+#################### SYNTAX HIGHLIGHTING #######################################
+################################################################################
+
+var text_effects := ""
+var text_effects_regex := RegEx.new()
+func load_text_effects():
+	if text_effects.is_empty():
+		for idx in DialogicUtil.get_indexers():
+			for effect in idx._get_text_effects():
+				text_effects+= effect['command']+'|'
+		text_effects += "b|i|u|s|code|p|center|left|right|fill|indent|url|img|font|font_size|opentype_features|color|bg_color|fg_color|outline_size|outline_color|table|cell|ul|ol|lb|rb|br"
+	if text_effects_regex.get_pattern().is_empty():
+		text_effects_regex.compile("(?<!\\\\)\\[\\s*/?(?<command>"+text_effects+")\\s*(=\\s*(?<value>.+?)\\s*)?\\]")
+
+
+var text_random_word_regex := RegEx.new()
+var text_effect_color := Color('#898276')
+func _get_syntax_highlighting(Highlighter:SyntaxHighlighter, dict:Dictionary, line:String) -> Dictionary:
+	load_text_effects()
+	if text_random_word_regex.get_pattern().is_empty():
+		text_random_word_regex.compile("(?<!\\\\)\\<[^\\[\\>]+(\\/[^\\>]*)\\>")
+	
+	var result := regex.search(line)
+	if !result:
+		return dict
+	if Highlighter.mode == Highlighter.Modes.FULL_HIGHLIGHTING:
+		if result.get_string('name'):
+			dict[result.get_start('name')] = {"color":Highlighter.character_name_color}
+			dict[result.get_end('name')] = {"color":Highlighter.normal_color}
+		if result.get_string('portrait'):
+			dict[result.get_start('portrait')] = {"color":Highlighter.character_portrait_color}
+			dict[result.get_end('portrait')] = {"color":Highlighter.normal_color}
+	if result.get_string('text'):
+		var effects_result := text_effects_regex.search_all(line)
+		for eff in effects_result:
+			dict[eff.get_start()] = {"color":text_effect_color}
+			dict[eff.get_end()] = {"color":Highlighter.normal_color}
+		dict = Highlighter.color_region(dict, Highlighter.variable_color, line, '{', '}', result.get_start('text'))
+
+		for replace_mod_match in text_random_word_regex.search_all(result.get_string('text')):
+			var color :Color = Highlighter.string_color
+			color = color.lerp(Highlighter.normal_color, 0.4)
+			dict[replace_mod_match.get_start()+result.get_start('text')] = {'color':Highlighter.string_color}
+			var offset := 1
+			for b in replace_mod_match.get_string().trim_suffix('>').trim_prefix('<').split('/'):
+				color.h = wrap(color.h+0.2, 0, 1)
+				dict[replace_mod_match.get_start()+result.get_start('text')+offset] = {'color':color}
+				offset += len(b)
+				dict[replace_mod_match.get_start()+result.get_start('text')+offset] = {'color':Highlighter.string_color}
+				offset += 1
+			dict[replace_mod_match.get_end()+result.get_start('text')] = {'color':Highlighter.normal_color}
+	return dict

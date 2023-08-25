@@ -32,7 +32,7 @@ func _execute() -> void:
 
 func _init() -> void:
 	event_name = "Sound"
-	set_default_color('Color5')
+	set_default_color('Color7')
 	event_category = "Audio"
 	event_sorting_index = 3
 	expand_by_default = false
@@ -57,8 +57,7 @@ func get_shortcode_parameters() -> Dictionary:
 		"volume"	: {"property": "volume", 		"default": 0},
 		"bus"		: {"property": "audio_bus", 	"default": "Master", 
 							"suggestions": get_bus_suggestions},
-		"loop"		: {"property": "loop", 			"default": false, 
-							"suggestions": func(): return {'True':{'value':'true'}, 'False':{'value':'false'}}},
+		"loop"		: {"property": "loop", 			"default": false},
 	}
 
 
@@ -67,12 +66,12 @@ func get_shortcode_parameters() -> Dictionary:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('file_path', ValueType.File, '', '', 
+	add_header_edit('file_path', ValueType.FILE, 'Play', '', 
 			{'file_filter' 	: '*.mp3, *.ogg, *.wav; Supported Audio Files', 
 			'placeholder' 	: "Select file", 
 			'editor_icon' 	: ["AudioStreamPlayer", "EditorIcons"]})
-	add_body_edit('volume', ValueType.Decibel, 'Volume:', '', {}, '!file_path.is_empty()')
-	add_body_edit('audio_bus', ValueType.SinglelineText, 'Audio Bus:', '', {}, '!file_path.is_empty()')
+	add_body_edit('volume', ValueType.DECIBEL, 'Volume:', '', {}, '!file_path.is_empty()')
+	add_body_edit('audio_bus', ValueType.SINGLELINE_TEXT, 'Audio Bus:', '', {}, '!file_path.is_empty()')
 
 func get_bus_suggestions() -> Dictionary:
 	var bus_name_list := {}
