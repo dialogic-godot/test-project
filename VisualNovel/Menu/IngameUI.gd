@@ -37,7 +37,7 @@ func _on_in_game_menu_button_pressed():
 
 
 func _on_quick_save_button_pressed():
-	Dialogic.Save.save(Dialogic.Save.get_latest_slot(), false, Dialogic.Save.THUMBNAIL_MODE.STORE_ONLY)
+	Dialogic.Save.save(Dialogic.Save.get_latest_slot(), false, Dialogic.Save.ThumbnailMode.STORE_ONLY)
 	_on_in_game_menu_button_pressed()
 
 
@@ -47,7 +47,7 @@ func _on_menu_button_pressed():
 
 
 func _on_with_saving_button_pressed():
-	Dialogic.Save.save(Dialogic.Save.get_latest_slot(), false, Dialogic.Save.THUMBNAIL_MODE.STORE_ONLY)
+	Dialogic.Save.save(Dialogic.Save.get_latest_slot(), false, Dialogic.Save.ThumbnailMode.STORE_ONLY)
 	Dialogic.clear()
 	Dialogic.get_layout_node().queue_free()
 	$WarningScreen.hide()
@@ -124,7 +124,7 @@ func _on_new_slot_edit_text_submitted(new_text:String) -> void:
 
 func _on_in_game_slot_list_item_activated(index:int) -> void:
 	if $SaveLoadMenu/VBox/HBox/SaveTab.button_pressed:
-		Dialogic.Save.save(%InGameSlotList.get_item_text(index), false, Dialogic.Save.THUMBNAIL_MODE.STORE_ONLY)
+		Dialogic.Save.save(%InGameSlotList.get_item_text(index), false, Dialogic.Save.ThumbnailMode.STORE_ONLY)
 	else:
 		Dialogic.Save.load(%InGameSlotList.get_item_text(index))
 	await _on_save_load_button_pressed()
