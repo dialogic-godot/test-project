@@ -14,6 +14,6 @@ Leon (Basic/doubt): What?
 Leon: ???
 Leon: ...
 Leon (Basic/default): Well, whatever.
-[jump timeline="vn_chapter1"]
+jump vn_chapter1/
 
 Leon (Positive/surprise): Wow, this looks pretty cool[signal=argument].

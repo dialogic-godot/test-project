@@ -26,4 +26,4 @@ Elina (default): Alright. Why are we standing around here. You were looking for 
 Update Leon 0 [animation="Tada"]
 Leon (Positive/surprise): Wait how do you know that?
 Elina: Who cares. Follow me.
-[jump timeline="vn_ending"]
+jump vn_ending/
