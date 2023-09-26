@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://uan2wdyuprb6"]
+[gd_scene load_steps=30 format=3 uid="uid://uan2wdyuprb6"]
 
 [ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultLayouts/Default/DialogicDefaultLayout.gd" id="1"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="2"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultLayouts/Default/ExampleGlossaryPopup.gd" id="20_vmnp2"]
 [ext_resource type="PackedScene" path="res://addons/dialogic/Modules/DefaultLayouts/ExampleHistoryScene.tscn" id="22_854kg"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/TextInput/node_text_input.gd" id="22_ltkcf"]
-[ext_resource type="Script" path="res://addons/dialogic/Modules/DefaultLayouts/HideWithChild.gd" id="23"]
 [ext_resource type="FontFile" uid="uid://vrrmdx83skor" path="res://addons/dialogic/Example Assets/Fonts/Roboto-Regular.ttf" id="23_gyqve"]
 [ext_resource type="FontFile" uid="uid://cc4xli25271fd" path="res://addons/dialogic/Example Assets/Fonts/Roboto-Bold.ttf" id="24_aa4pl"]
 [ext_resource type="FontFile" uid="uid://b5c0p00x6g6u5" path="res://addons/dialogic/Example Assets/Fonts/Roboto-Italic.ttf" id="25_wt3bc"]
@@ -87,27 +86,13 @@ tracks/4/keys = {
 [sub_resource type="Animation" id="Animation_6kbwc"]
 resource_name = "new_text"
 length = 0.4
-tracks/0/type = "method"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DialogicTextAnchor/DialogTextAnimationParent/DialogTextPanel/DialogicNode_DialogText")
+tracks/0/path = NodePath("DialogicTextAnchor/DialogTextAnimationParent/DialogTextPanel:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [&"text", ""],
-"method": &"set"
-}]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DialogicTextAnchor/DialogTextAnimationParent/DialogTextPanel:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "handle_modes": PackedInt32Array(3, 3, 3, 3, 3),
 "points": PackedFloat32Array(0, -0.025, 0, 0.025, 0, 0.005, -0.025, 0, 0.025, 0, -0.005, -0.025, 0, 0.025, 0, 0.005, -0.025, 0, 0.025, 0, 0, -0.025, 0, 0.025, 0),
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4)
@@ -270,7 +255,6 @@ box_animation_in = 1
 box_animation_out = 1
 box_animation_new_text = 1
 name_label_box_modulate = Color(0.00784314, 0.00784314, 0.00784314, 0.843137)
-autoadvance_progressbar = null
 
 [node name="DialogicNode_BackgroundHolder" type="CanvasLayer" parent="."]
 layer = -1
@@ -377,6 +361,7 @@ offset_right = 86.5
 offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 1
 metadata/_edit_layout_mode = 1
 
@@ -508,12 +493,11 @@ offset_top = -49.0
 offset_right = -1.0
 offset_bottom = -24.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_wpkyg")
-script = ExtResource("23")
 metadata/_edit_layout_mode = 1
 metadata/_edit_use_custom_anchors = true
 metadata/_edit_group_ = true
 
-[node name="DialogicNode_NameLabel" type="Label" parent="DefaultStyle/DialogicTextAnchor/DialogTextAnimationParent/DialogTextPanel/NameLabelHolder/NameLabelPanel"]
+[node name="DialogicNode_NameLabel" type="Label" parent="DefaultStyle/DialogicTextAnchor/DialogTextAnimationParent/DialogTextPanel/NameLabelHolder/NameLabelPanel" node_paths=PackedStringArray("name_label_root")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -521,6 +505,7 @@ theme_override_fonts/font = SubResource("FontVariation_7goc6")
 theme_override_font_sizes/font_size = 15
 text = "S"
 script = ExtResource("3")
+name_label_root = NodePath("..")
 
 [node name="DialogicNode_TextInput" type="Control" parent="DefaultStyle"]
 layout_mode = 1
@@ -535,6 +520,7 @@ offset_right = 210.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("22_ltkcf")
 input_line_edit = NodePath("TextInputPanel/VBoxContainer/InputField")
 text_label = NodePath("TextInputPanel/VBoxContainer/TextLabel")
