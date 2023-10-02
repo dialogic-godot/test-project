@@ -17,9 +17,7 @@ var style_name: String = ""
 
 func _execute() -> void:
 	dialogic.Styles.add_layout_style(style_name)
-	# base style isn't overridden by character styles
-	# this means after a charcter style, we can change back to the base style
-	dialogic.current_state_info['base_style'] = style_name
+	
 	finish()
 
 
@@ -53,8 +51,9 @@ func get_shortcode_parameters() -> Dictionary:
 ################################################################################
 
 func build_event_editor():
-	add_header_edit('style_name', ValueType.COMPLEX_PICKER, 'Use style', '', 
-			{'placeholder'		: 'Default',
+	add_header_edit('style_name', ValueType.COMPLEX_PICKER, {
+			'left_text'			:'Use style',
+			'placeholder'		: 'Default',
 			'suggestions_func' 	: get_style_suggestions, 
 			'editor_icon' 		: ["PopupMenu", "EditorIcons"],
 			'autofocus'			: true})
