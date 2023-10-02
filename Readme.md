@@ -1,6 +1,6 @@
 # Dialogic Test Project
 
-The goal of this project is have a lot of resources and timelines to test Dialogic.
+The goal of this project is to have a lot of resources and timelines to test Dialogic.
 
 The version of Dialogic should be the one in https://github.com/coppolaemilio/dialogic/tree/main.
 
