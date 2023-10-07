@@ -93,8 +93,9 @@ layout/styles={
 },
 "VisualNovel_Style": {}
 }
-layout/default_style="VisualNovel_Style"
+layout/default_style="SmallRPG_Style"
 text/skippable_delay=0.1
+text/letter_speed=0.01
 
 [display]
 
