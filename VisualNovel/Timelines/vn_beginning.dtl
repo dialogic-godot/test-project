@@ -1,14 +1,14 @@
-Setting "text_speed" = 0.02
-[i]This is the beginning of dialogics example visual novel. Enjoy.
+setting "text_speed" = 0.02
+\[i]This is the beginning of dialogics example visual novel. Enjoy.
 [background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Interior 4.png" fade="1.0"]
-Join Leon 3
+join Leon 3
 Leon: Wow, what a day. Feels insane to think it hasn't been more then 12 hours since everything began.
 [signal arg="crazy"]
 Leon (Positive/scoff): Only 12 hours and I already want back. [pause]But that won't happen.
 Leon (Basic/default): Let's see how this will end then.
 
 [background arg="res://VisualNovel/Assets/Backgrounds/Restaurant 9.png" fade="1.0"]
-[i] Some time later...
+\[i] Some time later...
 Leon (Basic/default): Oh, this is a cosy place. Let's say some more generic stuff.
 Leon (Basic/doubt): What?
 Leon: ???

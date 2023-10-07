@@ -219,7 +219,7 @@ func get_slot_info(slot_name:String = '') -> Dictionary:
 ##					SLOT IMAGE
 ####################################################################################################
 
-## Can be called manually to create a thumbnail. Then call save() with ThumbnailMode.STORE_ONLY
+## Can be called manually to create a thumbnail. Then call save() with THUMBNAIL_MODE.STORE_ONLY
 func take_thumbnail() -> void:
 	latest_thumbnail = get_viewport().get_texture().get_image()
 
