@@ -6,6 +6,7 @@ signal about_to_show_text(info:Dictionary)
 signal text_finished(info:Dictionary)
 signal speaker_updated(character:DialogicCharacter)
 signal textbox_visibility_changed(visible:bool)
+
 signal animation_textbox_new_text
 signal animation_textbox_show
 signal animation_textbox_hide
@@ -21,7 +22,8 @@ var text_effects_regex := RegEx.new()
 enum TextModifierModes {ALL=-1, TEXT_ONLY=0, CHOICES_ONLY=1}
 enum TextTypes {DIALOG_TEXT, CHOICE_TEXT}
 var text_modifiers := []
-var input_handler :Node = null
+
+
 
 # set by the [speed] effect, multies the letter speed and [pause] effects
 var speed_multiplier := 1.0
@@ -38,34 +40,25 @@ var _autopauses := {}
 func clear_game_state(clear_flag:=Dialogic.ClearFlags.FULL_CLEAR) -> void:
 	update_dialog_text('', true)
 	update_name_label(null)
-	dialogic.current_state_info['character'] = null
+	dialogic.current_state_info['speaker'] = null
 	dialogic.current_state_info['text'] = ''
-	
-	set_skippable(ProjectSettings.get_setting('dialogic/text/skippable', true))
-	set_autoadvance(ProjectSettings.get_setting('dialogic/text/autoadvance', false), ProjectSettings.get_setting('dialogic/text/autoadvance_delay', 1))
+
+	set_text_reveal_skippable(ProjectSettings.get_setting('dialogic/text/initial_text_reveal_skippable', true))
+
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
 		if text_node.start_hidden:
 			text_node.textbox_root.hide()
-	
-	set_manualadvance(true)
 
 
-func load_game_state() -> void:
+
+func load_game_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 	update_dialog_text(dialogic.current_state_info.get('text', ''), true)
 	var character:DialogicCharacter = null
-	if dialogic.current_state_info.get('character', null):
-		character = load(dialogic.current_state_info.get('character', null))
-	
+	if dialogic.current_state_info.get('speaker', null):
+		character = load(dialogic.current_state_info.get('speaker', null))
+
 	if character:
 		update_name_label(character)
-
-
-func pause() -> void:
-	input_handler.pause()
-
-
-func resume() -> void:
-	input_handler.resume()
 
 
 ####################################################################################################
@@ -92,7 +85,7 @@ func parse_text(text:String, type:int=TextTypes.DIALOG_TEXT, variables:= true, g
 ## If additional is true, the previous text will be kept.
 func update_dialog_text(text:String, instant:bool= false, additional:= false) -> String:
 	update_text_speed()
-	
+
 	if text.is_empty():
 		await hide_text_boxes(instant)
 	else:
@@ -101,7 +94,7 @@ func update_dialog_text(text:String, instant:bool= false, additional:= false) ->
 			animation_textbox_new_text.emit()
 			if Dialogic.Animation.is_animating():
 				await Dialogic.Animation.finished
-		
+
 	if !instant: dialogic.current_state = dialogic.States.SHOWING_TEXT
 	dialogic.current_state_info['text'] = text
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
@@ -112,23 +105,26 @@ func update_dialog_text(text:String, instant:bool= false, additional:= false) ->
 				text_node.reveal_text(text, additional)
 				if !text_node.finished_revealing_text.is_connected(_on_dialog_text_finished):
 					text_node.finished_revealing_text.connect(_on_dialog_text_finished)
-	
+			dialogic.current_state_info['text_parsed'] = (text_node as RichTextLabel).get_parsed_text()
+
 	# also resets temporary autoadvance and noskip settings:
 	speed_multiplier = 1
-	set_autoadvance(false, 1, true)
-	set_skippable(true, true)
-	set_manualadvance(true, true)
+
+	Dialogic.Input.auto_advance.set_autoadvance_until_next_event(false)
+	Dialogic.Input.auto_advance.set_autoadvance_override_delay_for_current_event(-1)
+	Dialogic.Input.set_manualadvance(true, true)
+	set_text_reveal_skippable(true, true)
 	return text
 
 
 func _on_dialog_text_finished():
-	text_finished.emit({'text':dialogic.current_state_info['text'], 'character':dialogic.current_state_info['character']})
+	text_finished.emit({'text':dialogic.current_state_info['text'], 'character':dialogic.current_state_info['speaker']})
 
 
 func update_name_label(character:DialogicCharacter) -> void:
 	var character_path = character.resource_path if character else null
 	if character_path != dialogic.current_state_info.get('character'):
-		dialogic.current_state_info['character'] = character_path
+		dialogic.current_state_info['speaker'] = character_path
 		speaker_updated.emit(character)
 	for name_label in get_tree().get_nodes_in_group('dialogic_name_label'):
 		if character:
@@ -143,41 +139,12 @@ func update_name_label(character:DialogicCharacter) -> void:
 			name_label.self_modulate = Color(1,1,1,1)
 
 
-func set_autoadvance(enabled:=true, wait_time:Variant=1.0, temp:= false) -> void:
-	if !dialogic.current_state_info.has('autoadvance'):
-		dialogic.current_state_info['autoadvance'] = {'enabled':false, 'temp_enabled':false, 'wait_time':0, 'temp_wait_time':0}
-	if temp:
-		dialogic.current_state_info['autoadvance']['temp_enabled'] = enabled
-		dialogic.current_state_info['autoadvance']['temp_wait_time'] = wait_time
-	else:
-		dialogic.current_state_info['autoadvance']['enabled'] = enabled
-		dialogic.current_state_info['autoadvance']['wait_time'] = wait_time
-
-
-func set_manualadvance(enabled:=true, temp:= false) -> void:
-	if !dialogic.current_state_info.has('manual_advance'):
-		dialogic.current_state_info['manual_advance'] = {'enabled':true, 'temp_enabled':true}
-	if temp:
-		dialogic.current_state_info['manual_advance']['temp_enabled'] = enabled
-	else:
-		dialogic.current_state_info['manual_advance']['enabled'] = enabled
-
-
-func set_skippable(skippable:= true, temp:=false) -> void:
-	if !dialogic.current_state_info.has('skippable'):
-		dialogic.current_state_info['skippable'] = {'enabled':false, 'temp_enabled':false}
-	if temp:
-		dialogic.current_state_info['skippable']['temp_enabled'] = skippable
-	else:
-		dialogic.current_state_info['skippable']['enabled'] = skippable
-
-
 func update_typing_sound_mood(mood:Dictionary = {}) -> void:
 	for typing_sound in get_tree().get_nodes_in_group('dialogic_type_sounds'):
 		typing_sound.load_overwrite(mood)
 
 
-# instant skips the signal and thus possible animations
+## Instant skips the signal and thus possible animations
 func hide_text_boxes(instant:=false) -> void:
 	dialogic.current_state_info['text'] = ''
 	var emitted := instant
@@ -198,7 +165,7 @@ func is_textbox_visible() -> bool:
 	return get_tree().get_nodes_in_group('dialogic_dialog_text').any(func(x): return x.textbox_root.visible)
 
 
-# instant skips the signal and thus possible animations
+## instant skips the signal and thus possible animations
 func show_text_boxes(instant:=false) -> void:
 	var emitted := instant
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
@@ -213,14 +180,13 @@ func show_text_boxes(instant:=false) -> void:
 			text_node.textbox_root.show()
 
 
-func show_next_indicators(question=false, autoadvance=false) -> void:
+func show_next_indicators(question:=false, autoadvance:=false) -> void:
 	for next_indicator in get_tree().get_nodes_in_group('dialogic_next_indicator'):
 		if (question and 'show_on_questions' in next_indicator and next_indicator.show_on_questions) or \
 			(autoadvance and 'show_on_autoadvance' in next_indicator and next_indicator.show_on_autoadvance) or (!question and !autoadvance):
 			next_indicator.show()
 
-
-func hide_next_indicators(fake_arg=null) -> void:
+func hide_next_indicators(_fake_arg = null) -> void:
 	for next_indicator in get_tree().get_nodes_in_group('dialogic_next_indicator'):
 		next_indicator.hide()
 
@@ -230,16 +196,16 @@ func update_text_speed(letter_speed:float = -1, absolute:bool = false, _speed_mu
 		letter_speed = ProjectSettings.get_setting('dialogic/text/letter_speed', 0.01)
 	_pure_letter_speed = letter_speed
 	_letter_speed_absolute = absolute
-	
+
 	if _speed_multiplier == -1:
 		_speed_multiplier = speed_multiplier
 	else:
 		speed_multiplier = _speed_multiplier
-	
+
 	if _user_speed == -1:
 		_user_speed = Dialogic.Settings.get_setting('text_speed', 1)
-	
-	
+
+
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
 		if absolute:
 			text_node.lspeed = letter_speed
@@ -248,38 +214,22 @@ func update_text_speed(letter_speed:float = -1, absolute:bool = false, _speed_mu
 
 
 
-####################################################################################################
-##					HELPERS
-####################################################################################################
-func should_autoadvance() -> bool:
-	return dialogic.current_state_info['autoadvance']['enabled'] or dialogic.current_state_info['autoadvance'].get('temp_enabled', false)
 
-
-func can_manual_advance() -> bool:
-	return dialogic.current_state_info['manual_advance']['enabled'] and dialogic.current_state_info['manual_advance'].get('temp_enabled', true)
-
-
-func get_autoadvance_time() -> float:
-	if dialogic.current_state_info['autoadvance'].get('temp_enabled', false):
-		var wait_time:Variant = dialogic.current_state_info['autoadvance']['temp_wait_time']
-		if typeof(wait_time) == TYPE_STRING and wait_time.begins_with('v'):
-			if '+' in wait_time:
-				return Dialogic.Voice.get_remaining_time() + float(wait_time.split('+')[1])
-			return Dialogic.Voice.get_remaining_time()
-		return float(dialogic.current_state_info['autoadvance']['temp_wait_time'])
+func set_text_reveal_skippable(skippable:= true, temp:=false) -> void:
+	if !dialogic.current_state_info.has('text_reveal_skippable'):
+		dialogic.current_state_info['text_reveal_skippable'] = {'enabled':false, 'temp_enabled':false}
+	if temp:
+		dialogic.current_state_info['text_reveal_skippable']['temp_enabled'] = skippable
 	else:
-		return float(dialogic.current_state_info['autoadvance']['wait_time'])
+		dialogic.current_state_info['text_reveal_skippable']['enabled'] = skippable
 
 
-func get_autoadvance_progress() -> float:
-	if !input_handler.is_autoadvancing():
-		return -1
-	return (get_autoadvance_time()-input_handler.get_autoadvance_time_left())/get_autoadvance_time()
+func can_skip_text_reveal() -> bool:
+	return dialogic.current_state_info['text_reveal_skippable']['enabled'] and dialogic.current_state_info['text_reveal_skippable'].get('temp_enabled', true)
 
 
-func can_skip() -> bool:
-	return dialogic.current_state_info['skippable']['enabled'] and dialogic.current_state_info['skippable'].get('temp_enabled', true)
-
+################### Text Effects & Modifiers ###################################################
+####################################################################################################
 
 func collect_text_effects() -> void:
 	var text_effect_names := ""
@@ -310,9 +260,9 @@ func parse_text_effects(text:String) -> String:
 		bbcode_correction = effect_match.get_start()-position_correction-len(rtl.get_parsed_text())
 		# append [index] = [command, value] to effects dict
 		parsed_text_effect_info.append({'index':effect_match.get_start()-position_correction-bbcode_correction, 'execution_info':text_effects[effect_match.get_string('command')], 'value': effect_match.get_string('value').strip_edges()})
-		
+
 		text = text.substr(0,effect_match.get_start()-position_correction)+text.substr(effect_match.get_start()-position_correction+len(effect_match.get_string()))
-		
+
 		position_correction += len(effect_match.get_string())
 	text = text.replace('\\[', '[')
 	rtl.queue_free()
@@ -343,7 +293,7 @@ func collect_text_modifiers() -> void:
 
 func parse_text_modifiers(text:String, type:int=TextTypes.DIALOG_TEXT) -> String:
 	for mod in text_modifiers:
-		if mod.mode != TextModifierModes.ALL and type != -1 and  type != mod.mode: 
+		if mod.mode != TextModifierModes.ALL and type != -1 and  type != mod.mode:
 			continue
 		text = mod.method.call(text)
 	return text
@@ -358,24 +308,27 @@ func skip_text_animation() -> void:
 
 
 func get_current_speaker() -> DialogicCharacter:
-	return (load(dialogic.current_state_info['character']) as DialogicCharacter)
+	return (load(dialogic.current_state_info['speaker']) as DialogicCharacter)
 
+
+#################### HELPERS & OTHER STUFF #########################################################
+####################################################################################################
 
 func _ready():
 	collect_character_names()
 	collect_text_effects()
 	collect_text_modifiers()
 	Dialogic.event_handled.connect(hide_next_indicators)
-	
+
 	_autopauses = {}
 	var autopause_data :Dictionary= ProjectSettings.get_setting('dialogic/text/autopauses', {})
 	for i in autopause_data.keys():
 		_autopauses[RegEx.create_from_string('(?<!(\\[|\\{))['+i+'](?!([\\w\\s]*!?[\\]\\}]|$))')] = autopause_data[i]
-	input_handler = Node.new()
-	input_handler.set_script(load(get_script().resource_path.get_base_dir().path_join('default_input_handler.gd')))
-	add_child(input_handler)
-	
+
+
+func post_install():
 	Dialogic.Settings.connect_to_change('text_speed', _update_user_speed)
+
 
 
 func _update_user_speed(user_speed:float) -> void:
@@ -385,32 +338,32 @@ func _update_user_speed(user_speed:float) -> void:
 func color_names(text:String) -> String:
 	if !ProjectSettings.get_setting('dialogic/text/autocolor_names', false):
 		return text
-	
+
 	var counter := 0
 	for result in color_regex.search_all(text):
 		text = text.insert(result.get_start("name")+((9+8+8)*counter), '[color=#' + character_colors[result.get_string('name')].to_html() + ']')
 		text = text.insert(result.get_end("name")+9+8+((9+8+8)*counter), '[/color]')
 		counter += 1
-	
+
 	return text
 
 
 func collect_character_names() -> void:
 	#don't do this at all if we're not using autocolor names to begin with
 	if !ProjectSettings.get_setting('dialogic/text/autocolor_names', false):
-		return 
-	
+		return
+
 	character_colors = {}
 	for dch_path in DialogicUtil.list_resources_of_type('.dch'):
 		var dch := (load(dch_path) as DialogicCharacter)
 
 		if dch.display_name:
 			character_colors[dch.display_name] = dch.color
-		
+
 		for nickname in dch.nicknames:
 			if nickname.strip_edges():
 				character_colors[nickname.strip_edges()] = dch.color
-	
+
 	color_regex.compile('(?<=\\W|^)(?<name>'+str(character_colors.keys()).trim_prefix('["').trim_suffix('"]').replace('", "', '|')+')(?=\\W|$)')
 
 
@@ -421,7 +374,15 @@ func collect_character_names() -> void:
 func effect_pause(text_node:Control, skipped:bool, argument:String) -> void:
 	if skipped:
 		return
+
+	# We want to ignore pauses if we're skipping.
+	if not dialogic.Input.auto_skip.enabled:
+		return
+
+	var text_speed = Dialogic.Settings.get_setting('text_speed', 1)
+
 	if argument:
+
 		if argument.ends_with('!'):
 			await get_tree().create_timer(float(argument.trim_suffix('!'))).timeout
 		elif speed_multiplier != 0 and Dialogic.Settings.get_setting('text_speed', 1) != 0:
@@ -460,28 +421,6 @@ func effect_mood(text_node:Control, skipped:bool, argument:String) -> void:
 	if Dialogic.current_state_info.get('character', null):
 		update_typing_sound_mood(
 			load(Dialogic.current_state_info.character).custom_info.get('sound_moods', {}).get(argument, {}))
-
-
-func effect_noskip(text_node:Control, skipped:bool, argument:String) -> void:
-	set_skippable(false, true)
-	set_manualadvance(false, true)
-	effect_autoadvance(text_node, skipped, argument)
-
-
-func effect_input(text_node:Control, skipped:bool, argument:String) -> void:
-	if skipped:
-		return
-	show_next_indicators()
-	await input_handler.dialogic_action_priority
-	hide_next_indicators()
-	input_handler.action_was_consumed = true
-
-
-func effect_autoadvance(text_node:Control, skipped:bool, argument:String) -> void:
-	if argument.is_empty() or !(argument.is_valid_float() or argument.begins_with('v')):
-		set_autoadvance(true, ProjectSettings.get_setting('dialogic/text/autoadvance_delay', 1), true)
-	else:
-		set_autoadvance(true, argument, true)
 
 
 var modifier_words_select_regex := RegEx.create_from_string("(?<!\\\\)\\<[^\\[\\>]+(\\/[^\\>]*)\\>")
