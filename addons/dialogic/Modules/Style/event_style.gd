@@ -7,7 +7,7 @@ extends DialogicEvent
 
 ### Settings
 
-## The name of the style to change to. Can be set on the DialogicNode_Style. 
+## The name of the style to change to. Can be set on the DialogicNode_Style.
 var style_name: String = ""
 
 
@@ -17,7 +17,8 @@ var style_name: String = ""
 
 func _execute() -> void:
 	dialogic.Styles.add_layout_style(style_name)
-	
+	# we need to wait till the new layout is ready before continuing
+	await dialogic.get_tree().process_frame
 	finish()
 
 
@@ -54,7 +55,7 @@ func build_event_editor():
 	add_header_edit('style_name', ValueType.COMPLEX_PICKER, {
 			'left_text'			:'Use style',
 			'placeholder'		: 'Default',
-			'suggestions_func' 	: get_style_suggestions, 
+			'suggestions_func' 	: get_style_suggestions,
 			'editor_icon' 		: ["PopupMenu", "EditorIcons"],
 			'autofocus'			: true})
 

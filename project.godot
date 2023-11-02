@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dialogic Test Project"
 run/main_scene="res://MainMenu/Menu.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
 [autoload]
@@ -91,11 +91,20 @@ layout/styles={
 "Smartphone_Style": {
 "layout": "res://Smartphone/SmartphoneLayout.tscn"
 },
-"VisualNovel_Style": {}
+"VisualNovel_Style": {
+"export_overrides": {
+"box_animation_new_text": "0"
+}
+}
 }
 layout/default_style="SmallRPG_Style"
 text/skippable_delay=0.1
 text/letter_speed=0.01
+text/autoadvance_per_character_delay=0.1
+text/autoadvance_ignored_characters_enabled=false
+text/initial_text_reveal_skippable=true
+text/text_reveal_skip_delay=0.1
+save/encryption_on_exports_only=true
 
 [display]
 

@@ -6,7 +6,7 @@ func _ready():
 	var plugin_cfg := ConfigFile.new()
 	plugin_cfg.load("res://addons/dialogic/plugin.cfg")
 	%Version.text = "Using "+plugin_cfg.get_value('plugin', 'version', 'unknown version')
-	
+
 	$AboutScreen.hide()
 	$MainMenu.show()
 	await fade(true)
@@ -47,12 +47,12 @@ func _on_back_pressed():
 
 func fade_menu(from:Node=null, to:Node = null):
 	var tween := create_tween().set_parallel()
-	
+
 	if to != null:
 		to.show()
 		to.modulate = Color.TRANSPARENT
 		tween.tween_property(to, 'modulate', Color.WHITE, 0.2)
-	
+
 	if from != null:
 		tween.tween_property(from, 'modulate', Color.TRANSPARENT, 0.2)
 		await tween.finished

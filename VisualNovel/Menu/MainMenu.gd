@@ -18,7 +18,11 @@ func open():
 	%LoadMenu.hide()
 
 
+## If the timeline actually ends on it's own, that can only mean that the player
+## reached the end of the game. Thus we remove the "last save" entry, so the
+## Continue button is hidden again.
 func _on_dialogic_end() -> void:
+	Dialogic.Save.set_latest_slot('')
 	open()
 
 
@@ -49,7 +53,8 @@ func load_slot(slot_name:String) -> void:
 	await get_parent().fade()
 	Dialogic.Styles.add_layout_style('VisualNovel_Style')
 	Dialogic.Save.load(slot_name)
-	Dialogic.timeline_ended.connect(_on_dialogic_end)
+	if not Dialogic.timeline_ended.is_connected(_on_dialogic_end):
+		Dialogic.timeline_ended.connect(_on_dialogic_end)
 	hide()
 	%IngameUI.enter_game()
 

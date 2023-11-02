@@ -3,12 +3,12 @@
 "@subpath": NodePath(""),
 "color": Color(0.886275, 0.0156863, 0.0156863, 1),
 "custom_info": {
-"sound_mood_default": "Default",
+"sound_mood_default": "Happy",
 "sound_moods": {
 "Happy": {
 "mode": 1,
 "name": "Happy",
-"pitch_base": 1.0,
+"pitch_base": 0.9,
 "pitch_variance": 0.1,
 "skip_characters": 3.0,
 "sound_path": "res://SmallRPG/Assets/talking_sound_short.ogg",
