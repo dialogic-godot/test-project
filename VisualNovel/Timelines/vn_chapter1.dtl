@@ -1,6 +1,6 @@
 [background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Porch 4.png" fade="1.0"]
 [i] Leon enters a new and strange place (once again)...
-join Leon [ mirrored="true"]
+update Leon 1 [ mirrored="true"]
 
 Leon (Basic/doubt): [i]I wonder who lives here...
 join Elina (angry) 3 [animation="Bounce In" length="0.2"]
@@ -10,7 +10,7 @@ Leon (Basic/default): Excuse me?
 Elina: I have been waiting for you. Come in.
 Leon (Positive/surprise): [i] Wait? I didn't even know I was going here?
 [i] Leon follows her inside anyways.
-leave --All--
+leave --All-- 
 
 [background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Library 1.png" fade="1.0"]
 join Elina

@@ -624,6 +624,28 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
+[node name="InGameMenuButton" type="Button" parent="IngameUI"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -59.0
+offset_top = -55.0
+offset_right = -10.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+focus_mode = 0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.501961)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+icon = ExtResource("10_8n3tn")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
 [node name="WarningScreen" type="ColorRect" parent="IngameUI"]
 visible = false
 anchors_preset = 15
@@ -714,28 +736,6 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="InGameMenuButton" type="Button" parent="IngameUI"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -59.0
-offset_top = -55.0
-offset_right = -10.0
-offset_bottom = -4.0
-grow_horizontal = 0
-grow_vertical = 0
-focus_mode = 0
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.501961)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-icon = ExtResource("10_8n3tn")
-flat = true
-icon_alignment = 1
-expand_icon = true
-
 [node name="SaveIndicator" type="TextureRect" parent="IngameUI"]
 anchors_preset = 3
 anchor_left = 1.0
@@ -786,7 +786,7 @@ vertical_alignment = 2
 [connection signal="pressed" from="IngameUI/InGameMenu/VBox/QuickSaveButton" to="IngameUI" method="_on_quick_save_button_pressed"]
 [connection signal="pressed" from="IngameUI/InGameMenu/VBox/SaveLoadButton" to="IngameUI" method="_on_save_load_button_pressed"]
 [connection signal="pressed" from="IngameUI/InGameMenu/VBox/MenuButton" to="IngameUI" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="IngameUI/InGameMenuButton" to="IngameUI" method="_on_in_game_menu_button_pressed"]
 [connection signal="pressed" from="IngameUI/WarningScreen/Warning/VBox/HBox/WithSavingButton" to="IngameUI" method="_on_with_saving_button_pressed"]
 [connection signal="pressed" from="IngameUI/WarningScreen/Warning/VBox/HBox/WithoutSavingButton" to="IngameUI" method="_on_without_saving_button_pressed"]
 [connection signal="pressed" from="IngameUI/WarningScreen/Warning/VBox/HBox/CancelButton" to="IngameUI" method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="IngameUI/InGameMenuButton" to="IngameUI" method="_on_in_game_menu_button_pressed"]

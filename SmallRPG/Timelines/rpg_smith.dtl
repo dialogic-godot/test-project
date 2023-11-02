@@ -71,6 +71,6 @@ Smith: Thank you <once again/very much/my friend>!
 label key
 Player: I bet that's the key!
 Player: Smith will be happy.
-VAR {RPG_Example.smiths_key} = 1
+set {RPG_Example.smiths_key} = 1
 [signal arg="collect"]
 [end_timeline]
