@@ -12,6 +12,6 @@ Whenever a Dialogic release is made a tag should be created on this repository t
 
 ![showcase_3.png](./Assets/showcase_3.png)
 
-![showcase_0.png](.\Assets/showcase_0.png)
+![showcase_0.png](./Assets/showcase_0.png)
 
 ![showcase_4.png](./Assets/showcase_4.png)
