@@ -84,6 +84,15 @@ func parse_text(text:String, type:int=TextTypes.DIALOG_TEXT, variables:= true, g
 ## Instant can be used to skip all revieling.
 ## If additional is true, the previous text will be kept.
 func update_dialog_text(text:String, instant:bool= false, additional:= false) -> String:
+
+	speed_multiplier = 1
+
+	# also resets temporary autoadvance and noskip settings:
+	Dialogic.Input.auto_advance.enabled_until_next_event = false
+	Dialogic.Input.auto_advance.override_delay_for_current_event = -1
+	Dialogic.Input.set_manualadvance(true, true)
+	set_text_reveal_skippable(true, true)
+
 	update_text_speed()
 
 	if text.is_empty():
@@ -95,7 +104,7 @@ func update_dialog_text(text:String, instant:bool= false, additional:= false) ->
 			if Dialogic.Animation.is_animating():
 				await Dialogic.Animation.finished
 
-	if !instant: dialogic.current_state = dialogic.States.SHOWING_TEXT
+	if !instant: dialogic.current_state = dialogic.States.REVEALING_TEXT
 	dialogic.current_state_info['text'] = text
 	for text_node in get_tree().get_nodes_in_group('dialogic_dialog_text'):
 		if text_node.enabled and (text_node == text_node.textbox_root or text_node.textbox_root.is_visible_in_tree()):
@@ -107,18 +116,12 @@ func update_dialog_text(text:String, instant:bool= false, additional:= false) ->
 					text_node.finished_revealing_text.connect(_on_dialog_text_finished)
 			dialogic.current_state_info['text_parsed'] = (text_node as RichTextLabel).get_parsed_text()
 
-	# also resets temporary autoadvance and noskip settings:
-	speed_multiplier = 1
-
-	Dialogic.Input.auto_advance.set_autoadvance_until_next_event(false)
-	Dialogic.Input.auto_advance.set_autoadvance_override_delay_for_current_event(-1)
-	Dialogic.Input.set_manualadvance(true, true)
-	set_text_reveal_skippable(true, true)
 	return text
 
 
 func _on_dialog_text_finished():
 	text_finished.emit({'text':dialogic.current_state_info['text'], 'character':dialogic.current_state_info['speaker']})
+
 
 
 func update_name_label(character:DialogicCharacter) -> void:
@@ -376,13 +379,12 @@ func effect_pause(text_node:Control, skipped:bool, argument:String) -> void:
 		return
 
 	# We want to ignore pauses if we're skipping.
-	if not dialogic.Input.auto_skip.enabled:
+	if dialogic.Input.auto_skip.enabled:
 		return
 
-	var text_speed = Dialogic.Settings.get_setting('text_speed', 1)
+	var text_speed: float = Dialogic.Settings.get_setting('text_speed', 1)
 
 	if argument:
-
 		if argument.ends_with('!'):
 			await get_tree().create_timer(float(argument.trim_suffix('!'))).timeout
 		elif speed_multiplier != 0 and Dialogic.Settings.get_setting('text_speed', 1) != 0:

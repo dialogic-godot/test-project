@@ -1,0 +1,44 @@
+This timeline tests character events (join, update, leave) and various portrait setups/actions.
+It will describe the desired effect, then do it.
+
+[i]Join a character with it's default portrait at position 1
+join TC3_BasicPortraits 1
+
+[i]Move the character to position 3, instantly.
+update TC3_BasicPortraits 3 [move_time="0"]
+
+[i]Move the character to position 2 in one second.
+update TC3_BasicPortraits 2 [move_time="2"]
+[wait time="2"]
+
+[i]Change the characters portrait.
+update TC3_BasicPortraits (happy)
+
+[i]Mirror the characters portrait.
+update TC3_BasicPortraits [mirrored="true"]
+
+[i]Animate the character (bounce).
+update TC3_BasicPortraits [animation="Bounce" wait="true"]
+
+[i]Animate the character very slowly (bounce).
+update TC3_BasicPortraits [animation="Bounce" length="3" wait="true"]
+
+[i]Animate the character repeatedly (bounce).
+update TC3_BasicPortraits [animation="Bounce" repeat="3" wait="true"]
+
+[i]Join a second character with an angry portrait at position 4 (slide in left).
+join TC4_BasicPortraits2 (angry) 4 [animation="Slide In Left"]
+
+[i]Join a third character at position 3 (bounce in, slow).
+join TC5_BasicPortraits3 3 [animation="Bounce In" length="2"]
+
+[i]Updte the new character z_index.
+update TC5_BasicPortraits3 [z_index="3"]
+
+[i]Leave the first character.
+leave TC3_BasicPortraits
+
+[i]Leave all characters (bounce out).
+leave --All-- [animation="Bounce Out" wait="true" ]
+
+jump t0_overview/

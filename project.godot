@@ -28,7 +28,6 @@ animations/join_default_wait=true
 choices/autofocus_first=true
 choices/delay=0.2
 save/autosave_delay=60.0
-settings/text_speed=0.01
 text/skippable=true
 text/autoadvance_delay=1.0
 text/hide_empty_textbox=true
@@ -38,12 +37,15 @@ layout/mode=0
 text/autocolor_names=false
 variables={
 "RPG_Example": {
-"NewVariable": ""
+"smiths_key": "0"
 },
 "Smartphone": {
 "Claire": "0",
 "Laurey": "",
 "Otto": ""
+},
+"UnitTests": {
+"Test1": "Some funny value."
 }
 }
 event_default_overrides={
@@ -105,6 +107,7 @@ text/autoadvance_ignored_characters_enabled=false
 text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
 save/encryption_on_exports_only=true
+settings/text_speed=1.0
 
 [display]
 

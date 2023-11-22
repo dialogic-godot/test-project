@@ -1,0 +1,7 @@
+[clear time="0" style="false" ]
+
+Choose a timeline to test.
+- Text events, effects & modifiers
+	jump t1_texts/
+- Character events & portraits
+	jump t2_characters/

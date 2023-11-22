@@ -21,7 +21,7 @@ func fade(fade_in:= false):
 	await get_tree().create_timer(0.3).timeout
 
 
-func _input(event):
+func _input(_event:InputEvent) -> void:
 	if Input.is_key_pressed(KEY_ESCAPE):
 		if Dialogic.has_active_layout_node():
 			Dialogic.get_layout_node().queue_free()

@@ -9,7 +9,7 @@ class_name DialogicCharacter
 @export var color:Color = Color()
 @export var description:String = ""
 
-@export var scale:float = 1.0 
+@export var scale:float = 1.0
 @export var offset:Vector2 = Vector2()
 @export var mirror:bool = false
 

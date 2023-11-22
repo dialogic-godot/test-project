@@ -215,6 +215,15 @@ focus_neighbor_right = NodePath("../VisualNovel")
 image = ExtResource("5_vikv7")
 title = "Smartphone"
 
+[node name="UnitTests" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../SmallRPG")
+focus_neighbor_right = NodePath("../VisualNovel")
+image = ExtResource("5_vikv7")
+title = "Testing"
+
 [node name="About" type="Button" parent="MainMenu"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -252,5 +261,6 @@ expand_icon = true
 [connection signal="pressed" from="MainMenu/VBox/VBoxContainer/VisualNovel" to="." method="_on_visual_novel_pressed"]
 [connection signal="pressed" from="MainMenu/VBox/VBoxContainer/SmallRPG" to="." method="_on_small_rpg_pressed"]
 [connection signal="pressed" from="MainMenu/VBox/VBoxContainer/Smartphone" to="." method="_on_smartphone_pressed"]
+[connection signal="pressed" from="MainMenu/VBox/VBoxContainer/UnitTests" to="." method="_on_unit_tests_pressed"]
 [connection signal="pressed" from="MainMenu/About" to="." method="_on_about_pressed"]
 [connection signal="pressed" from="MainMenu/Quit" to="." method="_on_quit_pressed"]
