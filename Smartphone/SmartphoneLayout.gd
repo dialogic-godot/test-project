@@ -1,4 +1,5 @@
-extends CanvasLayer
+@tool
+extends DialogicLayoutBase
 
 var last_text :String = ""
 var last_text_size := Vector2()
