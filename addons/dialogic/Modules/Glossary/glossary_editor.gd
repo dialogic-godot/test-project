@@ -26,16 +26,16 @@ func _ready() -> void:
 	%LoadGlossaryFile.icon = get_theme_icon('Folder', 'EditorIcons')
 	%DeleteGlossaryFile.icon = get_theme_icon('Remove', 'EditorIcons')
 	%DeleteGlossaryEntry.icon = get_theme_icon('Remove', 'EditorIcons')
-	
+
 	%AddGlossaryEntry.icon = get_theme_icon('Add', 'EditorIcons')
 	%EntrySearch.right_icon = get_theme_icon('Search', 'EditorIcons')
-	
+
 	%GlossaryList.item_selected.connect(_on_GlossaryList_item_selected)
 	%EntryList.item_selected.connect(_on_EntryList_item_selected)
-	
+
 	%DefaultColor.color_changed.connect(set_setting.bind('dialogic/glossary/default_color'))
 	%DefaultCaseSensitive.toggled.connect(set_setting.bind('dialogic/glossary/default_case_sensitive'))
-	
+
 	%EntryCaseSensitive.icon = get_theme_icon("MatchCase", "EditorIcons")
 
 
@@ -46,7 +46,7 @@ func set_setting(value, setting:String)  -> void:
 func _open(argument:Variant = null) -> void:
 	%DefaultColor.color = ProjectSettings.get_setting('dialogic/glossary/default_color', Color.POWDER_BLUE)
 	%DefaultCaseSensitive.button_pressed = ProjectSettings.get_setting('dialogic/glossary/default_case_sensitive', true)
-	
+
 	%GlossaryList.clear()
 	var idx := 0
 	for file in ProjectSettings.get_setting('dialogic/glossary/glossary_files', []):
@@ -54,12 +54,12 @@ func _open(argument:Variant = null) -> void:
 			%GlossaryList.add_item(DialogicUtil.pretty_name(file), get_theme_icon('FileList', 'EditorIcons'))
 		else:
 			%GlossaryList.add_item(DialogicUtil.pretty_name(file), get_theme_icon('FileDead', 'EditorIcons'))
-			
+
 		%GlossaryList.set_item_tooltip(idx, file)
 		idx += 1
-	
+
 	%EntryList.clear()
-	
+
 	if %GlossaryList.item_count != 0:
 		%GlossaryList.select(0)
 		_on_GlossaryList_item_selected(0)
@@ -81,7 +81,7 @@ func _on_GlossaryList_item_selected(idx:int) -> void:
 			%EntryList.add_item(entry, get_theme_icon("Breakpoint", "EditorIcons"))
 			%EntryList.set_item_icon_modulate(entry_idx, current_glossary.entries[entry].get('color', %DefaultColor.color))
 			entry_idx += 1
-	
+
 	if %EntryList.item_count != 0:
 		%EntryList.select(0)
 		_on_EntryList_item_selected(0)
@@ -137,7 +137,7 @@ func _on_EntryList_item_selected(idx:int) -> void:
 	%EntryText.text = entry_info.get('text', '')
 	%EntryExtra.text = entry_info.get('extra', '')
 	%EntryEnabled.button_pressed = entry_info.get('enabled', true)
-	
+
 	%EntryColor.color = entry_info.get('color', %DefaultColor.color)
 	%EntryCustomColor.button_pressed = entry_info.has('color')
 	%EntryColor.disabled = !entry_info.has('color')
@@ -145,7 +145,7 @@ func _on_EntryList_item_selected(idx:int) -> void:
 func _on_add_glossary_entry_pressed() -> void:
 	if !current_glossary:
 		return
-	
+
 	var new_name := "New Entry"
 	if new_name in current_glossary.entries:
 		var count := 2
@@ -189,7 +189,7 @@ func _on_entry_name_text_changed(new_text:String) -> void:
 			%EntryList.set_item_custom_bg_color(%EntryList.get_selected_items()[0],
 					get_theme_color("warning_color", "Editor").darkened(0.8))
 			%EntryList.set_item_text(%EntryList.get_selected_items()[0], new_text.strip_edges() + " (invalid name)")
-			return 
+			return
 		else:
 			%EntryList.set_item_custom_bg_color(%EntryList.get_selected_items()[0],
 				Color.TRANSPARENT)
@@ -198,7 +198,7 @@ func _on_entry_name_text_changed(new_text:String) -> void:
 		current_glossary.entries[new_text.strip_edges()] = info
 		%EntryList.set_item_text(%EntryList.get_selected_items()[0], new_text.strip_edges())
 		current_entry_name = new_text.strip_edges()
-	
+
 	ResourceSaver.save(current_glossary)
 
 func _on_entry_case_sensitive_toggled(button_pressed:bool) -> void:
