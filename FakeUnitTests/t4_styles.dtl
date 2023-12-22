@@ -1,0 +1,39 @@
+This timeline tests styles within timelines.
+It will describe the desired effect, then do it.
+
+\[i]Change to a special style.
+[style name="UnitTestStyle_A"]
+Some text to display in style A.
+
+\[i]Change back to the default style.
+[style]
+Some text to display in the default style.
+
+\[i]Change to style A.
+[style name="UnitTestStyle_A"]
+Some text to display in style A.
+
+\[i]Use a character with a custom style.
+TC6_Style: I'm saying something
+Someone else saying something
+TC6_Style: Me again. How are you doing?
+Okay enough of this.
+
+[style]
+
+\[i]We will create a situation that uses many systems (Backgrounds, Characters, Music, Textbox) and see if the style change can preserve them correctly.
+[style name="UnitTestStyle_A"]
+[background arg="res://VisualNovel/Assets/Backgrounds/Apartment 6.png" fade="0.0"]
+join TC3_BasicPortraits 1 [animation="Instant In Or Out"]
+join TC4_BasicPortraits2 2 [animation="Instant In Or Out"]
+join TC5_BasicPortraits3 4 [animation="Instant In Or Out"]
+This is some text!
+[style name="UnitTestStyle_B"]
+[wait_input]
+Some other text.
+[style]
+[wait_input]
+Another text event.
+
+\[i]The end.
+jump t0_overview/

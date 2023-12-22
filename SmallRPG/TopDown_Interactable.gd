@@ -7,7 +7,6 @@ extends Area2D
 
 var _player :CharacterBody2D = null
 
-var counter := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,7 +49,7 @@ func _input(_event:InputEvent):
 		if timeline:
 			owner.state = owner.States.DIALOG
 			get_viewport().set_input_as_handled()
-			Dialogic.Styles.add_layout_style('SmallRPG_Style')
+			Dialogic.Styles.load_style('SmallRPG_Style')
 			var node := Dialogic.start(timeline, next_label)
 			if _player:
 				node.register_character(load("res://SmallRPG/Timelines/Player.dch"), _player.get_node('BubbleMarker'))
@@ -62,7 +61,6 @@ func _input(_event:InputEvent):
 			Dialogic.timeline_ended.connect(_on_dialog_end)
 			if not Dialogic.signal_event.is_connected(_on_dialogic_signal_event):
 				Dialogic.signal_event.connect(_on_dialogic_signal_event)
-			counter += 1
 
 
 func _on_dialog_end():

@@ -1,0 +1,89 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"color": Color(1, 1, 1, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": ""
+},
+"default_portrait": "default",
+"description": "",
+"display_name": "BasicPortraitCharacter",
+"mirror": false,
+"nicknames": [""],
+"offset": Vector2(0, 0),
+"portraits": {
+"angry": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 angry.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"blink": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 blink.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"default": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 concept.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"happy": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 happy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"hate": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 hate.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"plot": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 plot.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"sad": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 sad.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"shy": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 shy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"surprise": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 surprise.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"worry": {
+"image": "res://VisualNovel/Assets/Characters/Audrey/pl2 worry.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+"scale": 1.0
+}

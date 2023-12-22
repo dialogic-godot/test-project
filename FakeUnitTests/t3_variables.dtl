@@ -1,0 +1,52 @@
+This timeline tests variable interactions within timelines.
+It will describe the desired effect, then do it.
+
+[i]Insert a variable into a text.
+Variable\: {UnitTests.Test1}
+
+[i]Variable Test2 Should be 10 by default.
+Variable Test 2: {UnitTests.Test2}
+
+[i]Variable Test2 will be changed by +10.
+set {UnitTests.Test2} += 10
+Variable Test2: {UnitTests.Test2}
+
+[i]Variable Test2 will set to 0.
+set {UnitTests.Test2} = 0
+Variable Test2: {UnitTests.Test2}
+
+[i]Setting a variable to a string input.
+[text_input text="Please enter a value for Test1" placeholder="Your Value" var="UnitTests.Test1"]
+Variable Test1: {UnitTests.Test1}
+
+
+[i]Some choices. Each choice is only enabled if Test2 is in a certain range.
+
+label choice1
+[i]Test2 is now {UnitTests.Test2} | (goal 53.75)
+- +20 (if Test2 < 60) [if {UnitTests.Test2} < 60] [else="disable"]
+	set {UnitTests.Test2} += 20
+
+- /2 (if Test2 > 50) [if {UnitTests.Test2} > 50] [else="disable"]
+	set {UnitTests.Test2} /= 2.0
+
+- *1.5 (if Test2 < 100 and Test2 > 40) [if {UnitTests.Test2} > 40 and {UnitTests.Test2} < 100] [else="disable"]
+	set {UnitTests.Test2} *= 1.5
+
+- Secret Reward! [if {UnitTests.Test2} == 53.75]
+	Hell yeah, you did it. Congrats!
+	jump after_choice1
+
+- Next section
+	jump after_choice1
+
+jump choice1
+label after_choice1
+[i]Insert variables from an autoload:
+Float\: {UnitTest.var_float} | String\: {UnitTest.var_string} | Array[0]\: {UnitTest.var_array[0]}
+
+[i]Change autoload variable \{var_float} by +10
+set UnitTest.var_float += 10
+Float\: {UnitTest.var_float} | String\: {UnitTest.var_string} | Array[0]\: {UnitTest.var_array[0]}
+
+jump t0_overview/

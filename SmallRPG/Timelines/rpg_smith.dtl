@@ -41,7 +41,7 @@ Smith: So I have a task for you.
 label quest_declined
 Smith: What <do you want/is it> now?
 Smith: <Argh. I don't have time for you./ Go away!>
-Smith: Go!
+Smith: <Go/Go away/Buzz off>!
 [end_timeline]
 
 label quest_accepted

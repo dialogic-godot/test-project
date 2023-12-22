@@ -1,0 +1,159 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"color": Color(1, 1, 1, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": ""
+},
+"default_portrait": "angry",
+"description": "",
+"display_name": "BasicPortraits3",
+"mirror": false,
+"nicknames": [""],
+"offset": Vector2(0, 0),
+"portraits": {
+"Wild/angry": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wangry.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/blink": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wblink.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/default": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wconcept.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/happy": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 whappy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/hate": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 whate.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/plot": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wplot.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/sad": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wsad.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/sadhappy": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wsadhappy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/serious": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wserious.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"Wild/surprise": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wsurprise.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"angry": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 angry.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"blink": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 blink.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"default": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 concept.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"happy": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 happy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"hate": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 hate.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"plot": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 plot.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"sad": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 sad.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"sadhappy": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 sadhappy.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"serious": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 serious.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"surprise": {
+"image": "res://VisualNovel/Assets/Characters/Eliana/pl1 surprise.png",
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+"scale": 1.0
+}

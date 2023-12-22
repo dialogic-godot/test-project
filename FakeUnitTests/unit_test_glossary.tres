@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="DialogicGlossary" load_steps=2 format=3 uid="uid://bqlxp66qel72h"]
+
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Glossary/glossary_resource.gd" id="1_y22ix"]
+
+[resource]
+script = ExtResource("1_y22ix")
+entries = {
+"Entry1": {
+"alternatives": ["en1", "entry_one"],
+"case_sensitive": false,
+"color": Color(0.831373, 0.647059, 0.294118, 1),
+"extra": "UNIT TEST",
+"text": "the one and only entry.",
+"title": "ONE"
+},
+"entry2": {
+"alternatives": ["en2", "entry_2", "entry_two"],
+"case_sensitive": true,
+"color": Color(0.486275, 0.709804, 0.301961, 1),
+"extra": "UNIT TEST",
+"text": "oh, seems like there is another one.",
+"title": "THE ONLY SECOND"
+}
+}
+enabled = true

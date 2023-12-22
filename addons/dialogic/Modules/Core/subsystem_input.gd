@@ -16,17 +16,13 @@ var auto_advance : DialogicAutoAdvance = null
 
 ####### SUBSYSTEM METHODS ######################################################
 #region SUBSYSTEM METHODS
-func clear_game_state(clear_flag:=Dialogic.ClearFlags.FULL_CLEAR) -> void:
+func clear_game_state(clear_flag:=DialogicGameHandler.ClearFlags.FULL_CLEAR) -> void:
 	if not is_node_ready():
 		await ready
-	auto_advance.set_autoadvance_system(ProjectSettings.get_setting('dialogic/text/autoadvance_enabled', false))
-	var autoadvance_info: Dictionary = auto_advance.get_autoadvance_info()
-	autoadvance_info['fixed_delay'] = ProjectSettings.get_setting('dialogic/text/autoadvance_fixed_delay', 1)
-	autoadvance_info['per_word_delay'] = ProjectSettings.get_setting('dialogic/text/autoadvance_per_word_delay', 0)
-	autoadvance_info['per_character_delay'] = ProjectSettings.get_setting('dialogic/text/autoadvance_per_character_delay', 0.1)
-	autoadvance_info['ignored_characters_enabled'] = ProjectSettings.get_setting('dialogic/text/autoadvance_ignored_characters_enabled', true)
-	autoadvance_info['ignored_characters'] = ProjectSettings.get_setting('dialogic/text/autoadvance_ignored_characters', {})
+
+
 	set_manualadvance(true)
+
 
 func pause() -> void:
 	auto_advance.autoadvance_timer.paused = true
@@ -46,14 +42,14 @@ func resume() -> void:
 #region MAIN METHODS
 
 func handle_input():
-	if Dialogic.paused or is_input_blocked():
+	if dialogic.paused or is_input_blocked():
 		return
 
 	if !action_was_consumed:
 		# We want to stop auto-advancing that cancels on user inputs.
-		if (auto_advance.is_autoadvance_enabled()
-			and auto_advance.get_autoadvance_info()['waiting_for_user_input']):
-			auto_advance.set_autoadvance_until_user_input(false)
+		if (auto_advance.is_enabled()
+			and auto_advance.enabled_until_user_input):
+			auto_advance.enabled_until_next_event = false
 			action_was_consumed = true
 
 		# We want to stop auto-skipping if it's enabled, we are listening
@@ -108,8 +104,8 @@ func _ready() -> void:
 	set_process(false)
 
 func post_install() -> void:
-	Dialogic.Settings.connect_to_change('autoadvance_delay_modifier', auto_advance._update_autoadvance_delay_modifier)
-	auto_skip.autoskip_changed.connect(_on_autoskip_changed)
+	dialogic.Settings.connect_to_change('autoadvance_delay_modifier', auto_advance._update_autoadvance_delay_modifier)
+	auto_skip.toggled.connect(_on_autoskip_toggled)
 	add_child(input_block_timer)
 	input_block_timer.one_shot = true
 
@@ -132,7 +128,7 @@ func start_autoskip_timer() -> void:
 
 
 ## If Auto-Skip disables, we want to stop the timer.
-func _on_autoskip_changed(enabled: bool) -> void:
+func _on_autoskip_toggled(enabled: bool) -> void:
 	if not enabled:
 		_auto_skip_timer_left = 0.0
 
@@ -174,14 +170,14 @@ func is_manualadvance_enabled() -> bool:
 func effect_input(text_node:Control, skipped:bool, argument:String) -> void:
 	if skipped:
 		return
-	Dialogic.Text.show_next_indicators()
-	await Dialogic.Input.dialogic_action_priority
-	Dialogic.Text.hide_next_indicators()
-	Dialogic.Input.action_was_consumed = true
+	dialogic.Text.show_next_indicators()
+	await dialogic.Input.dialogic_action_priority
+	dialogic.Text.hide_next_indicators()
+	dialogic.Input.action_was_consumed = true
 
 
 func effect_noskip(text_node:Control, skipped:bool, argument:String) -> void:
-	Dialogic.Text.set_text_reveal_skippable(false, true)
+	dialogic.Text.set_text_reveal_skippable(false, true)
 	set_manualadvance(false, true)
 	effect_autoadvance(text_node, skipped, argument)
 
@@ -190,8 +186,8 @@ func effect_autoadvance(text_node: Control, skipped:bool, argument:String) -> vo
 	if argument.ends_with('?'):
 		argument = argument.trim_suffix('?')
 	else:
-		auto_advance.set_autoadvance_until_next_event(true)
+		auto_advance.enabled_until_next_event = true
 
 	if argument.is_valid_float():
-		auto_advance.set_autoadvance_override_delay_for_current_event(float(argument))
+		auto_advance.override_delay_for_current_event = float(argument)
 #endregion

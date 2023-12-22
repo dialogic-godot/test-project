@@ -10,7 +10,7 @@ func _ready():
 	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 2)
 	ProjectSettings.set_setting('dialogic/choices/reveal_by_input', true)
 #	Dialogic.Text.set_skippable(false)
-	Dialogic.Styles.add_layout_style('Smartphone_Style')
+	Dialogic.Styles.load_style('Smartphone_Style')
 	Dialogic.signal_event.connect(_on_dialogic_signal_event)
 	Dialogic.clear()
 
@@ -28,15 +28,15 @@ func _on_dialogic_signal_event(argument:String):
 
 
 func save_history():
-	if Dialogic.has_active_layout_node() and !current_contact.is_empty():
-		var layout := Dialogic.get_layout_node()
+	if Dialogic.Styles.has_active_layout_node() and !current_contact.is_empty():
+		var layout :Node = Dialogic.Styles.get_layout_node()
 		chat_histories[current_contact] = layout.get_history()
 		chat_histories[current_contact]['dialogic_info'] = Dialogic.get_full_state()
 
 
 func load_history(contact:String):
-	if Dialogic.has_active_layout_node() and !contact.is_empty():
-		var layout := Dialogic.get_layout_node()
+	if Dialogic.Styles.has_active_layout_node() and !contact.is_empty():
+		var layout :Node = Dialogic.Styles.get_layout_node()
 		if chat_histories.has(contact):
 			layout.load_history(chat_histories[current_contact])
 		else:
@@ -49,7 +49,7 @@ func open_conversation(contact:String):
 	save_history()
 	current_contact = contact
 	Dialogic.clear()
-	Dialogic.get_layout_node().set_title(contact)
+	Dialogic.Styles.get_layout_node().set_title(contact)
 	load_history(contact)
 	if !chat_histories.has(current_contact):
 		await get_tree().create_timer(0.5).timeout

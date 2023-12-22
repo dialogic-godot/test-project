@@ -18,6 +18,13 @@ config/icon="res://icon.png"
 [autoload]
 
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
+UnitTest="*res://FakeUnitTests/unit_test_autoload.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
+file_logging/max_log_files=10
+settings/stdout/verbose_stdout=true
 
 [dialogic]
 
@@ -28,7 +35,6 @@ animations/join_default_wait=true
 choices/autofocus_first=true
 choices/delay=0.2
 save/autosave_delay=60.0
-settings/text_speed=0.01
 text/skippable=true
 text/autoadvance_delay=1.0
 text/hide_empty_textbox=true
@@ -44,6 +50,10 @@ variables={
 "Claire": "0",
 "Laurey": "",
 "Otto": ""
+},
+"UnitTests": {
+"Test1": "Some funny value.",
+"Test2": "10"
 }
 }
 event_default_overrides={
@@ -97,7 +107,7 @@ layout/styles={
 }
 }
 }
-layout/default_style="SmallRPG_Style"
+layout/default_style="res://VisualNovel/Assets/UI/VisualNovelStyle.tres"
 text/skippable_delay=0.1
 text/letter_speed=0.01
 text/autoadvance_per_character_delay=0.1
@@ -105,6 +115,39 @@ text/autoadvance_ignored_characters_enabled=false
 text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
 save/encryption_on_exports_only=true
+settings/text_speed=1.0
+layout/style_list=["res://VisualNovel/Assets/UI/VisualNovelStyle.tres", "res://SmallRPG/Assets/TextBubbleStyle.tres", "res://Smartphone/Smartphone_Style.tres", "res://FakeUnitTests/unit_test_style_a.tres", "res://FakeUnitTests/unit_test_style_b.tres"]
+directories/dch_directory={
+"Claire": "res://Smartphone/Characters/Claire.dch",
+"Elina": "res://VisualNovel/Characters/Elina.dch",
+"Laurey": "res://Smartphone/Characters/Laurey.dch",
+"Leon": "res://VisualNovel/Characters/Leon.dch",
+"Otto": "res://Smartphone/Characters/Otto.dch",
+"Player": "res://SmallRPG/Timelines/Player.dch",
+"Smith": "res://SmallRPG/Timelines/Smith.dch",
+"TC1_Simple": "res://FakeUnitTests/TC1_Simple.dch",
+"TC2 Simple2": "res://FakeUnitTests/TC2 Simple2.dch",
+"TC3_BasicPortraits": "res://FakeUnitTests/TC3_BasicPortraits.dch",
+"TC4_BasicPortraits2": "res://FakeUnitTests/TC4_BasicPortraits2.dch",
+"TC5_BasicPortraits3": "res://FakeUnitTests/TC5_BasicPortraits3.dch",
+"TC6_Style": "res://FakeUnitTests/TC6_Style.dch"
+}
+directories/dtl_directory={
+"Claire": "res://Smartphone/Timelines/Claire.dtl",
+"Laurey": "res://Smartphone/Timelines/Laurey.dtl",
+"Otto": "res://Smartphone/Timelines/Otto.dtl",
+"rpg_smith": "res://SmallRPG/Timelines/rpg_smith.dtl",
+"t0_overview": "res://FakeUnitTests/t0_overview.dtl",
+"t1_texts": "res://FakeUnitTests/t1_texts.dtl",
+"t2_characters": "res://FakeUnitTests/t2_characters.dtl",
+"t3_variables": "res://FakeUnitTests/t3_variables.dtl",
+"t4_styles": "res://FakeUnitTests/t4_styles.dtl",
+"t5_various_events": "res://FakeUnitTests/t5_various_events.dtl",
+"vn_beginning": "res://VisualNovel/Timelines/vn_beginning.dtl",
+"vn_chapter1": "res://VisualNovel/Timelines/vn_chapter1.dtl",
+"vn_ending": "res://VisualNovel/Timelines/vn_ending.dtl"
+}
+glossary/glossary_files=["res://FakeUnitTests/unit_test_glossary.tres"]
 
 [display]
 
@@ -114,6 +157,17 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://FakeUnitTests/": "yellow",
+"res://MainMenu/": "orange",
+"res://SmallRPG/": "red",
+"res://Smartphone/": "purple",
+"res://VisualNovel/": "teal",
+"res://addons/": "blue"
+}
 
 [input]
 

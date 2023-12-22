@@ -1,0 +1,92 @@
+setting "text_speed" = 1
+
+[i]This timeline tests all kinds of text events. It will describe the desired effect, followed by trying it.
+
+
+label Effects
+[i]Inserting a variable.
+The variable is: {UnitTests.Test1}.
+
+[i]Choosing a random option of (Option1/ Option2/ A longer option).
+Chosen Option: <Option1/Option2/A longer option>.
+
+[i]Inserting BR (new line) effect.
+Lorem ipsum dolor sit amet, [br]consectetur adipiscing elit. 
+
+[i]A pause of 1 second between two words.
+Lorem [pause=1]ipsum.
+
+
+label SpeedEffect
+[i]A text that is displayed quickly.
+[speed=0.2]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel arcu consectetur lectus congue porta. Praesent ornare leo lorem, non tincidunt risus tincidunt sed. 
+
+[i]A text that is displayed very slowly.
+[speed=3]Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+[i]A text that is displayed instantly.
+[speed=0]Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel arcu consectetur lectus congue porta. Praesent ornare leo lorem, non tincidunt risus tincidunt sed. In hac habitasse platea dictumst. Praesent ut pharetra nunc.
+
+
+label InputAndSplitEffects
+[i]A text that requires input at some point.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.[input] Sed vel arcu consectetur lectus congue porta.
+
+[i]A text that is split into two events.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.[n]Sed vel arcu consectetur lectus congue porta.
+
+[i]A text that is split into two events, but the second one is appended.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.[n+] Sed vel arcu consectetur lectus congue porta.
+
+
+label AutoAdvance
+[i]A text that autoadvances after 1 second.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. [aa=1]
+
+[i]A text that does not autoadance (normal counter test).
+Lorem ipsum dolor sit amet.
+
+[i]A text that autoadvances after 1 second, doesn't allow reveal-skipping, nor manual advance.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. [ns=1]
+
+[i]A text that does not autoadvance (normal counter test).
+Lorem ipsum dolor sit amet.
+
+
+label Characters
+[i]A text said by a character.
+TC1_Simple: Lorem ipsum dolor sit amet.
+
+[i]A text said by a character with a space in their file name.
+"TC2 Simple2": Lorem ipsum dolor sit amet.
+
+[i]A text said by a character that doesn't exist.
+"Nonexistant character": Lorem ipsum dolor sit amet.
+
+[i]Text that contains a :.
+Something\: Something else.
+
+label TypingSoundMoods
+[i]Text said by a character that has a typing sound defined.
+TC1_Simple (SoundMood): I'm saying something that hopefully sounds different.
+
+[i]Text said by a character that has a typing sound defined. Typing sound should change midway through.
+TC1_Simple (SoundMood): I'm saying something that hopefully sounds different.[mood=Mood2][br] I'm saying something that hopefully sounds different again.
+
+label Glossary 
+[i]Text that contains the \Entry1 glossary.
+Lorem ipsum dolor Entry1 sit amet.
+
+[i]Text that contains the \Entry1 glossary but as part of a word.
+Lorem ipsum dolor Sentry1 sit amet.
+
+[i]Text that contains the \entry_one alternative of \Entry1 glossary.
+Lorem ipsum dolor entry_one sit amet.
+
+[i]Text that contains some alternatives of \Entry1 glossary in different forms of capitalization (all should count).
+Lorem EN1 ipsum entry1 dolor entry_one sit amet.
+
+[i]Text that contains the \entry2 and it's alternatives (not all should count).
+Entry2 entry2 en2 EN2 entry_TWO entry_two entry_2 Entry_2
+
+jump t0_overview/

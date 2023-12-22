@@ -1,0 +1,15 @@
+This timeline tests various events that don't deserver their own timeline.
+It will describe the desired effect, then do it.
+
+# WAIT EVENT
+[i]Wait event: Will wait for 1 second, hiding the textbox.
+[wait time="1"]
+
+[i]Wait event: Will wait for 1 second, not hiding the textbox.
+[wait time="1" hide_text="false"]
+
+
+# WAIT INPUT EVENT
+[i]Wait input: Will wait for a click.
+[wait_input]
+
