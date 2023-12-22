@@ -6,12 +6,6 @@ The version of Dialogic should be the one in https://github.com/coppolaemilio/di
 
 Whenever a Dialogic release is made a tag should be created on this repository to know that up to this point every timeline and resource was working properly.
 
-![showcase_1.png](./MainMenu/Assets/showcase_1.png)
+<img src="./MainMenu/Assets/showcase_2.png" width="45%"></img> <img src="./MainMenu/Assets/showcase_3.png" width="45%"></img> <img src="./MainMenu/Assets/showcase_4.png" width="45%"></img> <img src="./MainMenu/Assets/showcase_0.png" width="45%"></img> 
 
-![showcase_2.png](./MainMenu/Assets/showcase_2.png)
-
-![showcase_3.png](./MainMenu/Assets/showcase_3.png)
-
-![showcase_0.png](./MainMenu/Assets/showcase_0.png)
-
-![showcase_4.png](./MainMenu/Assets/showcase_4.png)
+![image](./MainMenu/Assets/showcase_1.png)
