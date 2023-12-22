@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://VisualNovel/Menu/visual_novel_main.gd" id="1_4g5d8"]
 [ext_resource type="Script" path="res://VisualNovel/Menu/MainMenu.gd" id="2_2x8iy"]
-[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_62d8m"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_62d8m"]
 [ext_resource type="Texture2D" uid="uid://b413ictwywftp" path="res://MainMenu/Dialogic Logo.svg" id="3_pedax"]
 [ext_resource type="Script" path="res://VisualNovel/Menu/LoadMenu.gd" id="3_wurwl"]
-[ext_resource type="FontFile" uid="uid://cqh8tow5n20r4" path="res://Assets/Fonts/Roboto/Roboto-Italic.ttf" id="5_4y8dd"]
+[ext_resource type="FontFile" uid="uid://cqh8tow5n20r4" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Italic.ttf" id="5_4y8dd"]
 [ext_resource type="Texture2D" uid="uid://c4pnmpmep2xwg" path="res://icon.png" id="5_muuk4"]
 [ext_resource type="Script" path="res://VisualNovel/Menu/IngameUI.gd" id="5_wmmq1"]
 [ext_resource type="Texture2D" uid="uid://j2xovxi836t8" path="res://VisualNovel/Assets/UI/save.png" id="6_230wf"]
@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csc6c3v4cnfh3" path="res://VisualNovel/Assets/UI/menuGrid.png" id="10_8n3tn"]
 [ext_resource type="Texture2D" uid="uid://r7hcvplmu12d" path="res://VisualNovel/Assets/UI/exit.png" id="11_7ufed"]
 [ext_resource type="Texture2D" uid="uid://digng6kq2lkxj" path="res://VisualNovel/Assets/UI/cross.png" id="12_yiqe1"]
-[ext_resource type="FontFile" uid="uid://kpjdmncdwo8n" path="res://Assets/Fonts/Roboto/Roboto-Bold.ttf" id="18_tvmy3"]
+[ext_resource type="FontFile" uid="uid://kpjdmncdwo8n" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Bold.ttf" id="18_tvmy3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k38t"]
 content_margin_left = 10.0

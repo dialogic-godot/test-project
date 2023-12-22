@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dk2343crqx1nf"]
 
 [ext_resource type="Script" path="res://Smartphone/phone_example.gd" id="1_3og1r"]
-[ext_resource type="FontFile" uid="uid://c05jd1fu67en" path="res://Assets/Fonts/Roboto/Roboto-MediumItalic.ttf" id="1_jt70c"]
+[ext_resource type="FontFile" uid="uid://c05jd1fu67en" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-MediumItalic.ttf" id="1_jt70c"]
 [ext_resource type="PackedScene" uid="uid://brtaff0j0wfm6" path="res://Smartphone/contact_button.tscn" id="3_r2c8r"]
 [ext_resource type="Texture2D" uid="uid://bsb3pyc2vy0bt" path="res://Smartphone/Assets/elf.png" id="4_drqya"]
 [ext_resource type="Texture2D" uid="uid://c6h63a0ufpvvh" path="res://Smartphone/Assets/dwarf.png" id="5_l3tcf"]

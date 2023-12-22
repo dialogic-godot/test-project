@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqw0xfdhc4nc4"]
 
-[ext_resource type="Texture2D" uid="uid://bp18h0ibngt7s" path="res://Assets/RPG_Preview.PNG" id="1_8asru"]
+[ext_resource type="Texture2D" uid="uid://bp18h0ibngt7s" path="res://MainMenu/Assets/RPG_Preview.PNG" id="1_8asru"]
 [ext_resource type="Script" path="res://Smartphone/image_message_panel.gd" id="1_kupgr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwfob"]

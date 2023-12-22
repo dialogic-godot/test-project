@@ -58,3 +58,4 @@ name = "VisualNovel_Style"
 base_scene = ExtResource("1_w6tci")
 base_overrides = {}
 layers = Array[ExtResource("3_hr6kc")]([SubResource("Resource_lvo4e"), SubResource("Resource_jqwnp"), SubResource("Resource_7xc82"), SubResource("Resource_nqp88"), SubResource("Resource_v8jv4"), SubResource("Resource_32p1u"), SubResource("Resource_627n2"), SubResource("Resource_ix6oe")])
+metadata/_latest_layer = -1

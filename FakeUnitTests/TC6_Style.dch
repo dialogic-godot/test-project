@@ -6,11 +6,11 @@
 "custom_info": {
 "sound_mood_default": "",
 "sound_moods": {},
-"style": ""
+"style": "UnitTestStyle_B"
 },
 "default_portrait": "",
 "description": "",
-"display_name": "TC2 Simple2",
+"display_name": "TC6_Style",
 "mirror": false,
 "nicknames": [""],
 "offset": Vector2(0, 0),

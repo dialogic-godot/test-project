@@ -1,18 +1,61 @@
 {
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
+"_translation_id": "",
 "color": Color(1, 1, 1, 1),
 "custom_info": {
 "sound_mood_default": "",
-"sound_moods": {},
+"sound_moods": {
+"Mood1": {
+"mode": 0,
+"name": "Mood1",
+"pitch_base": 0.5,
+"pitch_variance": 0.3,
+"skip_characters": 3.0,
+"sound_path": "res://FakeUnitTests/Assets/TypingSounds",
+"volume_base": 0.0,
+"volume_variance": 0.0
+},
+"Mood2": {
+"mode": 1,
+"name": "Mood2",
+"pitch_base": 1.4,
+"pitch_variance": 0.4,
+"skip_characters": 4.0,
+"sound_path": "res://FakeUnitTests/Assets/TypingSounds",
+"volume_base": 3.0,
+"volume_variance": 0.4
+}
+},
 "style": ""
 },
-"default_portrait": "",
+"default_portrait": "Default",
 "description": "",
 "display_name": "SimpleCharacter",
 "mirror": false,
 "nicknames": [""],
 "offset": Vector2(0, 0),
-"portraits": {},
+"portraits": {
+"Default": {
+"export_overrides": {
+"image": "\"\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": "",
+"sound_mood": ""
+},
+"SoundMood": {
+"export_overrides": {
+"image": ""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": "",
+"sound_mood": "Mood1"
+}
+},
 "scale": 1.0
 }

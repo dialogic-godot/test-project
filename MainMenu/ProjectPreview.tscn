@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://btq2j5wf1e07n"]
 
 [ext_resource type="Script" path="res://MainMenu/ProjectPreview.gd" id="1_o2s7t"]
-[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_sj0gr"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_sj0gr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf5av"]
 bg_color = Color(1, 1, 1, 1)

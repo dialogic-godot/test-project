@@ -22,3 +22,4 @@ name = "SmallRPG_Style"
 base_scene = ExtResource("1_ex7y2")
 base_overrides = {}
 layers = Array[ExtResource("3_r5hp7")]([SubResource("Resource_08b7t"), SubResource("Resource_auogm")])
+metadata/_latest_layer = -1
