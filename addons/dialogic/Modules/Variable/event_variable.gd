@@ -45,7 +45,7 @@ func _execute() -> void:
 				0: the_value = dialogic.VAR.get_variable('"'+value+'"')
 				2: the_value = dialogic.VAR.get_variable('{'+value+'}')
 				1,3,4: the_value = dialogic.VAR.get_variable(value)
-
+			
 			if operation != Operations.SET and str(orig).is_valid_float() and str(the_value).is_valid_float():
 				orig = float(orig)
 				the_value = float(the_value)
@@ -66,7 +66,7 @@ func _execute() -> void:
 				printerr("Dialogic: Set Variable event failed because one value wasn't a float! [", orig, ", ",the_value,"]")
 		else:
 			printerr("Dialogic: Set Variable event failed because one value wasn't set!")
-
+			
 	finish()
 
 
@@ -100,7 +100,7 @@ func to_text() -> String:
 				string+= " *= "
 			Operations.DIVIDE:
 				string+= " /= "
-
+		
 		value = str(value)
 		match _value_type:
 			0: # String
@@ -111,7 +111,7 @@ func to_text() -> String:
 				string += '{'+value+'}'
 			4:
 				string += 'range('+str(random_min)+','+str(random_max)+').pick_random()'
-
+	
 	return string
 
 
@@ -133,7 +133,7 @@ func from_text(string:String) -> void:
 			operation = Operations.MULTIPLY
 		'/=':
 			operation = Operations.DIVIDE
-
+	
 	if result.get_string('value'):
 		value = result.get_string('value').strip_edges()
 		if value.begins_with('"') and value.ends_with('"') and value.count('"')-value.count('\\"') == 2:
@@ -166,8 +166,8 @@ func is_valid_event(string:String) -> bool:
 
 func build_event_editor():
 	add_header_edit('name', ValueType.COMPLEX_PICKER, {
-			'left_text'		: 'Set',
-			'suggestions_func' 	: get_var_suggestions,
+			'left_text'		: 'Set',  
+			'suggestions_func' 	: get_var_suggestions, 
 			'icon' 					: load("res://addons/dialogic/Editor/Images/Pieces/variable.svg"),
 			'placeholder'			:'Select Variable'}
 			)
@@ -219,12 +219,12 @@ func build_event_editor():
 				'icon': ["RandomNumberGenerator", "EditorIcons"],
 				'value': 4
 			}],
-		'symbol_only':true},
+		'symbol_only':true}, 
 		'!name.is_empty()')
 	add_header_edit('value', ValueType.SINGLELINE_TEXT, {}, '!name.is_empty() and (_value_type == 0 or _value_type == 3) ')
 	add_header_edit('value', ValueType.FLOAT, {}, '!name.is_empty()  and _value_type == 1')
-	add_header_edit('value', ValueType.COMPLEX_PICKER,
-			{'suggestions_func' : get_value_suggestions, 'placeholder':'Select Variable'},
+	add_header_edit('value', ValueType.COMPLEX_PICKER, 
+			{'suggestions_func' : get_value_suggestions, 'placeholder':'Select Variable'}, 
 			'!name.is_empty() and _value_type == 2')
 	add_header_label('a number between', '_value_type == 4')
 	add_header_edit('random_min', ValueType.INTEGER, {'right_text':'and'}, '!name.is_empty() and  _value_type == 4')
@@ -234,7 +234,7 @@ func build_event_editor():
 
 func get_var_suggestions(filter:String) -> Dictionary:
 	var suggestions := {}
-
+	
 	if filter:
 		suggestions[filter] = {'value':filter, 'editor_icon':["GuiScrollArrowRight", "EditorIcons"]}
 	var vars: Dictionary = ProjectSettings.get_setting('dialogic/variables', {})
@@ -245,7 +245,7 @@ func get_var_suggestions(filter:String) -> Dictionary:
 
 func get_value_suggestions(filter:String) -> Dictionary:
 	var suggestions := {}
-
+	
 	var vars: Dictionary = ProjectSettings.get_setting('dialogic/variables', {})
 	for var_path in DialogicUtil.list_variables(vars):
 		suggestions[var_path] = {'value':var_path, 'icon':load("res://addons/dialogic/Editor/Images/Pieces/variable.svg")}
@@ -278,7 +278,7 @@ func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:Str
 
 func _get_start_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit) -> void:
 	TextNode.add_code_completion_option(CodeEdit.KIND_PLAIN_TEXT, 'set', 'set ', event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.5))
-
+	
 
 #################### SYNTAX HIGHLIGHTING #######################################
 ################################################################################

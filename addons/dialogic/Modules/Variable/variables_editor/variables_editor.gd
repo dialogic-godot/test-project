@@ -23,7 +23,7 @@ func _open(argument:Variant = null):
 	%ReferenceInfo.hide()
 	%MainVariableGroup.update()
 	%MainVariableGroup.variables_editor = self
-
+	
 	%MainVariableGroup.load_data('Variables', ProjectSettings.get_setting('dialogic/variables', {}))
 
 

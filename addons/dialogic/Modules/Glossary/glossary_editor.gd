@@ -79,6 +79,7 @@ func _on_GlossaryList_item_selected(idx:int) -> void:
 		var entry_idx := 0
 		for entry in current_glossary.entries:
 			%EntryList.add_item(entry, get_theme_icon("Breakpoint", "EditorIcons"))
+			%EntryList.set_item_metadata(entry_idx, entry)
 			%EntryList.set_item_icon_modulate(entry_idx, current_glossary.entries[entry].get('color', %DefaultColor.color))
 			entry_idx += 1
 
@@ -124,12 +125,12 @@ func _on_delete_glossary_file_pressed() -> void:
 ##					ENTRY LIST
 ################################################################################
 func _on_EntryList_item_selected(idx:int) -> void:
-	current_entry_name = %EntryList.get_item_text(idx)
-	var entry_info = current_glossary.entries[current_entry_name]
+	current_entry_name = %EntryList.get_item_metadata(idx)
+	var entry_info: Dictionary = current_glossary.entries[current_entry_name]
 	%EntrySettings.show()
 	%EntryName.text = current_entry_name
 	%EntryCaseSensitive.button_pressed = entry_info.get('case_sensitive', %DefaultCaseSensitive.button_pressed)
-	var alts = ""
+	var alts := ""
 	for i in entry_info.get('alternatives', []):
 		alts += i+", "
 	%EntryAlternatives.text = alts
@@ -155,16 +156,18 @@ func _on_add_glossary_entry_pressed() -> void:
 	current_glossary.entries[new_name] = {}
 	ResourceSaver.save(current_glossary)
 	%EntryList.add_item(new_name, get_theme_icon("Breakpoint", "EditorIcons"))
+	%EntryList.set_item_metadata(%EntryList.item_count-1, new_name)
 	%EntryList.set_item_icon_modulate(%EntryList.item_count-1, %DefaultColor.color)
 	%EntryList.select(%EntryList.item_count-1)
 	_on_EntryList_item_selected(%EntryList.item_count-1)
 	%EntryList.ensure_current_is_visible()
 	%EntryName.grab_focus()
 
+
 func _on_delete_glossary_entry_pressed() -> void:
 	if len(%EntryList.get_selected_items()) != 0:
 		if current_glossary:
-			current_glossary.entries.erase(%EntryList.get_item_text(
+			current_glossary.entries.erase(%EntryList.get_item_metadata(
 			%EntryList.get_selected_items()[0]))
 		%EntryList.remove_item(%EntryList.get_selected_items()[0])
 
@@ -188,15 +191,19 @@ func _on_entry_name_text_changed(new_text:String) -> void:
 		if new_text.strip_edges().is_empty() or new_text.strip_edges() in current_glossary.entries.keys():
 			%EntryList.set_item_custom_bg_color(%EntryList.get_selected_items()[0],
 					get_theme_color("warning_color", "Editor").darkened(0.8))
-			%EntryList.set_item_text(%EntryList.get_selected_items()[0], new_text.strip_edges() + " (invalid name)")
+			if new_text.strip_edges().is_empty():
+				%EntryList.set_item_text(%EntryList.get_selected_items()[0], new_text.strip_edges() + " (invalid empty name)")
+			else:
+				%EntryList.set_item_text(%EntryList.get_selected_items()[0], new_text.strip_edges() + " (invalid duplicate name)")
 			return
 		else:
 			%EntryList.set_item_custom_bg_color(%EntryList.get_selected_items()[0],
 				Color.TRANSPARENT)
-		var info :Dictionary = current_glossary.entries[current_entry_name]
+		var info: Dictionary = current_glossary.entries[current_entry_name]
 		current_glossary.entries.erase(current_entry_name)
 		current_glossary.entries[new_text.strip_edges()] = info
 		%EntryList.set_item_text(%EntryList.get_selected_items()[0], new_text.strip_edges())
+		%EntryList.set_item_metadata(%EntryList.get_selected_items()[0], new_text.strip_edges())
 		current_entry_name = new_text.strip_edges()
 
 	ResourceSaver.save(current_glossary)

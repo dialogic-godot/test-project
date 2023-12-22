@@ -38,7 +38,7 @@ func load_game_state(load_flag:=LoadFlags.FULL_LOAD):
 func update_background(scene:String = '', argument:String = '', fade_time:float = 0.0, transition_path:=default_transition, force:bool = false) -> void:
 	var background_holder: DialogicNode_BackgroundHolder
 	if dialogic.has_subsystem('Styles'):
-		background_holder = Dialogic.Styles.get_first_node_in_layout('dialogic_background_holders')
+		background_holder = dialogic.Styles.get_first_node_in_layout('dialogic_background_holders')
 	else:
 		background_holder = get_tree().get_first_node_in_group('dialogic_background_holders')
 	if background_holder == null:
@@ -100,6 +100,8 @@ func update_background(scene:String = '', argument:String = '', fade_time:float 
 		trans_node.next_texture = new_viewport.get_child(0).get_texture()
 		new_viewport.get_meta('node')._update_background(argument, fade_time)
 		new_viewport.get_meta('node')._custom_fade_in(fade_time)
+	else:
+		background_holder.remove_meta('current_viewport')
 
 	add_child(trans_node)
 	trans_node._fade()
@@ -113,7 +115,7 @@ func add_background_node(scene:PackedScene, parent:DialogicNode_BackgroundHolder
 	var viewport := SubViewport.new()
 	var b_scene := scene.instantiate()
 	if not b_scene is DialogicBackground:
-		printerr("[Dialogic] Given background scene was not of type DialogicBackground!")
+		printerr("[Dialogic] Given background scene was not of type DialogicBackground! Make sure the scene has a script that extends DialogicBackground.")
 		v_con.queue_free()
 		viewport.queue_free()
 		b_scene.queue_free()
@@ -140,6 +142,6 @@ func add_background_node(scene:PackedScene, parent:DialogicNode_BackgroundHolder
 
 
 func has_background() -> bool:
-	return !dialogic.current_state_info['background_scene'].is_empty() or !dialogic.current_state_info['background_argument'].is_empty()
+	return !dialogic.current_state_info.get('background_scene', '').is_empty() or !dialogic.current_state_info.get('background_argument','').is_empty()
 
 
