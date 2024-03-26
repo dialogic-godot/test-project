@@ -24,7 +24,7 @@ var allow_empty : bool = false
 ################################################################################
 
 func _execute() -> void:
-	dialogic.Input.auto_skip.enabled = false
+	dialogic.Inputs.auto_skip.enabled = false
 	dialogic.current_state = DialogicGameHandler.States.WAITING
 	dialogic.TextInput.show_text_input(text, default, placeholder, allow_empty)
 	dialogic.TextInput.input_confirmed.connect(_on_DialogicTextInput_input_confirmed, CONNECT_ONE_SHOT)
@@ -76,7 +76,7 @@ func get_shortcode_parameters() -> Dictionary:
 
 func build_event_editor() -> void:
 	add_header_label('Show an input and store it in')
-	add_header_edit('variable', ValueType.COMPLEX_PICKER,
+	add_header_edit('variable', ValueType.DYNAMIC_OPTIONS,
 			{'suggestions_func'	: get_var_suggestions,
 			'icon'		 : load("res://addons/dialogic/Editor/Images/Pieces/variable.svg"),
 			'placeholder':'Select Variable'})
@@ -93,6 +93,6 @@ func get_var_suggestions(filter:String="") -> Dictionary:
 			'value'			: filter,
 			'editor_icon'	: ["GuiScrollArrowRight", "EditorIcons"]}
 	var vars :Dictionary = ProjectSettings.get_setting('dialogic/variables', {})
-	for var_path in DialogicUtil.list_variables(vars):
+	for var_path in DialogicUtil.list_variables(vars, "", DialogicUtil.VarTypes.STRING):
 		suggestions[var_path] = {'value':var_path, 'icon':load("res://addons/dialogic/Editor/Images/Pieces/variable.svg")}
 	return suggestions
