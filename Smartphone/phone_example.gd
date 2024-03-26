@@ -90,6 +90,6 @@ func fade(fade_in:= false):
 
 func _on_quit_pressed():
 	exit()
-	Dialogic.get_layout_node().queue_free()
+	Dialogic.Styles.get_layout_node().queue_free()
 	await fade()
 	get_tree().change_scene_to_file("res://MainMenu/Menu.tscn")
