@@ -53,7 +53,7 @@ func _on_menu_button_pressed():
 func _on_with_saving_button_pressed():
 	Dialogic.Save.save(Dialogic.Save.get_latest_slot(), false, Dialogic.Save.ThumbnailMode.STORE_ONLY)
 	Dialogic.clear()
-	Dialogic.get_layout_node().queue_free()
+	Dialogic.Styles.get_layout_node().queue_free()
 	$WarningScreen.hide()
 	hide()
 	get_tree().paused = false
@@ -62,7 +62,7 @@ func _on_with_saving_button_pressed():
 
 func _on_without_saving_button_pressed():
 	Dialogic.clear()
-	Dialogic.get_layout_node().queue_free()
+	Dialogic.Styles.get_layout_node().queue_free()
 	$WarningScreen.hide()
 	hide()
 	get_tree().paused = false
