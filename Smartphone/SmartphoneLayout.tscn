@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="1_lblyi"]
 [ext_resource type="Script" path="res://Smartphone/SmartphoneLayout.gd" id="1_qguno"]
-[ext_resource type="Texture2D" uid="uid://byaate5oq35el" path="res://Smartphone/Assets/GalaxyNote3.png" id="2_nhqfc"]
+[ext_resource type="Texture2D" uid="uid://2qcib4nigr0o" path="res://Smartphone/Assets/GalaxyNote3.png" id="2_nhqfc"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Choice/node_choice_button.gd" id="4_jhrew"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3p03"]

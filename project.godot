@@ -17,8 +17,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
-UnitTest="*res://FakeUnitTests/unit_test_autoload.gd"
+Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [debug]
 
