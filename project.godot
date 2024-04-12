@@ -132,6 +132,7 @@ directories/dch_directory={
 "TC6_Style": "res://FakeUnitTests/TC6_Style.dch"
 }
 directories/dtl_directory={
+"Chapter 10": "res://Chapter 10.dtl",
 "Claire": "res://Smartphone/Timelines/Claire.dtl",
 "Laurey": "res://Smartphone/Timelines/Laurey.dtl",
 "Otto": "res://Smartphone/Timelines/Otto.dtl",
