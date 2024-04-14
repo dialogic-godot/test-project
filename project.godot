@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+UnitTest="*res://FakeUnitTests/unit_test_autoload.gd"
 
 [debug]
 
@@ -43,7 +44,7 @@ layout/mode=0
 text/autocolor_names=false
 variables={
 "RPG_Example": {
-"NewVariable": ""
+"smiths_key": false
 },
 "Smartphone": {
 "Claire": "0",
@@ -72,7 +73,7 @@ event_default_overrides={
 "hide_textbox": false
 }
 }
-translation/enabled=true
+translation/enabled=false
 translation/original_locale="en"
 translation/file_mode=1
 translation/translation_folder=""
@@ -132,6 +133,7 @@ directories/dch_directory={
 "TC6_Style": "res://FakeUnitTests/TC6_Style.dch"
 }
 directories/dtl_directory={
+"Chapter 10": "res://Chapter 10.dtl",
 "Claire": "res://Smartphone/Timelines/Claire.dtl",
 "Laurey": "res://Smartphone/Timelines/Laurey.dtl",
 "Otto": "res://Smartphone/Timelines/Otto.dtl",
@@ -147,6 +149,11 @@ directories/dtl_directory={
 "vn_ending": "res://VisualNovel/Timelines/vn_ending.dtl"
 }
 glossary/glossary_files=["res://FakeUnitTests/unit_test_glossary.tres"]
+translation/save_mode=0
+translation/add_separator=false
+extensions_folder="res://addons/dialogic_additions"
+animations/cross_fade_default_length=0.5
+animations/cross_fade_default_wait=true
 
 [display]
 

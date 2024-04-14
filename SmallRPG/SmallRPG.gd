@@ -6,6 +6,7 @@ var state := States.MOVE
 
 
 func _ready():
+	load("res://SmallRPG/Assets/TextBubbleStyle.tres").prepare()
 	fade(true)
 
 

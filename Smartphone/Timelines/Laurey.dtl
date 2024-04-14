@@ -17,7 +17,7 @@ Player: I can send you a picture.
 [wait_input]
 Laurey: wow
 Laurey: Looks strange indeed
-Laurey: I can took at it
+Laurey: I can take a look at it
 Laurey: but no promises
 Player: thx
 label point1
@@ -26,4 +26,5 @@ Laurey: So...
 Laurey: I think I found something.
 Player: Wow.
 Player: What is it?
-Laurey: I think this might be a mix of 
+Laurey: I think this might be from a secret society. 
+Player: [i][b][To be continued]

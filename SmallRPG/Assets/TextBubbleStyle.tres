@@ -14,7 +14,9 @@ overrides = {}
 [sub_resource type="Resource" id="Resource_auogm"]
 script = ExtResource("3_r5hp7")
 scene = ExtResource("4_42t0a")
-overrides = {}
+overrides = {
+"box_padding": "Vector2(5, 5)"
+}
 
 [resource]
 script = ExtResource("5_q8b32")
@@ -22,4 +24,4 @@ name = "SmallRPG_Style"
 base_scene = ExtResource("1_ex7y2")
 base_overrides = {}
 layers = Array[ExtResource("3_r5hp7")]([SubResource("Resource_08b7t"), SubResource("Resource_auogm")])
-metadata/_latest_layer = -1
+metadata/_latest_layer = 1
