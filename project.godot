@@ -43,7 +43,7 @@ layout/mode=0
 text/autocolor_names=false
 variables={
 "RPG_Example": {
-"NewVariable": ""
+"smiths_key": false
 },
 "Smartphone": {
 "Claire": "0",

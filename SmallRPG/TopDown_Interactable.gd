@@ -3,13 +3,14 @@ extends Area2D
 @export var timeline : DialogicTimeline
 @export var next_label := ""
 @export var indicator_color := Color.SANDY_BROWN
-@export var character :DialogicCharacter = null
+@export var character: DialogicCharacter = null
 
 var _player :CharacterBody2D = null
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Dialogic.preload_timeline(timeline)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 

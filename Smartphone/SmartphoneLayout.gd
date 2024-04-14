@@ -40,7 +40,7 @@ func _on_dialog_text_started_revealing_text():
 
 	var time := Time.get_datetime_dict_from_system()
 	%DialogText.get_node('Time').text = str(time.hour)+":"+str(time.minute)
-	var speaker :DialogicCharacter = Dialogic.Text.get_current_speaker()
+	var speaker: DialogicCharacter = Dialogic.Text.get_current_speaker()
 	if speaker.display_name == "Player":
 		%DialogText.size_flags_horizontal = Control.SIZE_SHRINK_END
 		%DialogText.get_node('Time').hide()
@@ -51,7 +51,6 @@ func _on_dialog_text_started_revealing_text():
 
 	if last_text.is_empty():
 		return
-
 
 	add_message(last_text, last_text_size, last_text_speaker.get_character_name(), last_text_time)
 
@@ -160,17 +159,19 @@ func get_history() -> Dictionary:
 	return history
 
 
-func set_title(title:String) -> void:
+func set_title(title: String) -> void:
 	%Title.text = title
 
-func load_history(history) -> void:
+
+func load_history(history: Dictionary) -> void:
 	clear()
 	for message in history.previous_messages:
 		if message[0].begins_with('res://'):
 			add_image_message(load(message[0]), message[1], message[2], message[3])
 		else:
 			add_message(message[0], message[1], message[2], message[3])
-	%MessageList.get_parent().ensure_control_visible(%MessageList.get_child(-3))
+	if %MessageList.get_child_count() > 2:
+		%MessageList.get_parent().ensure_control_visible(%MessageList.get_child(-3))
 	last_text = ""
 
 
