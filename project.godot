@@ -151,6 +151,9 @@ directories/dtl_directory={
 glossary/glossary_files=["res://FakeUnitTests/unit_test_glossary.tres"]
 translation/save_mode=0
 translation/add_separator=false
+extensions_folder="res://addons/dialogic_additions"
+animations/cross_fade_default_length=0.5
+animations/cross_fade_default_wait=true
 
 [display]
 
