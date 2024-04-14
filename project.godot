@@ -18,6 +18,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+UnitTest="*res://FakeUnitTests/unit_test_autoload.gd"
 
 [debug]
 
@@ -72,7 +73,7 @@ event_default_overrides={
 "hide_textbox": false
 }
 }
-translation/enabled=true
+translation/enabled=false
 translation/original_locale="en"
 translation/file_mode=1
 translation/translation_folder=""
@@ -148,6 +149,8 @@ directories/dtl_directory={
 "vn_ending": "res://VisualNovel/Timelines/vn_ending.dtl"
 }
 glossary/glossary_files=["res://FakeUnitTests/unit_test_glossary.tres"]
+translation/save_mode=0
+translation/add_separator=false
 
 [display]
 

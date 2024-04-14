@@ -7,7 +7,7 @@ join TC3_BasicPortraits 1
 [i]Move the character to position 3, instantly.
 update TC3_BasicPortraits 3 [move_time="0"]
 
-[i]Move the character to position 2 in one second.
+[i]Move the character to position 2 in two seconds.
 update TC3_BasicPortraits 2 [move_time="2"]
 [wait time="2"]
 
