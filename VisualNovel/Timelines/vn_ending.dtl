@@ -3,3 +3,4 @@
 leave --All--
 [i]This is the end of the dialogic example visual novel. \
 Thank you for playing.
+[signal arg="end_game"]

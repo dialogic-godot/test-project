@@ -2,6 +2,7 @@ extends Control
 
 
 func _ready() -> void:
+	Dialogic.signal_event.connect(_on_dialogic_signal_event)
 	open()
 
 
@@ -18,10 +19,13 @@ func open():
 	%LoadMenu.hide()
 
 
-## If the timeline actually ends on it's own, that can only mean that the player
-## reached the end of the game. Thus we remove the "last save" entry, so the
-## Continue button is hidden again.
-func _on_dialogic_end() -> void:
+func _on_dialogic_signal_event(arg:String) -> void:
+	match arg:
+		"end_game":
+			game_ended()
+
+
+func game_ended() -> void:
 	Dialogic.Save.set_latest_slot('')
 	open()
 
@@ -36,7 +40,6 @@ func _on_new_game_pressed():
 	await get_parent().fade()
 	Dialogic.Styles.load_style('VisualNovel_Style')
 	Dialogic.start("res://VisualNovel/Timelines/vn_beginning.dtl")
-	Dialogic.timeline_ended.connect(_on_dialogic_end)
 	hide()
 	%IngameUI.enter_game()
 
@@ -53,8 +56,6 @@ func load_slot(slot_name:String) -> void:
 	await get_parent().fade()
 	Dialogic.Styles.load_style('VisualNovel_Style')
 	Dialogic.Save.load(slot_name)
-	if not Dialogic.timeline_ended.is_connected(_on_dialogic_end):
-		Dialogic.timeline_ended.connect(_on_dialogic_end)
 	hide()
 	%IngameUI.enter_game()
 

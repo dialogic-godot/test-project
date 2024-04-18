@@ -3,7 +3,6 @@ setting "text_speed" = 1
 [background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Interior 4.png" fade="1.0"]
 join Leon 3
 Leon: Wow, what a day. Feels insane to think it hasn't been more then 12 hours since everything began.
-[signal arg="crazy"]
 Leon (Positive/scoff): Only 12 hours and I already want back. [pause]But that won't happen.
 Leon (Basic/default): Let's see how this will end then.
 

@@ -21,5 +21,3 @@ func _get_covered_rect() -> Rect2:
 func _set_mirror(mirrored:bool) -> void:
 	$Portrait.flip_h = mirrored
 
-func crazy():
-	print("LOLOLOLOl")
