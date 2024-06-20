@@ -30,7 +30,7 @@ label choice1
 - /2 (if Test2 > 50) [if {UnitTests.Test2} > 50] [else="disable"]
 	set {UnitTests.Test2} /= 2.0
 
-- *1.5 (if Test2 < 100 and Test2 > 40) [if {UnitTests.Test2} > 40 and {UnitTests.Test2} < 100] [else="disable"]
+- *1.5 (if 40 < Test2 < 100) [if {UnitTests.Test2} > 40 and {UnitTests.Test2} < 100] [else="disable"]
 	set {UnitTests.Test2} *= 1.5
 
 - Secret Reward! [if {UnitTests.Test2} == 53.75]
