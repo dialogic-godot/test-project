@@ -131,11 +131,11 @@ text = "Advance Delay:"
 
 [node name="HintTooltip4" parent="VBoxContainer/VBox/Skippable/HBoxContainer3" instance=ExtResource("3_s7xhj")]
 layout_mode = 2
-tooltip_text = "Delay before you can advance (if the text finishes revealing on it's own). 
+tooltip_text = "Delay before you can advance (if the text finishes revealing on its own). 
 
 This is used to prevent players from advancing when they actually wanted to skip the revealing, but did so very shortly after the text was already fully revealed."
 texture = SubResource("ImageTexture_3xcp4")
-hint_text = "Delay before you can advance (only if the text finishes revealing on it's own). 
+hint_text = "Delay before you can advance (only if the text finishes revealing on its own). 
 
 This is used to prevent players from advancing when they actually wanted to skip the revealing, but did so very shortly after the text was already fully revealed."
 
@@ -361,20 +361,20 @@ layout_mode = 2
 tooltip_text = "Auto-Skip is the concept of automatically skipping Timeline Events to the next unread Text Event or Event demanding user inputs (e.g. Choice, Wait Input, and Text Input).
 
 You can enable Auto-Skip from code via:
-Dialogic.Inputsauto_skip.enabled = true
+Dialogic.Inputs.auto_skip.enabled = true
 
 By default, Auto-Skip will cancel on user input.
 You can disable this by calling:
-Dialogic.Inputsauto_skip.disable_on_user_input = false"
+Dialogic.Inputs.auto_skip.disable_on_user_input = false"
 texture = SubResource("ImageTexture_3xcp4")
 hint_text = "Auto-Skip is the concept of automatically skipping Timeline Events to the next unread Text Event or Event demanding user inputs (e.g. Choice, Wait Input, and Text Input).
 
 You can enable Auto-Skip from code via:
-Dialogic.Inputsauto_skip.enabled = true
+Dialogic.Inputs.auto_skip.enabled = true
 
 By default, Auto-Skip will cancel on user input.
 You can disable this by calling:
-Dialogic.Inputsauto_skip.disable_on_user_input = false"
+Dialogic.Inputs.auto_skip.disable_on_user_input = false"
 
 [node name="AutoskipSettings" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
