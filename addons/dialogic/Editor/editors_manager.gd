@@ -15,7 +15,7 @@ signal editor_changed(previous, current)
 
 var reference_manager: Node:
 	get:
-		return get_node("../../ReferenceManager")
+		return get_node("../ReferenceManager")
 
 ## Information on supported resource extensions and registered editors
 var current_editor: DialogicEditor = null
@@ -56,7 +56,7 @@ func _ready() -> void:
 
 	DialogicResourceUtil.update()
 
-	await get_parent().get_parent().ready
+	await get_parent().ready
 	await get_tree().process_frame
 
 	load_saved_state()
@@ -65,7 +65,7 @@ func _ready() -> void:
 
 	find_parent('EditorView').plugin_reference.get_editor_interface().get_file_system_dock().files_moved.connect(_on_file_moved)
 	find_parent('EditorView').plugin_reference.get_editor_interface().get_file_system_dock().file_removed.connect(_on_file_removed)
-	
+
 	hsplit.set("theme_override_constants/separation", get_theme_constant("base_margin", "Editor") * DialogicUtil.get_editor_scale())
 
 
@@ -209,7 +209,8 @@ func _on_add_resource_dialog_accepted(path:String, callable:Callable) -> void:
 
 ## Called by the plugin.gd script on CTRL+S or Debug Game start
 func save_current_resource() -> void:
-	current_editor._save()
+	if current_editor:
+		current_editor._save()
 
 
 ## Change the resource state
@@ -279,5 +280,5 @@ func get_current_editor() -> DialogicEditor:
 	return current_editor
 
 
-func _exit_tree():
+func _exit_tree() -> void:
 	DialogicUtil.set_editor_setting('last_resources', used_resources_cache)
