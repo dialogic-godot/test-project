@@ -28,6 +28,7 @@ var _initialized := false
 ################## TIMELINE EVENT MANAGEMENT ###################################
 ################################################################################
 var selected_items : Array = []
+var drag_allowed := false
 
 
 #region CREATE/SAVE/LOAD
@@ -256,8 +257,7 @@ func load_event_buttons() -> void:
 			%RightSidebar.get_child(0).move_child(%RightSidebar.get_child(0).get_node(section_name), 0)
 
 	# Resize RightSidebar
-	var _scale := DialogicUtil.get_editor_scale()
-	%RightSidebar.custom_minimum_size.x = 50 * _scale
+	%RightSidebar.custom_minimum_size.x = 50 * DialogicUtil.get_editor_scale()
 
 	_on_right_sidebar_resized()
 #endregion
@@ -299,7 +299,7 @@ func update_content_list() -> void:
 #################################################################################
 
 # SIGNAL handles input on the events mainly for selection and moving events
-func _on_event_block_gui_input(event, item: Node) -> void:
+func _on_event_block_gui_input(event: InputEvent, item: Node) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			if len(selected_items) > 1 and item in selected_items and !Input.is_key_pressed(KEY_CTRL):
@@ -309,9 +309,11 @@ func _on_event_block_gui_input(event, item: Node) -> void:
 			elif len(selected_items) > 1 or Input.is_key_pressed(KEY_CTRL):
 				select_item(item)
 
+			drag_allowed = true
+
 	if len(selected_items) > 0 and event is InputEventMouseMotion:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			if !%TimelineArea.dragging and !get_viewport().gui_is_dragging():
+			if !%TimelineArea.dragging and !get_viewport().gui_is_dragging() and drag_allowed:
 				sort_selection()
 				%TimelineArea.start_dragging(%TimelineArea.DragTypes.EXISTING_EVENTS, selected_items)
 
@@ -486,6 +488,7 @@ func add_events_indexed(indexed_events:Dictionary) -> void:
 	selected_items = events
 	visual_update_selection()
 	indent_events()
+	something_changed()
 
 
 ## Deletes events based on an indexed dictionary
@@ -504,8 +507,8 @@ func delete_events_indexed(indexed_events:Dictionary) -> void:
 			%Timeline.get_child(idx-idx_shift).get_parent().remove_child(%Timeline.get_child(idx-idx_shift))
 			idx_shift += 1
 
-	something_changed()
 	indent_events()
+	something_changed()
 
 
 func delete_selected_events() -> void:
@@ -530,7 +533,6 @@ func cut_events_indexed(indexed_events:Dictionary) -> void:
 	select_events_indexed(indexed_events)
 	copy_selected_events()
 	delete_events_indexed(indexed_events)
-	indent_events()
 
 
 func copy_selected_events() -> void:
@@ -835,8 +837,8 @@ func offset_blocks_by_index(blocks:Array, offset:int):
 
 func scroll_to_piece(piece_index:int) -> void:
 	await get_tree().process_frame
-	var height :float = %Timeline.get_child(min(piece_index, %Timeline.get_child_count()-1)).position.y
-	if height < %TimelineArea.scroll_vertical or height > %TimelineArea.scroll_vertical+%TimelineArea.size.y-(200*DialogicUtil.get_editor_scale()):
+	var height: float = %Timeline.get_child(min(piece_index, %Timeline.get_child_count()-1)).position.y
+	if height < %TimelineArea.scroll_vertical or height > %TimelineArea.scroll_vertical+%TimelineArea.size.y:
 		%TimelineArea.scroll_vertical = height
 
 
@@ -931,7 +933,6 @@ func _on_event_popup_menu_index_pressed(index:int) -> void:
 		TimelineUndoRedo.add_undo_method(add_events_indexed.bind(events_indexed))
 		TimelineUndoRedo.commit_action()
 		indent_events()
-		something_changed()
 
 
 func _on_right_sidebar_resized() -> void:
@@ -989,21 +990,24 @@ func duplicate_selected() -> void:
 		var at_index: int = selected_items[-1].get_index()+1
 		TimelineUndoRedo.create_action("[D] Duplicate "+str(len(events))+" event(s).")
 		TimelineUndoRedo.add_do_method(add_events_at_index.bind(events, at_index))
-		TimelineUndoRedo.add_do_method(something_changed)
 		TimelineUndoRedo.add_undo_method(delete_events_at_index.bind(at_index, len(events)))
-		TimelineUndoRedo.add_undo_method(something_changed)
 		TimelineUndoRedo.commit_action()
 
 
 func _input(event:InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed == false:
+		drag_allowed = false
+
 	# we protect this with is_visible_in_tree to not
 	# invoke a shortcut by accident
 	if !((event is InputEventKey or !event is InputEventWithModifiers) and is_visible_in_tree()):
 		return
 
+
 	if "pressed" in event:
 		if !event.pressed:
 			return
+
 
 	## Some shortcuts should always work
 	match event.as_text():
@@ -1110,6 +1114,7 @@ func _input(event:InputEvent) -> void:
 				TimelineUndoRedo.add_undo_method(delete_events_at_index.bind(paste_position+1, len(events_list)))
 				TimelineUndoRedo.commit_action()
 				get_viewport().set_input_as_handled()
+
 
 		"Ctrl+X":
 			var events_indexed := get_events_indexed(selected_items)

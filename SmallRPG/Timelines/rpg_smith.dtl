@@ -47,7 +47,7 @@ Smith: <Go/Go away/Buzz off>!
 label quest_accepted
 Smith: And?
 Smith: Have you <found/ gotten> the <key/ key yet>?
-- Yes [if {RPG_Example.smiths_key} > 0]
+- Yes [if {RPG_Example.smiths_key}]
 	Player: Here, I hope it's this one.
 	Smith: Oh?
 	Smith: Yes, that is my key!
@@ -63,7 +63,7 @@ Smith: Have you <found/ gotten> the <key/ key yet>?
 
 # Quest Finished
 label end_good
-Smith: It's <good/so great/wonderful> <to have/you broght> <the/my> key back.
+Smith: It's <good/so great/wonderful> <to have/you brought> <the/my> key back.
 Smith: Thank you <once again/very much/my friend>!
 [end_timeline]
 

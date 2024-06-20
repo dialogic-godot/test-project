@@ -43,7 +43,7 @@ label AutoAdvance
 [i]A text that autoadvances after 1 second.
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. [aa=1]
 
-[i]A text that does not autoadance (normal counter test).
+[i]A text that does not autoadvance (normal counter test).
 Lorem ipsum dolor sit amet.
 
 [i]A text that autoadvances after 1 second, doesn't allow reveal-skipping, nor manual advance.
