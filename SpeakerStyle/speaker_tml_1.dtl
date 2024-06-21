@@ -1,0 +1,4 @@
+speaker_1: I'm saying something first.
+speaker_2: And and now I'm sayting something.
+speaker_1 (default): I'm saying something third.
+speaker_1 (special): and here is something

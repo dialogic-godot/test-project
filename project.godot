@@ -116,7 +116,7 @@ text/initial_text_reveal_skippable=true
 text/text_reveal_skip_delay=0.1
 save/encryption_on_exports_only=true
 settings/text_speed=1.0
-layout/style_list=["res://VisualNovel/Assets/UI/VisualNovelStyle.tres", "res://SmallRPG/Assets/TextBubbleStyle.tres", "res://Smartphone/Smartphone_Style.tres", "res://FakeUnitTests/unit_test_style_a.tres", "res://FakeUnitTests/unit_test_style_b.tres"]
+layout/style_list=["res://VisualNovel/Assets/UI/VisualNovelStyle.tres", "res://SmallRPG/Assets/TextBubbleStyle.tres", "res://Smartphone/Smartphone_Style.tres", "res://FakeUnitTests/unit_test_style_a.tres", "res://FakeUnitTests/unit_test_style_b.tres", "res://SpeakerStyle/default_speaker_style.tres"]
 directories/dch_directory={
 "Claire": "res://Smartphone/Characters/Claire.dch",
 "Elina": "res://VisualNovel/Characters/Elina.dch",
@@ -130,7 +130,9 @@ directories/dch_directory={
 "TC3_BasicPortraits": "res://FakeUnitTests/TC3_BasicPortraits.dch",
 "TC4_BasicPortraits2": "res://FakeUnitTests/TC4_BasicPortraits2.dch",
 "TC5_BasicPortraits3": "res://FakeUnitTests/TC5_BasicPortraits3.dch",
-"TC6_Style": "res://FakeUnitTests/TC6_Style.dch"
+"TC6_Style": "res://FakeUnitTests/TC6_Style.dch",
+"speaker_1": "res://SpeakerStyle/speaker_1.dch",
+"speaker_2": "res://SpeakerStyle/speaker_2.dch"
 }
 directories/dtl_directory={
 "Chapter 10": "res://Chapter 10.dtl",
@@ -138,6 +140,7 @@ directories/dtl_directory={
 "Laurey": "res://Smartphone/Timelines/Laurey.dtl",
 "Otto": "res://Smartphone/Timelines/Otto.dtl",
 "rpg_smith": "res://SmallRPG/Timelines/rpg_smith.dtl",
+"speaker_tml_1": "res://SpeakerStyle/speaker_tml_1.dtl",
 "t0_overview": "res://FakeUnitTests/t0_overview.dtl",
 "t1_texts": "res://FakeUnitTests/t1_texts.dtl",
 "t2_characters": "res://FakeUnitTests/t2_characters.dtl",
@@ -154,6 +157,10 @@ translation/add_separator=false
 extensions_folder="res://addons/dialogic_additions"
 animations/cross_fade_default_length=0.5
 animations/cross_fade_default_wait=true
+text/advance_delay=0.1
+animations/cross_fade_default="res://addons/dialogic/Modules/Character/DefaultAnimations/fade_in_out.gd"
+animations/join_default="res://addons/dialogic/Modules/Character/DefaultAnimations/fade_up_in_out.gd"
+animations/leave_default="res://addons/dialogic/Modules/Character/DefaultAnimations/fade_up_in_out.gd"
 
 [display]
 
@@ -171,6 +178,7 @@ folder_colors={
 "res://MainMenu/": "orange",
 "res://SmallRPG/": "red",
 "res://Smartphone/": "purple",
+"res://SpeakerStyle/": "pink",
 "res://VisualNovel/": "teal",
 "res://addons/": "blue"
 }

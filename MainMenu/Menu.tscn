@@ -157,17 +157,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 151.0
-offset_top = 182.0
-offset_right = -151.0
-offset_bottom = -181.0
+offset_left = 107.0
+offset_top = 117.0
+offset_right = -101.0
+offset_bottom = -66.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = -12
+theme_override_constants/separation = -10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 40
 
 [node name="DialogicLogo" type="TextureRect" parent="MainMenu/VBox/HBoxContainer"]
 layout_mode = 2
@@ -183,11 +184,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="VBoxContainer" type="HBoxContainer" parent="MainMenu/VBox"]
+[node name="VBoxContainer" type="GridContainer" parent="MainMenu/VBox"]
 show_behind_parent = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 17
+columns = 4
 
 [node name="VisualNovel" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
 unique_name_in_owner = true
@@ -216,6 +217,15 @@ focus_neighbor_right = NodePath("../VisualNovel")
 image = ExtResource("5_vikv7")
 title = "Smartphone"
 
+[node name="Speaker" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../SmallRPG")
+focus_neighbor_right = NodePath("../VisualNovel")
+image = ExtResource("5_vikv7")
+title = "Speakers"
+
 [node name="UnitTests" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
 unique_name_in_owner = true
 layout_mode = 2
@@ -225,31 +235,28 @@ focus_neighbor_right = NodePath("../VisualNovel")
 image = ExtResource("7_ymxpl")
 title = "Testing"
 
-[node name="About" type="Button" parent="MainMenu"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.640625
-anchor_top = 0.421296
-anchor_right = 0.695313
-anchor_bottom = 0.469136
-grow_horizontal = 0
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = 38.0
+grow_horizontal = 2
+alignment = 2
+
+[node name="About" type="Button" parent="MainMenu/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 8
 text = "About"
 metadata/_edit_use_anchors_ = true
 
-[node name="Quit" type="Button" parent="MainMenu"]
+[node name="Quit" type="Button" parent="MainMenu/HBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -49.0
-offset_top = 9.0
-offset_right = -7.0
-offset_bottom = 48.0
-grow_horizontal = 0
+layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.509804)
@@ -262,6 +269,7 @@ expand_icon = true
 [connection signal="pressed" from="MainMenu/VBox/VBoxContainer/VisualNovel" to="." method="_on_visual_novel_pressed"]
 [connection signal="pressed" from="MainMenu/VBox/VBoxContainer/SmallRPG" to="." method="_on_small_rpg_pressed"]
 [connection signal="pressed" from="MainMenu/VBox/VBoxContainer/Smartphone" to="." method="_on_smartphone_pressed"]
+[connection signal="pressed" from="MainMenu/VBox/VBoxContainer/Speaker" to="." method="_on_speaker_pressed"]
 [connection signal="pressed" from="MainMenu/VBox/VBoxContainer/UnitTests" to="." method="_on_unit_tests_pressed"]
-[connection signal="pressed" from="MainMenu/About" to="." method="_on_about_pressed"]
-[connection signal="pressed" from="MainMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="MainMenu/HBoxContainer/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="MainMenu/HBoxContainer/Quit" to="." method="_on_quit_pressed"]
