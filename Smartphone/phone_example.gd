@@ -16,14 +16,14 @@ var chat_histories := {}
 func _ready() -> void:
 	start_example_scene()
 
-	Dialogic.Settings.text_speed = 0
-	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 2)
-	Dialogic.Choices.reveal_by_input = true
-
 	Dialogic.Styles.load_style('Smartphone_Style')
 
 	Dialogic.signal_event.connect(_on_dialogic_signal_event)
+
 	Dialogic.clear()
+	Dialogic.Settings.text_speed = 0
+	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 2)
+	Dialogic.Choices.reveal_by_input = true
 
 
 ## Mainly allows the timeline to reveal a new contact with a signal event

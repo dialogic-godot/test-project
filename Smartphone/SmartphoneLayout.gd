@@ -51,11 +51,10 @@ func _on_dialogic_node_dialog_text_finished_revealing_text() -> void:
 	add_message(last_text, last_text_size, last_text_speaker.get_character_name(), last_text_time)
 
 
-
 ## Helper method that calculates the size the textbox should have based on the text.
 func get_message_size(text:String) -> Vector2:
 	var font: Font = %DialogText.get_theme_font("normal_font", 'RichtTextLabel')
-	var string_size :Vector2= font.get_string_size(text, 0, -1, 10)
+	var string_size: Vector2 = font.get_string_size(text, 0, -1, 10)
 
 	var max_width: int= %MessageList.size.x
 
