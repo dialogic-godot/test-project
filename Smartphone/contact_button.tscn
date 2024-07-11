@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Smartphone/ContactButton.gd" id="1_pxpb2"]
 [ext_resource type="Texture2D" uid="uid://bsb3pyc2vy0bt" path="res://Smartphone/Assets/elf.png" id="2_qhow8"]
-[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://Assets/Fonts/Roboto/Roboto-Black.ttf" id="3_ogsui"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Black.ttf" id="3_ogsui"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3y2m"]
 content_margin_left = 0.0
@@ -33,7 +33,6 @@ corner_radius_bottom_left = 100
 [node name="ContactButton" type="VBoxContainer"]
 offset_right = 60.0
 offset_bottom = 86.0
-focus_mode = 2
 mouse_filter = 0
 script = ExtResource("1_pxpb2")
 
@@ -72,7 +71,5 @@ text = "CLAIRE"
 horizontal_alignment = 1
 uppercase = true
 
-[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
-[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
