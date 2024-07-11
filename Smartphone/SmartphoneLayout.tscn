@@ -163,6 +163,7 @@ size_flags_horizontal = 0
 theme_override_colors/default_color = Color(0.172549, 0.172549, 0.172549, 1)
 theme_override_font_sizes/normal_font_size = 10
 theme_override_styles/normal = SubResource("StyleBoxFlat_lfajr")
+bbcode_enabled = true
 text = "This is some example text. That is to long for one line."
 fit_content = true
 visible_characters_behavior = 1

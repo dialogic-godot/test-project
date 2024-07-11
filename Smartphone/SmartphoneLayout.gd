@@ -18,6 +18,7 @@ func _ready() -> void:
 
 ## Handle UI things, when a new text starts revealing
 func _on_dialog_text_started_revealing_text() -> void:
+	%DialogText.show()
 	# update the size of the box
 	%DialogText.custom_minimum_size = get_message_size(%DialogText.text)
 
@@ -48,6 +49,7 @@ func _on_dialogic_node_dialog_text_finished_revealing_text() -> void:
 	if last_text.is_empty():
 		return
 
+	%DialogText.hide()
 	add_message(last_text, last_text_size, last_text_speaker.get_character_name(), last_text_time)
 
 
