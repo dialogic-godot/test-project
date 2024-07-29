@@ -158,9 +158,9 @@ extensions_folder="res://addons/dialogic_additions"
 animations/cross_fade_default_length=0.5
 animations/cross_fade_default_wait=true
 text/advance_delay=0.1
-animations/cross_fade_default="res://addons/dialogic/Modules/Character/DefaultAnimations/fade_in_out.gd"
-animations/join_default="res://addons/dialogic/Modules/Character/DefaultAnimations/fade_up_in_out.gd"
-animations/leave_default="res://addons/dialogic/Modules/Character/DefaultAnimations/fade_up_in_out.gd"
+animations/cross_fade_default="Fade Cross"
+animations/join_default="Fade In Up"
+animations/leave_default="Fade Out Up"
 
 [display]
 
