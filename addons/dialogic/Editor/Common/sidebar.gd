@@ -7,7 +7,7 @@ signal file_activated(file_path)
 
 signal content_item_activated(item_name)
 
-@onready var editors_manager = get_parent().get_parent()
+@onready var editors_manager: Node = get_parent().get_parent()
 
 
 func _ready() -> void:
@@ -40,6 +40,8 @@ func _ready() -> void:
 	%RightClickMenu.clear()
 	%RightClickMenu.add_icon_item(get_theme_icon("Remove", "EditorIcons"), "Remove From List", 1)
 	%RightClickMenu.add_separator()
+	%RightClickMenu.add_icon_item(get_theme_icon("ActionCopy", "EditorIcons"), "Copy Identifier", 4)
+	%RightClickMenu.add_separator()
 	%RightClickMenu.add_icon_item(get_theme_icon("Filesystem", "EditorIcons"), "Show in FileSystem", 2)
 	%RightClickMenu.add_icon_item(get_theme_icon("ExternalLink", "EditorIcons"), "Open in External Program", 3)
 
@@ -62,7 +64,7 @@ func clean_resource_list(resources_list:Array = []) -> PackedStringArray:
 
 
 func update_resource_list(resources_list:PackedStringArray = []) -> void:
-	var filter :String = %Search.text
+	var filter: String = %Search.text
 	var current_file := ""
 	if editors_manager.current_editor and editors_manager.current_editor.current_resource:
 		current_file = editors_manager.current_editor.current_resource.resource_path
@@ -99,6 +101,7 @@ func update_resource_list(resources_list:PackedStringArray = []) -> void:
 			if filter.is_empty() or filter.to_lower() in timeline_name.to_lower():
 				%ResourcesList.add_item(timeline_name, get_theme_icon("TripleBar", "EditorIcons"))
 				%ResourcesList.set_item_metadata(idx, timeline_directory[timeline_name])
+				%ResourcesList.set_item_tooltip(idx, timeline_directory[timeline_name])
 				if timeline_directory[timeline_name] == current_file:
 					%ResourcesList.select(idx)
 					%ResourcesList.set_item_custom_fg_color(idx, get_theme_color("accent_color", "Editor"))
@@ -185,3 +188,5 @@ func _on_right_click_menu_id_pressed(id:int) -> void:
 			EditorInterface.get_file_system_dock().navigate_to_path(%ResourcesList.get_item_metadata(%RightClickMenu.get_meta("item_index")))
 		3: # OPEN IN EXTERNAL EDITOR
 			OS.shell_open(ProjectSettings.globalize_path(%ResourcesList.get_item_metadata(%RightClickMenu.get_meta("item_index"))))
+		4:
+			DisplayServer.clipboard_set(DialogicResourceUtil.get_unique_identifier(%ResourcesList.get_item_metadata(%RightClickMenu.get_meta("item_index"))))

@@ -15,7 +15,7 @@ func _ready() -> void:
 
 	## REFERENCES
 	editors_manager = $EditorsManager
-	var button :Button = editors_manager.add_icon_button(get_theme_icon("MakeFloating", "EditorIcons"), 'Make floating')
+	var button: Button = editors_manager.add_icon_button(get_theme_icon("MakeFloating", "EditorIcons"), 'Make floating')
 	button.pressed.connect(toggle_floating_window)
 
 	# File dialog
@@ -86,7 +86,7 @@ func update_theme_additions() -> void:
 
 	# panel used for example for portrait previews in character editor
 	theme.set_type_variation('DialogicPanelB', 'PanelContainer')
-	var side_panel :StyleBoxFlat= panel_style.duplicate()
+	var side_panel: StyleBoxFlat = panel_style.duplicate()
 	side_panel.corner_radius_top_left = 0
 	side_panel.corner_radius_bottom_left = 0
 	side_panel.expand_margin_left = 8
@@ -168,6 +168,15 @@ func update_theme_additions() -> void:
 	text_panel.content_margin_bottom = 5
 	text_panel.content_margin_left = 13
 	theme.set_stylebox('normal', 'DialogicTextEventTextEdit', text_panel)
+
+	var event_field_group_panel := DCSS.inline({
+		'border-radius': 8,
+		"border":1,
+		"padding":2,
+		"boder-color": get_theme_color("property_color", "Editor"),
+		"background":"none"})
+	theme.set_type_variation("DialogicEventEditGroup", "PanelContainer")
+	theme.set_stylebox("panel", "DialogicEventEditGroup", event_field_group_panel)
 
 	theme.set_icon('Plugin', 'Dialogic', load("res://addons/dialogic/Editor/Images/plugin-icon.svg"))
 

@@ -22,7 +22,12 @@ enum PositionModes {
 @export var portrait_prefix := ''
 
 @export_subgroup('Portrait Placement')
-enum SizeModes {KEEP, FIT_STRETCH, FIT_IGNORE_SCALE, FIT_SCALE_HEIGHT}
+enum SizeModes {
+	KEEP, ## The height and width of the container have no effect, only the origin.
+	FIT_STRETCH, ## The portrait will be fitted into the container, ignoring it's aspect ratio and the character/portrait scale.
+	FIT_IGNORE_SCALE, ## The portrait will be fitted into the container, ignoring the character/portrait scale, but preserving the aspect ratio.
+	FIT_SCALE_HEIGHT ## Recommended. The portrait will be scaled to fit the container height. A character/portrait scale of 100% means 100% container height. Aspect ratio will be preserved.
+	}
 ## Defines how to affect the scale of the portrait
 @export var size_mode: SizeModes = SizeModes.FIT_SCALE_HEIGHT :
 	set(mode):
@@ -63,7 +68,7 @@ enum PivotModes {AT_ORIGIN, PERCENTAGE, PIXELS}
 	set(character):
 		debug_character = character
 		_update_debug_portrait_scene()
-@export var debug_character_portrait: String = "":
+@export var debug_character_portrait := "":
 	set(portrait):
 		debug_character_portrait = portrait
 		_update_debug_portrait_scene()
@@ -187,8 +192,8 @@ func _update_debug_portrait_scene() -> void:
 	if mode == PositionModes.SPEAKER and !portrait_prefix.is_empty():
 		if portrait_prefix+debug_portrait in character.portraits:
 			debug_portrait = portrait_prefix+debug_portrait
-	var portrait_info :Dictionary = character.get_portrait_info(debug_portrait)
-	var portrait_scene_path :String = portrait_info.get('scene', default_portrait_scene)
+	var portrait_info: Dictionary = character.get_portrait_info(debug_portrait)
+	var portrait_scene_path: String = portrait_info.get('scene', default_portrait_scene)
 	if portrait_scene_path.is_empty(): portrait_scene_path = default_portrait_scene
 	debug_character_scene_node = load(portrait_scene_path).instantiate()
 	if !is_instance_valid(debug_character_scene_node):

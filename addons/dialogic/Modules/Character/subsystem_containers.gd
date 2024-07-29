@@ -45,11 +45,11 @@ func add_container(position_id: String, position := "", size := "") -> DialogicN
 	if example_position:
 		var new_position := DialogicNode_PortraitContainer.new()
 		example_position.get_parent().add_child(new_position)
+		new_position.name = "Portrait_"+position_id.validate_node_name()
 		new_position.size = str_to_vector(size)
 		copy_container_setup(example_position, new_position)
 		new_position.container_ids = [position_id]
 		new_position.position = str_to_vector(position)-new_position._get_origin_position()
-		new_position.name = "Portrait_"+position_id.validate_node_name()
 		position_changed.emit({&'change':'added', &'container_node':new_position, &'position_id':position_id})
 		return new_position
 	return null
@@ -181,7 +181,7 @@ func resize_container(container: DialogicNode_PortraitContainer, rect_size: Vari
 			tween.finished.connect(save_position_container.bind(container))
 	else:
 		container.position = container.position + relative_position_change
-		container.size = final_rect_resize
+		container.set_deferred("size", final_rect_resize)
 		save_position_container(container)
 
 	position_changed.emit({&'change':'resized', &'container_node':container})
