@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cgiiklsftpoau"]
+[gd_scene load_steps=16 format=3 uid="uid://cgiiklsftpoau"]
 
 [ext_resource type="Script" path="res://MainMenu/Menu.gd" id="1_tdqfe"]
 [ext_resource type="Texture2D" uid="uid://b413ictwywftp" path="res://MainMenu/Dialogic Logo.svg" id="2_u154w"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://2du0mu0epv6x" path="res://MainMenu/Assets/SmartphonePreview.PNG" id="5_vikv7"]
 [ext_resource type="Texture2D" uid="uid://bey4yauaaf03m" path="res://MainMenu/Assets/VN_Preview.PNG" id="5_x0yfe"]
 [ext_resource type="Texture2D" uid="uid://bp18h0ibngt7s" path="res://MainMenu/Assets/RPG_Preview.PNG" id="6_e1cue"]
+[ext_resource type="Texture2D" uid="uid://bmpqrsapqpgbk" path="res://MainMenu/Assets/speaker_preview.png" id="7_u33qm"]
 [ext_resource type="Texture2D" uid="uid://clbquf4p1pjdi" path="res://MainMenu/Assets/unit_tests.png" id="7_ymxpl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a307k"]
@@ -223,7 +224,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../SmallRPG")
 focus_neighbor_right = NodePath("../VisualNovel")
-image = ExtResource("5_vikv7")
+image = ExtResource("7_u33qm")
 title = "Speakers"
 
 [node name="UnitTests" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]

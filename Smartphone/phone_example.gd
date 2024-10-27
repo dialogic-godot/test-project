@@ -7,8 +7,9 @@ var chat_histories := {}
 func _ready():
 	fade(true)
 	Dialogic.Settings.text_speed = 0
+	Dialogic.Choices.reveal_by_input = true
 	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 2)
-	ProjectSettings.set_setting('dialogic/choices/reveal_by_input', true)
+
 #	Dialogic.Text.set_skippable(false)
 	Dialogic.Styles.load_style('Smartphone_Style')
 	Dialogic.signal_event.connect(_on_dialogic_signal_event)
@@ -17,8 +18,8 @@ func _ready():
 
 func exit():
 	Dialogic.Settings.reset_setting('text_speed')
+	Dialogic.Choices.reveal_by_input = false
 	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 0)
-	ProjectSettings.set_setting('dialogic/choices/reveal_by_input', false)
 	ProjectSettings.save()
 
 

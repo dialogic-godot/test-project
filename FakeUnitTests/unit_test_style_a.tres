@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogicStyle" load_steps=19 format=3 uid="uid://bx0u2rpnbroc6"]
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=20 format=3 uid="uid://bx0u2rpnbroc6"]
 
 [ext_resource type="PackedScene" uid="uid://c1k5m0w3r40xf" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_FullBackground/full_background_layer.tscn" id="1_cth7r"]
 [ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_rmujo"]
@@ -11,17 +11,21 @@
 [ext_resource type="PackedScene" uid="uid://lx24i8fl6uo" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_History/history_layer.tscn" id="9_i41qw"]
 [ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="10_pa6ry"]
 
-[sub_resource type="Resource" id="Resource_0c0a5"]
+[sub_resource type="Resource" id="Resource_0wyrv"]
+script = ExtResource("2_rmujo")
+overrides = {}
+
+[sub_resource type="Resource" id="Resource_2wgp1"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("1_cth7r")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_ut4jp"]
+[sub_resource type="Resource" id="Resource_viyaw"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("3_8m4hw")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_lhwgy"]
+[sub_resource type="Resource" id="Resource_u58bk"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("4_j1nh3")
 overrides = {
@@ -32,27 +36,27 @@ overrides = {
 "text_alignment": "1"
 }
 
-[sub_resource type="Resource" id="Resource_ns44i"]
+[sub_resource type="Resource" id="Resource_0c2vp"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("5_w6mee")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_1n683"]
+[sub_resource type="Resource" id="Resource_1c8hd"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("6_7pv72")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_7w7q2"]
+[sub_resource type="Resource" id="Resource_qxyi4"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("7_3saxg")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_3j0x6"]
+[sub_resource type="Resource" id="Resource_144k3"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("8_1ohxd")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_1hnnd"]
+[sub_resource type="Resource" id="Resource_vd0lh"]
 script = ExtResource("2_rmujo")
 scene = ExtResource("9_i41qw")
 overrides = {}
@@ -60,9 +64,18 @@ overrides = {}
 [resource]
 script = ExtResource("10_pa6ry")
 name = "UnitTestStyle_A"
-base_overrides = {
-"global_bg_color": "Color(0.223529, 0.0156863, 0.0156863, 0.956863)",
-"global_font_color": "Color(0.976471, 0.792157, 0.6, 1)"
+layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16", "17"])
+layer_info = {
+"": SubResource("Resource_0wyrv"),
+"10": SubResource("Resource_2wgp1"),
+"11": SubResource("Resource_viyaw"),
+"12": SubResource("Resource_u58bk"),
+"13": SubResource("Resource_0c2vp"),
+"14": SubResource("Resource_1c8hd"),
+"15": SubResource("Resource_qxyi4"),
+"16": SubResource("Resource_144k3"),
+"17": SubResource("Resource_vd0lh")
 }
-layers = Array[ExtResource("2_rmujo")]([SubResource("Resource_0c0a5"), SubResource("Resource_ut4jp"), SubResource("Resource_lhwgy"), SubResource("Resource_ns44i"), SubResource("Resource_1n683"), SubResource("Resource_7w7q2"), SubResource("Resource_3j0x6"), SubResource("Resource_1hnnd")])
+base_overrides = {}
+layers = Array[ExtResource("2_rmujo")]([])
 metadata/_latest_layer = 2

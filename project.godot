@@ -24,7 +24,6 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 file_logging/enable_file_logging=true
 file_logging/max_log_files=10
-settings/stdout/verbose_stdout=true
 
 [dialogic]
 
@@ -159,8 +158,9 @@ animations/cross_fade_default_length=0.5
 animations/cross_fade_default_wait=true
 text/advance_delay=0.1
 animations/cross_fade_default="Fade Cross"
-animations/join_default="Fade In Up"
-animations/leave_default="Fade Out Up"
+animations/join_default="Fade In"
+animations/leave_default="Fade Out Down"
+audio/max_channels=4.0
 
 [display]
 
