@@ -55,7 +55,7 @@ func load_info(info:Dictionary, update_type:int) -> void:
 		%Install.disabled = true
 
 	%UpdateName.text = info.name
-	%Content.text = markdown_to_bbcode('#'+info.body.get_slice('#', 1)).strip_edges()
+	%Content.text = markdown_to_bbcode(info.body).get_slice("\n[font_size", 0).strip_edges()
 	%ShortInfo.text = "Published on "+info.published_at.substr(0, info.published_at.find('T'))+" by "+info.author.login
 	if info.has("html_url"):
 		%ReadFull.uri = info.html_url

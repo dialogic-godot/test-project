@@ -112,9 +112,11 @@ func batch_events(array: Array, size: int, batch_number: int) -> Array:
 var opener_events_stack := []
 
 func load_batch(data:Array) -> void:
-	var current_batch: Array = _batches.pop_front()
+	# Don't try to cast it to Array immedietly, as the item may have become null and will throw a useless error
+	var current_batch = _batches.pop_front()
 	if current_batch:
-		for i in current_batch:
+		var current_batch_items: Array = current_batch
+		for i in current_batch_items:
 			if i is DialogicEndBranchEvent:
 				create_end_branch_event(%Timeline.get_child_count(), opener_events_stack.pop_back())
 			else:
@@ -134,9 +136,9 @@ func _on_batch_loaded() -> void:
 		return
 
 	if opener_events_stack:
-
 		for ev in opener_events_stack:
-			create_end_branch_event(%Timeline.get_child_count(), ev)
+			if is_instance_valid(ev):
+				create_end_branch_event(%Timeline.get_child_count(), ev)
 
 	opener_events_stack = []
 	indent_events()
@@ -1110,7 +1112,7 @@ func _input(event:InputEvent) -> void:
 			if events_list:
 				TimelineUndoRedo.create_action("[D] Pasting "+str(len(events_list))+" event(s).")
 				TimelineUndoRedo.add_do_method(add_events_at_index.bind(events_list, paste_position))
-				TimelineUndoRedo.add_undo_method(delete_events_at_index.bind(paste_position+1, len(events_list)))
+				TimelineUndoRedo.add_undo_method(delete_events_at_index.bind(paste_position, len(events_list)))
 				TimelineUndoRedo.commit_action()
 				get_viewport().set_input_as_handled()
 

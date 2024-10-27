@@ -93,7 +93,7 @@ enum ValueType {
 	NUMBER,
 	VECTOR2, VECTOR3, VECTOR4,
 	# Other
-	CUSTOM, BUTTON, LABEL, COLOR
+	CUSTOM, BUTTON, LABEL, COLOR, AUDIO_PREVIEW
 }
 ## List that stores the fields for the editor
 var editor_list: Array = []
@@ -125,6 +125,14 @@ func execute(_dialogic_game_handler) -> void:
 ## Ends the event behaviour.
 func finish() -> void:
 	event_finished.emit(self)
+
+
+## Called before executing the next event or before clear(any flags) / load_full_state().
+##
+## Should be overridden if the event stores temporary state into dialogic.current_state_info
+## or some other cleanup is needed before another event can run.
+func _clear_state() -> void:
+	pass
 
 
 ## To be overridden by subclasses.

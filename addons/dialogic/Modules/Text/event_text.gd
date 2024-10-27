@@ -32,6 +32,9 @@ var character_identifier: String:
 	set(value):
 		character_identifier = value
 		character = DialogicResourceUtil.get_character_resource(value)
+		if not character.portraits.has(portrait):
+			portrait = ""
+			ui_update_needed.emit()
 
 var regex := RegEx.create_from_string(r'\s*((")?(?<name>(?(2)[^"\n]*|[^(: \n]*))(?(2)"|)(\W*(?<portrait>\(.*\)))?\s*(?<!\\):)?(?<text>(.|\n)*)')
 var split_regex := RegEx.create_from_string(r"((\[n\]|\[n\+\])?((?!(\[n\]|\[n\+\]))(.|\n))+)")
@@ -43,6 +46,10 @@ signal advance
 
 #region EXECUTION
 ################################################################################
+
+func _clear_state() -> void:
+	dialogic.current_state_info.erase('text_sub_idx')
+	_disconnect_signals()
 
 func _execute() -> void:
 	if text.is_empty():
@@ -129,12 +136,14 @@ func _execute() -> void:
 				await dialogic.Text.text_finished
 
 			state = States.IDLE
+		else:
+			reveal_next_segment = true
 
 		# Handling potential Choice Events.
 		if section_idx == len(split_text)-1 and dialogic.has_subsystem('Choices') and dialogic.Choices.is_question(dialogic.current_event_idx):
 			dialogic.Text.show_next_indicators(true)
 
-			end_text_event()
+			finish()
 			return
 
 		elif dialogic.Inputs.auto_advance.is_enabled():
@@ -159,13 +168,6 @@ func _execute() -> void:
 			await advance
 
 
-	end_text_event()
-
-
-func end_text_event() -> void:
-	dialogic.current_state_info['text_sub_idx'] = -1
-
-	_disconnect_signals()
 	finish()
 
 
