@@ -25,14 +25,15 @@
 },
 "Basic/default": {
 "export_overrides": {
-"animation": "\"idle\""
+"animation": "\"idle\"",
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5.png\""
 },
 "ignore_char_scale": false,
 "image": "",
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
-"scene": "res://VisualNovel/Assets/Characters/Antonio/animated_portrait_antonio.tscn"
+"scene": "res://addons/dialogic/Modules/Character/default_portrait.tscn"
 },
 "Basic/doubt": {
 "image": "res://VisualNovel/Assets/Characters/Antonio/pl5 doubt.png",
