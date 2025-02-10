@@ -1,0 +1,57 @@
+This timeline tests various audio events.
+It will describe the desired effect, then do it.
+
+
+label Music
+[i]MP3 Music will play (click to end it). It will not fade in and out.
+[music path="res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" fade="0" volume="-15"]
+[wait_input]
+[music fade="0"]
+
+[i]WAV Music will play (click to end it). It will not fade in and out.
+[music path="res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" fade="0"  volume="-15"]
+[wait_input]
+[music fade="0"]
+
+[i]OGG Music will play (click to end it). It will not fade in and out.
+[music path="res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" fade="0"  volume="-15"]
+[wait_input ]
+[music fade="0"]
+
+
+label Music Looping
+[i]Looping OGG Music will play (click to end it). It will fade in and out (1s each).
+[music path="res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" fade="1" loop="true"  volume="-15"]
+[wait_input ]
+[music fade="1"]
+
+[i]Same file but with looping turned off (click to end it). It will fade in (and out if canceled early).
+[music path="res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" fade="1" loop="false"  volume="-15"]
+[wait_input ]
+[music fade="1"]
+
+label Music Channels
+[i]Play an ambient wind sound on a music channel. Then play music on another. On a click stop the music and on another click, stop the wind sound.
+[music path="res://FakeUnitTests/Assets/SFX/wind_ambiance.wav" channel="1"]
+[wait time="2"]
+[music path="res://FakeUnitTests/Assets/Music/Play Now.mp3" channel="2" volume="-22"]
+[wait_input]
+[music channel="2"]
+[wait_input]
+[music channel="1"]
+
+
+label Sound
+[i]Play a bell sound effect.
+[sound path="res://FakeUnitTests/Assets/SFX/bell_03.ogg"]
+[wait_input ]
+
+[i]Play a bell sound effect with -15db volume.
+[sound path="res://FakeUnitTests/Assets/SFX/bell_03.ogg" volume="-15"]
+[wait_input ]
+
+[i]Play a bell sound effect with -15db volume on an audio bus with reverb.
+[sound path="res://FakeUnitTests/Assets/SFX/bell_03.ogg" volume="-15" bus="UnitTestBus" ]
+[wait_input ]
+
+jump t0_overview/

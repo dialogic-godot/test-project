@@ -146,6 +146,7 @@ directories/dtl_directory={
 "t3_variables": "res://FakeUnitTests/t3_variables.dtl",
 "t4_styles": "res://FakeUnitTests/t4_styles.dtl",
 "t5_various_events": "res://FakeUnitTests/t5_various_events.dtl",
+"t6_audio": "res://FakeUnitTests/t6_audio.dtl",
 "vn_beginning": "res://VisualNovel/Timelines/vn_beginning.dtl",
 "vn_chapter1": "res://VisualNovel/Timelines/vn_chapter1.dtl",
 "vn_ending": "res://VisualNovel/Timelines/vn_ending.dtl"
@@ -158,7 +159,7 @@ animations/cross_fade_default_length=0.5
 animations/cross_fade_default_wait=true
 text/advance_delay=0.1
 animations/cross_fade_default="Fade Cross"
-animations/join_default="Fade In"
+animations/join_default="Fade In Up"
 animations/leave_default="Fade Out Down"
 audio/max_channels=4.0
 
