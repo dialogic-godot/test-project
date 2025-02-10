@@ -11,7 +11,7 @@ var mode := Modes.FULL_HIGHLIGHTING
 var word_regex := RegEx.new()
 var region_regex := RegEx.new()
 var number_regex := RegEx.create_from_string(r"(\d|\.)+")
-var shortcode_regex := RegEx.create_from_string(r"\W*\[(?<id>\w*)(?<args>[^\]]*)?")
+var shortcode_regex := RegEx.create_from_string(r'\W*\[(?<id>\w*)(?<args>([^\]"]|"[^"]*")*)?')
 var shortcode_param_regex := RegEx.create_from_string(r'((?<parameter>[^\s=]*)\s*=\s*"(?<value>([^=]|\\=)*)(?<!\\)")')
 
 ## Colors
@@ -179,9 +179,10 @@ func color_region(dict:Dictionary, color:Color, line:String, start:String, end:S
 		end = "\\"+end
 
 	if end.is_empty():
-		region_regex.compile("(?<!\\\\)"+start+".*")
+		region_regex.compile(r"(?<!\\)"+start+".*")
 	else:
-		region_regex.compile("(?<!\\\\)"+start+"((?!"+end+").)*"+end)
+		r"(?<!\\){([^{}]|({[^}]*}))*}"
+		region_regex.compile(r"(?<!\\)"+start+"([^"+start+end+"]|("+start+"[^"+end+"]*"+end+"))*"+end)
 	if to <= from:
 		to = len(line)-1
 	for region in region_regex.search_all(line.substr(from, to-from+2)):
@@ -199,3 +200,13 @@ func color_shortcode_content(dict:Dictionary, line:String, from:int = 0, to:int 
 		dict[x.get_start('value')+from-1] = {"color":base_color.lerp(normal_color, 0.7)}
 		dict[x.get_end()+from] = {"color":normal_color}
 	return dict
+
+
+func dict_get_color_at_column(dict:Dictionary, column:int) -> Color:
+	var prev_idx := -1
+	for i in dict:
+		if i > prev_idx and i <= column:
+			prev_idx = i
+	if prev_idx != -1:
+		return dict[prev_idx].color
+	return normal_color

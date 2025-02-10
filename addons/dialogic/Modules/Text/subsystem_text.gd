@@ -87,10 +87,10 @@ func post_install() -> void:
 
 ## Applies modifiers, effects and coloring to the text
 func parse_text(text:String, type:int=TextTypes.DIALOG_TEXT, variables := true, glossary := true, modifiers:= true, effects:= true, color_names:= true) -> String:
-	if modifiers:
-		text = parse_text_modifiers(text, type)
 	if variables and dialogic.has_subsystem('VAR'):
 		text = dialogic.VAR.parse_variables(text)
+	if modifiers:
+		text = parse_text_modifiers(text, type)
 	if effects:
 		text = parse_text_effects(text)
 	if color_names:
@@ -138,6 +138,13 @@ func update_dialog_text(text: String, instant := false, additional := false) -> 
 				text_node.text = text
 
 			else:
+				var current_character := get_current_speaker()
+
+				if current_character:
+					var character_prefix: String = current_character.custom_info.get(DialogicCharacterPrefixSuffixSection.PREFIX_CUSTOM_KEY, DialogicCharacterPrefixSuffixSection.DEFAULT_PREFIX)
+					var character_suffix: String = current_character.custom_info.get(DialogicCharacterPrefixSuffixSection.SUFFIX_CUSTOM_KEY, DialogicCharacterPrefixSuffixSection.DEFAULT_SUFFIX)
+					text = character_prefix + text + character_suffix
+
 				text_node.reveal_text(text, additional)
 
 				if !text_node.finished_revealing_text.is_connected(_on_dialog_text_finished):
@@ -569,14 +576,15 @@ func effect_mood(_text_node:Control, _skipped:bool, argument:String) -> void:
 			load(dialogic.current_state_info.speaker).custom_info.get('sound_moods', {}).get(argument, {}))
 
 
-var modifier_words_select_regex := RegEx.create_from_string(r"(?<!\\)\<[^\[\>]+(\/[^\>]*)\>")
+var modifier_select_regex := RegEx.create_from_string(r"(?<!\\)\<[^\>]+(\/[^\>]*)\>")
+var modifier_select_split_regex := RegEx.create_from_string(r"(\[[^\]]*\]|[^\/]|\/\/)+")
 func modifier_random_selection(text:String) -> String:
-	for replace_mod_match in modifier_words_select_regex.search_all(text):
+	for replace_mod_match: RegExMatch in modifier_select_regex.search_all(text):
 		var string: String = replace_mod_match.get_string().trim_prefix("<").trim_suffix(">")
-		string = string.replace('//', '<slash>')
-		var list: PackedStringArray = string.split('/')
-		var item: String = list[randi()%len(list)]
-		item = item.replace('<slash>', '/')
+		var options := []
+		for split: RegExMatch in modifier_select_split_regex.search_all(string):
+			options.append(split.get_string())
+		var item: String = options.pick_random()
 		text = text.replace(replace_mod_match.get_string(), item.strip_edges())
 	return text
 
