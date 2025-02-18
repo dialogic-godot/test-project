@@ -1,4 +1,4 @@
-[music fade="0.0" volume="0.0" bus="Master"]
+audio music - [fade="0.0" volume="0.0" bus="Master"]
 [background fade="0.0"]
 leave --All--
 [i]This is the end of the dialogic example visual novel. \

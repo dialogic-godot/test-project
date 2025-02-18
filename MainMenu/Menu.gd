@@ -53,6 +53,7 @@ func _on_about_pressed():
 	fade_menu($MainMenu, $AboutScreen)
 	%Back.grab_focus()
 
+
 func _on_back_pressed():
 	display_button_ripple(%Back)
 	fade_menu($AboutScreen, $MainMenu)

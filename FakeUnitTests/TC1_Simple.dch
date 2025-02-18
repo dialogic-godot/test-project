@@ -4,6 +4,7 @@
 "_translation_id": "",
 "color": Color(1, 1, 1, 1),
 "custom_info": {
+"prefix": "",
 "sound_mood_default": "",
 "sound_moods": {
 "Mood1": {
@@ -27,7 +28,8 @@
 "volume_variance": 0.4
 }
 },
-"style": ""
+"style": "",
+"suffix": ""
 },
 "default_portrait": "Default",
 "description": "",
