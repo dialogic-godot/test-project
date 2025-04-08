@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://c2qgetjc3mfo3"]
 
-[ext_resource type="Script" path="res://addons/dialogic/Modules/Audio/settings_audio.gd" id="1_2iyyr"]
+[ext_resource type="Script" uid="uid://cqyhm6offcitc" path="res://addons/dialogic/Modules/Audio/settings_audio.gd" id="1_2iyyr"]
 [ext_resource type="PackedScene" uid="uid://dbpkta2tjsqim" path="res://addons/dialogic/Editor/Common/hint_tooltip_icon.tscn" id="2_o1ban"]
 [ext_resource type="PackedScene" uid="uid://dpwhshre1n4t6" path="res://addons/dialogic/Editor/Events/Fields/field_options_dynamic.tscn" id="3_bx557"]
 [ext_resource type="PackedScene" uid="uid://kdpp3mibml33" path="res://addons/dialogic/Editor/Events/Fields/field_number.tscn" id="4_xfyvc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0nb1r"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m57ns"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -59,7 +59,7 @@ hint_text = "Default settings for named audio channels."
 
 [node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0nb1r")
+theme_override_styles/panel = SubResource("StyleBoxFlat_m57ns")
 
 [node name="VBox" type="VBoxContainer" parent="Panel"]
 layout_mode = 2

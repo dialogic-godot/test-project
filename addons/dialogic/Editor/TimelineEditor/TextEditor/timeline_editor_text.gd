@@ -14,6 +14,9 @@ func _ready() -> void:
 	syntax_highlighter = code_completion_helper.syntax_highlighter
 	timeline_editor.editors_manager.sidebar.content_item_activated.connect(_on_content_item_clicked)
 
+	get_menu().add_icon_item(get_theme_icon("PlayStart", "EditorIcons"), "Play from here", 42)
+	get_menu().id_pressed.connect(_on_context_menu_id_pressed)
+
 
 func _on_text_editor_text_changed() -> void:
 	timeline_editor.current_resource_state = DialogicEditor.ResourceStates.UNSAVED
@@ -73,21 +76,41 @@ func text_timeline_to_array(text:String) -> Array:
 ## 					HELPFUL EDITOR FUNCTIONALITY
 ################################################################################
 
+func _on_context_menu_id_pressed(id:int) -> void:
+	if id == 42:
+		play_from_here()
+
+
+func play_from_here() -> void:
+	timeline_editor.play_timeline(timeline_editor.current_resource.get_index_from_text_line(text, get_caret_line()))
+
+
 func _gui_input(event):
 	if not event is InputEventKey: return
 	if not event.is_pressed(): return
 	match event.as_text():
-		"Ctrl+K":
+		"Ctrl+K", "Ctrl+Slash":
 			toggle_comment()
+
+		# TODO clean this up when dropping 4.2 support
 		"Alt+Up":
-			move_line(-1)
+			if has_method("move_lines_up"):
+				call("move_lines_up")
 		"Alt+Down":
-			move_line(1)
-		"Ctrl+Shift+D":
-			duplicate_line()
+			if has_method("move_lines_down"):
+				call("move_lines_down")
+
+		"Ctrl+Shift+D", "Ctrl+D":
+			duplicate_lines()
+
+		"Ctrl+F6" when OS.get_name() != "macOS": # Play from here
+			play_from_here()
+		"Ctrl+Shift+B" when OS.get_name() == "macOS": # Play from here
+			play_from_here()
 		_:
 			return
 	get_viewport().set_input_as_handled()
+
 
 # Toggle the selected lines as comments
 func toggle_comment() -> void:
@@ -128,67 +151,14 @@ func toggle_comment() -> void:
 	text_changed.emit()
 
 
-# Move the selected lines up or down
-func move_line(offset: int) -> void:
-	offset = clamp(offset, -1, 1)
-
-	var cursor: Vector2 = Vector2(get_caret_column(), get_caret_line())
-	var reselect: bool = false
-	var from: int = cursor.y
-	var to: int = cursor.y
-	if has_selection():
-		reselect = true
-		from = get_selection_from_line()
-		to = get_selection_to_line()
-
-	var lines := text.split("\n")
-
-	if from + offset < 0 or to + offset >= lines.size(): return
-
-	var target_from_index: int = from - 1 if offset == -1 else to + 1
-	var target_to_index: int = to if offset == -1 else from
-	var line_to_move: String = lines[target_from_index]
-	lines.remove_at(target_from_index)
-	lines.insert(target_to_index, line_to_move)
-
-	text = "\n".join(lines)
-
-	cursor.y += offset
-	from += offset
-	to += offset
-	if reselect:
-		select(from, 0, to, get_line_width(to))
-	set_caret_line(cursor.y)
-	set_caret_column(cursor.x)
-	text_changed.emit()
-
-
-func duplicate_line() -> void:
-	var cursor: Vector2 = Vector2(get_caret_column(), get_caret_line())
-	var from: int = cursor.y
-	var to: int = cursor.y+1
-	if has_selection():
-		from = get_selection_from_line()
-		to = get_selection_to_line()+1
-
-	var lines := text.split("\n")
-	var lines_to_dupl: PackedStringArray = lines.slice(from, to)
-
-	text = "\n".join(lines.slice(0, from)+lines_to_dupl+lines.slice(from))
-
-	set_caret_line(cursor.y+to-from)
-	set_caret_column(cursor.x)
-	text_changed.emit()
-
-
-# Allows dragging files into the editor
+## Allows dragging files into the editor
 func _can_drop_data(at_position:Vector2, data:Variant) -> bool:
 	if typeof(data) == TYPE_DICTIONARY and 'files' in data.keys() and len(data.files) == 1:
 		return true
 	return false
 
 
-# Allows dragging files into the editor
+## Allows dragging files into the editor
 func _drop_data(at_position:Vector2, data:Variant) -> void:
 	if typeof(data) == TYPE_DICTIONARY and 'files' in data.keys() and len(data.files) == 1:
 		set_caret_column(get_line_column_at_pos(at_position).x)
@@ -235,12 +205,23 @@ func _on_content_item_clicked(label:String) -> void:
 			return
 
 
-func _search_timeline(search_text:String) -> bool:
-	set_search_text(search_text)
-	queue_redraw()
+func _search_timeline(search_text:String, match_case := false, whole_words := false) -> bool:
+	var flags := 0
+	if match_case:
+		flags = flags | SEARCH_MATCH_CASE
+	if whole_words:
+		flags = flags | SEARCH_WHOLE_WORDS
 	set_meta("current_search", search_text)
+	set_meta("current_search_flags", flags)
 
-	return search(search_text, 0, 0, 0).y != -1
+	set_search_text(search_text)
+	set_search_flags(flags)
+	queue_redraw()
+
+	var result := search(search_text, flags, get_selection_from_line(), get_selection_from_column())
+	if result.y != -1:
+		select.call_deferred(result.y, result.x, result.y, result.x + search_text.length())
+	return result.y != -1
 
 
 func _search_navigate_down() -> void:
@@ -252,8 +233,18 @@ func _search_navigate_up() -> void:
 
 
 func search_navigate(navigate_up := false) -> void:
-	if not has_meta("current_search"):
+	var pos := get_next_search_position(navigate_up)
+	if pos.x == -1:
 		return
+	select(pos.y, pos.x, pos.y, pos.x+len(get_meta("current_search")))
+	set_caret_line(pos.y)
+	center_viewport_to_caret()
+	queue_redraw()
+
+
+func get_next_search_position(navigate_up := false) -> Vector2i:
+	if not has_meta("current_search"):
+		return Vector2i(-1, -1)
 	var pos: Vector2i
 	var search_from_line := 0
 	var search_from_column := 0
@@ -274,30 +265,75 @@ func search_navigate(navigate_up := false) -> void:
 		search_from_line = get_caret_line()
 		search_from_column = get_caret_column()
 
-	pos = search(get_meta("current_search"), 4 if navigate_up else 0, search_from_line, search_from_column)
-	select(pos.y, pos.x, pos.y, pos.x+len(get_meta("current_search")))
+	var flags := get_meta("current_search_flags", 0)
+	if navigate_up:
+		flags = flags | SEARCH_BACKWARDS
+	print()
+	pos = search(get_meta("current_search"), flags, search_from_line, search_from_column)
+	return pos
+
+
+func replace(replace_text:String) -> void:
+	if has_selection():
+		set_caret_line(get_selection_from_line())
+		set_caret_column(get_selection_from_column())
+
+	var pos := get_next_search_position()
+	if pos.x == -1:
+		return
+
+	if not has_meta("current_search"):
+		return
+
+	begin_complex_operation()
+	insert_text("@@", pos.y, pos.x)
+	if get_meta("current_search_flags") & SEARCH_MATCH_CASE:
+		text = text.replace("@@"+get_meta("current_search"), replace_text)
+	else:
+		text = text.replacen("@@"+get_meta("current_search"), replace_text)
+	end_complex_operation()
+
 	set_caret_line(pos.y)
-	center_viewport_to_caret()
-	queue_redraw()
+	set_caret_column(pos.x)
+
+	timeline_editor.replace_in_timeline()
+
+
+func replace_all(replace_text:String) -> void:
+	begin_complex_operation()
+	var next_pos := get_next_search_position()
+	var counter := 0
+	while next_pos.y != -1:
+		insert_text("@@", next_pos.y, next_pos.x)
+		if get_meta("current_search_flags") & SEARCH_MATCH_CASE:
+			text = text.replace("@@"+get_meta("current_search"), replace_text)
+		else:
+			text = text.replacen("@@"+get_meta("current_search"), replace_text)
+		next_pos = get_next_search_position()
+		set_caret_line(next_pos.y)
+		set_caret_column(next_pos.x)
+	end_complex_operation()
+
+	timeline_editor.replace_in_timeline()
 
 
 ################################################################################
 ## 					AUTO COMPLETION
 ################################################################################
 
-# Called if something was typed
+## Called if something was typed
 func _request_code_completion(force:bool):
 	code_completion_helper.request_code_completion(force, self)
 
 
-# Filters the list of all possible options, depending on what was typed
-# Purpose of the different Kinds is explained in [_request_code_completion]
+## Filters the list of all possible options, depending on what was typed
+## Purpose of the different Kinds is explained in [_request_code_completion]
 func _filter_code_completion_candidates(candidates:Array) -> Array:
 	return code_completion_helper.filter_code_completion_candidates(candidates, self)
 
 
-# Called when code completion was activated
-# Inserts the selected item
+## Called when code completion was activated
+## Inserts the selected item
 func _confirm_code_completion(replace:bool) -> void:
 	code_completion_helper.confirm_code_completion(replace, self)
 
@@ -306,11 +342,11 @@ func _confirm_code_completion(replace:bool) -> void:
 ##					SYMBOL CLICKING
 ################################################################################
 
-# Performs an action (like opening a link) when a valid symbol was clicked
+## Performs an action (like opening a link) when a valid symbol was clicked
 func _on_symbol_lookup(symbol, line, column):
 	code_completion_helper.symbol_lookup(symbol, line, column)
 
 
-# Called to test if a symbol can be clicked
+## Called to test if a symbol can be clicked
 func _on_symbol_validate(symbol:String) -> void:
 	code_completion_helper.symbol_validate(symbol, self)

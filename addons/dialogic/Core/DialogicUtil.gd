@@ -9,7 +9,9 @@ class_name DialogicUtil
 ## This method should be used instead of EditorInterface.get_editor_scale(), because if you use that
 ## it will run perfectly fine from the editor, but crash when the game is exported.
 static func get_editor_scale() -> float:
-	return get_dialogic_plugin().get_editor_interface().get_editor_scale()
+	if Engine.is_editor_hint():
+		return get_dialogic_plugin().get_editor_interface().get_editor_scale()
+	return 1.0
 
 
 ## Although this does in fact always return a EditorPlugin node,
@@ -526,6 +528,7 @@ static func setup_script_property_edit_node(property_info: Dictionary, value:Var
 		TYPE_DICTIONARY:
 			input = load("res://addons/dialogic/Editor/Events/Fields/field_dictionary.tscn").instantiate()
 			input.property_name = property_info["name"]
+			input.set_value(value)
 			input.value_changed.connect(_on_export_dict_submitted.bind(property_changed))
 		TYPE_OBJECT:
 			input = load("res://addons/dialogic/Editor/Common/hint_tooltip_icon.tscn").instantiate()
@@ -748,9 +751,8 @@ static func get_audio_bus_suggestions(filter:= "") -> Dictionary:
 	return bus_name_list
 
 
-static func get_audio_channel_suggestions(search_text:String) -> Dictionary:#, is_sync := false, event: DialogicAudioEvent = null) -> Dictionary:
-	#if is_sync and event and event.channel_name.is_empty():
-		#return {}
+static func get_audio_channel_suggestions(search_text:String) -> Dictionary:
+
 
 	var suggestions := {}
 	var channel_defaults := DialogicUtil.get_audio_channel_defaults()
@@ -765,22 +767,8 @@ static func get_audio_channel_suggestions(search_text:String) -> Dictionary:#, i
 	for i in cached_names:
 		if i.is_empty():
 			continue
-			##if is_sync:
-				##suggestions['(No Sync)'] = {
-					##'value': i,
-					##'editor_icon': ["GuiRadioUnchecked", "EditorIcons"],
-				##}
-			##else:
-				##suggestions['(One-Shot SFX)'] = {
-					##'value': i,
-					##'editor_icon': ["GuiRadioUnchecked", "EditorIcons"],
-					##'tooltip': "Used for one shot sounds effects. Plays each sound in its own AudioStreamPlayer."
-				##}
-#
-		#elif is_sync and event and event.channel_name == i:
-			#continue
-		suggestions[i] = {'value': i}
 
+		suggestions[i] = {'value': i}
 
 		if i in channel_defaults.keys():
 			suggestions[i]["editor_icon"] = ["ProjectList", "EditorIcons"]
@@ -794,8 +782,7 @@ static func get_audio_channel_suggestions(search_text:String) -> Dictionary:#, i
 
 
 static func get_audio_channel_defaults() -> Dictionary:
-	return {
-	#return ProjectSettings.get_setting('dialogic/audio/channel_defaults', {
+	return ProjectSettings.get_setting('dialogic/audio/channel_defaults', {
 		"": {
 			'volume': 0.0,
 			'audio_bus': '',
@@ -807,7 +794,7 @@ static func get_audio_channel_defaults() -> Dictionary:
 			'audio_bus': '',
 			'fade_length': 0.0,
 			'loop': true,
-		}}#)
+		}})
 
 
 static func validate_audio_channel_name(text: String) -> Dictionary:
