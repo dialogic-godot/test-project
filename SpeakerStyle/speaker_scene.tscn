@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c2xovmad23ky2"]
 
-[ext_resource type="Script" path="res://SpeakerStyle/speaker_scene.gd" id="1_kd5f8"]
+[ext_resource type="Script" uid="uid://cus85pu5ig7fw" path="res://SpeakerStyle/speaker_scene.gd" id="1_kd5f8"]
 
 [node name="SpeakerScene" type="Control"]
 layout_mode = 3

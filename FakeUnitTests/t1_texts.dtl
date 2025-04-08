@@ -63,6 +63,9 @@ TC1_Simple: Lorem ipsum dolor sit amet.
 [i]A text said by a character that doesn't exist.
 "Nonexistant character": Lorem ipsum dolor sit amet.
 
+[i]A text said by a non-existant character that has a color specified (pink)
+"Pinky" (pink): Is my name pink?
+
 [i]Text that contains a :.
 Something\: Something else.
 

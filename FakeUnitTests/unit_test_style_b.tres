@@ -1,12 +1,14 @@
 [gd_resource type="Resource" script_class="DialogicStyle" load_steps=13 format=3 uid="uid://dfwk1l55ypbbj"]
 
 [ext_resource type="Resource" uid="uid://bx0u2rpnbroc6" path="res://FakeUnitTests/unit_test_style_a.tres" id="1_yy0kc"]
-[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_d3xxp"]
-[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="3_r7y4b"]
+[ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_d3xxp"]
+[ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="3_r7y4b"]
 
 [sub_resource type="Resource" id="Resource_tofcw"]
 script = ExtResource("2_d3xxp")
-overrides = {}
+overrides = {
+"global_bg_color": "Color(0.910156, 0.223984, 0.223984, 0.9)"
+}
 
 [sub_resource type="Resource" id="Resource_uw1mi"]
 script = ExtResource("2_d3xxp")
@@ -60,4 +62,4 @@ layer_info = {
 }
 base_overrides = {}
 layers = Array[ExtResource("2_d3xxp")]([])
-metadata/_latest_layer = 1
+metadata/_latest_layer = "12"

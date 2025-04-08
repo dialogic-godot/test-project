@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://brtaff0j0wfm6"]
 
-[ext_resource type="Script" path="res://Smartphone/ContactButton.gd" id="1_pxpb2"]
+[ext_resource type="Script" uid="uid://be0602uqmd2s2" path="res://Smartphone/ContactButton.gd" id="1_pxpb2"]
 [ext_resource type="Texture2D" uid="uid://bsb3pyc2vy0bt" path="res://Smartphone/Assets/elf.png" id="2_qhow8"]
-[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://Assets/Fonts/Roboto/Roboto-Black.ttf" id="3_ogsui"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Black.ttf" id="3_ogsui"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g3y2m"]
 content_margin_left = 0.0

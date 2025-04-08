@@ -26,8 +26,8 @@ update TC3_BasicPortraits [animation="Bounce" length="3.0" wait="true"]
 [i]Animate the character repeatedly (bounce).
 update TC3_BasicPortraits [animation="Bounce" wait="true" repeat="3"]
 
-[i]Join a second character with an angry portrait at position "rightmost" (slide in left).
-join TC4_BasicPortraits2 (angry) rightmost [animation="Slide In Left"]
+[i]Join a second character with an angry portrait at position "rightmost" (Slide From Right).
+join TC4_BasicPortraits2 (angry) rightmost [animation="Slide From Right"]
 
 [i]Join a third character at position "right" (bounce in, slow).
 join TC5_BasicPortraits3 right [animation="Bounce In" length="2.0"]

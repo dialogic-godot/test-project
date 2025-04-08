@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5d2iiukwf856"]
 
-[ext_resource type="Script" path="res://VisualNovel/Assets/Characters/Antonio/animated_portrait_antonio.gd" id="1_2sp3o"]
+[ext_resource type="Script" uid="uid://pfpbgpk7shnm" path="res://VisualNovel/Assets/Characters/Antonio/animated_portrait_antonio.gd" id="1_2sp3o"]
 [ext_resource type="Texture2D" uid="uid://dssysylhvatha" path="res://VisualNovel/Assets/Characters/Antonio/pl5.png" id="2_uwubj"]
 [ext_resource type="Texture2D" uid="uid://u00jvtcbthxr" path="res://VisualNovel/Assets/Characters/Antonio/pl5 blink.png" id="3_pdxmx"]
 
