@@ -147,6 +147,7 @@ directories/dtl_directory={
 "t4_styles": "res://FakeUnitTests/t4_styles.dtl",
 "t5_various_events": "res://FakeUnitTests/t5_various_events.dtl",
 "t6_audio": "res://FakeUnitTests/t6_audio.dtl",
+"t7_backgrounds": "res://FakeUnitTests/t7_backgrounds.dtl",
 "vn_beginning": "res://VisualNovel/Timelines/vn_beginning.dtl",
 "vn_chapter1": "res://VisualNovel/Timelines/vn_chapter1.dtl",
 "vn_ending": "res://VisualNovel/Timelines/vn_ending.dtl"
