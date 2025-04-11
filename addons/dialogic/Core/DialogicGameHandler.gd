@@ -91,8 +91,11 @@ signal timeline_ended
 signal event_handled(resource: DialogicEvent)
 
 ## Emitted when a [class SignalEvent] event was reached.
+@warning_ignore("unused_signal") # This is emitted by the signal event.
 signal signal_event(argument: Variant)
+
 ## Emitted when a signal event gets fired from a [class TextEvent] event.
+@warning_ignore("unused_signal") # This is emitted by the text subsystem.
 signal text_signal(argument: String)
 
 

@@ -99,7 +99,7 @@ func _execute() -> void:
 
 		## Change to the characters style if this character has one
 		elif character and not character_style.is_empty():
-			dialogic.Styles.change_style(current_style, false)
+			dialogic.Styles.change_style(character_style, false)
 			await dialogic.get_tree().process_frame
 
 	_connect_signals()
@@ -458,7 +458,7 @@ func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:Str
 
 
 func _get_start_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit) -> void:
-	CodeCompletionHelper.suggest_characters(TextNode, CodeEdit.KIND_CLASS, true)
+	CodeCompletionHelper.suggest_characters(TextNode, CodeEdit.KIND_CLASS, self)
 
 
 func suggest_bbcode(TextNode:CodeEdit):
