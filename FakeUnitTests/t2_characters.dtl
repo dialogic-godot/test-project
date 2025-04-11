@@ -51,7 +51,7 @@ label In/Out Animations
 Fade In [aa=0]
 join TC3_BasicPortraits center [animation="Fade In" wait="true"]
 Fade Out [aa=0]
-leave TC3_BasicPortraits [animation="Fade In" wait="true"]
+leave TC3_BasicPortraits [animation="Fade" wait="true"]
 
 Fade In Up [aa=0]
 join TC3_BasicPortraits center [animation="Fade In Up" wait="true"]

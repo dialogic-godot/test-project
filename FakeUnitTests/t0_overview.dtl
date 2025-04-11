@@ -13,3 +13,5 @@ Choose a timeline to test.
 	jump t5_various_events/
 - Audio
 	jump t6_audio/
+- Backgrounds
+	jump t7_backgrounds/
