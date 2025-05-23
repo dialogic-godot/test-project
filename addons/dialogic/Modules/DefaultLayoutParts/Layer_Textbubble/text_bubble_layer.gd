@@ -25,6 +25,7 @@ extends DialogicLayoutLayer
 @export_subgroup('Behaviour')
 @export var behaviour_distance: int = 50
 @export var behaviour_direction: Vector2 = Vector2(1, -1)
+@export var behaviour_mouse_filter: Control.MouseFilter
 
 @export_group('Name Label')
 @export_subgroup("Name Label")
@@ -54,6 +55,10 @@ extends DialogicLayoutLayer
 @export var choices_layout_alignment := FlowContainer.ALIGNMENT_END
 @export var choices_layout_force_lines: bool = false
 @export_file('*.tres', "*.res") var choices_base_theme: String = ""
+
+@export_subgroup('Behavior')
+@export var maximum_choices: int = 5
+@export_file('*.tscn') var choices_custom_button: String = ""
 
 const TextBubble := preload("res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Textbubble/text_bubble.gd")
 
@@ -93,7 +98,7 @@ func bubble_apply_overrides(bubble:TextBubble) -> void:
 	if !bold_font.is_empty():
 		rtl.add_theme_font_override(&"bold_font", load(bold_font) as Font)
 	if !italic_font.is_empty():
-		rtl.add_theme_font_override(&"italitc_font", load(italic_font) as Font)
+		rtl.add_theme_font_override(&"italics_font", load(italic_font) as Font)
 	if !bold_italic_font.is_empty():
 		rtl.add_theme_font_override(&"bold_italics_font", load(bold_italic_font) as Font)
 	bubble.set(&'max_width', text_max_width)
@@ -118,6 +123,7 @@ func bubble_apply_overrides(bubble:TextBubble) -> void:
 	## BEHAVIOUR
 	bubble.safe_zone = behaviour_distance
 	bubble.base_direction = behaviour_direction
+	bubble.change_mouse_filter(behaviour_mouse_filter)
 
 
 	## NAME LABEL SETTINGS
@@ -144,15 +150,13 @@ func bubble_apply_overrides(bubble:TextBubble) -> void:
 	bubble.name_label_offset = name_label_offset
 	bubble.name_label_alignment = name_label_alignment
 
-	if !name_label_enabled:
-		nlp.queue_free()
-
+	nlp.get_parent().visible = name_label_enabled
 
 	## CHOICE SETTINGS
 	if choices_layout_force_lines:
-		bubble.add_choice_container(VBoxContainer.new(), choices_layout_alignment)
+		bubble.add_choice_container(VBoxContainer.new(), choices_layout_alignment, choices_custom_button, maximum_choices)
 	else:
-		bubble.add_choice_container(HFlowContainer.new(), choices_layout_alignment)
+		bubble.add_choice_container(HFlowContainer.new(), choices_layout_alignment, choices_custom_button, maximum_choices)
 
 	var choice_theme: Theme = null
 	if choices_base_theme.is_empty() or not ResourceLoader.exists(choices_base_theme):
@@ -185,5 +189,3 @@ func bubble_apply_overrides(bubble:TextBubble) -> void:
 	choice_theme.set_color(&'font_focus_color', &'Button', choices_text_color_focus)
 	choice_theme.set_color(&'font_disabled_color', &'Button', choices_text_color_disabled)
 	bubble.choice_container.theme = choice_theme
-
-

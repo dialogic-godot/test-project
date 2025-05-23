@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqw0xfdhc4nc4"]
 
-[ext_resource type="Texture2D" uid="uid://bp18h0ibngt7s" path="res://MainMenu/Assets/RPG_Preview.PNG" id="1_8asru"]
-[ext_resource type="Script" path="res://Smartphone/image_message_panel.gd" id="1_kupgr"]
+[ext_resource type="Texture2D" uid="uid://d21yy5g7kxcpg" path="res://MainMenu/Assets/RPG_Preview.PNG" id="1_8asru"]
+[ext_resource type="Script" uid="uid://dfdwc73q4m2v1" path="res://Smartphone/image_message_panel.gd" id="1_kupgr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwfob"]
 content_margin_left = 10.0

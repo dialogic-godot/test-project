@@ -9,7 +9,9 @@ class_name DialogicUtil
 ## This method should be used instead of EditorInterface.get_editor_scale(), because if you use that
 ## it will run perfectly fine from the editor, but crash when the game is exported.
 static func get_editor_scale() -> float:
-	return get_dialogic_plugin().get_editor_interface().get_editor_scale()
+	if Engine.is_editor_hint():
+		return get_dialogic_plugin().get_editor_interface().get_editor_scale()
+	return 1.0
 
 
 ## Although this does in fact always return a EditorPlugin node,
@@ -77,14 +79,22 @@ static func _update_autoload_subsystem_access() -> void:
 
 	var script: Script = load("res://addons/dialogic/Core/DialogicGameHandler.gd")
 	var new_subsystem_access_list := "#region SUBSYSTEMS\n"
+	var subsystems_sorted := []
 
 	for indexer: DialogicIndexer in get_indexers(true, true):
 
 		for subsystem: Dictionary in indexer._get_subsystems().duplicate(true):
-			new_subsystem_access_list += '\nvar {name} := preload("{script}").new():\n\tget: return get_subsystem("{name}")\n'.format(subsystem)
+			subsystems_sorted.append(subsystem)
+
+	subsystems_sorted.sort_custom(func (a: Dictionary, b: Dictionary) -> bool:
+		return a.name < b.name
+	)
+
+	for subsystem: Dictionary in subsystems_sorted:
+		new_subsystem_access_list += '\nvar {name} := preload("{script}").new():\n\tget: return get_subsystem("{name}")\n'.format(subsystem)
 
 	new_subsystem_access_list += "\n#endregion"
-	script.source_code = RegEx.create_from_string("#region SUBSYSTEMS\\n#*\\n((?!#endregion)(.*\\n))*#endregion").sub(script.source_code, new_subsystem_access_list)
+	script.source_code = RegEx.create_from_string(r"#region SUBSYSTEMS\n#*\n((?!#endregion)(.*\n))*#endregion").sub(script.source_code, new_subsystem_access_list)
 	ResourceSaver.save(script)
 	Engine.get_singleton("EditorInterface").get_resource_filesystem().reimport_files(["res://addons/dialogic/Core/DialogicGameHandler.gd"])
 
@@ -111,39 +121,6 @@ static func get_indexers(include_custom := true, force_reload := false) -> Array
 	return indexers
 
 
-enum AnimationType {ALL, IN, OUT, ACTION}
-
-
-
-static func get_portrait_animation_scripts(type := AnimationType.ALL) -> Array:
-	var animations := DialogicResourceUtil.list_special_resources_of_type("PortraitAnimation")
-	const CROSS_ANIMATION := "_in_out"
-	const OUT_ANIMATION := "_out"
-	const IN_ANIMATION := "_in"
-
-	return animations.filter(
-		func(script: String) -> bool:
-			match (type):
-				AnimationType.ALL:
-					return true
-
-				AnimationType.IN:
-					return IN_ANIMATION in script or CROSS_ANIMATION in script
-
-				AnimationType.OUT:
-					return OUT_ANIMATION in script or CROSS_ANIMATION in script
-
-				# All animations that are not IN or OUT.
-				# Extra check for CROSS animations to prevent parsing parts
-				# of the name as an IN or OUT animation.
-				AnimationType.ACTION:
-					#return CROSS_ANIMATION in script or not (IN_ANIMATION in script or OUT_ANIMATION in script)
-					return not IN_ANIMATION in script and not OUT_ANIMATION in script
-
-				_:
-					return false
-	)
-
 
 ## Turns a [param file_path] from `some_file.png` to `Some File`.
 static func pretty_name(file_path: String) -> String:
@@ -152,7 +129,6 @@ static func pretty_name(file_path: String) -> String:
 	_name = _name.capitalize()
 
 	return _name
-
 
 #endregion
 
@@ -388,7 +364,7 @@ static func get_scene_export_defaults(node:Node) -> Dictionary:
 	if !Engine.get_main_loop().has_meta('dialogic_scene_export_defaults'):
 		Engine.get_main_loop().set_meta('dialogic_scene_export_defaults', {})
 	var defaults := {}
-	var property_info :Array[Dictionary] = node.script.get_script_property_list()
+	var property_info: Array[Dictionary] = node.script.get_script_property_list()
 	for i in property_info:
 		if i['usage'] & PROPERTY_USAGE_EDITOR:
 			defaults[i['name']] = node.get(i['name'])
@@ -397,6 +373,74 @@ static func get_scene_export_defaults(node:Node) -> Dictionary:
 
 #endregion
 
+#region MAKE CUSTOM
+
+static func make_file_custom(original_file:String, target_folder:String, new_file_name := "", new_folder_name := "") -> String:
+	if not ResourceLoader.exists(original_file):
+		push_error("[Dialogic] Unable to make file with invalid path custom!")
+		return ""
+
+	if new_folder_name:
+		target_folder = target_folder.path_join(new_folder_name)
+		DirAccess.make_dir_absolute(target_folder)
+
+	if new_file_name.is_empty():
+		new_file_name = "custom_" + original_file.get_file()
+
+	if not new_file_name.ends_with(original_file.get_extension()):
+		new_file_name += "." + original_file.get_extension()
+
+	var target_file := target_folder.path_join(new_file_name)
+
+	customize_file(original_file, target_file)
+
+	get_dialogic_plugin().get_editor_interface().get_resource_filesystem().scan_sources()
+
+	return target_file
+
+
+static func customize_file(original_file:String, target_file:String) -> String:
+	#print("\nCUSTOMIZE FILE")
+	#printt(original_file, "->", target_file)
+
+	DirAccess.copy_absolute(original_file, target_file)
+
+	var file := FileAccess.open(target_file, FileAccess.READ)
+	var file_text := file.get_as_text()
+	file.close()
+
+	# If we are customizing a scene, we check for any resources used in that scene that are in the same folder.
+	# Those will be copied as well and the scene will be modified to point to them.
+	if file_text.begins_with('[gd_'):
+		var base_path: String = original_file.get_base_dir()
+
+		var remove_uuid_regex := r'\[gd_.* (?<uid>uid="uid:[^"]*")'
+		var result := RegEx.create_from_string(remove_uuid_regex).search(file_text)
+		if result:
+			file_text = file_text.replace(result.get_string("uid"), "")
+
+		# This regex also removes the UID referencing the original resource
+		var file_regex := r'(uid="[^"]*" )?\Qpath="'+base_path+r'\E(?<file>[^"]*)"'
+		result = RegEx.create_from_string(file_regex).search(file_text)
+		while result:
+			var found_file_name := result.get_string('file')
+			var found_file_path := base_path.path_join(found_file_name)
+			var target_file_path := target_file.get_base_dir().path_join(found_file_name)
+
+			# Files found in this file will ALSO be customized.
+			customize_file(found_file_path, target_file_path)
+
+			file_text = file_text.replace(found_file_path, target_file_path)
+
+			result = RegEx.create_from_string(file_regex).search(file_text)
+
+	file = FileAccess.open(target_file, FileAccess.WRITE)
+	file.store_string(file_text)
+	file.close()
+
+	return target_file
+
+#endregion
 
 #region INSPECTOR FIELDS
 ################################################################################
@@ -481,9 +525,15 @@ static func setup_script_property_edit_node(property_info: Dictionary, value:Var
 				if value != null:
 					input.text = value
 				input.text_submitted.connect(DialogicUtil._on_export_input_text_submitted.bind(property_info.name, property_changed))
+		TYPE_DICTIONARY:
+			input = load("res://addons/dialogic/Editor/Events/Fields/field_dictionary.tscn").instantiate()
+			input.property_name = property_info["name"]
+			input.set_value(value)
+			input.value_changed.connect(_on_export_dict_submitted.bind(property_changed))
 		TYPE_OBJECT:
 			input = load("res://addons/dialogic/Editor/Common/hint_tooltip_icon.tscn").instantiate()
 			input.hint_text = "Objects/Resources as settings are currently not supported. \nUse @export_file('*.extension') instead and load the resource once needed."
+
 		_:
 			input = LineEdit.new()
 			if value != null:
@@ -514,6 +564,9 @@ static func _on_export_string_enum_submitted(value:int, property_name:String, li
 	callable.call(property_name, var_to_str(list[value]))
 
 static func _on_export_vector_submitted(property_name:String, value:Variant, callable: Callable) -> void:
+	callable.call(property_name, var_to_str(value))
+
+static func _on_export_dict_submitted(property_name:String, value:Variant, callable: Callable) -> void:
 	callable.call(property_name, var_to_str(value))
 
 #endregion
@@ -617,7 +670,7 @@ static func get_portrait_suggestions(search_text:String, character:DialogicChara
 
 
 static func get_portrait_position_suggestions(search_text := "") -> Dictionary:
-	var icon := load(DialogicUtil.get_module_path("Character").path_join('event_portrait_position.svg'))
+	var icon := load(DialogicUtil.get_module_path("Character").path_join('portrait_position.svg'))
 
 	var setting: String = ProjectSettings.get_setting('dialogic/portraits/position_suggestion_names', 'leftmost, left, center, right, rightmost')
 
@@ -634,15 +687,131 @@ static func get_portrait_position_suggestions(search_text := "") -> Dictionary:
 	return suggestions
 
 
-static func get_portrait_animation_suggestions(_search_text := "", empty_text := "Default", action := AnimationType.ALL) -> Dictionary:
+static func get_autoload_suggestions(filter:String="") -> Dictionary:
 	var suggestions := {}
 
-	suggestions[empty_text] = {'value':"", 'editor_icon':["GuiRadioUnchecked", "EditorIcons"]}
+	for prop in ProjectSettings.get_property_list():
+		if prop.name.begins_with('autoload/'):
+			var some_autoload: String = prop.name.trim_prefix('autoload/')
+			suggestions[some_autoload] = {'value': some_autoload, 'tooltip':some_autoload, 'editor_icon': ["Node", "EditorIcons"]}
+			if filter.begins_with(some_autoload):
+				suggestions[filter] = {'value': filter, 'editor_icon':["GuiScrollArrowRight", "EditorIcons"]}
+	return suggestions
 
-	for anim in DialogicUtil.get_portrait_animation_scripts(action):
-		suggestions[DialogicUtil.pretty_name(anim)] = {
-			'value'			: DialogicUtil.pretty_name(anim),
-			'editor_icon'	: ["Animation", "EditorIcons"]
-			}
+
+static func get_autoload_script_resource(autoload_name:String) -> Script:
+	var script: Script
+	if autoload_name and ProjectSettings.has_setting('autoload/'+autoload_name):
+		var loaded_autoload := load(ProjectSettings.get_setting('autoload/'+autoload_name).trim_prefix('*'))
+
+		if loaded_autoload is PackedScene:
+			var packed_scene: PackedScene = loaded_autoload
+			script = packed_scene.instantiate().get_script()
+
+		else:
+			script = loaded_autoload
+	return script
+
+
+static func get_autoload_method_suggestions(filter:String, autoload_name:String) -> Dictionary:
+	var suggestions := {}
+
+	var script := get_autoload_script_resource(autoload_name)
+	if script:
+		for script_method in script.get_script_method_list():
+			if script_method.name.begins_with('@') or script_method.name.begins_with('_'):
+				continue
+			suggestions[script_method.name] = {'value': script_method.name, 'tooltip':script_method.name, 'editor_icon': ["Callable", "EditorIcons"]}
+
+	if not filter.is_empty():
+		suggestions[filter] = {'value': filter, 'editor_icon':["GuiScrollArrowRight", "EditorIcons"]}
 
 	return suggestions
+
+
+static func get_autoload_property_suggestions(_filter:String, autoload_name:String) -> Dictionary:
+	var suggestions := {}
+	var script := get_autoload_script_resource(autoload_name)
+	if script:
+		for property in script.get_script_property_list():
+			if property.name.ends_with('.gd') or property.name.begins_with('_'):
+				continue
+			suggestions[property.name] = {'value': property.name, 'tooltip':property.name, 'editor_icon': ["MemberProperty", "EditorIcons"]}
+
+	return suggestions
+
+
+static func get_audio_bus_suggestions(_filter:= "") -> Dictionary:
+	var bus_name_list := {}
+	for i in range(AudioServer.bus_count):
+		if i == 0:
+			bus_name_list[AudioServer.get_bus_name(i)] = {'value':''}
+		else:
+			bus_name_list[AudioServer.get_bus_name(i)] = {'value':AudioServer.get_bus_name(i)}
+	return bus_name_list
+
+
+static func get_audio_channel_suggestions(_search_text:String) -> Dictionary:
+	var suggestions := {}
+	var channel_defaults := DialogicUtil.get_audio_channel_defaults()
+	var cached_names := DialogicResourceUtil.get_channel_list()
+
+	for i in channel_defaults.keys():
+		if not cached_names.has(i):
+			cached_names.append(i)
+
+	cached_names.sort()
+
+	for i in cached_names:
+		if i.is_empty():
+			continue
+
+		suggestions[i] = {'value': i}
+
+		if i in channel_defaults.keys():
+			suggestions[i]["editor_icon"] = ["ProjectList", "EditorIcons"]
+			suggestions[i]["tooltip"] = "A default channel defined in the settings."
+
+		else:
+			suggestions[i]["editor_icon"] = ["AudioStreamPlayer", "EditorIcons"]
+			suggestions[i]["tooltip"] = "A temporary channel without defaults."
+
+	return suggestions
+
+
+static func get_audio_channel_defaults() -> Dictionary:
+	return ProjectSettings.get_setting('dialogic/audio/channel_defaults', {
+		"": {
+			'volume': 0.0,
+			'audio_bus': '',
+			'fade_length': 0.0,
+			'loop': false,
+		},
+		"music": {
+			'volume': 0.0,
+			'audio_bus': '',
+			'fade_length': 0.0,
+			'loop': true,
+		}})
+
+
+static func validate_audio_channel_name(text: String) -> Dictionary:
+	var result := {}
+	var channel_name_regex := RegEx.create_from_string(r'(?<dash_only>^-$)|(?<invalid>[^\w-]{1})')
+	var matches := channel_name_regex.search_all(text)
+	var invalid_chars := []
+
+	for regex_match in matches:
+		if regex_match.get_string('dash_only'):
+			result['error_tooltip'] = "Channel name cannot be '-'."
+			result['valid_text'] = ''
+		else:
+			var invalid_char = regex_match.get_string('invalid')
+			if not invalid_char in invalid_chars:
+				invalid_chars.append(invalid_char)
+
+	if invalid_chars:
+		result['valid_text'] = channel_name_regex.sub(text, '', true)
+		result['error_tooltip'] = "Channel names cannot contain the following characters: " + "".join(invalid_chars)
+
+	return result

@@ -32,7 +32,7 @@ var bg_padding := 30
 
 func _ready() -> void:
 	reset()
-	DialogicUtil.autoload().Choices.choices_shown.connect(_on_choices_shown)
+	DialogicUtil.autoload().Choices.question_shown.connect(_on_question_shown)
 
 
 func reset() -> void:
@@ -42,7 +42,7 @@ func reset() -> void:
 	tail.points = []
 	bubble_rect = Rect2(0,0,2,2)
 
-	base_position = get_speaker_canvas_position()
+	base_position = get_speaker_canvas_position() + base_direction * safe_zone
 	position = base_position
 
 
@@ -133,7 +133,7 @@ func _resize_bubble(content_size:Vector2, popup:=false) -> void:
 	name_label_holder.size.x = text.size.x
 
 
-func _on_choices_shown(info:Dictionary) -> void:
+func _on_question_shown(info:Dictionary) -> void:
 	if !is_visible_in_tree():
 		return
 
@@ -155,7 +155,7 @@ func get_base_content_size() -> Vector2:
 		)
 
 
-func add_choice_container(node:Container, alignment:=FlowContainer.ALIGNMENT_BEGIN) -> void:
+func add_choice_container(node:Container, alignment:=FlowContainer.ALIGNMENT_BEGIN, choices_button_path:="", maximum_choices:=5) -> void:
 	if choice_container:
 		choice_container.get_parent().remove_child(choice_container)
 		choice_container.queue_free()
@@ -168,9 +168,21 @@ func add_choice_container(node:Container, alignment:=FlowContainer.ALIGNMENT_BEG
 
 	if node is HFlowContainer:
 		(node as HFlowContainer).alignment = alignment
+	
+	var choices_button: PackedScene = null
+	if not choices_button_path.is_empty():
+		if ResourceLoader.exists(choices_button_path):
+			choices_button = (load(choices_button_path) as PackedScene)
+		else:
+			printerr("[Dialogic] Unable to load custom choice button from ", choices_button_path)
 
-	for i:int in range(5):
-		choice_container.add_child(DialogicNode_ChoiceButton.new())
+	for i:int in range(maximum_choices):
+		var new_button : DialogicNode_ChoiceButton
+		if choices_button == null:
+			new_button = DialogicNode_ChoiceButton.new()
+		else:
+			new_button = (choices_button.instantiate() as DialogicNode_ChoiceButton)
+		choice_container.add_child(new_button)
 		if node is HFlowContainer:
 			continue
 		match alignment:
@@ -193,10 +205,18 @@ func add_choice_container(node:Container, alignment:=FlowContainer.ALIGNMENT_BEG
 
 
 func get_speaker_canvas_position() -> Vector2:
-	if node_to_point_at:
+	if is_instance_valid(node_to_point_at):
 		if node_to_point_at is Node3D:
 			base_position = get_viewport().get_camera_3d().unproject_position(
 				(node_to_point_at as Node3D).global_position)
 		if node_to_point_at is CanvasItem:
 			base_position = (node_to_point_at as CanvasItem).get_global_transform_with_canvas().origin
 	return base_position
+
+
+## Changes the property of mouse filter of the bubble and its children (text and label).
+func change_mouse_filter(mouse_filter: Control.MouseFilter) -> void:
+	mouse_filter = mouse_filter
+	text.mouse_filter = mouse_filter
+	name_label_box.mouse_filter = mouse_filter
+	name_label_holder.mouse_filter = mouse_filter

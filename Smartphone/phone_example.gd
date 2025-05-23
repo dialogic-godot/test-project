@@ -22,6 +22,7 @@ func _ready() -> void:
 
 	Dialogic.clear()
 	Dialogic.Settings.text_speed = 0
+	Dialogic.Choices.reveal_by_input = true
 	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 2)
 	Dialogic.Choices.reveal_by_input = true
 

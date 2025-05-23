@@ -1,40 +1,46 @@
-[gd_resource type="Resource" script_class="DialogicStyle" load_steps=12 format=3 uid="uid://dfwk1l55ypbbj"]
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=13 format=3 uid="uid://dfwk1l55ypbbj"]
 
 [ext_resource type="Resource" uid="uid://bx0u2rpnbroc6" path="res://FakeUnitTests/unit_test_style_a.tres" id="1_yy0kc"]
-[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_d3xxp"]
-[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="3_r7y4b"]
+[ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_d3xxp"]
+[ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="3_r7y4b"]
 
-[sub_resource type="Resource" id="Resource_ex6a2"]
+[sub_resource type="Resource" id="Resource_tofcw"]
+script = ExtResource("2_d3xxp")
+overrides = {
+"global_bg_color": "Color(0.910156, 0.223984, 0.223984, 0.9)"
+}
+
+[sub_resource type="Resource" id="Resource_uw1mi"]
 script = ExtResource("2_d3xxp")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_cmcvq"]
+[sub_resource type="Resource" id="Resource_701bc"]
 script = ExtResource("2_d3xxp")
 overrides = {
 "portrait_size_mode": "1"
 }
 
-[sub_resource type="Resource" id="Resource_y5t4q"]
+[sub_resource type="Resource" id="Resource_5rmbw"]
 script = ExtResource("2_d3xxp")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_lw3yu"]
+[sub_resource type="Resource" id="Resource_7161f"]
 script = ExtResource("2_d3xxp")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_gr5fk"]
+[sub_resource type="Resource" id="Resource_hkllo"]
 script = ExtResource("2_d3xxp")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_cijw1"]
+[sub_resource type="Resource" id="Resource_oxef3"]
 script = ExtResource("2_d3xxp")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_6iv6n"]
+[sub_resource type="Resource" id="Resource_js1oc"]
 script = ExtResource("2_d3xxp")
 overrides = {}
 
-[sub_resource type="Resource" id="Resource_cnjx0"]
+[sub_resource type="Resource" id="Resource_4h8sp"]
 script = ExtResource("2_d3xxp")
 overrides = {}
 
@@ -42,9 +48,18 @@ overrides = {}
 script = ExtResource("3_r7y4b")
 name = "UnitTestStyle_B"
 inherits = ExtResource("1_yy0kc")
-base_overrides = {
-"global_bg_color": "Color(0.12549, 0.2, 0.545098, 0.956863)",
-"global_font_color": "Color(0.6, 0.976471, 0.843137, 1)"
+layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16", "17"])
+layer_info = {
+"": SubResource("Resource_tofcw"),
+"10": SubResource("Resource_uw1mi"),
+"11": SubResource("Resource_701bc"),
+"12": SubResource("Resource_5rmbw"),
+"13": SubResource("Resource_7161f"),
+"14": SubResource("Resource_hkllo"),
+"15": SubResource("Resource_oxef3"),
+"16": SubResource("Resource_js1oc"),
+"17": SubResource("Resource_4h8sp")
 }
-layers = Array[ExtResource("2_d3xxp")]([SubResource("Resource_ex6a2"), SubResource("Resource_cmcvq"), SubResource("Resource_y5t4q"), SubResource("Resource_lw3yu"), SubResource("Resource_gr5fk"), SubResource("Resource_cijw1"), SubResource("Resource_6iv6n"), SubResource("Resource_cnjx0")])
-metadata/_latest_layer = 1
+base_overrides = {}
+layers = Array[ExtResource("2_d3xxp")]([])
+metadata/_latest_layer = "12"

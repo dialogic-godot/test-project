@@ -14,4 +14,3 @@ func fade(fade_in:= false):
 		tween.tween_property(self, 'modulate', Color.TRANSPARENT, 0.2)
 	await tween.finished
 	await get_tree().create_timer(0.3).timeout
-

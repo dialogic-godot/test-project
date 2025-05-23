@@ -12,7 +12,7 @@ func animate() -> void:
 
 	else:
 		node.scale = Vector2(0, 0)
-		node.position.y = end_position.y - node.get_viewport().size.y * 0.5
+		node.position.y = base_position.y - node.get_viewport().size.y * 0.5
 
 		var original_modulation: Color = node.get(modulate_property)
 		original_modulation.a = 0.0
@@ -22,8 +22,15 @@ func animate() -> void:
 	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_EXPO)
 	tween.set_parallel(true)
 	tween.tween_property(node, "scale", end_scale, time)
-	tween.tween_property(node, "position", end_position, time)
+	tween.tween_property(node, "position", base_position, time)
 	tween.tween_property(node,  modulate_alpha_property, end_modulation_alpha, time)
 
 	await tween.finished
 	finished_once.emit()
+
+
+func _get_named_variations() -> Dictionary:
+	return {
+		"zoom center in": {"reversed": false, "type": AnimationType.IN},
+		"zoom center out": {"reversed": true, "type": AnimationType.OUT},
+	}

@@ -1,0 +1,57 @@
+This timeline tests various audio events.
+It will describe the desired effect, then do it.
+
+
+label Music
+[i]MP3 Music will play (click to end it). It will not fade in and out.
+audio music "res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" [fade="0.0" volume="-15.0"]
+[wait_input]
+audio music - [fade="0.0"]
+
+[i]WAV Music will play (click to end it). It will not fade in and out.
+audio music "res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" [fade="0.0" volume="-15.0"]
+[wait_input]
+audio music - [fade="0.0"]
+
+[i]OGG Music will play (click to end it). It will not fade in and out.
+audio music "res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" [fade="0.0" volume="-15.0"]
+[wait_input ]
+audio music - [fade="0.0"]
+
+
+label Music Looping
+[i]Looping OGG Music will play (click to end it). It will fade in and out (1s each).
+audio music "res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" [fade="1.0" volume="-15.0" loop="true"]
+[wait_input ]
+audio music - [fade="1.0"]
+
+[i]Same file but with looping turned off (click to end it). It will fade in (and out if canceled early).
+audio music "res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg" [fade="1.0" volume="-15.0" loop="false"]
+[wait_input ]
+audio music - [fade="1.0"]
+
+label Music Channels
+[i]Play an ambient wind sound on a music channel. Then play music on another. On a click stop the music and on another click, stop the wind sound.
+audio music2 "res://FakeUnitTests/Assets/SFX/wind_ambiance.wav"
+[wait time="2"]
+audio music3 "res://FakeUnitTests/Assets/Music/Play Now.mp3" [volume="-22.0"]
+[wait_input]
+audio music3 -
+[wait_input]
+audio music2 -
+
+
+label Sound
+[i]Play a bell sound effect.
+audio "res://FakeUnitTests/Assets/SFX/bell_03.ogg"
+[wait_input ]
+
+[i]Play a bell sound effect with -15db volume.
+audio "res://FakeUnitTests/Assets/SFX/bell_03.ogg" [volume="-15.0"]
+[wait_input ]
+
+[i]Play a bell sound effect with -15db volume on an audio bus with reverb.
+audio "res://FakeUnitTests/Assets/SFX/bell_03.ogg" [volume="-15.0" bus="UnitTestBus"]
+[wait_input ]
+
+jump t0_overview/

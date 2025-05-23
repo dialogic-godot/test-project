@@ -8,20 +8,20 @@ enum Actions {JOIN, LEAVE, UPDATE}
 ### Settings
 
 ## The type of action of this event (JOIN/LEAVE/UPDATE). See [Actions].
-var action : int =  Actions.JOIN
+var action :=  Actions.JOIN
 ## The character that will join/leave/update.
-var character : DialogicCharacter = null
+var character: DialogicCharacter = null
 ## For Join/Update, this will be the portrait of the character that is shown.
 ## Not used on Leave.
 ## If empty, the default portrait will be used.
-var portrait: String = ""
+var portrait := ""
 ## The index of the position this character should move to
-var transform: String = "center"
+var transform := "center"
 
 ## Name of the animation script (extending DialogicAnimation).
 ## On Join/Leave empty (default) will fallback to the animations set in the settings.
 ## On Update empty will mean no animation.
-var animation_name: String = ""
+var animation_name := ""
 ## Length of the animation.
 var animation_length: float = 0.5
 ## How often the animation is repeated. Only for Update events.
@@ -64,9 +64,9 @@ var trans_options := [
 ## The z_index that the portrait should have.
 var z_index: int = 0
 ## If true, the portrait will be set to mirrored.
-var mirrored: bool = false
+var mirrored := false
 ## If set, will be passed to the portrait scene.
-var extra_data: String = ""
+var extra_data := ""
 
 
 ### Helpers
@@ -82,13 +82,16 @@ var character_identifier: String:
 		if character_identifier == '--All--':
 			return '--All--'
 		if character:
-			var identifier := DialogicResourceUtil.get_unique_identifier(character.resource_path)
+			var identifier := character.get_identifier()
 			if not identifier.is_empty():
 				return identifier
 		return character_identifier
 	set(value):
 		character_identifier = value
 		character = DialogicResourceUtil.get_character_resource(value)
+		if (not character) or (character and not character.portraits.has(portrait)):
+			portrait = ""
+			ui_update_needed.emit()
 
 var regex := RegEx.create_from_string(r'(?<type>join|update|leave)\s*(")?(?<name>(?(2)[^"\n]*|[^(: \n]*))(?(2)"|)(\W*\((?<portrait>.*)\))?(\s*(?<transform>[^\[]*))?(\s*\[(?<shortcode>.*)\])?')
 
@@ -151,10 +154,10 @@ func _execute() -> void:
 			finish()
 			return
 
-		dialogic.Portraits.change_character_extradata(character, extra_data)
-
 		if set_portrait:
 			dialogic.Portraits.change_character_portrait(character, portrait, fade_animation, fade_length)
+
+		dialogic.Portraits.change_character_extradata(character, extra_data)
 
 		if set_mirrored:
 			dialogic.Portraits.change_character_mirror(character, mirrored)
@@ -222,7 +225,7 @@ func to_text() -> String:
 	if action == Actions.LEAVE and character_identifier == '--All--':
 		result_string += "--All--"
 	elif character:
-		var name := DialogicResourceUtil.get_unique_identifier(character.resource_path)
+		var name := character.get_character_name()
 
 		if name.count(" ") > 0:
 			name = '"' + name + '"'
@@ -237,6 +240,11 @@ func to_text() -> String:
 	# TRANSFORM
 	if action == Actions.JOIN or (action == Actions.UPDATE and set_transform):
 		result_string += " " + str(transform)
+
+	# SETS:
+	if action == Actions.JOIN or action == Actions.LEAVE:
+		set_mirrored = mirrored != default_values.get("mirrored", false)
+		set_z_index = z_index != default_values.get("z_index", 0)
 
 	var shortcode := store_to_shortcode_parameters()
 
@@ -296,7 +304,7 @@ func get_shortcode_parameters() -> Dictionary:
 										'Update':{'value':Actions.UPDATE}}},
 		"character" 	: {"property": "character_identifier",	"default": "", "custom_stored":true,},
 		"portrait" 		: {"property": "portrait", 				"default": "", "custom_stored":true,},
-		"tranform" 		: {"property": "tranform", 				"default": 1, "custom_stored":true,},
+		"transform" 	: {"property": "transform", 			"default": "center", "custom_stored":true,},
 
 		"animation"		: {"property": "animation_name", 			"default": ""},
 		"length"		: {"property": "animation_length", 			"default": 0.5},
@@ -383,7 +391,7 @@ func build_event_editor() -> void:
 			'placeholder' 			: 'Default',
 			'enable_pretty_name' 	: true},
 			'should_show_fade_options()')
-	add_body_edit('fade_length', ValueType.NUMBER, {'left_text':'Length:', 'suffix':'s'},
+	add_body_edit('fade_length', ValueType.NUMBER, {'left_text':'Length:', 'suffix':'s', "min":0},
 			'should_show_fade_options() and !fade_animation.is_empty()')
 	add_body_line_break("should_show_fade_options()")
 	add_body_edit('animation_name', ValueType.DYNAMIC_OPTIONS,
@@ -393,14 +401,14 @@ func build_event_editor() -> void:
 			'placeholder' 			: 'Default',
 			'enable_pretty_name' 	: true},
 			'should_show_animation_options()')
-	add_body_edit('animation_length', ValueType.NUMBER, {'left_text':'Length:', 'suffix':'s'},
+	add_body_edit('animation_length', ValueType.NUMBER, {'left_text':'Length:', 'suffix':'s', "min":0},
 			'should_show_animation_options() and !animation_name.is_empty()')
 	add_body_edit('animation_wait', ValueType.BOOL, {'left_text':'Await end:'},
 			'should_show_animation_options() and !animation_name.is_empty()')
-	add_body_edit('animation_repeats', ValueType.NUMBER, {'left_text':'Repeat:', 'mode':1},
+	add_body_edit('animation_repeats', ValueType.NUMBER, {'left_text':'Repeat:', 'mode':1, "min":1},
 			'should_show_animation_options() and !animation_name.is_empty() and action == %s)' %Actions.UPDATE)
 	add_body_line_break()
-	add_body_edit('transform_time', ValueType.NUMBER, {'left_text':'Movement duration:'},
+	add_body_edit('transform_time', ValueType.NUMBER, {'left_text':'Movement duration:', "min":0},
 			"should_show_transform_options()")
 	add_body_edit("transform_trans", ValueType.FIXED_OPTIONS, {'options':trans_options, 'left_text':"Trans:"}, 'should_show_transform_options() and transform_time > 0')
 	add_body_edit("transform_ease", ValueType.FIXED_OPTIONS, {'options':ease_options, 'left_text':"Ease:"}, 'should_show_transform_options() and transform_time > 0')
@@ -450,13 +458,19 @@ func get_position_suggestions(search_text:String='') -> Dictionary:
 
 
 func get_animation_suggestions(search_text:String='') -> Dictionary:
-	var empty_text := "Default"
-	if action == Actions.UPDATE:
-		empty_text = "None"
-	return DialogicUtil.get_portrait_animation_suggestions(search_text, empty_text, action+1)
+	var DPAU := DialogicPortraitAnimationUtil
+	match action:
+		Actions.JOIN:
+			return DPAU.get_suggestions(search_text, animation_name, "Default", DPAU.AnimationType.IN)
+		Actions.LEAVE:
+			return DPAU.get_suggestions(search_text, animation_name, "Default", DPAU.AnimationType.OUT)
+		Actions.UPDATE:
+			return DPAU.get_suggestions(search_text, animation_name, "None", DPAU.AnimationType.ACTION)
+	return {}
+
 
 func get_fade_suggestions(search_text:String='') -> Dictionary:
-	return DialogicUtil.get_portrait_animation_suggestions(search_text, "Default", 1)
+	return DialogicPortraitAnimationUtil.get_suggestions(search_text, fade_animation, "Default", DialogicPortraitAnimationUtil.AnimationType.CROSSFADE)
 
 
 ####################### CODE COMPLETION ########################################
@@ -464,8 +478,8 @@ func get_fade_suggestions(search_text:String='') -> Dictionary:
 
 func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:String, _word:String, symbol:String) -> void:
 	var line_until_caret: String = CodeCompletionHelper.get_line_untill_caret(line)
-	if symbol == ' ' and line_until_caret.count(' ') == 1:
-		CodeCompletionHelper.suggest_characters(TextNode, CodeEdit.KIND_MEMBER)
+	if symbol == ' ' and line_until_caret.count(" ") == 1:
+		CodeCompletionHelper.suggest_characters(TextNode, CodeEdit.KIND_MEMBER, self)
 		if line.begins_with('leave'):
 			TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, 'All', '--All-- ', event_color, TextNode.get_theme_icon("GuiEllipsis", "EditorIcons"))
 
@@ -473,45 +487,57 @@ func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:Str
 		var completion_character := regex.search(line).get_string('name')
 		CodeCompletionHelper.suggest_portraits(TextNode, completion_character)
 
-	elif not '[' in line_until_caret and symbol == ' ':
-		for position in get_position_suggestions():
-			TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, position, position+' ', TextNode.syntax_highlighter.normal_color)
+	elif not '[' in line_until_caret and symbol == ' ' and line_until_caret.split(" ", false).size() > 1:
+		if not line.begins_with("leave"):
+			if not line_until_caret.split(" ", false)[-1] in get_position_suggestions():
+				for position in get_position_suggestions():
+					TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, position, position+' ', TextNode.syntax_highlighter.normal_color)
 
-	if '[' in line_until_caret and (symbol == "[" or symbol == " "):
-		suggest_parameter("animation", line, TextNode)
+	# Shortcode Part
+	if '[' in line_until_caret:
+		# Suggest Parameters
+		if symbol == '[' or symbol == ' ' and line_until_caret.count('"')%2 == 0:# and (symbol == "[" or (symbol == " " and line_until_caret.rfind('="') < line_until_caret.rfind('"')-1)):
+			suggest_parameter("animation", line, TextNode)
 
-		if "animation=" in line:
-			for param in ["length", "wait"]:
-				suggest_parameter(param, line, TextNode)
-			if line.begins_with('update'):
-				suggest_parameter("repeat", line, TextNode)
-		if line.begins_with("update"):
-			for param in ["time", "trans", "ease"]:
-				suggest_parameter(param, line, TextNode)
-		if not line.begins_with('leave'):
-			for param in ["mirrored", "z_index", "extra_data"]:
-				suggest_parameter(param, line, TextNode)
+			if "animation=" in line:
+				for param in ["length", "wait"]:
+					suggest_parameter(param, line, TextNode)
+				if line.begins_with('update'):
+					suggest_parameter("repeat", line, TextNode)
+			if line.begins_with("update"):
+				for param in ["move_time", "move_trans", "move_ease", "fade"]:
+					suggest_parameter(param, line, TextNode)
+				if "fade=" in line_until_caret:
+					suggest_parameter("fade_length", line, TextNode)
+			if not line.begins_with('leave'):
+				for param in ["mirrored", "z_index", "extra_data"]:
+					suggest_parameter(param, line, TextNode)
 
-	if line_until_caret.ends_with('animation="'):
-		var animations := []
+		# Suggest Values
+		else:
+			var current_param: RegExMatch = CodeCompletionHelper.completion_shortcode_param_getter_regex.search(line)
+			if not current_param:
+				return
 
-		if line.begins_with('join'):
-			animations = DialogicUtil.get_portrait_animation_scripts(DialogicUtil.AnimationType.IN)
+			match current_param.get_string("param"):
+				"animation":
+					var animations := {}
+					if line.begins_with('join'):
+						animations = DialogicPortraitAnimationUtil.get_portrait_animations_filtered(DialogicPortraitAnimationUtil.AnimationType.IN)
+					elif line.begins_with('update'):
+						animations = DialogicPortraitAnimationUtil.get_portrait_animations_filtered(DialogicPortraitAnimationUtil.AnimationType.ACTION)
+					elif line.begins_with('leave'):
+						animations = DialogicPortraitAnimationUtil.get_portrait_animations_filtered(DialogicPortraitAnimationUtil.AnimationType.OUT)
 
-		if line.begins_with('update'):
-			animations = DialogicUtil.get_portrait_animation_scripts(DialogicUtil.AnimationType.ACTION)
+					for script: String  in animations:
+						TextNode.add_code_completion_option(CodeEdit.KIND_VARIABLE, DialogicUtil.pretty_name(script), DialogicUtil.pretty_name(script), TextNode.syntax_highlighter.normal_color, null, '" ')
 
-		if line.begins_with('leave'):
-			animations = DialogicUtil.get_portrait_animation_scripts(DialogicUtil.AnimationType.OUT)
-
-		for script: String  in animations:
-			TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, DialogicUtil.pretty_name(script), DialogicUtil.pretty_name(script)+'" ', TextNode.syntax_highlighter.normal_color)
-	elif line_until_caret.ends_with('wait="') or line_until_caret.ends_with('mirrored="'):
-		CodeCompletionHelper.suggest_bool(TextNode, TextNode.syntax_highlighter.normal_color)
-	elif line_until_caret.ends_with('trans="'):
-		CodeCompletionHelper.suggest_custom_suggestions(list_to_suggestions(trans_options), TextNode, TextNode.syntax_highlighter.normal_color)
-	elif line_until_caret.ends_with('ease="'):
-		CodeCompletionHelper.suggest_custom_suggestions(list_to_suggestions(ease_options), TextNode, TextNode.syntax_highlighter.normal_color)
+				"wait", "mirrored":
+					CodeCompletionHelper.suggest_bool(TextNode, TextNode.syntax_highlighter.normal_color)
+				"move_trans":
+					CodeCompletionHelper.suggest_custom_suggestions(list_to_suggestions(trans_options), TextNode, TextNode.syntax_highlighter.normal_color)
+				"move_ease":
+					CodeCompletionHelper.suggest_custom_suggestions(list_to_suggestions(ease_options), TextNode, TextNode.syntax_highlighter.normal_color)
 
 
 func suggest_parameter(parameter:String, line:String, TextNode:TextEdit) -> void:

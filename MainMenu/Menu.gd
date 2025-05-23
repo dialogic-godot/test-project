@@ -30,6 +30,13 @@ func _on_smartphone_pressed():
 	get_tree().change_scene_to_file("res://Smartphone/phone_example.tscn")
 
 
+func _on_speaker_pressed() -> void:
+	display_button_ripple(%UnitTests)
+	await fade()
+	get_tree().change_scene_to_file("res://SpeakerStyle/speaker_scene.tscn")
+
+
+
 func _on_unit_tests_pressed() -> void:
 	display_button_ripple(%UnitTests)
 	await fade()
@@ -45,6 +52,7 @@ func _on_about_pressed():
 	display_button_ripple(%About)
 	fade_menu($MainMenu, $AboutScreen)
 	%Back.grab_focus()
+
 
 func _on_back_pressed():
 	display_button_ripple(%Back)
@@ -94,4 +102,3 @@ func display_button_ripple(button:CanvasItem):
 	tween.tween_property(button.get_node('Effect').material,"shader_parameter/time",1.0,0.5).from(0.0)
 	await tween.finished
 	button.get_child(-1).queue_free()
-

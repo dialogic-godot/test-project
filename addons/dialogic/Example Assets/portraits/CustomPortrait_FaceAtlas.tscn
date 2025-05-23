@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://bgshjju5v2q0i"]
 
-[ext_resource type="Script" path="res://addons/dialogic/Example Assets/portraits/CustomPortrait_FaceAtlas.gd" id="1_fc12l"]
-[ext_resource type="Texture2D" uid="uid://djqit26f4be4f" path="res://addons/dialogic/Example Assets/portraits/Princess/princess_blank.png" id="2_igcyp"]
-[ext_resource type="Texture2D" uid="uid://ndmjrpk41eo4" path="res://addons/dialogic/Example Assets/portraits/Portrait1.png" id="3_6xy1t"]
-[ext_resource type="Texture2D" uid="uid://dokv225cp85ja" path="res://addons/dialogic/Example Assets/portraits/Princess/anger.png" id="3_wdpjk"]
-[ext_resource type="Texture2D" uid="uid://5bruuhj5cqu4" path="res://addons/dialogic/Example Assets/portraits/Princess/frown.png" id="4_pimb3"]
-[ext_resource type="Texture2D" uid="uid://dg7c4umbfsyvs" path="res://addons/dialogic/Example Assets/portraits/Princess/joy.png" id="5_2ekfy"]
-[ext_resource type="Texture2D" uid="uid://bu3631ymfqxi3" path="res://addons/dialogic/Example Assets/portraits/Princess/neutral.png" id="6_5hpoa"]
-[ext_resource type="Texture2D" uid="uid://c5aku2g01k6c6" path="res://addons/dialogic/Example Assets/portraits/Princess/shock.png" id="7_5xil3"]
-[ext_resource type="Texture2D" uid="uid://dsid4ye0q74nl" path="res://addons/dialogic/Example Assets/portraits/Princess/smile.png" id="8_7s6tq"]
+[ext_resource type="Script" uid="uid://dixl3myysljgs" path="res://addons/dialogic/Example Assets/portraits/CustomPortrait_FaceAtlas.gd" id="1_fc12l"]
+[ext_resource type="Texture2D" uid="uid://cf0jn0l31ljeo" path="res://addons/dialogic/Example Assets/portraits/Princess/princess_blank.png" id="2_igcyp"]
+[ext_resource type="Texture2D" uid="uid://dqc8rjhdu5vyd" path="res://addons/dialogic/Example Assets/portraits/Portrait1.png" id="3_6xy1t"]
+[ext_resource type="Texture2D" uid="uid://df35pqx8gob8y" path="res://addons/dialogic/Example Assets/portraits/Princess/anger.png" id="3_wdpjk"]
+[ext_resource type="Texture2D" uid="uid://l2mcnxgo4shb" path="res://addons/dialogic/Example Assets/portraits/Princess/frown.png" id="4_pimb3"]
+[ext_resource type="Texture2D" uid="uid://ckjs5q0a011in" path="res://addons/dialogic/Example Assets/portraits/Princess/joy.png" id="5_2ekfy"]
+[ext_resource type="Texture2D" uid="uid://cg08wopuqwgn2" path="res://addons/dialogic/Example Assets/portraits/Princess/neutral.png" id="6_5hpoa"]
+[ext_resource type="Texture2D" uid="uid://dload056jwh43" path="res://addons/dialogic/Example Assets/portraits/Princess/shock.png" id="7_5xil3"]
+[ext_resource type="Texture2D" uid="uid://cohyqr3g8jfs7" path="res://addons/dialogic/Example Assets/portraits/Princess/smile.png" id="8_7s6tq"]
 
 [node name="CustomPortraitFaceAtlas" type="Node2D"]
 position = Vector2(301, 598)

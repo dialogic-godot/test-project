@@ -10,14 +10,18 @@ extends DialogicEvent
 ## This scene supports images and fading.
 ## If you set it to a scene path, then that scene will be instanced.
 ## Learn more about custom backgrounds in the Subsystem_Background.gd docs.
-var scene: String = ""
+var scene := ""
 ## The argument that is passed to the background scene.
 ## For the default scene it's the path to the image to show.
-var argument: String = ""
+var argument := "":
+	set(value):
+		if argument != value:
+			argument = value
+			ui_update_needed.emit()
 ## The time the fade animation will take. Leave at 0 for instant change.
 var fade: float = 0.0
 ## Name of the transition to use.
-var transition: String = ""
+var transition := ""
 
 ## Helpers for visual editor
 enum ArgumentTypes {IMAGE, CUSTOM}
@@ -138,6 +142,10 @@ func build_event_editor() -> void:
 			'_arg_type == ArgumentTypes.IMAGE or _scene_type == SceneTypes.DEFAULT')
 	add_header_edit('argument', ValueType.SINGLELINE_TEXT, {}, '_arg_type == ArgumentTypes.CUSTOM')
 
+	add_body_edit("argument", ValueType.IMAGE_PREVIEW, {'left_text':'Preview:'},
+		'(_arg_type == ArgumentTypes.IMAGE or _scene_type == SceneTypes.DEFAULT) and !argument.is_empty()')
+	add_body_line_break('(_arg_type == ArgumentTypes.IMAGE or _scene_type == SceneTypes.DEFAULT) and !argument.is_empty()')
+
 	add_body_edit("transition", ValueType.DYNAMIC_OPTIONS,
 			{'left_text':'Transition:',
 			'empty_text':'Simple Fade',
@@ -147,7 +155,7 @@ func build_event_editor() -> void:
 
 
 func get_transition_suggestions(_filter:String="") -> Dictionary:
-	var transitions := DialogicResourceUtil.list_special_resources_of_type("BackgroundTransition")
+	var transitions := DialogicResourceUtil.list_special_resources("BackgroundTransition")
 	var suggestions := {}
 	for i in transitions:
 		suggestions[DialogicUtil.pretty_name(i)] = {'value': DialogicUtil.pretty_name(i), 'editor_icon': ["PopupMenu", "EditorIcons"]}

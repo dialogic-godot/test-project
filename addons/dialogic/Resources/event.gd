@@ -19,9 +19,9 @@ signal event_finished(event_resource:DialogicEvent)
 ### Main Event Properties ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## The event name that'll be displayed in the editor.
-var event_name: String = "Event"
+var event_name := "Event"
 ## Unique identifier used for translatable events.
-var _translation_id: String = ""
+var _translation_id := ""
 ## A reference to dialogic during execution, can be used the same as Dialogic (reference to the autoload)
 var dialogic: DialogicGameHandler = null
 
@@ -30,48 +30,52 @@ var dialogic: DialogicGameHandler = null
 ### (these properties store how this event affects indentation/flow of timeline)
 
 ## If true this event can not be toplevel (e.g. Choice)
-var needs_indentation: bool = false
+var needs_indentation := false
 ## If true this event will spawn with an END BRANCH event and higher the indentation
-var can_contain_events: bool = false
+var can_contain_events := false
 ## If [can_contain_events] is true this is a reference to the end branch event
 var end_branch_event: DialogicEndBranchEvent = null
 ## If this is true this event will group with other similar events (like choices do).
-var wants_to_group: bool = false
+var wants_to_group := false
 
 
 ### Saving/Loading Properties ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Stores the event in a text format. Does NOT automatically update.
-var event_node_as_text: String = ""
+var event_node_as_text := ""
 ## Flags if the event has been processed or is only stored as text
-var event_node_ready: bool = false
+var event_node_ready := false
 ## How many empty lines are before this event
-var empty_lines_above:int = 0
+var empty_lines_above: int = 0
 
 
 ### Editor UI Properties ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## The event color that event node will take in the editor
-var event_color: Color = Color("FBB13C")
+var event_color := Color("FBB13C"):
+	get:
+		if dialogic_color_name:
+			return DialogicUtil.get_color(dialogic_color_name)
+		return event_color
 ## If you are using the default color palette
-var dialogic_color_name: String = ''
+var dialogic_color_name: = ""
 ## To sort the buttons shown in the editor. Lower index is placed at the top of a category
 var event_sorting_index: int = 0
 ## If true the event will not have a button in the visual editor sidebar
-var disable_editor_button: bool = false
+var disable_editor_button := false
 ## If false the event will hide it's body by default. Recommended for most events
-var expand_by_default: bool = false
+var expand_by_default := false
 ## The URL to open when right_click>Documentation is selected
-var help_page_path: String = ""
+var help_page_path := ""
 ## Is the event block created by a button?
-var created_by_button: bool = false
+var created_by_button := false
 
 ## Reference to the node, that represents this event. Only works while in visual editor mode.
 ## Use with care.
 var editor_node: Control = null
 
 ## The categories and which one to put it in (in the visual editor sidebar)
-var event_category: String = "Other"
+var event_category := "Other"
 
 
 ### Editor UI creation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,7 +97,7 @@ enum ValueType {
 	NUMBER,
 	VECTOR2, VECTOR3, VECTOR4,
 	# Other
-	CUSTOM, BUTTON, LABEL, COLOR
+	CUSTOM, BUTTON, LABEL, COLOR, AUDIO_PREVIEW, IMAGE_PREVIEW
 }
 ## List that stores the fields for the editor
 var editor_list: Array = []
@@ -101,7 +105,9 @@ var editor_list: Array = []
 var this_folder: String = get_script().resource_path.get_base_dir()
 
 ## Singal that notifies the visual editor block to update
+@warning_ignore("unused_signal")
 signal ui_update_needed
+@warning_ignore("unused_signal")
 signal ui_update_warning(text:String)
 
 
@@ -127,6 +133,14 @@ func finish() -> void:
 	event_finished.emit(self)
 
 
+## Called before executing the next event or before clear(any flags) / load_full_state().
+##
+## Should be overridden if the event stores temporary state into dialogic.current_state_info
+## or some other cleanup is needed before another event can run.
+func _clear_state() -> void:
+	pass
+
+
 ## To be overridden by subclasses.
 func _execute() -> void:
 	finish()
@@ -134,22 +148,37 @@ func _execute() -> void:
 #endregion
 
 
-#region OVERRIDABLES
+#region BRANCHING EVENTS
 ################################################################################
+## All of this section should only be in use if [member can_contain_events] is `true`.
 
-## to be overridden by sub-classes
-## only called if can_contain_events is true.
-## return a control node that should show on the END BRANCH node
-func get_end_branch_control() -> Control:
+
+## To be overridden. Only called if [member can_contain_events] is `true`.
+## Return a control node that should show on the END BRANCH node.
+func _get_end_branch_control() -> Control:
 	return null
 
 
-## to be overridden by sub-classes
-## only called if can_contain_events is true and the previous event was an end-branch event
-## return true if this event should be executed if the previous event was an end-branch event
-## basically only important for the Condition event but who knows. Some day someone might need this.
-func should_execute_this_branch() -> bool:
+## To be overridden. Return `true` if this event should be executed even if a previous branch has been executed.
+## E.g. IF events returns true, but ELIF and ELSE do not. The first choice of a question does this, while the others don't.
+func _is_branch_starter() -> bool:
 	return false
+
+
+## Returns the index of the end branch event of this event (Only use if can_contain_events is true).
+func get_end_branch_index() -> int:
+	var idx: int = dialogic.current_timeline_events.find(self)
+	while true:
+		idx += 1
+		var event: DialogicEvent = dialogic.current_timeline.get_event(idx)
+		if not event:
+			break
+		if event.can_contain_events:
+			idx = event.get_end_branch_index()
+		if event is DialogicEndBranchEvent:
+			break
+	return idx
+
 
 #endregion
 
@@ -275,8 +304,9 @@ func from_text(string: String) -> void:
 
 
 ## Returns a string with all the shortcode parameters.
-func store_to_shortcode_parameters() -> String:
-	var params: Dictionary = get_shortcode_parameters()
+func store_to_shortcode_parameters(params:Dictionary = {}) -> String:
+	if params.is_empty():
+		params = get_shortcode_parameters()
 	var custom_defaults: Dictionary = DialogicUtil.get_custom_event_defaults(event_name)
 	var result_string := ""
 	for parameter in params.keys():
@@ -294,35 +324,43 @@ func store_to_shortcode_parameters() -> String:
 			if not "set_" + parameter_info.property in self or not get("set_" + parameter_info.property):
 				continue
 
-		var value_as_string := ""
-		match typeof(value):
-			TYPE_OBJECT:
-				value_as_string = str(value.resource_path)
+		result_string += " " + parameter + '="' + value_to_string(value, parameter_info.get("suggestions", Callable())) + '"'
 
-			TYPE_STRING:
-				value_as_string = value
-
-			TYPE_INT when parameter_info.has('suggestions'):
-				# HANDLE TEXT ALTERNATIVES FOR ENUMS
-				for option in parameter_info.suggestions.call().values():
-					if option.value != value:
-						continue
-
-					if option.has('text_alt'):
-						value_as_string = option.text_alt[0]
-					else:
-						value_as_string = var_to_str(option.value)
-
-					break
-
-			TYPE_DICTIONARY:
-				value_as_string = JSON.stringify(value)
-
-			_:
-				value_as_string = var_to_str(value)
-
-		result_string += " " + parameter + '="' + value_as_string.replace('"', '\\"') + '"'
 	return result_string.strip_edges()
+
+
+func value_to_string(value: Variant, suggestions := Callable()) -> String:
+	var value_as_string := ""
+	match typeof(value):
+		TYPE_OBJECT:
+			value_as_string = str(value.resource_path)
+
+		TYPE_STRING:
+			value_as_string = value
+
+		TYPE_INT when suggestions.is_valid():
+			# HANDLE TEXT ALTERNATIVES FOR ENUMS
+			for option in suggestions.call().values():
+				if option.value != value:
+					continue
+
+				if option.has('text_alt'):
+					value_as_string = option.text_alt[0]
+				else:
+					value_as_string = var_to_str(option.value)
+
+				break
+
+		TYPE_DICTIONARY:
+			value_as_string = JSON.stringify(value)
+
+		_:
+			value_as_string = var_to_str(value)
+
+	if not ((value_as_string.begins_with("[") and value_as_string.ends_with("]")) or (value_as_string.begins_with("{") and value_as_string.ends_with("}"))):
+		value_as_string.replace('"', '\\"')
+
+	return value_as_string
 
 
 func load_from_shortcode_parameters(string:String) -> void:
@@ -381,9 +419,9 @@ func is_string_full_event(string: String) -> bool:
 
 ## Used to get all the shortcode parameters in a string as a dictionary.
 func parse_shortcode_parameters(shortcode: String) -> Dictionary:
-	var regex: RegEx = RegEx.new()
-	regex.compile(r'((?<parameter>[^\s=]*)\s*=\s*"(?<value>([^"]|\\")*)(?<!\\)")')
-	var dict: Dictionary = {}
+	var regex := RegEx.new()
+	regex.compile(r'(?<parameter>[^\s=]*)\s*=\s*"(?<value>(\{[^}]*\}|\[[^]]*\]|([^"]|\\")*|))(?<!\\)\"')
+	var dict := {}
 	for result in regex.search_all(shortcode):
 		dict[result.get_string('parameter')] = result.get_string('value')
 	return dict
@@ -449,6 +487,8 @@ func get_event_editor_info() -> Array:
 		else:
 			editor_list = []
 
+		if DialogicUtil.get_editor_setting('show_event_names', false):
+			add_header_label(event_name)
 		build_event_editor()
 		return editor_list
 	else:
@@ -466,7 +506,7 @@ func build_event_editor() -> void:
 ## @left_text: 		Text that will be shown to the left of the field
 ## @right_text: 	Text that will be shown to the right of the field
 ## @extra_info: 	Allows passing a lot more info to the field.
-## 					What info can be passed is differnet for every field
+## 					What info can be passed is different for every field
 
 func add_header_label(text:String, condition:= "") -> void:
 	editor_list.append({

@@ -1,4 +1,4 @@
-[clear time="0"]
+[clear time="0.0"]
 
 Choose a timeline to test.
 - Text events, effects & modifiers
@@ -9,3 +9,9 @@ Choose a timeline to test.
 	jump t3_variables/
 - Styles
 	jump t4_styles/
+- Various
+	jump t5_various_events/
+- Audio
+	jump t6_audio/
+- Backgrounds
+	jump t7_backgrounds/

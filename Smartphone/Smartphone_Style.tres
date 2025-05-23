@@ -1,12 +1,21 @@
-[gd_resource type="Resource" script_class="DialogicStyle" load_steps=3 format=3 uid="uid://hwkqflrcjdit"]
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=5 format=3 uid="uid://hwkqflrcjdit"]
 
-[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="1_c2rf5"]
+[ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="1_c2rf5"]
 [ext_resource type="PackedScene" uid="uid://doer5vu1ifsrv" path="res://Smartphone/SmartphoneLayout.tscn" id="1_toowd"]
+[ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_4s04i"]
+
+[sub_resource type="Resource" id="Resource_o3v7g"]
+script = ExtResource("2_4s04i")
+scene = ExtResource("1_toowd")
+overrides = {}
 
 [resource]
 script = ExtResource("1_c2rf5")
 name = "Smartphone_Style"
-base_scene = ExtResource("1_toowd")
+layer_list = Array[String]([])
+layer_info = {
+"": SubResource("Resource_o3v7g")
+}
 base_overrides = {}
-layers = Array[Resource("res://addons/dialogic/Resources/dialogic_style_layer.gd")]([])
+layers = Array[ExtResource("2_4s04i")]([])
 metadata/_latest_layer = -1

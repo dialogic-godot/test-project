@@ -1,15 +1,16 @@
 This timeline tests character events (join, update, leave) and various portrait setups/actions.
 It will describe the desired effect, then do it.
 
-[i]Join a character with it's default portrait at position 1
-join TC3_BasicPortraits 1
+label Positions
+[i]Join a character with it's default portrait at position "left"
+join TC3_BasicPortraits left
 
-[i]Move the character to position 3, instantly.
-update TC3_BasicPortraits 3 [move_time="0"]
+[i]Move the character to position "right", instantly.
+update TC3_BasicPortraits right
 
-[i]Move the character to position 2 in two seconds.
-update TC3_BasicPortraits 2 [move_time="2"]
-[wait time="2"]
+[i]Move the character to position "center" in two seconds.
+update TC3_BasicPortraits center [move_time="2.0"]
+[wait time="2.0"]
 
 [i]Change the characters portrait.
 update TC3_BasicPortraits (happy)
@@ -21,16 +22,16 @@ update TC3_BasicPortraits [mirrored="true"]
 update TC3_BasicPortraits [animation="Bounce" wait="true"]
 
 [i]Animate the character very slowly (bounce).
-update TC3_BasicPortraits [animation="Bounce" length="3" wait="true"]
+update TC3_BasicPortraits [animation="Bounce" length="3.0" wait="true"]
 
 [i]Animate the character repeatedly (bounce).
-update TC3_BasicPortraits [animation="Bounce" repeat="3" wait="true"]
+update TC3_BasicPortraits [animation="Bounce" wait="true" repeat="3"]
 
-[i]Join a second character with an angry portrait at position 4 (slide in left).
-join TC4_BasicPortraits2 (angry) 4 [animation="Slide In Left"]
+[i]Join a second character with an angry portrait at position "rightmost" (Slide From Right).
+join TC4_BasicPortraits2 (angry) rightmost [animation="Slide From Right"]
 
-[i]Join a third character at position 3 (bounce in, slow).
-join TC5_BasicPortraits3 3 [animation="Bounce In" length="2"]
+[i]Join a third character at position "right" (bounce in, slow).
+join TC5_BasicPortraits3 right [animation="Bounce In" length="2.0"]
 
 [i]Updte the new character z_index.
 update TC5_BasicPortraits3 [z_index="3"]
@@ -39,6 +40,82 @@ update TC5_BasicPortraits3 [z_index="3"]
 leave TC3_BasicPortraits
 
 [i]Leave all characters (bounce out).
-leave --All-- [animation="Bounce Out" wait="true" ]
+leave --All-- [animation="Bounce Out" wait="true"]
 
+label In/Out Animations
+[i]Testing all the built-in animations.
+- Start
+- Skip
+	jump after_animations
+
+Fade In [aa=0]
+join TC3_BasicPortraits center [animation="Fade In" wait="true"]
+Fade Out [aa=0]
+leave TC3_BasicPortraits [animation="Fade" wait="true"]
+
+Fade In Up [aa=0]
+join TC3_BasicPortraits center [animation="Fade In Up" wait="true"]
+Fade Out Down [aa=0]
+leave TC3_BasicPortraits [animation="Fade Out Down" wait="true"]
+
+Fade In Down [aa=0]
+join TC3_BasicPortraits center [animation="Fade In Down" wait="true"]
+Fade Out Up [aa=0]
+leave TC3_BasicPortraits [animation="Fade Out Up" wait="true"]
+
+Instant In [aa=0]
+join TC3_BasicPortraits center [animation="Instant In" wait="true"]
+[wait time="0.5" hide_text="false"]
+Instant Out [aa=0]
+leave TC3_BasicPortraits [animation="Instant Out" wait="true"]
+
+Slide In Up [aa=0]
+join TC3_BasicPortraits center [animation="Slide In Up" wait="true"]
+Slide Out Down [aa=0]
+leave TC3_BasicPortraits [animation="Slide Out Down" wait="true"]
+
+Slide In Down [aa=0]
+join TC3_BasicPortraits center [animation="Slide In Down" wait="true"]
+Slide Out Up [aa=0]
+leave TC3_BasicPortraits [animation="Slide Out Up" wait="true"]
+
+Slide From Left [aa=0]
+join TC3_BasicPortraits center [animation="Slide From Left" wait="true"]
+Slide To Left [aa=0]
+leave TC3_BasicPortraits [animation="Slide To Left" wait="true"]
+
+Slide From Right [aa=0]
+join TC3_BasicPortraits center [animation="Slide From Right" wait="true"]
+Slide To Right [aa=0]
+leave TC3_BasicPortraits [animation="Slide To Right" wait="true"]
+
+Zoom In [aa=0]
+join TC3_BasicPortraits center [animation="Zoom In" wait="true"]
+Zoom Out [aa=0]
+leave TC3_BasicPortraits [animation="Zoom Out" wait="true"]
+
+Zoom Center In [aa=0]
+join TC3_BasicPortraits center [animation="Zoom Center In" wait="true"]
+Zoom Center Out [aa=0]
+leave TC3_BasicPortraits [animation="Zoom Center Out" wait="true"]
+
+Bounce In [aa=0]
+join TC3_BasicPortraits center [animation="Bounce In" wait="true"]
+Bounce Out [aa=0]
+leave TC3_BasicPortraits [animation="Bounce Out" wait="true"]
+
+join TC3_BasicPortraits center [animation="Instant" wait="true"]
+Tada [aa=0]
+update TC3_BasicPortraits [animation="Tada" wait="true"]
+Bounce [aa=0]
+update TC3_BasicPortraits [animation="Bounce" wait="true"]
+Heartbeat [aa=0]
+update TC3_BasicPortraits [animation="Heartbeat" wait="true"]
+ShakeX [aa=0]
+update TC3_BasicPortraits [animation="Shake X" wait="true"]
+ShakeY [aa=0]
+update TC3_BasicPortraits [animation="Shake Y" wait="true"]
+leave TC3_BasicPortraits [animation="Instant Out" wait="true"]
+
+label after_animations
 jump t0_overview/

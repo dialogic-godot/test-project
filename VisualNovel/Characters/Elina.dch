@@ -1,19 +1,20 @@
 {
 "@path": "res://addons/dialogic/Resources/character.gd",
 "@subpath": NodePath(""),
-"color": Color(0.227451, 0.647059, 0.87451, 1),
-"custom_info": {
+&"_translation_id": "",
+&"color": Color(0.227451, 0.647059, 0.87451, 1),
+&"custom_info": {
 "sound_mood_default": "Happy",
 "sound_moods": {},
 "style": ""
 },
-"default_portrait": "default",
-"description": "",
-"display_name": "Elina",
-"mirror": false,
-"nicknames": [""],
-"offset": Vector2(0, 0),
-"portraits": {
+&"default_portrait": "default",
+&"description": "",
+&"display_name": "Elina",
+&"mirror": false,
+&"nicknames": [""],
+&"offset": Vector2(0, 0),
+&"portraits": {
 "Entangled/wangry": {
 "image": "res://VisualNovel/Assets/Characters/Eliana/pl1 wangry.png",
 "mirror": false,
@@ -156,5 +157,5 @@
 "scene": ""
 }
 },
-"scale": 1.0
+&"scale": 1.0
 }

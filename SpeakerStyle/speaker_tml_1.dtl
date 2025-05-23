@@ -1,0 +1,8 @@
+[background arg="#372930" fade="1.0"]
+[wait time="1.0"]
+speaker_1: Hey Harold, you there?
+speaker_2: Oh hey Janette, I didn't see you. Yeah I was just getting ready.
+speaker_1 (default): Good. I think we should get going soon.
+speaker_1: You know we have a long way ahead of us.
+speaker_2: I know, I know.[n]But it's weird leaving this place behind...
+speaker_1: Well, there is nothing we can do about it.

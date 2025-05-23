@@ -1,0 +1,28 @@
+This timeline tests backgrounds within timelines.
+
+[i]Test using a color
+[background arg="pink" fade="0.0"]
+
+[i]Test using a simple image
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach day.jpg" fade="0.75" transition="Simple Fade"]
+
+[i]Test using a custom scene.
+[background scene="res://FakeUnitTests/Assets/Backgrounds/industrial-custom-background.tscn"]
+
+[i]Test all transitions.
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach eve.jpg" fade="0.5" transition="Push Right"]
+Push Right [aa=0.75]
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach night.jpg" fade="0.5" transition="Push Left"]
+Push Left [aa=0.75]
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach eve.jpg" fade="0.5" transition="Push Down"]
+Push Down [aa=0.75]
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach night.jpg" fade="0.5" transition="Push Up"]
+Push Up [aa=0.75]
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beachhut day.jpg" fade="0.5" transition="Swipe Left To Right"]
+Swipe Left to Right [aa=0.75]
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beachhut night on.jpg" fade="0.5" transition="Swipe Right to Left"]
+Push Left [aa=0.75]
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beachhut eve.jpg" fade="0.5" transition="Swipe Diagonal Up Left"]
+Push Left [aa=0.75]
+[i] End of background tests.
+jump t0_overview/

@@ -4,11 +4,18 @@ extends DialogicVisualEditorField
 
 ## Event block field for integers and floats. Improved version of the native spinbox.
 
-@export var allow_string : bool = false
+@export_enum("Float", "Int", "Decible") var mode := 0 :
+	set(new_mode):
+		mode = new_mode
+		match mode:
+			0: use_float_mode() #FLOAT
+			1: use_int_mode() #INT
+			2: use_decibel_mode() #DECIBLE
+@export var allow_string: bool = false
 @export var step: float = 0.1
 @export var enforce_step: bool = true
-@export var min: float = 0
-@export var max: float= 999
+@export var min: float = -INF
+@export var max: float = INF
 @export var value = 0.0
 @export var prefix: String = ""
 @export var suffix: String = ""
@@ -24,17 +31,9 @@ func _ready() -> void:
 
 	update_prefix(prefix)
 	update_suffix(suffix)
-	$Value_Panel.add_theme_stylebox_override('panel', get_theme_stylebox('panel', 'DialogicEventEdit'))
 
 
 func _load_display_info(info: Dictionary) -> void:
-	match info.get('mode', 0):
-		0: #FLOAT
-			use_float_mode(info.get('step', 0.1))
-		1: #INT
-			use_int_mode(info.get('step', 1))
-		2: #DECIBLE:
-			use_decibel_mode(info.get('step', step))
 
 	for option in info.keys():
 		match option:
@@ -47,6 +46,7 @@ func _load_display_info(info: Dictionary) -> void:
 				step = info[option]
 			'hide_step_button': %Spin.hide()
 
+	mode = info.get('mode', mode)
 
 func _set_value(new_value: Variant) -> void:
 	_on_value_text_submitted(str(new_value), true)
@@ -62,13 +62,13 @@ func get_value() -> float:
 
 
 func use_float_mode(value_step: float = 0.1) -> void:
-	step = value_step
+	#step = value_step
 	update_suffix("")
 	enforce_step = false
 
 
 func use_int_mode(value_step: float = 1) -> void:
-	step = value_step
+	#step = value_step
 	update_suffix("")
 	enforce_step = true
 
@@ -157,6 +157,8 @@ func _on_decrement_button_down(button: NodePath) -> void:
 
 
 func _on_value_text_submitted(new_text: String, no_signal:= false) -> void:
+	if new_text.is_empty() and not allow_string:
+		new_text = "0.0"
 	if new_text.is_valid_float():
 		var temp: float = min(max(new_text.to_float(), min), max)
 		if !enforce_step:
@@ -195,4 +197,3 @@ func _on_value_focus_entered() -> void:
 	%Value.select_all.call_deferred()
 
 #endregion
-

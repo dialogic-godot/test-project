@@ -8,24 +8,28 @@ extends DialogicEvent
 ### Settings
 
 ## The timeline to jump to, if null then it's the current one. This setting should be a dialogic timeline resource.
-var timeline : DialogicTimeline
+var timeline: DialogicTimeline
 ## If not empty, the event will try to find a Label event with this set as name. Empty by default..
-var label_name : String = ""
+var label_name := ""
 
 
 ### Helpers
 
 ## Used to set the timeline resource from the unique name identifier and vice versa
-var timeline_identifier: String = "":
+var timeline_identifier := "":
 	get:
 		if timeline:
-			var identifier := DialogicResourceUtil.get_unique_identifier(timeline.resource_path)
+			var identifier := timeline.get_identifier()
 			if not identifier.is_empty():
 				return identifier
 		return timeline_identifier
 	set(value):
 		timeline_identifier = value
 		timeline = DialogicResourceUtil.get_timeline_resource(value)
+		if (not timeline_identifier in DialogicResourceUtil.get_label_cache().keys()
+				or not label_name in DialogicResourceUtil.get_label_cache()[timeline_identifier]):
+			label_name = ""
+			ui_update_needed.emit()
 
 
 ################################################################################
@@ -75,7 +79,7 @@ func to_text() -> String:
 
 
 func from_text(string:String) -> void:
-	var result := RegEx.create_from_string('jump (?<timeline>.*\\/)?(?<label>.*)?').search(string.strip_edges())
+	var result := RegEx.create_from_string(r"jump (?<timeline>.*\/)?(?<label>.*)?").search(string.strip_edges())
 	if result:
 		timeline_identifier = result.get_string('timeline').trim_suffix('/')
 		label_name = result.get_string('label')
@@ -130,6 +134,9 @@ func get_label_suggestions(_filter:String="") -> Dictionary:
 	if timeline_identifier in DialogicResourceUtil.get_label_cache().keys():
 		for label in DialogicResourceUtil.get_label_cache()[timeline_identifier]:
 			suggestions[label] = {'value': label, 'tooltip':label, 'editor_icon': ["ArrowRight", "EditorIcons"]}
+	if _filter.begins_with("{"):
+		for var_path in DialogicUtil.list_variables(DialogicUtil.get_default_variables()):
+			suggestions["{"+var_path+"}"] = {'value':"{"+var_path+"}", 'icon':load("res://addons/dialogic/Editor/Images/Pieces/variable.svg")}
 	return suggestions
 
 
@@ -140,6 +147,8 @@ func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:Str
 	if symbol == ' ' and line.count(' ') == 1:
 		CodeCompletionHelper.suggest_labels(TextNode, '', '\n', event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.6))
 		CodeCompletionHelper.suggest_timelines(TextNode, CodeEdit.KIND_MEMBER, event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.6))
+	if symbol == "{":
+		CodeCompletionHelper.suggest_variables(TextNode)
 	if symbol == '/':
 		CodeCompletionHelper.suggest_labels(TextNode, line.strip_edges().trim_prefix('jump ').trim_suffix('/'+String.chr(0xFFFF)).strip_edges(), '\n', event_color.lerp(TextNode.syntax_highlighter.normal_color, 0.6))
 
