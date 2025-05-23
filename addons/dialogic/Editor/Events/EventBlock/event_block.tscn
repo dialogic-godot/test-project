@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbncx2w0btjyx" path="res://addons/dialogic/Editor/Events/EventBlock/event_block.gd" id="1"]
 [ext_resource type="StyleBox" uid="uid://cl75ikyq2is7c" path="res://addons/dialogic/Editor/Events/styles/unselected_stylebox.tres" id="2_axj84"]
-[ext_resource type="Texture2D" uid="uid://dybg3l5pwetne" path="res://addons/dialogic/Editor/Images/plugin-icon.svg" id="6"]
+[ext_resource type="Texture2D" uid="uid://bjngm1qbtsuys" path="res://addons/dialogic/Editor/Images/plugin-icon.svg" id="6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_otutu"]
 bg_color = Color(1, 1, 1, 1)

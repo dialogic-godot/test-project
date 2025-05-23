@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cwhe7tpe75oh7" path="res://addons/dialogic/Editor/CharacterEditor/character_editor.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://dbpkta2tjsqim" path="res://addons/dialogic/Editor/Common/hint_tooltip_icon.tscn" id="2_uhhqs"]
 [ext_resource type="Script" uid="uid://deliic6d8vajo" path="res://addons/dialogic/Editor/CharacterEditor/character_editor_portrait_tree.gd" id="2_vad0i"]
-[ext_resource type="Texture2D" uid="uid://babwe22dqjta" path="res://addons/dialogic/Editor/Images/Pieces/add-folder.svg" id="3_v1qnr"]
+[ext_resource type="Texture2D" uid="uid://l5a8cnpntlpb" path="res://addons/dialogic/Editor/Images/Pieces/add-folder.svg" id="3_v1qnr"]
 
 [sub_resource type="Image" id="Image_r5ayh"]
 data = {

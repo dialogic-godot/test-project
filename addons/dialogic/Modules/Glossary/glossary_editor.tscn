@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://due48ce7jiudt"]
 
 [ext_resource type="Script" uid="uid://bqu863yjcjc8y" path="res://addons/dialogic/Modules/Glossary/glossary_editor.gd" id="1_tf3p1"]
-[ext_resource type="Texture2D" uid="uid://cenut3sc5cul0" path="res://addons/dialogic/Modules/Glossary/add-glossary.svg" id="2_0elx7"]
+[ext_resource type="Texture2D" uid="uid://brxpliaruwmrg" path="res://addons/dialogic/Modules/Glossary/add-glossary.svg" id="2_0elx7"]
 
 [sub_resource type="Image" id="Image_2730t"]
 data = {

@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://c3i2fcdr7nu04"]
 
 [ext_resource type="Script" uid="uid://dncaaeraxkvdj" path="res://SmallRPG/SmallRPG.gd" id="1_tg85s"]
-[ext_resource type="Texture2D" uid="uid://cy0g1dasmt2wr" path="res://SmallRPG/Assets/tilemap_castles.png" id="2_70fvf"]
+[ext_resource type="Texture2D" uid="uid://wrhi1hg1rwar" path="res://SmallRPG/Assets/tilemap_castles.png" id="2_70fvf"]
 [ext_resource type="Script" uid="uid://6cgdx2n3ahw7" path="res://SmallRPG/TopDown_Player.gd" id="3_ot201"]
-[ext_resource type="Texture2D" uid="uid://dj1wt7nle2rch" path="res://SmallRPG/Assets/tilemap_village.png" id="3_spqwk"]
+[ext_resource type="Texture2D" uid="uid://bimqinvakguk4" path="res://SmallRPG/Assets/tilemap_village.png" id="3_spqwk"]
 [ext_resource type="Script" uid="uid://qo1fgddiwpsc" path="res://SmallRPG/TopDown_Interactable.gd" id="3_v5p4e"]
 [ext_resource type="Resource" uid="uid://67fn1gwhu64h" path="res://SmallRPG/Timelines/Smith.dch" id="5_84vax"]
 [ext_resource type="Resource" uid="uid://dbpqbgjgh16ov" path="res://SmallRPG/Timelines/rpg_smith.dtl" id="5_e2vex"]
-[ext_resource type="FontFile" uid="uid://bs4yfbtvcsy1x" path="res://MainMenu/Assets/Fonts/Kenney Pixel.ttf" id="8_1ufv6"]
+[ext_resource type="FontFile" uid="uid://mxf8iv4hlo7j" path="res://MainMenu/Assets/Fonts/Kenney Pixel.ttf" id="8_1ufv6"]
 [ext_resource type="Script" uid="uid://cw0yrvl1xsya2" path="res://SmallRPG/UI.gd" id="9_lapxt"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_8rnv5"]

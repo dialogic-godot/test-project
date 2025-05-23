@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://nqibjx5oqxto"]
 
 [ext_resource type="Script" uid="uid://dtnfajnhkgpan" path="res://VisualNovel/Assets/Backgrounds/particles_background.gd" id="1_3xxsl"]
-[ext_resource type="Texture2D" uid="uid://cgn7varar35m5" path="res://VisualNovel/Assets/Backgrounds/Interior 5.png" id="2_5lcq7"]
+[ext_resource type="Texture2D" uid="uid://co6alhea8hy75" path="res://VisualNovel/Assets/Backgrounds/Interior 5.png" id="2_5lcq7"]
 
 [sub_resource type="Gradient" id="Gradient_qhytk"]
 interpolation_mode = 2

@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://cgiiklsftpoau"]
 
 [ext_resource type="Script" uid="uid://behxco71ypde7" path="res://MainMenu/Menu.gd" id="1_tdqfe"]
-[ext_resource type="Texture2D" uid="uid://b413ictwywftp" path="res://MainMenu/Dialogic Logo.svg" id="2_u154w"]
-[ext_resource type="Texture2D" uid="uid://digng6kq2lkxj" path="res://VisualNovel/Assets/UI/cross.png" id="3_mte4y"]
+[ext_resource type="Texture2D" uid="uid://dpcl423chbgo4" path="res://MainMenu/Dialogic Logo.svg" id="2_u154w"]
+[ext_resource type="Texture2D" uid="uid://caxi7gfmwjac7" path="res://VisualNovel/Assets/UI/cross.png" id="3_mte4y"]
 [ext_resource type="PackedScene" uid="uid://btq2j5wf1e07n" path="res://MainMenu/ProjectPreview.tscn" id="4_dtbjh"]
-[ext_resource type="Texture2D" uid="uid://2du0mu0epv6x" path="res://MainMenu/Assets/SmartphonePreview.PNG" id="5_vikv7"]
-[ext_resource type="Texture2D" uid="uid://bey4yauaaf03m" path="res://MainMenu/Assets/VN_Preview.PNG" id="5_x0yfe"]
-[ext_resource type="Texture2D" uid="uid://bp18h0ibngt7s" path="res://MainMenu/Assets/RPG_Preview.PNG" id="6_e1cue"]
-[ext_resource type="Texture2D" uid="uid://bmpqrsapqpgbk" path="res://MainMenu/Assets/speaker_preview.png" id="7_u33qm"]
-[ext_resource type="Texture2D" uid="uid://clbquf4p1pjdi" path="res://MainMenu/Assets/unit_tests.png" id="7_ymxpl"]
+[ext_resource type="Texture2D" uid="uid://d25gadpeng25y" path="res://MainMenu/Assets/SmartphonePreview.PNG" id="5_vikv7"]
+[ext_resource type="Texture2D" uid="uid://ccty22gncdwvf" path="res://MainMenu/Assets/VN_Preview.PNG" id="5_x0yfe"]
+[ext_resource type="Texture2D" uid="uid://d21yy5g7kxcpg" path="res://MainMenu/Assets/RPG_Preview.PNG" id="6_e1cue"]
+[ext_resource type="Texture2D" uid="uid://ldal0rc7s3wk" path="res://MainMenu/Assets/speaker_preview.png" id="7_u33qm"]
+[ext_resource type="Texture2D" uid="uid://4eu7f4vkahjw" path="res://MainMenu/Assets/unit_tests.png" id="7_ymxpl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a307k"]
 content_margin_left = 8.0
