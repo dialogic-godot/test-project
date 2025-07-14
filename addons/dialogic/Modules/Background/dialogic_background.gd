@@ -35,3 +35,4 @@ func _custom_fade_in(_time:float) -> bool:
 ## If you return false (by default) it will attempt to animate the "modulate" property.
 func _custom_fade_out(_time:float) -> bool:
 	return false
+

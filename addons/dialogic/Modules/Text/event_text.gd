@@ -76,7 +76,7 @@ func _execute() -> void:
 
 		var current_portrait: String = portrait
 		if portrait.is_empty():
-			portrait = dialogic.current_state_info["portraits"].get(character.resource_path, {}).get("portrait", "")
+			current_portrait = dialogic.current_state_info["portraits"].get(character.get_identifier(), {}).get("portrait", "")
 
 		var current_portrait_sound_mood: String = character.portraits.get(current_portrait, {}).get("sound_mood", "")
 		dialogic.Text.update_typing_sound_mood_from_character(character, current_portrait_sound_mood)
@@ -133,7 +133,7 @@ func _execute() -> void:
 			var segment: String = dialogic.Text.parse_text(split_text[section_idx][0])
 			var is_append: bool = split_text[section_idx][1]
 
-			final_text = segment
+			final_text = ProjectSettings.get_setting("dialogic/text/dialog_text_prefix", "")+segment
 			dialogic.Text.about_to_show_text.emit({'text':final_text, 'character':character, 'portrait':portrait, 'append': is_append})
 
 			await dialogic.Text.update_textbox(final_text, false)
@@ -325,12 +325,15 @@ func from_text(string:String) -> void:
 		else:
 			character = DialogicResourceUtil.get_character_resource(name)
 
-			if character == null and Engine.is_editor_hint() == false:
-				character = DialogicCharacter.new()
-				character.display_name = name
-				character.set_identifier(name)
-				if portrait:
-					character.color = Color(portrait)
+			if character == null:
+				if Engine.is_editor_hint() == false:
+					character = DialogicCharacter.new()
+					character.display_name = name
+					character.set_identifier(name)
+					if portrait:
+						character.color = Color(portrait)
+				else:
+					character_identifier = name
 
 	if not result:
 		return

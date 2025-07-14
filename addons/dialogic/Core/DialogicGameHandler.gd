@@ -165,6 +165,8 @@ func _ready() -> void:
 
 	clear()
 
+	DialogicResourceUtil.update_event_cache()
+
 	dialog_ending_timeline = DialogicTimeline.new()
 	dialog_ending_timeline.from_text("[clear]")
 
@@ -192,8 +194,10 @@ func start(timeline:Variant, label_or_idx:Variant="") -> Node:
 		scene.show()
 
 	if not scene.is_node_ready():
-		scene.ready.connect(clear.bind(ClearFlags.KEEP_VARIABLES))
-		scene.ready.connect(start_timeline.bind(timeline, label_or_idx))
+		if not scene.ready.is_connected(clear.bind(ClearFlags.KEEP_VARIABLES)):
+			scene.ready.connect(clear.bind(ClearFlags.KEEP_VARIABLES))
+		if not scene.ready.is_connected(start_timeline.bind(timeline, label_or_idx)):
+			scene.ready.connect(start_timeline.bind(timeline, label_or_idx))
 	else:
 		start_timeline(timeline, label_or_idx)
 
@@ -207,10 +211,10 @@ func start_timeline(timeline:Variant, label_or_idx:Variant = "") -> void:
 	# load the resource if only the path is given
 	if typeof(timeline) == TYPE_STRING:
 		#check the lookup table if it's not a full file name
-		if (timeline as String).contains("res://") or (timeline as String).contains("uid://"):
-			timeline = load((timeline as String))
+		if "://" in timeline:
+			timeline = load(timeline)
 		else:
-			timeline = DialogicResourceUtil.get_timeline_resource((timeline as String))
+			timeline = DialogicResourceUtil.get_timeline_resource(timeline)
 
 	if timeline == null:
 		printerr("[Dialogic] There was an error loading this timeline. Check the filename, and the timeline for errors")
@@ -243,7 +247,11 @@ func start_timeline(timeline:Variant, label_or_idx:Variant = "") -> void:
 func preload_timeline(timeline_resource:Variant) -> Variant:
 	# I think ideally this should be on a new thread, will test
 	if typeof(timeline_resource) == TYPE_STRING:
-		timeline_resource = load((timeline_resource as String))
+		if "://" in timeline_resource:
+			timeline_resource = load(timeline_resource)
+		else:
+			timeline_resource = DialogicResourceUtil.get_timeline_resource(timeline_resource)
+
 		if timeline_resource == null:
 			printerr("[Dialogic] There was an error preloading this timeline. Check the filename, and the timeline for errors")
 			return null

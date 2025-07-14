@@ -38,14 +38,15 @@ signal animation_textbox_hide
 ## Emitted when a new text starts. Use like [signal animation_textbox_show].
 signal animation_textbox_new_text
 
-@warning_ignore_start("unused_signal") # These are emitted by the NodeDialogText
 ## Emitted when a meta text on any DialogText node is hovered.
+@warning_ignore("unused_signal") # These are emitted by the NodeDialogText
 signal meta_hover_started(meta:Variant)
 ## Emitted when a meta text on any DialogText node is not hovered anymore.
+@warning_ignore("unused_signal") # These are emitted by the NodeDialogText
 signal meta_hover_ended(meta:Variant)
 ## Emitted when a meta text on any DialogText node is clicked.
+@warning_ignore("unused_signal") # These are emitted by the NodeDialogText
 signal meta_clicked(meta:Variant)
-@warning_ignore_restore("unused_signal")
 
 #endregion
 
@@ -380,8 +381,12 @@ func collect_text_effects() -> void:
 ## Use get_parsed_text_effects() after calling this to get all effect information
 func parse_text_effects(text:String) -> String:
 	parsed_text_effect_info.clear()
-	var rtl := RichTextLabel.new()
-	rtl.bbcode_enabled = true
+	var rtl: RichTextLabel = null
+	if get_tree().get_first_node_in_group("dialogic_dialog_text"):
+		rtl = get_tree().get_first_node_in_group("dialogic_dialog_text").duplicate()
+	else:
+		rtl = RichTextLabel.new()
+		rtl.bbcode_enabled = true
 	var position_correction := 0
 	var bbcode_correction := 0
 	for effect_match in text_effects_regex.search_all(text):
