@@ -76,6 +76,13 @@ static func get_unique_identifier_by_path(file_path:String) -> String:
 	return ""
 
 
+static func get_resource_path_from_identifier(identifier:String, extension:String) -> String:
+	var value: Variant = get_directory(extension).get(identifier, '')
+	if value is String:
+		return value
+	return ""
+
+
 ## Returns the resource associated with the given unique identifier.
 ## The expected extension is needed to use the right directory.
 static func get_resource_from_identifier(identifier:String, extension:String) -> Resource:
@@ -85,6 +92,15 @@ static func get_resource_from_identifier(identifier:String, extension:String) ->
 	elif value is Resource:
 		return value
 	return null
+
+
+## Returns a boolean that expresses whether the resource exists.
+## The expected extension is needed to use the right directory.
+static func resource_exists_from_identifier(identifier:String, extension:String) -> bool:
+	var value: Variant = get_directory(extension).get(identifier, '')
+	if typeof(value) == TYPE_STRING:
+		return ResourceLoader.exists(value)
+	return value is Resource
 
 
 ## Editor Only
@@ -323,6 +339,10 @@ static func get_character_directory() -> Dictionary:
 
 static func get_timeline_directory() -> Dictionary:
 	return get_directory('dtl')
+
+
+static func timeline_resource_exists(timeline_identifier:String) -> bool:
+	return resource_exists_from_identifier(timeline_identifier, 'dtl')
 
 
 static func get_timeline_resource(timeline_identifier:String) -> DialogicTimeline:
