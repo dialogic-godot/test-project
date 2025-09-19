@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Dialogic Test Project"
 run/main_scene="res://MainMenu/Menu.tscn"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.5")
 config/icon="res://icon.png"
 
 [autoload]
@@ -160,8 +160,8 @@ animations/cross_fade_default_length=0.5
 animations/cross_fade_default_wait=true
 text/advance_delay=0.1
 animations/cross_fade_default="Fade Cross"
-animations/join_default="Fade In Up"
-animations/leave_default="Fade Out Down"
+animations/join_default="Fade In"
+animations/leave_default="Fade Out"
 audio/max_channels=4.0
 audio/channel_defaults={
 "": {
@@ -176,6 +176,15 @@ audio/channel_defaults={
 "loop": true,
 "volume": 0.0
 }
+}
+layout/style_directory={
+"": "res://VisualNovel/Assets/UI/VisualNovelStyle.tres",
+"SmallRPG_Style": "res://SmallRPG/Assets/TextBubbleStyle.tres",
+"Smartphone_Style": "res://Smartphone/Smartphone_Style.tres",
+"UnitTestStyle_A": "res://FakeUnitTests/unit_test_style_a.tres",
+"UnitTestStyle_B": "res://FakeUnitTests/unit_test_style_b.tres",
+"VisualNovel_Style": "res://VisualNovel/Assets/UI/VisualNovelStyle.tres",
+"default_speaker_style": "res://SpeakerStyle/default_speaker_style.tres"
 }
 
 [display]

@@ -15,7 +15,7 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 
 
-func _on_body_entered(body:PhysicsBody2D) -> void:
+func _on_body_entered(body:Node2D) -> void:
 	if body is CharacterBody2D:
 		var indicator := Sprite2D.new()
 		indicator.name = "InteractionIndicator"

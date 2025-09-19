@@ -7,15 +7,11 @@
 [sub_resource type="Resource" id="Resource_o3v7g"]
 script = ExtResource("2_4s04i")
 scene = ExtResource("1_toowd")
-overrides = {}
 
 [resource]
 script = ExtResource("1_c2rf5")
 name = "Smartphone_Style"
-layer_list = Array[String]([])
 layer_info = {
 "": SubResource("Resource_o3v7g")
 }
-base_overrides = {}
-layers = Array[ExtResource("2_4s04i")]([])
 metadata/_latest_layer = -1
