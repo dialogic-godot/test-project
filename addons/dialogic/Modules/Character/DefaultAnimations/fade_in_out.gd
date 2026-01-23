@@ -31,3 +31,4 @@ func _get_named_variations() -> Dictionary:
 		"fade out": {"reversed": true, "type": AnimationType.OUT},
 		"fade cross": {"type": AnimationType.CROSSFADE},
 	}
+

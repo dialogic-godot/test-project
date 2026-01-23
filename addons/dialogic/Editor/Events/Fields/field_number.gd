@@ -35,6 +35,7 @@ func _ready() -> void:
 
 func _load_display_info(info: Dictionary) -> void:
 
+	mode = info.get('mode', mode)
 	for option in info.keys():
 		match option:
 			'min': min_value = info[option]
@@ -45,8 +46,10 @@ func _load_display_info(info: Dictionary) -> void:
 				enforce_step = true
 				step = info[option]
 			'hide_step_button': %Spin.hide()
+			'tooltip': tooltip_text = info[option]
 
-	mode = info.get('mode', mode)
+
+
 
 func _set_value(new_value: Variant) -> void:
 	_on_value_text_submitted(str(new_value), true)
@@ -69,6 +72,7 @@ func use_float_mode() -> void:
 func use_int_mode() -> void:
 	update_suffix("")
 	enforce_step = true
+	step = 1.0
 
 
 func use_decibel_mode() -> void:
@@ -146,12 +150,12 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_increment_button_down(button: NodePath) -> void:
 	_on_value_text_submitted(str(value+step))
-	_holding_button(1.0, get_node(button) as BaseButton)
+	_holding_button(1, get_node(button) as BaseButton)
 
 
 func _on_decrement_button_down(button: NodePath) -> void:
 	_on_value_text_submitted(str(value-step))
-	_holding_button(-1.0, get_node(button) as BaseButton)
+	_holding_button(-1, get_node(button) as BaseButton)
 
 
 func _on_value_text_submitted(new_text: String, no_signal:= false) -> void:
@@ -165,10 +169,14 @@ func _on_value_text_submitted(new_text: String, no_signal:= false) -> void:
 			value = snapped(temp, step)
 	elif allow_string:
 		value = new_text
-	%Value.text = str(value).pad_decimals(
-		max(
-			len(str(float(step)-floorf(step)))-2,
-			len(str(float(value)-floorf(value)))-2,))
+
+	if int(step) == step and step != 0:
+		%Value.text = str(int(value))
+	else:
+		%Value.text = str(value).pad_decimals(
+			max(
+				len(str(float(step)-floorf(step)))-2,
+				len(str(float(value)-floorf(value)))-2,))
 	if not no_signal:
 		value_changed.emit(property_name, value)
 	# Visually disable Up or Down arrow when limit is reached to better indicate a limit has been hit

@@ -19,7 +19,7 @@ static func get_editor_scale() -> float:
 static func get_dialogic_plugin() -> Node:
 	for child in Engine.get_main_loop().get_root().get_children():
 		if child.get_class() == "EditorNode":
-			return child.get_node('DialogicPlugin')
+			return child.get_node("DialogicPlugin")
 	return null
 
 #endregion
@@ -135,27 +135,30 @@ static func pretty_name(file_path: String) -> String:
 #region EDITOR SETTINGS & COLORS
 ################################################################################
 
+const SETTING_HIDDEN_BUTTONS_DEFAULT := ["Setting", "History", "Save"]
+const SETTING_BUTTON_SECTION_ORDER := ["Main", "Flow", "Audio", "Visuals", "Logic", "Other"]
+
 static func set_editor_setting(setting:String, value:Variant) -> void:
 	var cfg := ConfigFile.new()
-	if FileAccess.file_exists('user://dialogic/editor_settings.cfg'):
-		cfg.load('user://dialogic/editor_settings.cfg')
+	if FileAccess.file_exists("user://dialogic/editor_settings.cfg"):
+		cfg.load("user://dialogic/editor_settings.cfg")
 
-	cfg.set_value('DES', setting, value)
+	cfg.set_value("DES", setting, value)
 
-	if !DirAccess.dir_exists_absolute('user://dialogic'):
-		DirAccess.make_dir_absolute('user://dialogic')
-	cfg.save('user://dialogic/editor_settings.cfg')
+	if not DirAccess.dir_exists_absolute("user://dialogic"):
+		DirAccess.make_dir_absolute("user://dialogic")
+	cfg.save("user://dialogic/editor_settings.cfg")
 
 
 static func get_editor_setting(setting:String, default:Variant=null) -> Variant:
 	var cfg := ConfigFile.new()
-	if !FileAccess.file_exists('user://dialogic/editor_settings.cfg'):
+	if not FileAccess.file_exists("user://dialogic/editor_settings.cfg"):
 		return default
 
-	if !cfg.load('user://dialogic/editor_settings.cfg') == OK:
+	if not cfg.load("user://dialogic/editor_settings.cfg") == OK:
 		return default
 
-	return cfg.get_value('DES', setting, default)
+	return cfg.get_value("DES", setting, default)
 
 
 static func get_color_palette(default:bool = false) -> Dictionary:
@@ -305,7 +308,7 @@ static func apply_scene_export_overrides(node:Node, export_overrides:Dictionary,
 		return
 	var property_info: Array[Dictionary] = node.script.get_script_property_list()
 	for i in property_info:
-		if i['usage'] & PROPERTY_USAGE_EDITOR:
+		if i['usage'] & PROPERTY_USAGE_EDITOR == PROPERTY_USAGE_EDITOR:
 			if i['name'] in export_overrides:
 				if str_to_var(export_overrides[i['name']]) == null and typeof(node.get(i['name'])) == TYPE_STRING:
 					node.set(i['name'], export_overrides[i['name']])
@@ -323,17 +326,17 @@ static func get_scene_export_defaults(node:Node) -> Dictionary:
 		return {}
 
 	if Engine.get_main_loop().has_meta('dialogic_scene_export_defaults') and \
-			node.script.resource_path in Engine.get_main_loop().get_meta('dialogic_scene_export_defaults'):
-		return Engine.get_main_loop().get_meta('dialogic_scene_export_defaults')[node.script.resource_path]
+			node.scene_file_path in Engine.get_main_loop().get_meta('dialogic_scene_export_defaults'):
+		return Engine.get_main_loop().get_meta('dialogic_scene_export_defaults')[node.scene_file_path]
 
 	if !Engine.get_main_loop().has_meta('dialogic_scene_export_defaults'):
 		Engine.get_main_loop().set_meta('dialogic_scene_export_defaults', {})
 	var defaults := {}
 	var property_info: Array[Dictionary] = node.script.get_script_property_list()
 	for i in property_info:
-		if i['usage'] & PROPERTY_USAGE_EDITOR:
+		if i['usage'] & PROPERTY_USAGE_EDITOR == PROPERTY_USAGE_EDITOR:
 			defaults[i['name']] = node.get(i['name'])
-	Engine.get_main_loop().get_meta('dialogic_scene_export_defaults')[node.script.resource_path] = defaults
+	Engine.get_main_loop().get_meta('dialogic_scene_export_defaults')[node.scene_file_path] = defaults
 	return defaults
 
 #endregion
@@ -425,7 +428,7 @@ static func setup_script_property_edit_node(property_info: Dictionary, value:Var
 			input.color_changed.connect(DialogicUtil._on_export_color_submitted.bind(property_info.name, property_changed))
 			input.custom_minimum_size.x = get_editor_scale() * 50
 		TYPE_INT:
-			if property_info['hint'] & PROPERTY_HINT_ENUM:
+			if property_info['hint'] & PROPERTY_HINT_ENUM == PROPERTY_HINT_ENUM:
 				input = OptionButton.new()
 				for x in property_info['hint_string'].split(','):
 					input.add_item(x.split(':')[0])
@@ -477,7 +480,7 @@ static func setup_script_property_edit_node(property_info: Dictionary, value:Var
 			input.set_value(value)
 			input.value_changed.connect(DialogicUtil._on_export_vectori_submitted.bind(property_changed))
 		TYPE_STRING:
-			if property_info['hint'] & PROPERTY_HINT_FILE or property_info['hint'] & PROPERTY_HINT_DIR:
+			if property_info['hint'] & PROPERTY_HINT_FILE== PROPERTY_HINT_FILE  or property_info['hint'] & PROPERTY_HINT_DIR == PROPERTY_HINT_DIR:
 				input = load("res://addons/dialogic/Editor/Events/Fields/field_file.tscn").instantiate()
 				input.show_editing_button = true
 				input.file_filter = property_info['hint_string']
@@ -490,7 +493,7 @@ static func setup_script_property_edit_node(property_info: Dictionary, value:Var
 				if value != null:
 					input.set_value(value)
 				input.value_changed.connect(DialogicUtil._on_export_file_submitted.bind(property_changed))
-			elif property_info['hint'] & PROPERTY_HINT_ENUM:
+			elif property_info['hint'] & PROPERTY_HINT_ENUM == PROPERTY_HINT_ENUM:
 				input = OptionButton.new()
 				var options: PackedStringArray = []
 				for x in property_info['hint_string'].split(','):
@@ -509,6 +512,11 @@ static func setup_script_property_edit_node(property_info: Dictionary, value:Var
 			input.property_name = property_info["name"]
 			input.set_value(value)
 			input.value_changed.connect(_on_export_dict_submitted.bind(property_changed))
+		TYPE_ARRAY:
+			input = load("res://addons/dialogic/Editor/Events/Fields/field_array.tscn").instantiate()
+			input.property_name = property_info["name"]
+			input.set_value(value)
+			input.value_changed.connect(_on_export_array_submitted.bind(property_changed))
 		TYPE_OBJECT:
 			input = load("res://addons/dialogic/Editor/Common/hint_tooltip_icon.tscn").instantiate()
 			input.hint_text = "Objects/Resources as settings are currently not supported. \nUse @export_file('*.extension') instead and load the resource once needed."
@@ -553,6 +561,9 @@ static func _on_export_vectori_submitted(property_name:String, value:Variant, ca
 	callable.call(property_name, var_to_str(value))
 
 static func _on_export_dict_submitted(property_name:String, value:Variant, callable: Callable) -> void:
+	callable.call(property_name, var_to_str(value))
+
+static func _on_export_array_submitted(property_name:String, value:Variant, callable: Callable) -> void:
 	callable.call(property_name, var_to_str(value))
 
 #endregion
@@ -638,7 +649,7 @@ static func get_character_suggestions(_search_text:String, current_value:Dialogi
 	return suggestions
 
 
-static func get_portrait_suggestions(search_text:String, character:DialogicCharacter, allow_empty := false, empty_text := "Don't Change") -> Dictionary:
+static func get_portrait_suggestions(search_text:String, character:DialogicCharacter, allow_empty := false, empty_text := "Don't Change", allow_anything:=false) -> Dictionary:
 	var icon := load("res://addons/dialogic/Editor/Images/Resources/portrait.svg")
 	var suggestions := {}
 
@@ -646,6 +657,9 @@ static func get_portrait_suggestions(search_text:String, character:DialogicChara
 		suggestions[empty_text] = {'value':'', 'editor_icon':["GuiRadioUnchecked", "EditorIcons"]}
 
 	if "{" in search_text:
+		suggestions[search_text] = {'value':search_text, 'editor_icon':["Variant", "EditorIcons"]}
+
+	elif allow_anything and search_text:
 		suggestions[search_text] = {'value':search_text, 'editor_icon':["Variant", "EditorIcons"]}
 
 	if character != null:

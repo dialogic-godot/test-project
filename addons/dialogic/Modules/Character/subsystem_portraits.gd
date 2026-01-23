@@ -112,21 +112,23 @@ func _change_portrait(character_node: Node2D, portrait: String, fade_animation:=
 	var portrait_node: Node = null
 	var previous_portrait: Node = null
 	var portrait_count := character_node.get_child_count()
+	var copy_state_vars := {}
 
 	if portrait_count > 0:
 		previous_portrait = character_node.get_child(-1)
 
 	# Check if the scene is the same as the currently loaded scene.
-	if (not previous_portrait == null and
-		previous_portrait.get_meta('scene', '') == scene_path and
+	if previous_portrait != null and previous_portrait.get_meta("scene", "") == scene_path:
 		# Also check if the scene supports changing to the given portrait.
-		previous_portrait.has_method('_should_do_portrait_update') and
-		previous_portrait._should_do_portrait_update(character, portrait)):
-			portrait_node = previous_portrait
-			info['same_scene'] = true
+		if previous_portrait is DialogicPortrait:
+			for i in previous_portrait.get_property_list():
+				if i.name.begins_with("state_"):
+					copy_state_vars[i.name] = previous_portrait.get(i.name)
+			if previous_portrait._should_do_portrait_update(character, portrait):
+				portrait_node = previous_portrait
+				info["same_scene"] = true
 
-	else:
-
+	if portrait_node == null:
 		if ResourceLoader.exists(scene_path):
 			ResourceLoader.load_threaded_request(scene_path)
 
@@ -151,6 +153,10 @@ func _change_portrait(character_node: Node2D, portrait: String, fade_animation:=
 
 
 	if portrait_node:
+		for i in copy_state_vars:
+			if i in portrait_node:
+				portrait_node.set(i, copy_state_vars[i])
+
 		portrait_node.set_meta('portrait', portrait)
 		character_node.set_meta('portrait', portrait)
 
@@ -630,7 +636,6 @@ func get_character_info(character:DialogicCharacter) -> Dictionary:
 ## Updates all portrait containers set to SPEAKER.
 func change_speaker(speaker: DialogicCharacter = null, portrait := "") -> void:
 	for container: Node in get_tree().get_nodes_in_group('dialogic_portrait_con_speaker'):
-
 		var just_joined := true
 		for character_node: Node in container.get_children():
 			if not character_node.get_meta('character') == speaker:
@@ -656,7 +661,9 @@ func change_speaker(speaker: DialogicCharacter = null, portrait := "") -> void:
 
 		elif portrait.is_empty():
 			continue
-
+		if portrait.is_empty():
+			if is_character_joined(speaker):
+				portrait = dialogic.current_state_info.portraits[speaker.get_identifier()].get("portrait", "")
 		if portrait.is_empty():
 			portrait = speaker.default_portrait
 
@@ -683,6 +690,11 @@ func change_speaker(speaker: DialogicCharacter = null, portrait := "") -> void:
 			character_node.hide()
 			if not container.is_visible_in_tree():
 				await get_tree().process_frame
+
+			# There is chance that the style changed (due to a speaker style) and thus the character node is gone now.
+			# In that case, just give up.
+			if not is_instance_valid(character_node):
+				return
 			character_node.show()
 			var join_animation: String = ProjectSettings.get_setting('dialogic/animations/join_default', "Fade In Up")
 			join_animation = DialogicPortraitAnimationUtil.guess_animation(join_animation, DialogicPortraitAnimationUtil.AnimationType.IN)
