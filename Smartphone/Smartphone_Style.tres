@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogicStyle" load_steps=5 format=3 uid="uid://hwkqflrcjdit"]
+[gd_resource type="Resource" script_class="DialogicStyle" format=3 uid="uid://hwkqflrcjdit"]
 
 [ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="1_c2rf5"]
 [ext_resource type="PackedScene" uid="uid://doer5vu1ifsrv" path="res://Smartphone/SmartphoneLayout.tscn" id="1_toowd"]

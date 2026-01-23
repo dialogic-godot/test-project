@@ -1,13 +1,15 @@
 This timeline tests backgrounds within timelines.
 
-[i]Test using a color
+[i]Test using a color by name
 [background arg="pink" fade="0.0"]
+[i]Test using a color by hex code
+[background arg="#14cac6ff" fade="0.0"]
 
 [i]Test using a simple image
 [background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach day.jpg" fade="0.75" transition="Simple Fade"]
 
 [i]Test using a custom scene.
-[background scene="res://FakeUnitTests/Assets/Backgrounds/industrial-custom-background.tscn"]
+[background scene="res://FakeUnitTests/Assets/Backgrounds/industrial-custom-background.tscn" fade="0.0"]
 
 [i]Test all transitions.
 [background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach eve.jpg" fade="0.5" transition="Push Right"]

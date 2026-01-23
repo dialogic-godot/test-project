@@ -8,17 +8,25 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Dialogic Test Project"
 run/main_scene="res://MainMenu/Menu.tscn"
-config/features=PackedStringArray("4.5")
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
+
+[audio]
+
+buses/default_bus_layout="uid://c2my4q1ytlhp"
 
 [autoload]
 
 UnitTest="*res://FakeUnitTests/unit_test_autoload.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+Dialogic="*uid://ds2q0uclmolvu"
 
 [debug]
 
