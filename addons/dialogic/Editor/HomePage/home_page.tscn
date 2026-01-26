@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cqy73hshqqgga"]
 
 [ext_resource type="Script" uid="uid://bl3vudjf3wn2x" path="res://addons/dialogic/Editor/HomePage/home_page.gd" id="1_6g38w"]
-[ext_resource type="Texture2D" uid="uid://cvmlp5nxb2rer" path="res://addons/dialogic/Editor/HomePage/icon_bg.png" id="1_ed1g1"]
-[ext_resource type="Texture2D" uid="uid://bt87p6qlso0ya" path="res://addons/dialogic/Editor/Images/dialogic-logo.svg" id="3_3leok"]
+[ext_resource type="Texture2D" uid="uid://dsglv5w1ym6vk" path="res://addons/dialogic/Editor/HomePage/icon_bg.png" id="1_ed1g1"]
+[ext_resource type="Texture2D" uid="uid://b0be2i2n5eq4c" path="res://addons/dialogic/Editor/Images/dialogic-logo.svg" id="3_3leok"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ipcwk"]
 draw_center = false
