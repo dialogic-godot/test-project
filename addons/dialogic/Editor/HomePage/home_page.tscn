@@ -189,7 +189,7 @@ offset_top = -20.500002
 offset_right = 32.0
 offset_bottom = 42.5
 rotation = -0.30892327
-text = "3"
+text = "2"
 label_settings = SubResource("LabelSettings_w8q1h")
 metadata/_edit_use_anchors_ = true
 
