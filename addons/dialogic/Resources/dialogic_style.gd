@@ -22,16 +22,18 @@ class_name DialogicStyle
 }
 
 
-
-
 func _init(_name := "") -> void:
 	if not _name.is_empty():
 		name = _name
 
 
-
 #region BASE METHODS
 # These methods are local, meaning they do NOT take inheritance into account.
+
+func clear() -> void:
+	layer_list = []
+	layer_info = {"" : DialogicStyleLayer.new()}
+	inherits = null
 
 
 ## Returns the amount of layers (the base layer is not included).
@@ -73,7 +75,7 @@ func get_layer_info(id:String) -> Dictionary:
 		if layer_resource.scene != null:
 			info.path = layer_resource.scene.resource_path
 		elif id == "":
-			info.path = DialogicUtil.get_default_layout_base().resource_path
+			info.path = DialogicStylesUtil.get_default_layout_base().resource_path
 
 		info.overrides = layer_resource.overrides.duplicate()
 

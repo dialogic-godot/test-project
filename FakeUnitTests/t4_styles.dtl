@@ -28,13 +28,14 @@ Okay enough of this.
 join TC3_BasicPortraits 1 [animation="Instant"]
 join TC4_BasicPortraits2 2 [animation="Instant"]
 join TC5_BasicPortraits3 4 [animation="Instant"]
+audio music "res://FakeUnitTests/Assets/Music/Play Now.mp3" [volume="-30.0"]
 This is some text!
 [style name="UnitTestStyle_B"]
 [wait_input]
-Some other text.
+This is now the UnitTestStyleB style
 [style]
 [wait_input]
-Another text event.
+And back to the default style.
 
 [i]The end.
 jump t0_overview/

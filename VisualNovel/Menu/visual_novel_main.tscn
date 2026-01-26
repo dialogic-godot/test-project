@@ -1,23 +1,29 @@
-[gd_scene load_steps=38 format=3 uid="uid://u0gqldnxnboj"]
+[gd_scene format=3 uid="uid://u0gqldnxnboj"]
 
 [ext_resource type="Script" uid="uid://ctckxavplp2np" path="res://VisualNovel/Menu/visual_novel_main.gd" id="1_4g5d8"]
 [ext_resource type="Script" uid="uid://dintq0hgbx06s" path="res://VisualNovel/Menu/MainMenu.gd" id="2_2x8iy"]
-[ext_resource type="FontFile" uid="uid://cndedeubxwjt1" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_62d8m"]
-[ext_resource type="Texture2D" uid="uid://dpcl423chbgo4" path="res://MainMenu/Dialogic Logo.svg" id="3_pedax"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_62d8m"]
+[ext_resource type="Texture2D" uid="uid://4xikx4orrxj8" path="res://VisualNovel/Assets/Backgrounds/Brotsch/windmill.jpg" id="2_hht6a"]
+[ext_resource type="Texture2D" uid="uid://b413ictwywftp" path="res://MainMenu/Dialogic Logo.svg" id="3_pedax"]
 [ext_resource type="Script" uid="uid://p8y8oagxh3uk" path="res://VisualNovel/Menu/LoadMenu.gd" id="3_wurwl"]
 [ext_resource type="FontFile" uid="uid://xovv0ehdux3" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Italic.ttf" id="5_4y8dd"]
 [ext_resource type="Texture2D" uid="uid://b07872tewlmv1" path="res://icon.png" id="5_muuk4"]
 [ext_resource type="Script" uid="uid://3hqaxtqcv4s8" path="res://VisualNovel/Menu/IngameUI.gd" id="5_wmmq1"]
-[ext_resource type="Texture2D" uid="uid://dwpb2jvhmr7f" path="res://VisualNovel/Assets/UI/save.png" id="6_230wf"]
-[ext_resource type="Texture2D" uid="uid://uurckvyys1b2" path="res://VisualNovel/Assets/UI/open.png" id="7_h7oxv"]
-[ext_resource type="Texture2D" uid="uid://b2jw0thjq0ynd" path="res://VisualNovel/Assets/UI/trashcan.png" id="7_oe5lv"]
-[ext_resource type="Texture2D" uid="uid://dduafqy00b4ge" path="res://VisualNovel/Assets/UI/plus.png" id="8_bbg7t"]
-[ext_resource type="Texture2D" uid="uid://cll72pleixju1" path="res://VisualNovel/Assets/UI/gear.png" id="8_qax7c"]
-[ext_resource type="Texture2D" uid="uid://bf68s7r0y3pql" path="res://VisualNovel/Assets/UI/home.png" id="9_wa353"]
-[ext_resource type="Texture2D" uid="uid://bh681lbulck05" path="res://VisualNovel/Assets/UI/menuGrid.png" id="10_8n3tn"]
-[ext_resource type="Texture2D" uid="uid://b65ewpv2okxa5" path="res://VisualNovel/Assets/UI/exit.png" id="11_7ufed"]
-[ext_resource type="Texture2D" uid="uid://caxi7gfmwjac7" path="res://VisualNovel/Assets/UI/cross.png" id="12_yiqe1"]
-[ext_resource type="FontFile" uid="uid://veygrdb33ixa" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Bold.ttf" id="18_tvmy3"]
+[ext_resource type="Texture2D" uid="uid://j2xovxi836t8" path="res://VisualNovel/Assets/UI/save.png" id="6_230wf"]
+[ext_resource type="Texture2D" uid="uid://bxtiwgr6gho8" path="res://VisualNovel/Assets/UI/open.png" id="7_h7oxv"]
+[ext_resource type="Texture2D" uid="uid://bhtf8qxddipgx" path="res://VisualNovel/Assets/UI/trashcan.png" id="7_oe5lv"]
+[ext_resource type="Texture2D" uid="uid://dwm3egl3ysw7" path="res://VisualNovel/Assets/UI/plus.png" id="8_bbg7t"]
+[ext_resource type="Texture2D" uid="uid://bysxuiutd66cx" path="res://VisualNovel/Assets/UI/gear.png" id="8_qax7c"]
+[ext_resource type="Texture2D" uid="uid://rbyro7pjcpmu" path="res://VisualNovel/Assets/UI/home.png" id="9_wa353"]
+[ext_resource type="Texture2D" uid="uid://csc6c3v4cnfh3" path="res://VisualNovel/Assets/UI/menuGrid.png" id="10_8n3tn"]
+[ext_resource type="Script" uid="uid://gpao3rjowm56" path="res://VisualNovel/Menu/credits_menu.gd" id="11_4xl34"]
+[ext_resource type="Texture2D" uid="uid://r7hcvplmu12d" path="res://VisualNovel/Assets/UI/exit.png" id="11_7ufed"]
+[ext_resource type="FontFile" uid="uid://cuemxns5bcpu2" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Light.ttf" id="11_d7442"]
+[ext_resource type="Texture2D" uid="uid://digng6kq2lkxj" path="res://VisualNovel/Assets/UI/cross.png" id="12_yiqe1"]
+[ext_resource type="FontFile" uid="uid://ch7lf1nu2qoq6" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-BoldItalic.ttf" id="13_4xl34"]
+[ext_resource type="FontFile" uid="uid://dohypo0m56ip" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-LightItalic.ttf" id="14_oxsj6"]
+[ext_resource type="FontFile" uid="uid://u5o8qy26oasu" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Regular.ttf" id="15_3pt6m"]
+[ext_resource type="FontFile" uid="uid://kpjdmncdwo8n" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Bold.ttf" id="18_tvmy3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1k38t"]
 content_margin_left = 10.0
@@ -86,7 +92,10 @@ fill_to = Vector2(0, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_wvv6k"]
 offsets = PackedFloat32Array(0, 0.311927, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.698039, 0.698039, 0.698039, 0.662745, 0.972549, 0.972549, 0.972549, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.662745, 0.972549, 0.972549, 0.972549, 0)
+
+[sub_resource type="Gradient" id="Gradient_hht6a"]
+colors = PackedColorArray(1, 1, 1, 0.18039216, 1, 1, 1, 1)
 
 [sub_resource type="Gradient" id="Gradient_554c4"]
 offsets = PackedFloat32Array(0, 0.255556, 1)
@@ -123,10 +132,11 @@ content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
 bg_color = Color(0.00392157, 0.00392157, 0.00392157, 0.313726)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
+skew = Vector2(0.04, 0.015)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6w3f7"]
 
@@ -164,7 +174,7 @@ corner_radius_top_right = 20
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 20
 
-[node name="VisualNovel_Main" type="Control"]
+[node name="VisualNovel_Main" type="Control" unique_id=2125289192]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,7 +184,7 @@ grow_vertical = 2
 theme = SubResource("Theme_c822e")
 script = ExtResource("1_4g5d8")
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="BG" type="TextureRect" parent="." unique_id=96543102]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -184,12 +194,25 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_w2llu")
 expand_mode = 1
 
-[node name="GPUParticles2D" type="CPUParticles2D" parent="BG"]
+[node name="TextureRect" type="TextureRect" parent="BG" unique_id=1153682560]
+modulate = Color(1, 1, 1, 0.15686275)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_hht6a")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="BG" unique_id=177491257]
+modulate = Color(1, 1, 1, 0.4)
 position = Vector2(571, 272)
-amount = 200
+amount = 100
+texture = SubResource("GradientTexture2D_nv4hs")
 lifetime = 7.0
 preprocess = 6.0
-texture = SubResource("GradientTexture2D_nv4hs")
 emission_shape = 3
 emission_rect_extents = Vector2(600, 400)
 gravity = Vector2(0, 10)
@@ -199,10 +222,11 @@ scale_amount_min = 0.32
 scale_amount_max = 0.66
 color = Color(0.619608, 0.564706, 0.372549, 1)
 color_ramp = SubResource("Gradient_wvv6k")
+color_initial_ramp = SubResource("Gradient_hht6a")
 hue_variation_min = -0.44
 hue_variation_max = 0.41
 
-[node name="Menu" type="Control" parent="."]
+[node name="Menu" type="Control" parent="." unique_id=41021723]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,7 +235,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_2x8iy")
 
-[node name="MainPart" type="VBoxContainer" parent="Menu"]
+[node name="MainPart" type="VBoxContainer" parent="Menu" unique_id=856827656]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -220,17 +244,18 @@ offset_top = 67.0
 offset_right = 668.0
 offset_bottom = -67.0
 grow_vertical = 2
+theme_override_constants/separation = -6
 alignment = 1
 
-[node name="DialogicLogo" type="TextureRect" parent="Menu/MainPart"]
-self_modulate = Color(1, 1, 1, 0.552941)
+[node name="DialogicLogo" type="TextureRect" parent="Menu/MainPart" unique_id=123666234]
+modulate = Color(0.7130147, 0.74571717, 0.36349288, 1)
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 texture = ExtResource("3_pedax")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Title" type="Label" parent="Menu/MainPart"]
+[node name="Title" type="Label" parent="Menu/MainPart" unique_id=1046232888]
 clip_children = 2
 layout_mode = 2
 size_flags_horizontal = 0
@@ -239,9 +264,9 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_fonts/font = ExtResource("2_62d8m")
 theme_override_font_sizes/font_size = 50
-text = "The Dialogic Paradox"
+text = "Cinny in Elyria"
 
-[node name="BG2" type="TextureRect" parent="Menu/MainPart/Title"]
+[node name="BG2" type="TextureRect" parent="Menu/MainPart/Title" unique_id=1061169345]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,38 +276,70 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_ncwis")
 expand_mode = 1
 
-[node name="VBox" type="VBoxContainer" parent="Menu/MainPart"]
+[node name="Subtitle" type="Label" parent="Menu/MainPart" unique_id=1016997819]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"HeaderLarge"
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("5_4y8dd")
+theme_override_font_sizes/font_size = 24
+text = "A mission from the bureau of Fate and Fortune"
+
+[node name="BG2" type="TextureRect" parent="Menu/MainPart/Subtitle" unique_id=469708178]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ncwis")
+expand_mode = 1
+
+[node name="Control" type="Control" parent="Menu/MainPart" unique_id=1448807849]
+custom_minimum_size = Vector2(0, 27.345)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Menu/MainPart" unique_id=572890118]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Continue" type="Button" parent="Menu/MainPart/VBox"]
+[node name="Continue" type="Button" parent="Menu/MainPart/VBox" unique_id=903276073]
 unique_name_in_owner = true
 clip_children = 2
 layout_mode = 2
 text = "Continue"
 alignment = 0
 
-[node name="NewGame" type="Button" parent="Menu/MainPart/VBox"]
+[node name="NewGame" type="Button" parent="Menu/MainPart/VBox" unique_id=674895476]
 unique_name_in_owner = true
 layout_mode = 2
 text = "New Game"
 alignment = 0
 
-[node name="Load" type="Button" parent="Menu/MainPart/VBox"]
+[node name="Load" type="Button" parent="Menu/MainPart/VBox" unique_id=818181554]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Load"
 alignment = 0
 
-[node name="Back" type="Button" parent="Menu/MainPart/VBox"]
+[node name="Back" type="Button" parent="Menu/MainPart/VBox" unique_id=942746664]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Back"
 alignment = 0
 
-[node name="LoadMenu" type="VBoxContainer" parent="Menu"]
+[node name="Credits" type="Button" parent="Menu/MainPart/VBox" unique_id=423167646]
 unique_name_in_owner = true
+layout_mode = 2
+text = "Credits"
+alignment = 0
+
+[node name="LoadMenu" type="VBoxContainer" parent="Menu" unique_id=1275950596]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -298,12 +355,12 @@ theme_override_constants/separation = 21
 alignment = 1
 script = ExtResource("3_wurwl")
 
-[node name="Top" type="Control" parent="Menu/LoadMenu"]
+[node name="Top" type="Control" parent="Menu/LoadMenu" unique_id=1287732218]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Title" type="Label" parent="Menu/LoadMenu/Top"]
+[node name="Title" type="Label" parent="Menu/LoadMenu/Top" unique_id=588289392]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 5
@@ -325,7 +382,7 @@ text = "Load Game
 "
 horizontal_alignment = 2
 
-[node name="BG2" type="TextureRect" parent="Menu/LoadMenu/Top/Title"]
+[node name="BG2" type="TextureRect" parent="Menu/LoadMenu/Top/Title" unique_id=991651599]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -335,7 +392,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_ncwis")
 expand_mode = 1
 
-[node name="Preview" type="Panel" parent="Menu/LoadMenu/Top"]
+[node name="Preview" type="Panel" parent="Menu/LoadMenu/Top" unique_id=607868971]
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 1
 anchors_preset = 15
@@ -346,7 +403,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_cxqqu")
 
-[node name="Preview2" type="Panel" parent="Menu/LoadMenu/Top/Preview"]
+[node name="Preview2" type="Panel" parent="Menu/LoadMenu/Top/Preview" unique_id=1931765163]
 modulate = Color(0.0980392, 0.0980392, 0.0980392, 0.478431)
 layout_mode = 1
 anchors_preset = 15
@@ -361,9 +418,9 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_cxqqu")
 
-[node name="LoadSlotButton" type="Button" parent="Menu/LoadMenu/Top/Preview"]
+[node name="LoadSlotButton" type="Button" parent="Menu/LoadMenu/Top/Preview" unique_id=2020475129]
 custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
+layout_mode = 0
 offset_left = 286.0
 offset_top = 113.0
 offset_right = 355.0
@@ -373,9 +430,9 @@ focus_neighbor_top = NodePath("../DeleteSlotButton")
 focus_neighbor_bottom = NodePath("../../../../../IngameUI/InGameMenuButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("7_h7oxv")
@@ -383,9 +440,9 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="DeleteSlotButton" type="Button" parent="Menu/LoadMenu/Top/Preview"]
+[node name="DeleteSlotButton" type="Button" parent="Menu/LoadMenu/Top/Preview" unique_id=1070369342]
 custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
+layout_mode = 0
 offset_left = 293.0
 offset_top = 146.0
 offset_right = 344.0
@@ -394,9 +451,9 @@ tooltip_text = "Delete slot (no undo!)"
 focus_neighbor_bottom = NodePath("../LoadSlotButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("7_oe5lv")
@@ -404,7 +461,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="PreviewPanel" type="Panel" parent="Menu/LoadMenu/Top/Preview"]
+[node name="PreviewPanel" type="Panel" parent="Menu/LoadMenu/Top/Preview" unique_id=1403682572]
 clip_children = 2
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 1
@@ -416,7 +473,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_wcitc")
 
-[node name="PreviewTexture" type="TextureRect" parent="Menu/LoadMenu/Top/Preview/PreviewPanel"]
+[node name="PreviewTexture" type="TextureRect" parent="Menu/LoadMenu/Top/Preview/PreviewPanel" unique_id=69360494]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 1
@@ -433,7 +490,7 @@ texture = ExtResource("5_muuk4")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="SlotName" type="Label" parent="Menu/LoadMenu/Top/Preview/PreviewPanel"]
+[node name="SlotName" type="Label" parent="Menu/LoadMenu/Top/Preview/PreviewPanel" unique_id=1935568815]
 unique_name_in_owner = true
 layout_mode = 1
 offset_left = 11.0
@@ -451,8 +508,9 @@ theme_override_font_sizes/font_size = 22
 text = "Load Game
 "
 
-[node name="SlotList" type="ItemList" parent="Menu/LoadMenu"]
+[node name="SlotList" type="ItemList" parent="Menu/LoadMenu" unique_id=504205255]
 unique_name_in_owner = true
+clip_contents = false
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pud4n")
@@ -462,13 +520,81 @@ item_0/text = "Some item"
 item_1/text = "Another item"
 item_2/text = "A really cool item"
 
-[node name="IngameUI" type="CanvasLayer" parent="."]
+[node name="CreditsMenu" type="ScrollContainer" parent="Menu" unique_id=241285538]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -514.0
+offset_top = 52.0
+offset_right = -41.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("11_4xl34")
+
+[node name="CreditsMenu" type="VBoxContainer" parent="Menu/CreditsMenu" unique_id=1798551094]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Title" type="Label" parent="Menu/CreditsMenu/CreditsMenu" unique_id=1032142515]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"HeaderLarge"
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_fonts/font = ExtResource("2_62d8m")
+theme_override_font_sizes/font_size = 30
+text = "Credits"
+horizontal_alignment = 2
+
+[node name="BG2" type="TextureRect" parent="Menu/CreditsMenu/CreditsMenu/Title" unique_id=1430644121]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ncwis")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Menu/CreditsMenu/CreditsMenu" unique_id=979433344]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("11_d7442")
+theme_override_fonts/bold_font = ExtResource("18_tvmy3")
+theme_override_fonts/bold_italics_font = ExtResource("13_4xl34")
+theme_override_fonts/italics_font = ExtResource("14_oxsj6")
+theme_override_fonts/mono_font = ExtResource("15_3pt6m")
+bbcode_enabled = true
+text = "[b]Story & Menu by [color=light_sea_green]Jowan[/color][/b]
+
+[b]Character Portraits by [color=light_coral]FALLiNG_AiR[/color] (cc0)[/b]
+- [url]https://opengameart.org/content/visual-novel-character-sprite[/url]
+
+[b]Background Art by [color=yellow_green]Spiral Atlas[/color] (cc-by)[/b]
+- [url]https://spiralatlas.itch.io/victorian-backgrounds[/url]
+- [url]https://spiralatlas.itch.io/countryside-backgrounds[/url]
+- [url]https://spiralatlas.itch.io/stylized-fantasy-provencal-backgrounds[/url]
+
+[b]Background Art by [color=plum]Katelynn Parsec[/color] (cc-by)[/b]
+- [url]https://katelynn-parsec.itch.io/sci-fi-research-base[/url]
+
+[b]Music by [color=sandy_brown]yd[/color] (cc0)[/b]
+- [url]https://opengameart.org/content/another-space-background-track[/url]"
+fit_content = true
+
+[node name="IngameUI" type="CanvasLayer" parent="." unique_id=1347968086]
 unique_name_in_owner = true
 process_mode = 3
 layer = 2
 script = ExtResource("5_wmmq1")
 
-[node name="SaveLoadMenu" type="PanelContainer" parent="IngameUI"]
+[node name="SaveLoadMenu" type="PanelContainer" parent="IngameUI" unique_id=543851221]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -482,13 +608,13 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_hvpxx")
 
-[node name="VBox" type="VBoxContainer" parent="IngameUI/SaveLoadMenu"]
+[node name="VBox" type="VBoxContainer" parent="IngameUI/SaveLoadMenu" unique_id=397664719]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="IngameUI/SaveLoadMenu/VBox"]
+[node name="HBox" type="HBoxContainer" parent="IngameUI/SaveLoadMenu/VBox" unique_id=1905846232]
 layout_mode = 2
 
-[node name="SaveTab" type="Button" parent="IngameUI/SaveLoadMenu/VBox/HBox"]
+[node name="SaveTab" type="Button" parent="IngameUI/SaveLoadMenu/VBox/HBox" unique_id=518070578]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.894118, 0.894118, 0.894118, 1)
@@ -499,7 +625,7 @@ button_group = SubResource("ButtonGroup_xgrnr")
 text = "Save"
 flat = true
 
-[node name="LoadTab" type="Button" parent="IngameUI/SaveLoadMenu/VBox/HBox"]
+[node name="LoadTab" type="Button" parent="IngameUI/SaveLoadMenu/VBox/HBox" unique_id=21621747]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.894118, 0.894118, 0.894118, 1)
@@ -509,7 +635,7 @@ button_group = SubResource("ButtonGroup_xgrnr")
 text = "Load"
 flat = true
 
-[node name="InGameSlotList" type="ItemList" parent="IngameUI/SaveLoadMenu/VBox"]
+[node name="InGameSlotList" type="ItemList" parent="IngameUI/SaveLoadMenu/VBox" unique_id=1047644773]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -519,11 +645,11 @@ item_0/text = "Some item"
 item_1/text = "Another item"
 item_2/text = "A really cool item"
 
-[node name="NewSlotEdit" type="LineEdit" parent="IngameUI/SaveLoadMenu/VBox"]
+[node name="NewSlotEdit" type="LineEdit" parent="IngameUI/SaveLoadMenu/VBox" unique_id=1334646202]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="NewSlotButton" type="Button" parent="IngameUI/SaveLoadMenu/VBox"]
+[node name="NewSlotButton" type="Button" parent="IngameUI/SaveLoadMenu/VBox" unique_id=1628784069]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
@@ -532,7 +658,7 @@ icon = ExtResource("8_bbg7t")
 flat = true
 expand_icon = true
 
-[node name="InGameMenu" type="PanelContainer" parent="IngameUI"]
+[node name="InGameMenu" type="PanelContainer" parent="IngameUI" unique_id=2059476301]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -546,11 +672,11 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_p264t")
 
-[node name="VBox" type="VBoxContainer" parent="IngameUI/InGameMenu"]
+[node name="VBox" type="VBoxContainer" parent="IngameUI/InGameMenu" unique_id=1085170110]
 layout_mode = 2
 theme_override_constants/separation = -7
 
-[node name="QuickSaveButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+[node name="QuickSaveButton" type="Button" parent="IngameUI/InGameMenu/VBox" unique_id=1929651557]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 tooltip_text = "Quick Save"
@@ -558,9 +684,9 @@ focus_neighbor_top = NodePath("../../../InGameMenuButton")
 focus_neighbor_bottom = NodePath("../SaveLoadButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("6_230wf")
@@ -568,7 +694,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="SaveLoadButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+[node name="SaveLoadButton" type="Button" parent="IngameUI/InGameMenu/VBox" unique_id=1152186998]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 tooltip_text = "Save/Load"
@@ -576,9 +702,9 @@ focus_neighbor_top = NodePath("../QuickSaveButton")
 focus_neighbor_bottom = NodePath("../SettingsButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("7_h7oxv")
@@ -586,7 +712,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="SettingsButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+[node name="SettingsButton" type="Button" parent="IngameUI/InGameMenu/VBox" unique_id=479676660]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 tooltip_text = "Settings"
@@ -594,9 +720,9 @@ focus_neighbor_top = NodePath("../SaveLoadButton")
 focus_neighbor_bottom = NodePath("../MenuButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 disabled = true
@@ -605,7 +731,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="MenuButton" type="Button" parent="IngameUI/InGameMenu/VBox"]
+[node name="MenuButton" type="Button" parent="IngameUI/InGameMenu/VBox" unique_id=1204768099]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
@@ -614,9 +740,9 @@ focus_neighbor_top = NodePath("../SettingsButton")
 focus_neighbor_bottom = NodePath("../../../InGameMenuButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("9_wa353")
@@ -624,7 +750,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="InGameMenuButton" type="Button" parent="IngameUI"]
+[node name="InGameMenuButton" type="Button" parent="IngameUI" unique_id=332657547]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -646,7 +772,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="WarningScreen" type="ColorRect" parent="IngameUI"]
+[node name="WarningScreen" type="ColorRect" parent="IngameUI" unique_id=1170986593]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -655,7 +781,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0.321569)
 
-[node name="Warning" type="PanelContainer" parent="IngameUI/WarningScreen"]
+[node name="Warning" type="PanelContainer" parent="IngameUI/WarningScreen" unique_id=457627246]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -670,19 +796,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hvpxx")
 
-[node name="VBox" type="VBoxContainer" parent="IngameUI/WarningScreen/Warning"]
+[node name="VBox" type="VBoxContainer" parent="IngameUI/WarningScreen/Warning" unique_id=354264710]
 layout_mode = 2
 
-[node name="WarningText" type="Label" parent="IngameUI/WarningScreen/Warning/VBox"]
+[node name="WarningText" type="Label" parent="IngameUI/WarningScreen/Warning/VBox" unique_id=1753614865]
 layout_mode = 2
 text = "Do you want to save before exiting?"
 horizontal_alignment = 1
 
-[node name="HBox" type="HBoxContainer" parent="IngameUI/WarningScreen/Warning/VBox"]
+[node name="HBox" type="HBoxContainer" parent="IngameUI/WarningScreen/Warning/VBox" unique_id=1982603983]
 layout_mode = 2
 alignment = 1
 
-[node name="WithSavingButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox"]
+[node name="WithSavingButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox" unique_id=269936899]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
@@ -691,9 +817,9 @@ focus_neighbor_top = NodePath("../../../../../InGameMenuButton")
 focus_neighbor_bottom = NodePath("../CancelButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("6_230wf")
@@ -701,7 +827,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="WithoutSavingButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox"]
+[node name="WithoutSavingButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox" unique_id=1706326801]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Exit without saving"
@@ -709,9 +835,9 @@ focus_neighbor_top = NodePath("../../../../../InGameMenuButton")
 focus_neighbor_bottom = NodePath("../CancelButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("11_7ufed")
@@ -719,16 +845,16 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="CancelButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox"]
+[node name="CancelButton" type="Button" parent="IngameUI/WarningScreen/Warning/VBox/HBox" unique_id=1274602987]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Cancel Exit"
 focus_neighbor_top = NodePath("../WithSavingButton")
 theme_override_colors/font_color = Color(0.219608, 0.219608, 0.219608, 1)
 theme_override_colors/icon_normal_color = Color(0.756863, 0.756863, 0.756863, 1)
+theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_pressed_color = Color(0.768627, 0.752941, 0.458824, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(0.396078, 0.772549, 0.886275, 1)
 theme_override_colors/icon_disabled_color = Color(0.454902, 0.454902, 0.454902, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_45d8p")
 icon = ExtResource("12_yiqe1")
@@ -736,7 +862,7 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="SaveIndicator" type="TextureRect" parent="IngameUI"]
+[node name="SaveIndicator" type="TextureRect" parent="IngameUI" unique_id=992935562]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -752,7 +878,7 @@ texture = ExtResource("6_230wf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="IngameUI/SaveIndicator"]
+[node name="Label" type="Label" parent="IngameUI/SaveIndicator" unique_id=719487644]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -774,6 +900,7 @@ vertical_alignment = 2
 [connection signal="pressed" from="Menu/MainPart/VBox/NewGame" to="Menu" method="_on_new_game_pressed"]
 [connection signal="pressed" from="Menu/MainPart/VBox/Load" to="Menu" method="_on_load_pressed"]
 [connection signal="pressed" from="Menu/MainPart/VBox/Back" to="Menu" method="_on_back_pressed"]
+[connection signal="pressed" from="Menu/MainPart/VBox/Credits" to="Menu" method="_on_credits_pressed"]
 [connection signal="pressed" from="Menu/LoadMenu/Top/Preview/LoadSlotButton" to="Menu/LoadMenu" method="_on_load_slot_button_pressed"]
 [connection signal="pressed" from="Menu/LoadMenu/Top/Preview/DeleteSlotButton" to="Menu/LoadMenu" method="_on_delete_slot_button_pressed"]
 [connection signal="item_activated" from="Menu/LoadMenu/SlotList" to="Menu/LoadMenu" method="_on_slot_list_item_activated"]

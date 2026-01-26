@@ -18,7 +18,7 @@ func _register() -> void:
 	alternative_text = "Create and edit dialogic variables and their default values"
 
 
-func _open(argument:Variant = null):
+func _open(_argument:Variant = null) -> void:
 	%ReferenceInfo.hide()
 	%Tree.load_info(ProjectSettings.get_setting('dialogic/variables', {}))
 
@@ -35,17 +35,25 @@ func _close() -> void:
 #endregion
 
 func _ready() -> void:
+	if get_parent() is SubViewport:
+		return
+
 	%ReferenceInfo.get_node('Label').add_theme_color_override('font_color', get_theme_color("warning_color", "Editor"))
 	%Search.right_icon = get_theme_icon("Search", "EditorIcons")
+	%Documentation.icon = get_theme_icon("ExternalLink", "EditorIcons")
 
 #region RENAMING
 
 func variable_renamed(old_name:String, new_name:String):
 	if old_name == new_name:
 		return
+	var count: int = editors_manager.reference_manager.get_change_count()
 	editors_manager.reference_manager.add_variable_ref_change(old_name, new_name)
-	%ReferenceInfo.show()
-
+	var new_count: int = editors_manager.reference_manager.get_change_count()
+	if count > new_count:
+		%ReferenceInfo.hide()
+	elif count < new_count:
+		%ReferenceInfo.show()
 
 func _on_reference_manager_pressed() -> void:
 	editors_manager.reference_manager.open()
@@ -56,3 +64,7 @@ func _on_reference_manager_pressed() -> void:
 
 func _on_search_text_changed(new_text: String) -> void:
 	%Tree.filter(new_text)
+
+
+func _on_documentation_pressed() -> void:
+	OS.shell_open("https://docs.dialogic.pro/variables.html")

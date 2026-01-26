@@ -34,16 +34,14 @@ func execute_string(string:String, default: Variant = null, no_warning := false)
 
 	if expr.parse(string, autoload_names) != OK:
 		if not no_warning:
-			printerr('[Dialogic] Expression "', string, '" failed to parse.')
-			printerr('           ', expr.get_error_text())
+			printerr('[Dialogic] Expression "{0}" failed to parse: {1}'.format([string, expr.get_error_text()]))
 			dialogic.print_debug_moment()
 		return default
 
 	var result: Variant = expr.execute(autoloads, self)
 	if expr.has_execute_failed():
 		if not no_warning:
-			printerr('[Dialogic] Expression "', string, '" failed to parse.')
-			printerr('           ', expr.get_error_text())
+			printerr('[Dialogic] Expression "{0}" failed to parse: {1}'.format([string, expr.get_error_text()]))
 			dialogic.print_debug_moment()
 		return default
 	return result
@@ -55,13 +53,21 @@ func execute_condition(condition:String) -> bool:
 	return false
 
 
-var condition_modifier_regex := RegEx.create_from_string(r"(?(DEFINE)(?<nobraces>([^{}]|\{(?P>nobraces)\})*))\[if *(?<condition>\{(?P>nobraces)\})(?<truetext>(\\\]|\\\/|[^\]\/])*)(\/(?<falsetext>(\\\]|[^\]])*))?\]")
+var condition_modifier_regex := RegEx.create_from_string(r"(?(DEFINE)(?<nobraces>([^{}]|\{(?P>nobraces)\})*))\[if *(?<condition>(\{(?P>nobraces)\}|true\b|false\b))(?<truetext>(\\\]|\\\/|[^\]\/])*)(\/(?<falsetext>(\\\]|[^\]])*))?\]")
 func modifier_condition(text:String) -> String:
 	for find in condition_modifier_regex.search_all(text):
+		var insert := ""
 		if execute_condition(find.get_string("condition")):
-			text = text.replace(find.get_string(), find.get_string("truetext").strip_edges())
+			insert = find.get_string("truetext")
 		else:
-			text = text.replace(find.get_string(), find.get_string("falsetext").strip_edges())
+			insert = find.get_string("falsetext")
+
+		# Avoid double spaces at the insert position if the insert is empty.
+		if not insert.strip_edges() and " "+find.get_string()+" " in text:
+			text = text.replace(find.get_string()+" ", insert.strip_edges())
+		else:
+			text = text.replace(find.get_string(), insert.strip_edges())
+
 	return text
 #endregion
 

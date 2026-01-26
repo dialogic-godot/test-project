@@ -8,17 +8,25 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Dialogic Test Project"
 run/main_scene="res://MainMenu/Menu.tscn"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.6")
 config/icon="res://icon.png"
+
+[audio]
+
+buses/default_bus_layout="uid://c2my4q1ytlhp"
 
 [autoload]
 
 UnitTest="*res://FakeUnitTests/unit_test_autoload.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+Dialogic="*uid://ds2q0uclmolvu"
 
 [debug]
 
@@ -56,6 +64,9 @@ variables={
 }
 }
 event_default_overrides={
+"Character": {
+"transform_time": 0.5
+},
 "Music": {
 "audio_bus": "Music"
 },
@@ -117,6 +128,7 @@ save/encryption_on_exports_only=true
 settings/text_speed=1.0
 layout/style_list=["res://VisualNovel/Assets/UI/VisualNovelStyle.tres", "res://SmallRPG/Assets/TextBubbleStyle.tres", "res://Smartphone/Smartphone_Style.tres", "res://FakeUnitTests/unit_test_style_a.tres", "res://FakeUnitTests/unit_test_style_b.tres", "res://SpeakerStyle/default_speaker_style.tres"]
 directories/dch_directory={
+"Cinny": "res://VisualNovel/Characters/Cinny.dch",
 "Claire": "res://Smartphone/Characters/Claire.dch",
 "Elina": "res://VisualNovel/Characters/Elina.dch",
 "Laurey": "res://Smartphone/Characters/Laurey.dch",
@@ -134,7 +146,6 @@ directories/dch_directory={
 "speaker_2": "res://SpeakerStyle/speaker_2.dch"
 }
 directories/dtl_directory={
-"Chapter 10": "res://Chapter 10.dtl",
 "Claire": "res://Smartphone/Timelines/Claire.dtl",
 "Laurey": "res://Smartphone/Timelines/Laurey.dtl",
 "Otto": "res://Smartphone/Timelines/Otto.dtl",
@@ -160,8 +171,8 @@ animations/cross_fade_default_length=0.5
 animations/cross_fade_default_wait=true
 text/advance_delay=0.1
 animations/cross_fade_default="Fade Cross"
-animations/join_default="Fade In Up"
-animations/leave_default="Fade Out Down"
+animations/join_default="Fade In"
+animations/leave_default="Fade Out"
 audio/max_channels=4.0
 audio/channel_defaults={
 "": {
@@ -175,8 +186,24 @@ audio/channel_defaults={
 "fade_length": 0.0,
 "loop": true,
 "volume": 0.0
+},
+"sound-scapeA": {
+"audio_bus": "",
+"fade_length": 2.0,
+"loop": true,
+"volume": 0.0
 }
 }
+layout/style_directory={
+"": "res://VisualNovel/Assets/UI/VisualNovelStyle.tres",
+"SmallRPG_Style": "res://SmallRPG/Assets/TextBubbleStyle.tres",
+"Smartphone_Style": "res://Smartphone/Smartphone_Style.tres",
+"UnitTestStyle_A": "res://FakeUnitTests/unit_test_style_a.tres",
+"UnitTestStyle_B": "res://FakeUnitTests/unit_test_style_b.tres",
+"VisualNovel_Style": "res://VisualNovel/Assets/UI/VisualNovelStyle.tres",
+"default_speaker_style": "res://SpeakerStyle/default_speaker_style.tres"
+}
+text/custom_bbcode_effects="uid://c8b884puc720d, uid://hx8qyt5ry3h0, uid://dnxkgwncm1pt5, uid://qegqrr4g2riu"
 
 [display]
 

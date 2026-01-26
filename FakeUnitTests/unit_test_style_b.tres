@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogicStyle" load_steps=13 format=3 uid="uid://dfwk1l55ypbbj"]
+[gd_resource type="Resource" script_class="DialogicStyle" format=3 uid="uid://dfwk1l55ypbbj"]
 
 [ext_resource type="Resource" uid="uid://bx0u2rpnbroc6" path="res://FakeUnitTests/unit_test_style_a.tres" id="1_yy0kc"]
 [ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_d3xxp"]
@@ -12,7 +12,6 @@ overrides = {
 
 [sub_resource type="Resource" id="Resource_uw1mi"]
 script = ExtResource("2_d3xxp")
-overrides = {}
 
 [sub_resource type="Resource" id="Resource_701bc"]
 script = ExtResource("2_d3xxp")
@@ -22,27 +21,21 @@ overrides = {
 
 [sub_resource type="Resource" id="Resource_5rmbw"]
 script = ExtResource("2_d3xxp")
-overrides = {}
 
 [sub_resource type="Resource" id="Resource_7161f"]
 script = ExtResource("2_d3xxp")
-overrides = {}
 
 [sub_resource type="Resource" id="Resource_hkllo"]
 script = ExtResource("2_d3xxp")
-overrides = {}
 
 [sub_resource type="Resource" id="Resource_oxef3"]
 script = ExtResource("2_d3xxp")
-overrides = {}
 
 [sub_resource type="Resource" id="Resource_js1oc"]
 script = ExtResource("2_d3xxp")
-overrides = {}
 
 [sub_resource type="Resource" id="Resource_4h8sp"]
 script = ExtResource("2_d3xxp")
-overrides = {}
 
 [resource]
 script = ExtResource("3_r7y4b")
@@ -60,6 +53,4 @@ layer_info = {
 "16": SubResource("Resource_js1oc"),
 "17": SubResource("Resource_4h8sp")
 }
-base_overrides = {}
-layers = Array[ExtResource("2_d3xxp")]([])
 metadata/_latest_layer = "12"

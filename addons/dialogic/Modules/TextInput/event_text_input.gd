@@ -8,30 +8,32 @@ extends DialogicEvent
 ### Settings
 
 ## The promt to be shown.
-var text := "Please enter some text:"
+@export var text := "Please enter some text:"
 ## The name/path of the variable to set.
-var variable := ""
+@export var variable := ""
 ## The placeholder text to show in the line edit.
-var placeholder := ""
+@export var placeholder := ""
 ## The value that should be in the line edit by default.
-var default := ""
+@export var default := ""
 ## If true, the player can continue if nothing is entered.
-var allow_empty := false
+@export var allow_empty := false
 
 
-################################################################################
-## 						EXECUTION
+#region EXECUTION
 ################################################################################
 
 func _execute() -> void:
 	dialogic.Inputs.auto_skip.enabled = false
 	dialogic.current_state = DialogicGameHandler.States.WAITING
-	dialogic.TextInput.show_text_input(text, default, placeholder, allow_empty)
+	dialogic.TextInput.show_text_input(
+		get_property_translated("text"),
+		get_property_translated("default"),
+		get_property_translated("placeholder"), allow_empty)
 	dialogic.TextInput.input_confirmed.connect(_on_DialogicTextInput_input_confirmed, CONNECT_ONE_SHOT)
 
 
 func _on_DialogicTextInput_input_confirmed(input:String) -> void:
-	if !dialogic.has_subsystem('VAR'):
+	if not dialogic.has_subsystem('VAR'):
 		printerr('[Dialogic] The TextInput event needs the variable subsystem to be present.')
 		finish()
 		return
@@ -40,20 +42,23 @@ func _on_DialogicTextInput_input_confirmed(input:String) -> void:
 	dialogic.current_state = DialogicGameHandler.States.IDLE
 	finish()
 
+#endregion
 
-################################################################################
-## 						SAVING/LOADING
+
+#region SETUP
 ################################################################################
 
 func _init() -> void:
 	event_name = "Text Input"
+	event_description = "Shows a text input field and stores it to a dialogic variable."
 	set_default_color('Color6')
 	event_category = "Logic"
 	event_sorting_index = 6
 
+#endregion
 
-################################################################################
-## 						SAVING/LOADING
+
+#region SAVING/LOADING
 ################################################################################
 
 func get_shortcode() -> String:
@@ -70,8 +75,25 @@ func get_shortcode_parameters() -> Dictionary:
 		"allow_empty"	: {"property": "allow_empty",	"default": false},
 	}
 
-################################################################################
-## 						EDITOR
+
+func _get_translatable_properties() -> Array:
+	return ["text", "placeholder", "default"]
+
+
+func _get_property_original_translation(property_name:String) -> String:
+	match property_name:
+		"text":
+			return text
+		"placeholder":
+			return placeholder
+		"default":
+			return default
+	return ""
+
+#endregion
+
+
+#region EDITOR
 ################################################################################
 
 func build_event_editor() -> void:
@@ -86,7 +108,7 @@ func build_event_editor() -> void:
 	add_body_edit('allow_empty', ValueType.BOOL, {'left_text':'Allow empty:'})
 
 
-func get_var_suggestions(filter:String="") -> Dictionary:
+func get_var_suggestions(filter: String = "") -> Dictionary:
 	var suggestions := {}
 	if filter:
 		suggestions[filter] = {
@@ -96,3 +118,5 @@ func get_var_suggestions(filter:String="") -> Dictionary:
 	for var_path in DialogicUtil.list_variables(vars, "", DialogicUtil.VarTypes.STRING):
 		suggestions[var_path] = {'value':var_path, 'icon':load("res://addons/dialogic/Editor/Images/Pieces/variable.svg")}
 	return suggestions
+
+#endregion

@@ -10,6 +10,9 @@ The variable is: {UnitTests.Test1}.
 [i]Choosing a random option of (Option1/ Option2/ A longer option).
 Chosen Option: <Option1/Option2/A longer option>.
 
+[i]Based on a variable, this should display something.
+[if {RPG_Example.smiths_key} You have a key./You don't have any key.]
+
 [i]Inserting BR (new line) effect.
 Lorem ipsum dolor sit amet, [br]consectetur adipiscing elit. 
 

@@ -143,10 +143,10 @@ func build_event_editor() -> void:
 #region STATE
 ####################################################################################################
 
-func clear_game_state(clear_flag:=Dialogic.ClearFlags.FULL_CLEAR) -> void:
+func _clear_state(clear_flag:=Dialogic.ClearFlags.FULL_CLEAR) -> void:
 	pass
 
-func load_game_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
+func _load_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 	pass
 
 #endregion
@@ -165,7 +165,7 @@ func load_game_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 	%ExtensionCreator.hide()
 	%CreateExtensionButton.show()
 
-	find_parent('EditorView').plugin_reference.get_editor_interface().get_resource_filesystem().scan_sources()
+	EditorInterface.get_resource_filesystem().scan_sources()
 	force_event_button_list_reload()
 
 

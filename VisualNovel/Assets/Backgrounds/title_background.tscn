@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://co1ea4gievdxg"]
+
+[ext_resource type="Script" uid="uid://drhfq6rmdeuri" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="1_81r0f"]
+[ext_resource type="Script" uid="uid://bob02srwjc12e" path="res://VisualNovel/Assets/Backgrounds/title_background.gd" id="1_b6m1u"]
+[ext_resource type="FontFile" uid="uid://b7jgyogiuxer3" path="res://MainMenu/Assets/Fonts/Roboto/Roboto-Black.ttf" id="2_e42if"]
+
+[sub_resource type="Gradient" id="Gradient_b6m1u"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e42if"]
+gradient = SubResource("Gradient_b6m1u")
+fill = 1
+fill_from = Vector2(0.4871795, 0.47435898)
+
+[node name="TitleBackground" type="Control" unique_id=294264319]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b6m1u")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1267666724]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(2.8878452e-07, 0.36444664, 0.22425395, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=571509798]
+modulate = Color(1, 1, 1, 0.49411765)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_e42if")
+expand_mode = 1
+
+[node name="Title" type="RichTextLabel" parent="." unique_id=175155577 node_paths=PackedStringArray("textbox_root")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.0
+offset_top = -20.0
+offset_right = 506.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_e42if")
+theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/bold_font_size = 30
+theme_override_font_sizes/bold_italics_font_size = 30
+theme_override_font_sizes/italics_font_size = 30
+theme_override_font_sizes/mono_font_size = 30
+bbcode_enabled = true
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_81r0f")
+identifier = "title"
+textbox_root = NodePath(".")
+start_hidden = false
+auto_visibility = false
+metadata/_custom_type_script = "uid://drhfq6rmdeuri"

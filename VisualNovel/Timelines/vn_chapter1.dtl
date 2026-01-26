@@ -1,29 +1,36 @@
-[background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Porch 4.png" fade="1.0"]
-[i] Leon enters a new and strange place (once again)...
-update Leon left [mirrored="true"]
-
-Leon (Basic/doubt): [i]I wonder who lives here...
-join Elina (angry) right [animation="Bounce In" length="0.2"]
-Leon (Positive/surprise): Wowowowow! Where did you come from?
-Elina (happy): Haha, you look funny!
-Leon (Basic/default): Excuse me?
-Elina: I have been waiting for you. Come in.
-Leon (Positive/surprise): [i] Wait? I didn't even know I was going here?
-[i] Leon follows her inside anyways.
-leave --All--
-
-[background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Library 1.png" fade="1.0"]
-join Elina center
-join Leon left
-Leon: This place looks amazing! Do you live here?
-Elina (surprise): Huh? Yeah of course. It's pretty boring to be honest.
-Leon (Positive/scoff): Boring! You are strange.
-Elina (serious): Excuse me!
-Elina (hate): You are very mean.
-Leon (Basic/doubt): You are right. I'm sorry.
-Elina: Well...[portrait=happy] Okay.
-Elina (default): Alright. Why are we standing around here. You were looking for a book, right?
-update Leon leftmost [animation="Tada"]
-Leon (Positive/surprise): Wait how do you know that?
-Elina: Who cares. Follow me.
+[background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Brotsch/distance.jpg" fade="10.0"]
+audio sound-scapeA "res://VisualNovel/Assets/SFX/village_noises.mp3" [volume="3.0"]
+[wait time="4.0"]
+[wait time="0.5" hide_text="false"]
+join Cinny left [animation="Zoom Center In" length="3.0" wait="true"]
+update Cinny [animation="Tada"]
+Cinny: Okay. I'm all back together now it seems...[n]What a ride![n]Let's get this started then...
+update Cinny (Surprise) [animation="Heartbeat"]
+Cinny: HOLY! Look at all this nature and stuff. And the sunshine. This is [speed=0.8]AMAZING.
+update Cinny (Happy) [animation="Shake X"]
+Cinny: [wave][font_size=30]omgicantbelievetheyletmegohereonmyownthisisthebestdayofmylife!!!
+Cinny: [font_size=20]Are those real SHEEP?
+update Cinny (Surprise) right
+Cinny: [n+][font_size=18] I can't.
+update Cinny leftmost [animation="Shake X"]
+Cinny: [n+][font_size=16] And what's that? [n+][font_size=14]Gras?
+update Cinny center
+Cinny: [n+][font_size=12] Would you look at those clouds, sooooo cute!
+update Cinny rightmost
+Cinny: [n+][font_size=10] That one looks like... [n+][font_size=9] Ugh what are you thinking, Cinny, lol.
+update Cinny pos=x1 [animation="Heartbeat"]
+Cinny: [n+][font_size=8] Damn, even more gras.
+update Cinny pos=x1
+Cinny: [n+][font_size=7] What is this, gras city?
+update Cinny pos=x1.3
+Cinny: [n+][font_size=5] Bet you can't even read this anymore.
+...
+It takes a while until you remember why you're here.
+update Cinny (Happy) left
+Cinny: Uhm.. Oops. Back to buisness.
+Cinny (Serious): Gotta find this hero dude. I bet those houses there are Brotsch, that village they mentioned.
+Cinny (Sadhappy): What a name to make me even hungrier, ha. [br][n+]Brotsch sounds delicious...
+leave Cinny [animation="Slide To Right" wait="true"]
+[background scene="res://VisualNovel/Assets/Backgrounds/particles_background.tscn" arg="res://VisualNovel/Assets/Backgrounds/Brotsch/c2_sheep.jpg" fade="1.0"]
+You head towards the village.
 jump vn_ending/

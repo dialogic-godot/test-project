@@ -4,6 +4,7 @@ extends Control
 func _ready():
 	Dialogic.process_mode = Node.PROCESS_MODE_ALWAYS
 
+
 func fade(fade_in:= false):
 	var tween := create_tween().set_parallel()
 	if fade_in:

@@ -4,12 +4,15 @@ extends CodeEdit
 ## Sub-Editor that allows editing timelines in a text format.
 
 @onready var timeline_editor := get_parent().get_parent()
-@onready var code_completion_helper: Node= find_parent('EditorsManager').get_node('CodeCompletionHelper')
+@onready var code_completion_helper: Node = find_parent('EditorsManager').get_node('CodeCompletionHelper')
 
 var label_regex := RegEx.create_from_string('label +(?<name>[^\n]+)')
 var channel_regex := RegEx.create_from_string(r'audio +(?<channel>[\w-]{2,}|[\w]+)')
 
 func _ready() -> void:
+	if get_parent() is SubViewport or owner.get_parent() is SubViewport:
+		return
+
 	await find_parent('EditorView').ready
 	syntax_highlighter = code_completion_helper.syntax_highlighter
 	timeline_editor.editors_manager.sidebar.content_item_activated.connect(_on_content_item_clicked)
@@ -91,7 +94,6 @@ func _gui_input(event):
 	match event.as_text():
 		"Ctrl+K", "Ctrl+Slash":
 			toggle_comment()
-
 		# TODO clean this up when dropping 4.2 support
 		"Alt+Up":
 			if has_method("move_lines_up"):
@@ -107,6 +109,17 @@ func _gui_input(event):
 			play_from_here()
 		"Ctrl+Shift+B" when OS.get_name() == "macOS": # Play from here
 			play_from_here()
+		"Enter":
+			if get_code_completion_options():
+				return
+			for caret in range(get_caret_count()):
+				var line := get_line(get_caret_line(caret)).strip_edges()
+				var event_res := DialogicTimeline.event_from_string(line, DialogicResourceUtil.get_event_cache())
+				var indent_format: String = timeline_editor.current_resource.indent_format
+				if event_res.can_contain_events:
+					insert_text_at_caret("\n"+indent_format.repeat(get_indent_level(get_caret_line(caret))/4+1), caret)
+				else:
+					insert_text_at_caret("\n"+indent_format.repeat(get_indent_level(get_caret_line(caret))/4), caret)
 		_:
 			return
 	get_viewport().set_input_as_handled()
@@ -182,7 +195,7 @@ func update_content_list() -> void:
 	var labels: PackedStringArray = []
 	for i in label_regex.search_all(text):
 		labels.append(i.get_string('name'))
-	timeline_editor.editors_manager.sidebar.update_content_list(labels)
+	timeline_editor.update_label_cache(labels)
 
 	var channels: PackedStringArray = []
 	for i in channel_regex.search_all(text):
@@ -265,10 +278,10 @@ func get_next_search_position(navigate_up := false) -> Vector2i:
 		search_from_line = get_caret_line()
 		search_from_column = get_caret_column()
 
-	var flags := get_meta("current_search_flags", 0)
+	var flags: int = get_meta("current_search_flags", 0)
 	if navigate_up:
 		flags = flags | SEARCH_BACKWARDS
-	print()
+
 	pos = search(get_meta("current_search"), flags, search_from_line, search_from_column)
 	return pos
 

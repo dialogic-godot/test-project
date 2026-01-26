@@ -4,6 +4,7 @@
 &"_translation_id": "",
 &"color": Color(0.886275, 0.0156863, 0.0156863, 1),
 &"custom_info": {
+"prefix": "",
 "sound_mood_default": "Happy",
 "sound_moods": {
 "Happy": {
@@ -13,11 +14,12 @@
 "pitch_variance": 0.1,
 "skip_characters": 3.0,
 "sound_path": "res://SmallRPG/Assets/talking_sound_short.ogg",
-"volume_base": -10.0,
+"volume_base": 0.0,
 "volume_variance": 0.0
 }
 },
-"style": ""
+"style": "",
+"suffix": ""
 },
 &"default_portrait": "",
 &"description": "",

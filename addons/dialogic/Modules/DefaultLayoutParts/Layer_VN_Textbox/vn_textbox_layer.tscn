@@ -219,7 +219,7 @@ name_label_box_modulate = Color(0, 0, 0, 1)
 [node name="Animations" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_c14kh")
+&"": SubResource("AnimationLibrary_c14kh")
 }
 autoplay = "RESET"
 script = ExtResource("2_xy7a2")
@@ -278,12 +278,11 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 1
 theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/bold_italics_font_size = 15
+theme_override_font_sizes/italics_font_size = 15
 theme_override_font_sizes/normal_font_size = 15
 theme_override_font_sizes/bold_font_size = 15
-theme_override_font_sizes/italics_font_size = 15
-theme_override_font_sizes/bold_italics_font_size = 15
 bbcode_enabled = true
-text = "Some default text"
 visible_characters_behavior = 1
 script = ExtResource("3_4634k")
 textbox_root = NodePath("..")
@@ -298,7 +297,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-mouse_filter = 2
 script = ExtResource("5_40a50")
 show_on_questions = true
 texture = ExtResource("6_uch03")

@@ -13,13 +13,12 @@ func _ready() -> void:
 	%LoadingIcon.texture = editor_view.get_theme_icon("KeyTrackScale", "EditorIcons")
 	%InstallWarning.modulate = editor_view.get_theme_color("warning_color", "Editor")
 	%CloseButton.icon = editor_view.get_theme_icon("Close", "EditorIcons")
-	DialogicUtil.get_dialogic_plugin().get_editor_interface().get_resource_filesystem().resources_reimported.connect(_on_resources_reimported)
+	EditorInterface.get_resource_filesystem().resources_reimported.connect(_on_resources_reimported)
 
 
 func open() -> void:
 	get_parent().popup_centered_ratio(0.5)
 	get_parent().mode = Window.MODE_WINDOWED
-	get_parent().move_to_foreground()
 	get_parent().grab_focus()
 
 
@@ -67,10 +66,10 @@ func load_info(info:Dictionary, update_type:int) -> void:
 		var reactions := {"laugh":"😂", "hooray":"🎉", "confused":"😕", "heart":"❤️", "rocket":"🚀", "eyes":"👀"}
 		for i in reactions:
 			%Reactions.get_node(i.capitalize()).visible = info.reactions[i] > 0
-			%Reactions.get_node(i.capitalize()).text = reactions[i]+" "+str(info.reactions[i]) if info.reactions[i] > 0 else reactions[i]
+			%Reactions.get_node(i.capitalize()).text = reactions[i]+" "+str(int(info.reactions[i])) if info.reactions[i] > 0 else reactions[i]
 		if info.reactions['+1']+info.reactions['-1'] > 0:
 			%Reactions.get_node("Likes").visible = true
-			%Reactions.get_node("Likes").text = "👍 "+str(info.reactions['+1']+info.reactions['-1'])
+			%Reactions.get_node("Likes").text = "👍 "+str(int(info.reactions['+1']+info.reactions['-1']))
 		else:
 			%Reactions.get_node("Likes").visible = false
 	else:
@@ -108,7 +107,7 @@ func _on_update_manager_downdload_completed(result:int):
 func _on_resources_reimported(resources:Array) -> void:
 	if is_inside_tree():
 		await get_tree().process_frame
-		get_parent().move_to_foreground()
+		get_parent().grab_focus()
 
 
 func markdown_to_bbcode(text:String) -> String:
@@ -173,7 +172,7 @@ func _on_install_mouse_exited() -> void:
 
 
 func _on_restart_pressed() -> void:
-	DialogicUtil.get_dialogic_plugin().get_editor_interface().restart_editor(true)
+	EditorInterface.restart_editor(true)
 
 
 func _on_close_button_pressed() -> void:
