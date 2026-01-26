@@ -30,12 +30,12 @@ func _on_slot_list_item_selected(index:int) -> void:
 		%SlotName.text = "No slots exists!"
 		%PreviewTexture.texture = null
 		return
-	
+
 	var slot_name :String = %SlotList.get_item_text(index)
 	%SlotName.text = slot_name
-	
+
 	%PreviewTexture.texture = Dialogic.Save.get_slot_thumbnail(slot_name)
-	
+
 	var tween := create_tween().set_ease(Tween.EASE_OUT)
 	$Top/Preview.pivot_offset = $Top/Preview.size/2
 	tween.tween_property($Top/Preview, 'scale', Vector2(1,1), 0.2).set_trans(Tween.TRANS_BACK).from(Vector2(0.8,0.8))

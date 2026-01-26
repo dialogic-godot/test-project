@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cgiiklsftpoau"]
+[gd_scene format=3 uid="uid://cgiiklsftpoau"]
 
 [ext_resource type="Script" uid="uid://behxco71ypde7" path="res://MainMenu/Menu.gd" id="1_tdqfe"]
 [ext_resource type="Texture2D" uid="uid://b413ictwywftp" path="res://MainMenu/Dialogic Logo.svg" id="2_u154w"]
@@ -72,7 +72,7 @@ colors = PackedColorArray(0.180857, 0.488328, 0.562902, 1, 0.0599336, 0.319169, 
 gradient = SubResource("Gradient_a4bnh")
 fill_to = Vector2(0.273504, 1)
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1278736697]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,7 +82,7 @@ grow_vertical = 2
 theme = SubResource("Theme_xmlp2")
 script = ExtResource("1_tdqfe")
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="BG" type="TextureRect" parent="." unique_id=1473883486]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,7 +92,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_485ln")
 expand_mode = 1
 
-[node name="AboutScreen" type="Control" parent="."]
+[node name="AboutScreen" type="Control" parent="." unique_id=743218939]
 visible = false
 anchors_preset = 0
 offset_left = 123.0
@@ -100,7 +100,7 @@ offset_top = 69.0
 offset_right = 1030.0
 offset_bottom = 569.0
 
-[node name="VBox" type="VBoxContainer" parent="AboutScreen"]
+[node name="VBox" type="VBoxContainer" parent="AboutScreen" unique_id=273178535]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -108,25 +108,25 @@ offset_right = 566.0
 grow_vertical = 2
 alignment = 1
 
-[node name="Title" type="Label" parent="AboutScreen/VBox"]
+[node name="Title" type="Label" parent="AboutScreen/VBox" unique_id=239899155]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 text = "About"
 
-[node name="Text" type="Label" parent="AboutScreen/VBox"]
+[node name="Text" type="Label" parent="AboutScreen/VBox" unique_id=536021980]
 layout_mode = 2
 text = "This is a project showcasing Dialogic 2, a story and dialog creation tool for the godot game engine.
 
 This project serves as a testing ground for existing and new features of dialogic."
 autowrap_mode = 3
 
-[node name="Back" type="Button" parent="AboutScreen/VBox"]
+[node name="Back" type="Button" parent="AboutScreen/VBox" unique_id=378863590]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Back"
 
-[node name="MainMenu" type="Control" parent="."]
+[node name="MainMenu" type="Control" parent="." unique_id=2005298222]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -134,7 +134,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Version" type="Label" parent="MainMenu"]
+[node name="Version" type="Label" parent="MainMenu" unique_id=640878824]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 1
@@ -153,7 +153,7 @@ text = "Current Dialogic Version: "
 horizontal_alignment = 2
 autowrap_mode = 3
 
-[node name="VBox" type="VBoxContainer" parent="MainMenu"]
+[node name="VBox" type="VBoxContainer" parent="MainMenu" unique_id=490729881]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -166,12 +166,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = -10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu/VBox" unique_id=1621154806]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 40
 
-[node name="DialogicLogo" type="TextureRect" parent="MainMenu/VBox/HBoxContainer"]
+[node name="DialogicLogo" type="TextureRect" parent="MainMenu/VBox/HBoxContainer" unique_id=1830202734]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.82
@@ -180,18 +180,18 @@ texture = ExtResource("2_u154w")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Control" type="Control" parent="MainMenu/VBox/HBoxContainer"]
+[node name="Control" type="Control" parent="MainMenu/VBox/HBoxContainer" unique_id=1586912533]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 
-[node name="VBoxContainer" type="GridContainer" parent="MainMenu/VBox"]
+[node name="VBoxContainer" type="GridContainer" parent="MainMenu/VBox" unique_id=1274349175]
 show_behind_parent = true
 layout_mode = 2
 size_flags_vertical = 3
 columns = 4
 
-[node name="VisualNovel" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
+[node name="VisualNovel" parent="MainMenu/VBox/VBoxContainer" unique_id=862448819 instance=ExtResource("4_dtbjh")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -200,7 +200,7 @@ focus_neighbor_right = NodePath("../SmallRPG")
 image = ExtResource("5_x0yfe")
 title = "Visual Novel"
 
-[node name="SmallRPG" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
+[node name="SmallRPG" parent="MainMenu/VBox/VBoxContainer" unique_id=1090962761 instance=ExtResource("4_dtbjh")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -209,7 +209,7 @@ focus_neighbor_right = NodePath("../Smartphone")
 image = ExtResource("6_e1cue")
 title = "Small RPG"
 
-[node name="Smartphone" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
+[node name="Smartphone" parent="MainMenu/VBox/VBoxContainer" unique_id=1249609602 instance=ExtResource("4_dtbjh")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -218,7 +218,7 @@ focus_neighbor_right = NodePath("../VisualNovel")
 image = ExtResource("5_vikv7")
 title = "Smartphone"
 
-[node name="Speaker" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
+[node name="Speaker" parent="MainMenu/VBox/VBoxContainer" unique_id=649822253 instance=ExtResource("4_dtbjh")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -227,7 +227,7 @@ focus_neighbor_right = NodePath("../VisualNovel")
 image = ExtResource("7_u33qm")
 title = "Speakers"
 
-[node name="UnitTests" parent="MainMenu/VBox/VBoxContainer" instance=ExtResource("4_dtbjh")]
+[node name="UnitTests" parent="MainMenu/VBox/VBoxContainer" unique_id=1899322018 instance=ExtResource("4_dtbjh")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -236,7 +236,7 @@ focus_neighbor_right = NodePath("../VisualNovel")
 image = ExtResource("7_ymxpl")
 title = "Testing"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenu" unique_id=728759526]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -247,7 +247,7 @@ offset_bottom = 38.0
 grow_horizontal = 2
 alignment = 2
 
-[node name="About" type="Button" parent="MainMenu/HBoxContainer"]
+[node name="About" type="Button" parent="MainMenu/HBoxContainer" unique_id=1079023103]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -255,13 +255,13 @@ size_flags_vertical = 8
 text = "About"
 metadata/_edit_use_anchors_ = true
 
-[node name="Quit" type="Button" parent="MainMenu/HBoxContainer"]
+[node name="Quit" type="Button" parent="MainMenu/HBoxContainer" unique_id=1669276074]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 focus_mode = 0
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 0.509804)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 icon = ExtResource("3_mte4y")
 flat = true
 expand_icon = true

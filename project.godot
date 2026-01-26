@@ -64,6 +64,9 @@ variables={
 }
 }
 event_default_overrides={
+"Character": {
+"transform_time": 0.5
+},
 "Music": {
 "audio_bus": "Music"
 },
@@ -125,6 +128,7 @@ save/encryption_on_exports_only=true
 settings/text_speed=1.0
 layout/style_list=["res://VisualNovel/Assets/UI/VisualNovelStyle.tres", "res://SmallRPG/Assets/TextBubbleStyle.tres", "res://Smartphone/Smartphone_Style.tres", "res://FakeUnitTests/unit_test_style_a.tres", "res://FakeUnitTests/unit_test_style_b.tres", "res://SpeakerStyle/default_speaker_style.tres"]
 directories/dch_directory={
+"Cinny": "res://VisualNovel/Characters/Cinny.dch",
 "Claire": "res://Smartphone/Characters/Claire.dch",
 "Elina": "res://VisualNovel/Characters/Elina.dch",
 "Laurey": "res://Smartphone/Characters/Laurey.dch",
@@ -142,7 +146,6 @@ directories/dch_directory={
 "speaker_2": "res://SpeakerStyle/speaker_2.dch"
 }
 directories/dtl_directory={
-"Chapter 10": "res://Chapter 10.dtl",
 "Claire": "res://Smartphone/Timelines/Claire.dtl",
 "Laurey": "res://Smartphone/Timelines/Laurey.dtl",
 "Otto": "res://Smartphone/Timelines/Otto.dtl",
@@ -183,6 +186,12 @@ audio/channel_defaults={
 "fade_length": 0.0,
 "loop": true,
 "volume": 0.0
+},
+"sound-scapeA": {
+"audio_bus": "",
+"fade_length": 2.0,
+"loop": true,
+"volume": 0.0
 }
 }
 layout/style_directory={
@@ -194,6 +203,7 @@ layout/style_directory={
 "VisualNovel_Style": "res://VisualNovel/Assets/UI/VisualNovelStyle.tres",
 "default_speaker_style": "res://SpeakerStyle/default_speaker_style.tres"
 }
+text/custom_bbcode_effects="uid://c8b884puc720d, uid://hx8qyt5ry3h0, uid://dnxkgwncm1pt5, uid://qegqrr4g2riu"
 
 [display]
 

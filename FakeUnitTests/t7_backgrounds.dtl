@@ -3,7 +3,7 @@ This timeline tests backgrounds within timelines.
 [i]Test using a color by name
 [background arg="pink" fade="0.0"]
 [i]Test using a color by hex code
-[background arg="#14cac6ff" fade="0.0"]
+[background arg=" #000000ff" fade="0.0"]
 
 [i]Test using a simple image
 [background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beach day.jpg" fade="0.75" transition="Simple Fade"]

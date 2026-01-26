@@ -16,7 +16,8 @@ func open():
 	else:
 		%NewGame.grab_focus()
 	%Load.visible = !Dialogic.Save.get_slot_names().is_empty()
-	%LoadMenu.hide()
+	%LoadMenu.close()
+	%CreditsMenu.close()
 
 
 func _on_dialogic_signal_event(arg:String) -> void:
@@ -50,6 +51,8 @@ func _on_load_pressed():
 		%LoadMenu.hide()
 	else:
 		%LoadMenu.open()
+	if %CreditsMenu.visible:
+		%CreditsMenu.close()
 
 
 func load_slot(slot_name:String) -> void:
@@ -65,6 +68,15 @@ func _on_back_pressed():
 	await get_parent().fade()
 	get_tree().change_scene_to_file("res://MainMenu/Menu.tscn")
 
+
+func _on_credits_pressed() -> void:
+	display_button_ripple(%Credits)
+	if %CreditsMenu.visible:
+		%CreditsMenu.close()
+	else:
+		%CreditsMenu.open()
+	if %LoadMenu.visible:
+		%LoadMenu.close()
 
 ######### VFX ##################################################################
 
