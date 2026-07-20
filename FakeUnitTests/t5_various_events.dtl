@@ -11,6 +11,12 @@ label Wait
 [i]Wait event\: Will wait for 1 second, not hiding the textbox.
 [wait time="1.0" hide_text="false"]
 
+[i]Wait event\: Will wait for 1 second after a character spoke. Make sure the name label re-appears.
+TC1_Simple: It's me, TC1 Simple :)
+[wait time="1.0" hide_text="true"]
+"TC2 Simple2": I'm different.
+TC1_Simple: What a nice little wait. Hope my name is back.
+
 
 label Wait Input
 [i]Wait input\: Will wait for a click.

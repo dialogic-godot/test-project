@@ -24,7 +24,7 @@ Okay enough of this.
 
 [i]We will create a situation that uses many systems (Backgrounds, Characters, Music, Textbox) and see if the style change can preserve them correctly.
 [style name="UnitTestStyle_A"]
-[background arg="res://VisualNovel/Assets/Backgrounds/Apartment 6.png" fade="0.0"]
+[background arg="res://FakeUnitTests/Assets/Backgrounds/Beach/BG Beachhut day.jpg" fade="0.0"]
 join TC3_BasicPortraits 1 [animation="Instant"]
 join TC4_BasicPortraits2 2 [animation="Instant"]
 join TC5_BasicPortraits3 4 [animation="Instant"]

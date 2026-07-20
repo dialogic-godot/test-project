@@ -14,7 +14,7 @@
 "pitch_variance": 0.1,
 "skip_characters": 4.0,
 "sound_path": "res://SmallRPG/Assets/talking_sound_short.ogg",
-"volume_base": 0.0,
+"volume_base": -4.0,
 "volume_variance": 2.0
 }
 },

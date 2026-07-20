@@ -6,7 +6,7 @@ label Positions
 join TC3_BasicPortraits left
 
 [i]Move the character to position "right", instantly.
-update TC3_BasicPortraits right
+update TC3_BasicPortraits right [move_time="0.0"]
 
 [i]Move the character to position "center" in two seconds.
 update TC3_BasicPortraits center [move_time="2.0"]
@@ -34,7 +34,7 @@ join TC4_BasicPortraits2 (angry) rightmost [animation="Slide From Right"]
 join TC5_BasicPortraits3 right [animation="Bounce In" length="2.0"]
 
 [i]Updte the new character z_index.
-update TC5_BasicPortraits3 [z_index="3"]
+update TC5_BasicPortraits3 [z_index="-1"]
 
 [i]Leave the first character.
 leave TC3_BasicPortraits
