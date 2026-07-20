@@ -4,3 +4,4 @@ func _fade() -> void:
 	var shader := setup_push_shader()
 	shader.set_shader_parameter('final_offset', Vector2.LEFT)
 	tween_shader_progress().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+

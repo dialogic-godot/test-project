@@ -22,7 +22,7 @@ enum States {
 enum ClearFlags {
 	FULL_CLEAR = 0, 		## Clears all subsystems
 	KEEP_VARIABLES = 1, 	## Clears all subsystems and info except for variables
-	TIMELINE_INFO_ONLY = 2	## Doesn't clear subsystems but current timeline and index
+	TIMELINE_INFO_ONLY = 2 	## Doesn't clear subsystems but current timeline and index
 	}
 
 ## Reference to the currently executed timeline.
@@ -94,59 +94,81 @@ signal text_signal(argument: String)
 # Careful, this section is repopulated automatically at certain moments.
 #region SUBSYSTEMS
 
-var Animations := preload("res://addons/dialogic/Modules/Core/subsystem_animation.gd").new():
+const AnimationSubsystem = preload("res://addons/dialogic/Modules/Core/subsystem_animation.gd")
+var Animations: AnimationSubsystem:
 	get: return get_subsystem("Animations")
 
-var Audio := preload("res://addons/dialogic/Modules/Audio/subsystem_audio.gd").new():
+const AudioSubsystem = preload("res://addons/dialogic/Modules/Audio/subsystem_audio.gd")
+var Audio: AudioSubsystem:
 	get: return get_subsystem("Audio")
 
-var Backgrounds := preload("res://addons/dialogic/Modules/Background/subsystem_backgrounds.gd").new():
+const BackgroundsSubsystem = preload("res://addons/dialogic/Modules/Background/subsystem_backgrounds.gd")
+var Backgrounds: BackgroundsSubsystem:
 	get: return get_subsystem("Backgrounds")
 
-var Choices := preload("res://addons/dialogic/Modules/Choice/subsystem_choices.gd").new():
+const ChoicesSubsystem = preload("res://addons/dialogic/Modules/Choice/subsystem_choices.gd")
+var Choices: ChoicesSubsystem:
 	get: return get_subsystem("Choices")
 
-var Expressions := preload("res://addons/dialogic/Modules/Core/subsystem_expression.gd").new():
+const ExpressionSubsystem = preload("res://addons/dialogic/Modules/Core/subsystem_expression.gd")
+var Expressions: ExpressionSubsystem:
 	get: return get_subsystem("Expressions")
 
-var Glossary := preload("res://addons/dialogic/Modules/Glossary/subsystem_glossary.gd").new():
+const GlossarySubsystem = preload("res://addons/dialogic/Modules/Glossary/subsystem_glossary.gd")
+var Glossary: GlossarySubsystem:
 	get: return get_subsystem("Glossary")
 
-var History := preload("res://addons/dialogic/Modules/History/subsystem_history.gd").new():
+const HistorySubsystem = preload("res://addons/dialogic/Modules/History/subsystem_history.gd")
+var History: HistorySubsystem:
 	get: return get_subsystem("History")
 
-var Inputs := preload("res://addons/dialogic/Modules/Core/subsystem_input.gd").new():
+const InputsSubsystem = preload("res://addons/dialogic/Modules/Core/subsystem_input.gd")
+var Inputs: InputsSubsystem:
 	get: return get_subsystem("Inputs")
 
-var Jump := preload("res://addons/dialogic/Modules/Jump/subsystem_jump.gd").new():
+const JumpSubsystem = preload("res://addons/dialogic/Modules/Jump/subsystem_jump.gd")
+var Jump: JumpSubsystem:
 	get: return get_subsystem("Jump")
 
-var PortraitContainers := preload("res://addons/dialogic/Modules/Character/subsystem_containers.gd").new():
+const PortraitContainersSubsystem = preload("res://addons/dialogic/Modules/Character/subsystem_containers.gd")
+var PortraitContainers: PortraitContainersSubsystem:
 	get: return get_subsystem("PortraitContainers")
 
-var Portraits := preload("res://addons/dialogic/Modules/Character/subsystem_portraits.gd").new():
+const PortraitsSubsystem = preload("res://addons/dialogic/Modules/Character/subsystem_portraits.gd")
+var Portraits: PortraitsSubsystem:
 	get: return get_subsystem("Portraits")
 
-var Save := preload("res://addons/dialogic/Modules/Save/subsystem_save.gd").new():
+const SaveSubsystem = preload("res://addons/dialogic/Modules/Save/subsystem_save.gd")
+var Save: SaveSubsystem:
 	get: return get_subsystem("Save")
 
-var Settings := preload("res://addons/dialogic/Modules/Settings/subsystem_settings.gd").new():
+const SettingsSubsystem = preload("res://addons/dialogic/Modules/Settings/subsystem_settings.gd")
+var Settings: SettingsSubsystem:
 	get: return get_subsystem("Settings")
 
-var Styles := preload("res://addons/dialogic/Modules/Style/subsystem_styles.gd").new():
+const StylesSubsystem = preload("res://addons/dialogic/Modules/Style/subsystem_styles.gd")
+var Styles: StylesSubsystem:
 	get: return get_subsystem("Styles")
 
-var Text := preload("res://addons/dialogic/Modules/Text/subsystem_text.gd").new():
+const TextSubsystem = preload("res://addons/dialogic/Modules/Text/subsystem_text.gd")
+var Text: TextSubsystem:
 	get: return get_subsystem("Text")
 
-var TextInput := preload("res://addons/dialogic/Modules/TextInput/subsystem_text_input.gd").new():
+const TextInputSubsystem = preload("res://addons/dialogic/Modules/TextInput/subsystem_text_input.gd")
+var TextInput: TextInputSubsystem:
 	get: return get_subsystem("TextInput")
 
-var VAR := preload("res://addons/dialogic/Modules/Variable/subsystem_variables.gd").new():
+const VARSubsystem = preload("res://addons/dialogic/Modules/Variable/subsystem_variables.gd")
+var VAR: VARSubsystem:
 	get: return get_subsystem("VAR")
 
-var Voice := preload("res://addons/dialogic/Modules/Voice/subsystem_voice.gd").new():
+const VoiceSubsystem = preload("res://addons/dialogic/Modules/Voice/subsystem_voice.gd")
+var Voice: VoiceSubsystem:
 	get: return get_subsystem("Voice")
+
+const WaitSubsystem = preload("res://addons/dialogic/Modules/Wait/subsystem_wait.gd")
+var Wait: WaitSubsystem:
+	get: return get_subsystem("Wait")
 
 #endregion
 
@@ -334,16 +356,14 @@ func clear(clear_flags := ClearFlags.FULL_CLEAR) -> void:
 			if subsystem is DialogicSubsystem:
 				(subsystem as DialogicSubsystem)._clear_state(clear_flags)
 
-	var timeline := current_timeline
-
-	current_timeline = null
 	current_event_idx = -1
 	current_timeline_events = []
 	current_state = States.IDLE
 
 	# Resetting variables
-	if timeline:
-		await timeline.clean()
+	if current_timeline:
+		await current_timeline.clean()
+	current_timeline = null
 
 
 ## Cleanup after previous event (if any).
@@ -448,6 +468,15 @@ func get_subsystem(subsystem_name:String) -> DialogicSubsystem:
 
 ## Adds a subsystem node with the given [param subsystem_name] and [param script_path].
 func add_subsystem(subsystem_name:String, script_path:String) -> DialogicSubsystem:
+	var existing_subsystem_node = get_node_or_null(subsystem_name)
+
+	# If two Subsystem have the same name, we override the existing one with the new one
+	if is_instance_valid(existing_subsystem_node):
+		existing_subsystem_node.set_script(load(script_path))
+		existing_subsystem_node.dialogic = self
+		existing_subsystem_node._ready()
+		return existing_subsystem_node
+
 	var node: Node = Node.new()
 	node.name = subsystem_name
 	node.set_script(load(script_path))
