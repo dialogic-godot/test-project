@@ -12,15 +12,17 @@ var current_contact := ""
 ## Stores chat histories so they can be loaded back when switching to a different contact.
 var chat_histories := {}
 
+var prev_ending_timeline: DialogicTimeline = null
 
 func _ready() -> void:
 	start_example_scene()
+	Dialogic.clear()
 
 	Dialogic.Styles.load_style('Smartphone_Style')
-
+	prev_ending_timeline = Dialogic.dialog_ending_timeline
+	Dialogic.dialog_ending_timeline = null
 	Dialogic.signal_event.connect(_on_dialogic_signal_event)
 
-	Dialogic.clear()
 	Dialogic.Settings.text_speed = 0
 	Dialogic.Choices.reveal_by_input = true
 	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 2)
@@ -29,8 +31,8 @@ func _ready() -> void:
 
 ## Mainly allows the timeline to reveal a new contact with a signal event
 func _on_dialogic_signal_event(argument: String) -> void:
-	if argument.begins_with('reveal->') and $VBox/Contacts.has_node(argument.trim_prefix('reveal->')):
-		$VBox/Contacts.get_node(argument.trim_prefix('reveal->')).show()
+	if argument.begins_with('reveal->') and %Contacts.has_node(argument.trim_prefix('reveal->')):
+		%Contacts.get_node(argument.trim_prefix('reveal->')).show()
 
 
 ## Saves the chat history of the current contact
@@ -93,9 +95,9 @@ func _on_contact_pressed(contact: String) -> void:
 	get_viewport().set_input_as_handled()
 
 	# change selected state
-	for node in $VBox/Contacts.get_children():
+	for node in %Contacts.get_children():
 		node.selected = false
-	$VBox/Contacts.get_node(contact).selected = true
+	%Contacts.get_node(contact).selected = true
 
 
 #region EXAMPLE SCENE SETUP
@@ -107,6 +109,7 @@ func start_example_scene() -> void:
 
 
 func exit() -> void:
+	Dialogic.dialog_ending_timeline = prev_ending_timeline
 	Dialogic.Settings.reset_setting('text_speed')
 	ProjectSettings.set_setting('dialogic/layout/end_behaviour', 0)
 	Dialogic.Choices.reveal_by_input = false

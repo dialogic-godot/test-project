@@ -35,6 +35,7 @@ var speed_counter: float = 0
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+
 	# add to necessary
 	add_to_group('dialogic_dialog_text')
 	meta_hover_ended.connect(_on_meta_hover_ended)
@@ -46,13 +47,16 @@ func _ready() -> void:
 	if textbox_root == null:
 		textbox_root = self
 
+	if start_hidden:
+		textbox_root.hide()
+
 	text = ""
 
 	var custom_bbcode_effects: Array = ProjectSettings.get_setting("dialogic/text/custom_bbcode_effects", "").split(",", false)
 	for i in custom_bbcode_effects:
 		var x: Resource = load(i.strip_edges())
 		if x is RichTextEffect:
-			custom_effects.append(x.duplicate(true))
+			custom_effects.append(x.duplicate())
 
 
 ## This is called by the [subsytem Text] to set text and play the reveal animation according to [member active_speed].
@@ -134,7 +138,7 @@ func finish_text(is_organic := false) -> void:
 		custom_fx_skip()
 	DialogicUtil.autoload().Text.execute_effects(-1, self, true)
 	revealing = false
-	DialogicUtil.autoload().current_state = DialogicUtil.autoload().States.IDLE
+	DialogicUtil.autoload().current_state = DialogicGameHandler.States.IDLE
 
 	finished_revealing_text.emit()
 
@@ -168,7 +172,7 @@ func on_gui_input(event:InputEvent) -> void:
 
 
 func custom_fx_update() -> void:
-	for effect in custom_effects:
+	for effect:RichTextEffect in custom_effects:
 		if "visible_characters" in effect:
 			effect.visible_characters = visible_characters
 

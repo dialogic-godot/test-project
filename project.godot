@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Dialogic Test Project"
 run/main_scene="res://MainMenu/Menu.tscn"
-config/features=PackedStringArray("4.6")
+config/features=PackedStringArray("4.7")
 config/icon="res://icon.png"
 
 [audio]
@@ -127,42 +127,8 @@ text/text_reveal_skip_delay=0.1
 save/encryption_on_exports_only=true
 settings/text_speed=1.0
 layout/style_list=["res://VisualNovel/Assets/UI/VisualNovelStyle.tres", "res://SmallRPG/Assets/TextBubbleStyle.tres", "res://Smartphone/Smartphone_Style.tres", "res://FakeUnitTests/unit_test_style_a.tres", "res://FakeUnitTests/unit_test_style_b.tres", "res://SpeakerStyle/default_speaker_style.tres"]
-directories/dch_directory={
-"Cinny": "res://VisualNovel/Characters/Cinny.dch",
-"Claire": "res://Smartphone/Characters/Claire.dch",
-"Elina": "res://VisualNovel/Characters/Elina.dch",
-"Laurey": "res://Smartphone/Characters/Laurey.dch",
-"Leon": "res://VisualNovel/Characters/Leon.dch",
-"Otto": "res://Smartphone/Characters/Otto.dch",
-"Player": "res://SmallRPG/Timelines/Player.dch",
-"Smith": "res://SmallRPG/Timelines/Smith.dch",
-"TC1_Simple": "res://FakeUnitTests/TC1_Simple.dch",
-"TC2 Simple2": "res://FakeUnitTests/TC2 Simple2.dch",
-"TC3_BasicPortraits": "res://FakeUnitTests/TC3_BasicPortraits.dch",
-"TC4_BasicPortraits2": "res://FakeUnitTests/TC4_BasicPortraits2.dch",
-"TC5_BasicPortraits3": "res://FakeUnitTests/TC5_BasicPortraits3.dch",
-"TC6_Style": "res://FakeUnitTests/TC6_Style.dch",
-"speaker_1": "res://SpeakerStyle/speaker_1.dch",
-"speaker_2": "res://SpeakerStyle/speaker_2.dch"
-}
-directories/dtl_directory={
-"Claire": "res://Smartphone/Timelines/Claire.dtl",
-"Laurey": "res://Smartphone/Timelines/Laurey.dtl",
-"Otto": "res://Smartphone/Timelines/Otto.dtl",
-"rpg_smith": "res://SmallRPG/Timelines/rpg_smith.dtl",
-"speaker_tml_1": "res://SpeakerStyle/speaker_tml_1.dtl",
-"t0_overview": "res://FakeUnitTests/t0_overview.dtl",
-"t1_texts": "res://FakeUnitTests/t1_texts.dtl",
-"t2_characters": "res://FakeUnitTests/t2_characters.dtl",
-"t3_variables": "res://FakeUnitTests/t3_variables.dtl",
-"t4_styles": "res://FakeUnitTests/t4_styles.dtl",
-"t5_various_events": "res://FakeUnitTests/t5_various_events.dtl",
-"t6_audio": "res://FakeUnitTests/t6_audio.dtl",
-"t7_backgrounds": "res://FakeUnitTests/t7_backgrounds.dtl",
-"vn_beginning": "res://VisualNovel/Timelines/vn_beginning.dtl",
-"vn_chapter1": "res://VisualNovel/Timelines/vn_chapter1.dtl",
-"vn_ending": "res://VisualNovel/Timelines/vn_ending.dtl"
-}
+directories/dch_directory={}
+directories/dtl_directory={}
 glossary/glossary_files=["res://FakeUnitTests/unit_test_glossary.tres"]
 translation/save_mode=0
 translation/add_separator=false
@@ -171,8 +137,8 @@ animations/cross_fade_default_length=0.5
 animations/cross_fade_default_wait=true
 text/advance_delay=0.1
 animations/cross_fade_default="Fade Cross"
-animations/join_default="Fade In"
-animations/leave_default="Fade Out"
+animations/join_default="Fade In Up"
+animations/leave_default="Fade Out Down"
 audio/max_channels=4.0
 audio/channel_defaults={
 "": {
@@ -182,13 +148,13 @@ audio/channel_defaults={
 "volume": 0.0
 },
 "music": {
-"audio_bus": "",
+"audio_bus": "Music",
 "fade_length": 0.0,
 "loop": true,
 "volume": 0.0
 },
 "sound-scapeA": {
-"audio_bus": "",
+"audio_bus": "Sound Effects",
 "fade_length": 2.0,
 "loop": true,
 "volume": 0.0

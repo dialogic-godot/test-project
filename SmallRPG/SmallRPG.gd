@@ -7,6 +7,7 @@ var state := States.MOVE
 
 func _ready():
 	load("res://SmallRPG/Assets/TextBubbleStyle.tres").prepare()
+	Dialogic.VAR.RPG_Example.smiths_key = false
 	fade(true)
 
 
