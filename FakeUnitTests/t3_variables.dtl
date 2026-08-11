@@ -16,8 +16,12 @@ set {UnitTests.Test2} = 0
 Variable Test2: {UnitTests.Test2}
 
 [i]Setting a variable to a string input.
-[text_input text="Please enter a value for Test1" placeholder="Your Value" var="UnitTests.Test1"]
-Variable Test1: {UnitTests.Test1}
+[text_input text="Please enter a value for Test1" placeholder="Your Value" var="UnitTests.Test3"]
+Variable Test3: {UnitTests.Test3}
+
+[i]Variable Test4 will set to variable Test3.
+set {UnitTests.Test4} = {UnitTests.Test3}
+Variable Test4: {UnitTests.Test4}
 
 
 [i]Some choices. Each choice is only enabled if Test2 is in a certain range.

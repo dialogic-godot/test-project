@@ -42,11 +42,11 @@ leave TC3_BasicPortraits
 [i]Leave all characters (bounce out).
 leave --All-- [animation="Bounce Out" wait="true"]
 
-label In/Out Animations
+label In-Out Animations
 [i]Testing all the built-in animations.
 - Start
 - Skip
-	jump after_animations
+	jump Movement
 
 Fade In [aa=0]
 join TC3_BasicPortraits center [animation="Fade In" wait="true"]
@@ -115,7 +115,192 @@ ShakeX [aa=0]
 update TC3_BasicPortraits [animation="Shake X" wait="true"]
 ShakeY [aa=0]
 update TC3_BasicPortraits [animation="Shake Y" wait="true"]
-leave TC3_BasicPortraits [animation="Instant Out" wait="true"]
 
-label after_animations
+label Complex Animations 
+join TC3_BasicPortraits center
+[i]Test some animations with portrait movements and other updates.
+ShakeX + movement. [aa=0]
+update TC3_BasicPortraits leftmost [animation="Shake X" repeat="3" length="2" wait="true" move_time="4"]
+ShakeY + movement. [aa=0]
+update TC3_BasicPortraits pos=x0.8 rot=20 [animation="Shake Y" repeat="3" length="2" wait="true"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0"]
+
+[i]Test interrupting animations.
+Shake interrupted by Heartbeat.
+update TC3_BasicPortraits [animation="Shake X" repeat="4" length="1"]
+[wait time="2.5" hide_text="false"]
+update TC3_BasicPortraits [animation="Heartbeat" length="2" wait="true" ]
+Leave SlideToLeft interrupted by Join BounceUp
+leave TC3_BasicPortraits [animation="Slide To Left" length="2"]
+[wait time="1" hide_text="false"]
+join TC3_BasicPortraits center [animation="Bounce In"]
+.
+leave TC3_BasicPortraits 
+
+label Movement
+do UnitTest.set_container_debug_draw(true)
+
+[i]Move a character around multiple times.
+join TC3_BasicPortraits center
+[i]Move it to the leftmost, instantly
+update TC3_BasicPortraits leftmost [move_time="0.0"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+[i]Move it to the leftmost again, this time over 2 seconds
+update TC3_BasicPortraits leftmost [move_time="2.0"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+[i]Move it to the leftmost again, 2 seconds, while fading the portrait
+update TC3_BasicPortraits (plot) leftmost [fade="Fade Cross" fade_length="2.0" move_time="2.0"]
+[wait_input]
+update TC3_BasicPortraits (default) center [move_time="0.0"]
+[i]Move it to the leftmost again, 2 seconds, while the next text events changes the portrait
+update TC3_BasicPortraits leftmost [fade="Fade Cross" fade_length="2.0" move_time="2.0"]
+TC3_BasicPortraits (plot): I'm changing and moving!
+update TC3_BasicPortraits (default) center [move_time="0.0"]
+
+label Crazy Containers
+do UnitTest.set_container_debug_draw(true)
+
+[i]Change to a style with very strange portrait containers and attempt various different transforms.
+leave --All--
+[style name="unit_test_style_crazy_portraits"]
+join TC3_BasicPortraits center [animation="Instant In"]
+[i]Move it to the leftmost, which is set to FIT_STRETCH, instantly
+update TC3_BasicPortraits leftmost [move_time="0.0"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+[i]Move it to the leftmost again, this time over 2 seconds
+update TC3_BasicPortraits leftmost [move_time="2.0"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+[i]Move it to the leftmost again, 2 seconds, while fading the portrait
+update TC3_BasicPortraits (plot) leftmost [fade="Fade Cross" fade_length="2.0" move_time="2.0"]
+[wait_input]
+update TC3_BasicPortraits (default) center [move_time="0.0"]
+[i]Move it to the leftmost again, 2 seconds, while the next text events changes the portrait
+update TC3_BasicPortraits leftmost [fade="Fade Cross" fade_length="2.0" move_time="2.0"]
+TC3_BasicPortraits (plot): I'm changing and moving!
+update TC3_BasicPortraits (default) center [move_time="0.0"]
+
+
+[i]Now move it to "left", which is set to KEEP, instantly
+update TC3_BasicPortraits left [move_time="0.0"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+[i]Move it to the left again, this time over 2 seconds
+update TC3_BasicPortraits left [move_time="2.0"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+[i]Move it to the left again, 2 seconds, while fading the portrait
+update TC3_BasicPortraits (plot) left [fade="Fade Cross" fade_length="2.0" move_time="2.0"]
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+[wait_input]
+
+
+[i]Now move it to "right", which is set to FIT STRETCH, but with the origin on the side
+update TC3_BasicPortraits right
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+
+
+[i]Now move it to "rightmost", which is set to FIT IGNORE SCALE, and mirrored
+update TC3_BasicPortraits rightmost
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+do UnitTest.set_container_debug_draw(false)
+
+
+label Manual Transforms
+
+[i]Now let's test some manual transforms.
+join TC3_BasicPortraits center
+do UnitTest.set_container_debug_draw(true)
+[i]Move the character to "pos=x0.1y1 size=x0.1y1"
+update TC3_BasicPortraits pos=x0.1y1 size=x0.1y1
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+
+[i]Move the character to "pos=x200pxy0.4 size=x0.3y0.2"
+update TC3_BasicPortraits pos=x200pxy0.4 size=x0.3y0.2
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+
+[i]Move the character to "pos=x500pxy0.8 size=x0.3y0.9 rot=45"
+update TC3_BasicPortraits pos=x500pxy0.8 size=x0.3y0.9 rot=45
+[wait_input]
+
+[i]Move the character to "pos=x0.4 size=x0.3y0.9 rot=-10 mir=true mod=0"
+update TC3_BasicPortraits pos=x0.4 size=x0.3y0.9 rot=-10 mir=true mod=0
+[wait_input]
+
+[i]Move the character to "rot=0 mir=false ori=x0.5y0.5 mod=3"
+update TC3_BasicPortraits rot=0 mir=false ori=x0.5y0.5 mod=3
+[wait_input]
+update TC3_BasicPortraits center [move_time="0.0"]
+leave TC3_BasicPortraits 
+
+label SpeakerPortrait
+[i]Change to a speaker portrait style and test that.
+[style name="unit_test_style_speaker_portrait"]
+TC3_BasicPortraits: I'm saying something and should be visible.
+A general thought with noone saying it....
+TC3_BasicPortraits (sad): I'm saying this with a sad portrait.
+TC3_BasicPortraits (happy): I'm saying this with a happy portrait.
+[i]TC4 Should have some dedicated portraits setup that the style will display in the speaker portrait.
+TC4_BasicPortraits2 (Blink): I'm someone else.
+join TC4_BasicPortraits2 (Plot) center
+TC4_BasicPortraits2 (Surprise): This is the greatest thing ever!
+leave --All-- 
+
+label Z Index
+[style]
+[i]Test various z-index switches.
+[i]Join multiple characters. They should overlap, with the newest one always being on top.
+join TC3_BasicPortraits center
+join TC4_BasicPortraits2 left
+join TC5_BasicPortraits3 right
+update TC4_BasicPortraits2 pos=x0.4
+update TC5_BasicPortraits3 pos=x0.6
+[i]Move the center character to z-index 10.
+update TC3_BasicPortraits [z_index="10"]
+update TC3_BasicPortraits [mirrored="true"]
+update TC4_BasicPortraits2 [mirrored="true"]
+[i]Try saving and loading and if z-index is preserved.
+[i]Move the left character to z-index 11.
+update TC4_BasicPortraits2 [z_index="11"]
+[i]See if moving the left character makes them loose their z-index.
+update TC4_BasicPortraits2 center
+[i]Move the center character to z-index 0.
+update TC3_BasicPortraits [z_index="0"]
+[i]Move the right character to z-index 0.
+update TC5_BasicPortraits3 [z_index="0"]
+[i]Move the right character to position leftmost while changing the z-index to 20.
+update TC5_BasicPortraits3 leftmost [z_index="20"]
+leave --All-- 
+
+label Multiple Parents
+[i]Switch to a style that has Portrait Positions on multiple "layers".
+[style name="unit_test_style_multi_portraits"]
+join TC3_BasicPortraits right
+[i]Move the character to left-over (should appear over the pink bar).
+update TC3_BasicPortraits left-over [move_time="2"]
+[i]Move the character to left (should be under the pink bar).
+update TC3_BasicPortraits left
+.
+
+label Simple Highlight Portrait
+leave --ALL--
+join TC7_SimpleHighlightPortrait left
+join TC8_SimpleHighlightPortrait2 right
+TC7_SimpleHighlightPortrait: It's me, Antonio.
+TC8_SimpleHighlightPortrait2: It's me, Eliana.
+TC8_SimpleHighlightPortrait2: Me again.
+An unrelated voice asks you to test if saving and loading preserves the highlight correctly.
+TC7_SimpleHighlightPortrait: Hello friend.\
+I do hope it all works out.
+
+
 jump t0_overview/

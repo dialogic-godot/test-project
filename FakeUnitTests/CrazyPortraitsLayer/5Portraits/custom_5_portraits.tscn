@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://dbi3if8nki0sa"]
+
+[ext_resource type="Script" uid="uid://bbbrb1aknntdv" path="res://FakeUnitTests/CrazyPortraitsLayer/5Portraits/vn_portrait_layer.gd" id="1_n48oh"]
+[ext_resource type="Script" uid="uid://d0ptqnbudhkyj" path="res://addons/dialogic/Modules/Character/node_portrait_container.gd" id="1_rxdcc"]
+[ext_resource type="Script" uid="uid://diexbgvrksk2k" path="res://addons/dialogic/Resources/flex_vector.gd" id="3_dadf2"]
+
+[sub_resource type="Resource" id="Resource_dadf2"]
+script = ExtResource("3_dadf2")
+x_value = 0.5068083
+y_value = 0.31111884
+
+[sub_resource type="Resource" id="Resource_iq6tl"]
+script = ExtResource("3_dadf2")
+x_value = 0.17382582
+y_value = 0.6686083
+metadata/_custom_type_script = "uid://diexbgvrksk2k"
+
+[sub_resource type="Resource" id="Resource_7p6mp"]
+script = ExtResource("3_dadf2")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_4adrj"]
+script = ExtResource("3_dadf2")
+x_value = 0.2170139
+y_value = 0.62808645
+
+[sub_resource type="Resource" id="Resource_cdpct"]
+script = ExtResource("3_dadf2")
+x_value = 0.28125
+y_value = 0.9691358
+
+[sub_resource type="Resource" id="Resource_fmvve"]
+script = ExtResource("3_dadf2")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_vrs72"]
+script = ExtResource("3_dadf2")
+x_value = 0.17881945
+y_value = 0.91512346
+
+[sub_resource type="Resource" id="Resource_b1gqw"]
+script = ExtResource("3_dadf2")
+x_value = 0.5008681
+y_value = 0.97993827
+
+[sub_resource type="Resource" id="Resource_2v2fh"]
+script = ExtResource("3_dadf2")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_a7nlb"]
+script = ExtResource("3_dadf2")
+x_value = 0.22395833
+y_value = 0.38117266
+
+[sub_resource type="Resource" id="Resource_3rjt1"]
+script = ExtResource("3_dadf2")
+x_value = 0.7309028
+y_value = 0.7538579
+
+[sub_resource type="Resource" id="Resource_v0tgs"]
+script = ExtResource("3_dadf2")
+x_value = 1.0
+y_value = 0.5
+
+[sub_resource type="Resource" id="Resource_4rq3l"]
+script = ExtResource("3_dadf2")
+x_value = 0.18489583
+y_value = 0.75308645
+
+[sub_resource type="Resource" id="Resource_61duj"]
+script = ExtResource("3_dadf2")
+x_value = 0.86675346
+y_value = 0.88271606
+
+[sub_resource type="Resource" id="Resource_jljw2"]
+script = ExtResource("3_dadf2")
+x_value = 0.5
+y_value = 1.0
+
+[node name="VN_PortraitLayer" type="Control" unique_id=1969203669]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_n48oh")
+
+[node name="Portraits" type="Control" parent="." unique_id=2109198753]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="DialogicNode_PortraitContainer1" type="Control" parent="Portraits" unique_id=1122247117]
+anchors_preset = 0
+offset_left = -111.00003
+offset_top = 263.0
+offset_right = 472.8431
+offset_bottom = 464.605
+size = Vector2(583.84314, 201.60501)
+position = Vector2(-111.00003, 263)
+rotation = -0.103847064
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("1", "leftmost")
+size_mode = 1
+container_size = SubResource("Resource_dadf2")
+container_position = SubResource("Resource_iq6tl")
+container_rotation = -5.9499984
+container_origin = SubResource("Resource_7p6mp")
+
+[node name="DialogicNode_PortraitContainer2" type="Control" parent="Portraits" unique_id=4290952]
+anchors_preset = 0
+offset_left = 199.0
+offset_top = 220.99997
+offset_right = 449.0
+offset_bottom = 628.0
+size = Vector2(250, 407.00003)
+position = Vector2(199, 220.99997)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("2", "left")
+size_mode = 0
+container_size = SubResource("Resource_4adrj")
+container_position = SubResource("Resource_cdpct")
+container_origin = SubResource("Resource_fmvve")
+
+[node name="DialogicNode_PortraitContainer3" type="Control" parent="Portraits" unique_id=1350242155]
+anchors_preset = 0
+offset_left = 474.00006
+offset_top = 42.0
+offset_right = 680.00006
+offset_bottom = 635.0
+size = Vector2(206, 593)
+position = Vector2(474.00006, 42)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("3", "center")
+container_size = SubResource("Resource_vrs72")
+container_position = SubResource("Resource_b1gqw")
+container_origin = SubResource("Resource_2v2fh")
+
+[node name="DialogicNode_PortraitContainer4" type="Control" parent="Portraits" unique_id=167817719]
+anchors_preset = 0
+offset_left = 584.0
+offset_top = 364.99997
+offset_right = 842.0
+offset_bottom = 611.9999
+size = Vector2(258, 246.99991)
+position = Vector2(584, 364.99997)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("4", "right")
+container_size = SubResource("Resource_a7nlb")
+container_position = SubResource("Resource_3rjt1")
+container_origin = SubResource("Resource_v0tgs")
+
+[node name="DialogicNode_PortraitContainer5" type="Control" parent="Portraits" unique_id=516852017]
+anchors_preset = 0
+offset_left = 892.0
+offset_top = 83.99997
+offset_right = 1105.0
+offset_bottom = 572.0
+size = Vector2(213, 488.00003)
+position = Vector2(892, 83.99997)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("5", "rightmost")
+size_mode = 2
+mirrored = true
+container_size = SubResource("Resource_4rq3l")
+container_position = SubResource("Resource_61duj")
+container_origin = SubResource("Resource_jljw2")

@@ -4,89 +4,176 @@
 &"_translation_id": "",
 &"color": Color(1, 1, 1, 1),
 &"custom_info": {
+"prefix": "",
 "sound_mood_default": "",
 "sound_moods": {},
-"style": ""
+"style": "",
+"suffix": ""
 },
-&"default_portrait": "angry",
+&"default_portrait": "Blink",
 &"description": "",
 &"display_name": "BasicPortraits2",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),
 &"portraits": {
-"angry": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 angry.png",
+"Blink": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 blink.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"blink": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 blink.png",
+"Default": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"default": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 concept.png",
+"Doubt": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 doubt.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"happy": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 happy.png",
+"Hate": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 hate.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"normal": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 normal.png",
+"Plot": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 plot.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"plot": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 plot.png",
+"Sad": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 sad.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"sad": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 sad.png",
+"Scoff": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 scoff.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"scoff": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 scoff.png",
+"Shy": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 shy.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"shy": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 shy.png",
+"Surprise": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/pl5 surprise.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"surprise": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 surprise.png",
+"speaker/Blink": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_blink.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": ""
 },
-"worry": {
-"image": "res://VisualNovel/Assets/Characters/Chyou/pl4 worry.png",
+"speaker/Default": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_default.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"speaker/Doubt": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_doubt.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"speaker/Hate": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_hate.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"speaker/Plot": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_plot.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"speaker/Sad": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_sad.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"speaker/Scoff": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_scoff.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"speaker/Shy": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_shy.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"speaker/Surprise": {
+"export_overrides": {
+"image": "\"res://VisualNovel/Assets/Characters/Antonio/faces/antonio_face_surprise.png\""
+},
 "mirror": false,
 "offset": Vector2(0, 0),
 "scale": 1,
