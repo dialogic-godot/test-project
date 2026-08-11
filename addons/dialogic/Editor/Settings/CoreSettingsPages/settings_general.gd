@@ -26,7 +26,7 @@ func _ready() -> void:
 
 	# Extension creator
 	%ExtensionCreator.hide()
-
+	
 	# Grab subsystems that exist for later use
 	for indexer in DialogicUtil.get_indexers():
 		for sub in indexer._get_subsystems():
@@ -72,7 +72,7 @@ func _on_create_extension_button_pressed() -> void:
 func _on_submit_extension_button_pressed() -> void:
 	if %NameEdit.text.is_empty():
 		return
-
+	
 	var extensions_folder: String = ProjectSettings.get_setting('dialogic/extensions_folder', 'res://addons/dialogic_additions')
 
 	extensions_folder = extensions_folder.path_join(%NameEdit.text.to_pascal_case())
@@ -190,3 +190,4 @@ func _on_name_edit_changed(new_text: String) -> void:
 			%WarningMessage.visible = true
 		else:
 			%WarningMessage.visible = false
+			
