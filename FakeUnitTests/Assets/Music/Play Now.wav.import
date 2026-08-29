@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7vespy2y4ucy"
+path="res://.godot/imported/Play Now.wav-96f464a1bad9c52848adb982ddfce111.sample"
+
+[deps]
+
+source_file="res://FakeUnitTests/Assets/Music/Play Now.wav"
+dest_files=["res://.godot/imported/Play Now.wav-96f464a1bad9c52848adb982ddfce111.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
