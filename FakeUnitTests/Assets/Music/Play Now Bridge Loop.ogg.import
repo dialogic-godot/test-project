@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://mavk3yrjyyqo"
+path="res://.godot/imported/Play Now Bridge Loop.ogg-7bebcc556cc4435e566587bf2ac8fc1a.oggvorbisstr"
+
+[deps]
+
+source_file="res://FakeUnitTests/Assets/Music/Play Now Bridge Loop.ogg"
+dest_files=["res://.godot/imported/Play Now Bridge Loop.ogg-7bebcc556cc4435e566587bf2ac8fc1a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
