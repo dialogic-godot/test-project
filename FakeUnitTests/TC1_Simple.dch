@@ -42,7 +42,7 @@
 "export_overrides": {
 "image": "\"\""
 },
-"mirror": false,
+"mirror": true,
 "offset": Vector2(0, 0),
 "scale": 1,
 "scene": "",

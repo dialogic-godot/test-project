@@ -1,0 +1,348 @@
+[gd_scene format=3 uid="uid://cx0cp1bmqicm4"]
+
+[ext_resource type="Script" uid="uid://dnocsnr5hhlo" path="res://FakeUnitTests/MultiPortraitsLayer/5Portraits/vn_portrait_layer.gd" id="1_g1w6j"]
+[ext_resource type="Script" uid="uid://d0ptqnbudhkyj" path="res://addons/dialogic/Modules/Character/node_portrait_container.gd" id="1_rxdcc"]
+[ext_resource type="Script" uid="uid://diexbgvrksk2k" path="res://addons/dialogic/Resources/flex_vector.gd" id="3_j0v32"]
+
+[sub_resource type="Resource" id="Resource_nf3k4"]
+script = ExtResource("3_j0v32")
+x_value = 0.2
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_j0v32"]
+script = ExtResource("3_j0v32")
+x_value = 0.1
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_kwhsf"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_np73d"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_pw8le"]
+script = ExtResource("3_j0v32")
+x_value = 0.3
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_u26y7"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_46qkt"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_vcdlt"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_vnd0q"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_w5lxs"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_2ixhv"]
+script = ExtResource("3_j0v32")
+x_value = 0.7
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_ssa17"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_y7160"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_owffp"]
+script = ExtResource("3_j0v32")
+x_value = 0.9
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_wacbv"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_g1w6j"]
+script = ExtResource("3_j0v32")
+x_value = 0.2
+y_value = 1.0000002
+
+[sub_resource type="Resource" id="Resource_khgij"]
+script = ExtResource("3_j0v32")
+x_value = 0.1
+y_value = 1.0000002
+
+[sub_resource type="Resource" id="Resource_0hkv5"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_n0tl7"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_sr4y0"]
+script = ExtResource("3_j0v32")
+x_value = 0.3
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_cly5w"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_1nobk"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_lw0ff"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_vwbx4"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_s4cfq"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_liiqm"]
+script = ExtResource("3_j0v32")
+x_value = 0.7
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_u3iyt"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_5xpw3"]
+script = ExtResource("3_j0v32")
+x_value = 0.19999999
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_5sk8s"]
+script = ExtResource("3_j0v32")
+x_value = 0.9
+y_value = 1.0
+
+[sub_resource type="Resource" id="Resource_mywql"]
+script = ExtResource("3_j0v32")
+x_value = 0.5
+y_value = 1.0
+
+[node name="VN_PortraitLayer" type="Control" unique_id=770308938]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_g1w6j")
+
+[node name="Portraits" type="Control" parent="." unique_id=1118283014]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="leftmost" type="Control" parent="Portraits" unique_id=1680326072]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 230.4
+offset_bottom = 648.0
+size = Vector2(230.4, 648)
+pivot_offset = Vector2(115.2, 648)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("leftmost", "0")
+container_size = SubResource("Resource_nf3k4")
+container_position = SubResource("Resource_j0v32")
+container_origin = SubResource("Resource_kwhsf")
+
+[node name="left" type="Control" parent="Portraits" unique_id=2147382048]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 230.40001
+offset_right = 460.8
+offset_bottom = 648.0
+size = Vector2(230.39998, 648)
+position = Vector2(230.40001, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("left", "1")
+container_size = SubResource("Resource_np73d")
+container_position = SubResource("Resource_pw8le")
+container_origin = SubResource("Resource_u26y7")
+metadata/_edit_use_anchors_ = true
+
+[node name="center" type="Control" parent="Portraits" unique_id=452412182]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 460.8
+offset_right = 691.19995
+offset_bottom = 648.0
+size = Vector2(230.39996, 648)
+position = Vector2(460.8, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("center", "middle", "2")
+container_size = SubResource("Resource_46qkt")
+container_position = SubResource("Resource_vcdlt")
+container_origin = SubResource("Resource_vnd0q")
+metadata/_edit_use_anchors_ = true
+
+[node name="right" type="Control" parent="Portraits" unique_id=1797107823]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 691.2
+offset_right = 921.60004
+offset_bottom = 648.0
+size = Vector2(230.40002, 648)
+position = Vector2(691.2, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("right", "3")
+container_size = SubResource("Resource_w5lxs")
+container_position = SubResource("Resource_2ixhv")
+container_origin = SubResource("Resource_ssa17")
+metadata/_edit_use_anchors_ = true
+
+[node name="rightmost" type="Control" parent="Portraits" unique_id=1200320127]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 921.60004
+offset_right = 1152.0
+offset_bottom = 648.0
+size = Vector2(230.39996, 648)
+position = Vector2(921.60004, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("rightmost", "4")
+container_size = SubResource("Resource_y7160")
+container_position = SubResource("Resource_owffp")
+container_origin = SubResource("Resource_wacbv")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=159678533]
+layout_mode = 0
+offset_left = -29.999996
+offset_top = 451.99997
+offset_right = 1176.0
+offset_bottom = 791.0
+rotation = -0.045738265
+color = Color(0.74914014, 0.33082163, 0.52409077, 0.7490196)
+
+[node name="Control" type="Control" parent="." unique_id=1878886542]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 216.88892
+offset_top = 150.0
+offset_right = -184.88892
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="leftmost" type="Control" parent="Control" unique_id=1244549434]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 150.04443
+offset_bottom = 422.0001
+size = Vector2(150.04443, 422.0001)
+pivot_offset = Vector2(115.2, 648)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("leftmost-over", "0")
+container_size = SubResource("Resource_g1w6j")
+container_position = SubResource("Resource_khgij")
+container_origin = SubResource("Resource_0hkv5")
+
+[node name="left" type="Control" parent="Control" unique_id=958781259]
+anchors_preset = 0
+offset_left = 150.04443
+offset_right = 300.08887
+offset_bottom = 422.0
+size = Vector2(150.04443, 422)
+position = Vector2(150.04443, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("left-over", "1")
+container_size = SubResource("Resource_n0tl7")
+container_position = SubResource("Resource_sr4y0")
+container_origin = SubResource("Resource_cly5w")
+metadata/_edit_use_anchors_ = true
+
+[node name="center" type="Control" parent="Control" unique_id=979927009]
+anchors_preset = 0
+offset_left = 300.08887
+offset_right = 450.1333
+offset_bottom = 422.0
+size = Vector2(150.04443, 422)
+position = Vector2(300.08887, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("center-over", "middle", "2")
+container_size = SubResource("Resource_1nobk")
+container_position = SubResource("Resource_lw0ff")
+container_origin = SubResource("Resource_vwbx4")
+metadata/_edit_use_anchors_ = true
+
+[node name="right" type="Control" parent="Control" unique_id=1359377852]
+anchors_preset = 0
+offset_left = 450.1333
+offset_right = 600.17773
+offset_bottom = 422.0
+size = Vector2(150.04443, 422)
+position = Vector2(450.1333, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("right-over", "3")
+container_size = SubResource("Resource_s4cfq")
+container_position = SubResource("Resource_liiqm")
+container_origin = SubResource("Resource_u3iyt")
+metadata/_edit_use_anchors_ = true
+
+[node name="rightmost" type="Control" parent="Control" unique_id=953053084]
+anchors_preset = 0
+offset_left = 600.17773
+offset_right = 750.2222
+offset_bottom = 422.0
+size = Vector2(150.0445, 422)
+position = Vector2(600.17773, 0)
+mouse_filter = 2
+script = ExtResource("1_rxdcc")
+container_ids = PackedStringArray("rightmost-over", "4")
+container_size = SubResource("Resource_5xpw3")
+container_position = SubResource("Resource_5sk8s")
+container_origin = SubResource("Resource_mywql")
+metadata/_edit_use_anchors_ = true
